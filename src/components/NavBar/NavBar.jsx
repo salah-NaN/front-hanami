@@ -27,7 +27,7 @@ export const NavBar = () => {
         </nav>
       </header>
       <div
-        className={`sm:flex sm:justify-center sm:items-center px-5 py-1 w-full
+        className={`sm:flex sm:justify-center sm:items-center px-7 py-1 w-full
       absolute top-0 h-full bg-green-300 transition ease-in-out delay-150 ${
        open ? `block` : `hidden`
      }`}
