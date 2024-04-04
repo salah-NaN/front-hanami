@@ -1,4 +1,6 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useCycle } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
 /*
  El max-w-7xl define el ancho del contenedor nav, el header es todo el largo
@@ -7,10 +9,24 @@ import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
 */
 
 export const NavBar = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
+  const [mobileNav, toggleMobileNav] = useCycle(false, true);
 
-  const toggleMenu = (value) => {
-    setOpen(value);
+  const menuVars = {
+    initial: {
+      scaleY: 0,
+    },
+    animate: {
+      scaleY: 1,
+    },
+    exit: {
+      scaleY: 0,
+    },
+  };
+
+  const toggleMenu = () => {
+    console.log("togglemenu");
+    toggleMobileNav();
   };
 
   return (
@@ -26,13 +42,30 @@ export const NavBar = () => {
           </div>
         </nav>
       </header>
-      <div
-        className={`sm:flex sm:justify-center sm:items-center px-7 py-1 w-full
-      absolute top-0 h-full bg-green-300 transition ease-in-out delay-150 ${
-       open ? `block` : `hidden`
-     }`}
-      >
-        <NavLinks toggleMenu={toggleMenu} />
+      <div>
+        <div
+          className="w-full flex h-screen text-2xl"
+          variants={{
+            closed: { rotate: 0 },
+            rotate: { open: 45 },
+          }}
+          animate={mobileNav ? "open" : "closed"}
+        >
+          {/* Contenido del menú */}
+          <button onClick={toggleMenu}>Hola</button>
+          <motion.h1
+            variants={{
+              closed: { rotate: 0 },
+              open: { rotate: 45 },
+            }}
+            animate={mobileNav ? 'open' : 'closed'}
+          >
+            Prueba
+          </motion.h1>
+        </div>
+        <motion.div className="fixed left-0 top-0 w-full h-screen">
+          <NavLinks toggleMenu={toggleMenu} mobileNav={mobileNav} />
+        </motion.div>
       </div>
     </div>
   );

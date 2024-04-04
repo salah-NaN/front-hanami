@@ -1,16 +1,21 @@
+import { motion } from 'framer-motion'
 import Logo from "../Logo";
 
-export const NavLinks = ({ toggleMenu }) => {
+export const NavLinks = ({ toggleMenu, mobileNav }) => {
+
   return (
-    <div className="fixed left-0 top-0 w-full h-screen">
+    <div className="bg-green-500">
       <div className="flex justify-between py-5 px-5">
         <div className="w-full flex justify-between">
           <Logo />
-          <button onClick={() => toggleMenu(false)}>Cerrar</button>
+          <button onClick={() => toggleMenu()}>Cerrar</button>
         </div>
       </div>
 
-      <div className="w-full flex h-screen text-2xl">
+      <motion.div className="w-full flex h-screen text-2xl" variants={{
+        closed: {x: '-100%'},
+        open: {x: '0%'}
+      }} animate={mobileNav ? 'open': 'closed'}>
         <ul className="text-white w-screen absolute">
           <div className="">
             <li className="py-3 px-5 hover:bg-red-500 hover:cursor-pointer">
@@ -33,7 +38,7 @@ export const NavLinks = ({ toggleMenu }) => {
             </li>
           </div>
         </ul>
-      </div>
+      </motion.div>
     </div>
   );
 };
