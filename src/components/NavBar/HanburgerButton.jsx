@@ -1,8 +1,6 @@
-import React from "react";
-
-export const HanburgerButton = () => {
+export const HanburgerButton = ({openModal}) => {
   return (
-    <div>
+    <div onClick={openModal}>
       <svg
         width="24px"
         height="24px"
