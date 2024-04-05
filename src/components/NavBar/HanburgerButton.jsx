@@ -1,6 +1,6 @@
-export const HanburgerButton = ({openModal}) => {
+export const HanburgerButton = ({toggleMenu}) => {
   return (
-    <div onClick={openModal}>
+    <button onClick={() => toggleMenu()}>
       <svg
         width="24px"
         height="24px"
@@ -32,7 +32,7 @@ export const HanburgerButton = ({openModal}) => {
           stroke-linejoin="round"
         ></path>
       </svg>
-    </div>
+    </button>
   );
 };
 
