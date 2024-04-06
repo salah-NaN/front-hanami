@@ -31,7 +31,7 @@ export const NavBar = () => {
       <div>
         <AnimatePresence>
           {mobileNav && (
-            <motion.div className="fixed top-0 w-full h-screen">
+            <motion.div className="fixed z-20 top-0 w-full h-screen">
               <NavLinks toggleMenu={toggleMenu} mobileNav={mobileNav} />
             </motion.div>
           )}
