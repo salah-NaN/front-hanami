@@ -4,6 +4,7 @@ export const App = () => {
   return (
     <>
       <NavBar />
+      <Outlet/>
     </>
   )
 }
