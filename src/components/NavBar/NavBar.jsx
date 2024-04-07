@@ -18,7 +18,7 @@ export const NavBar = () => {
   return (
     <div className="">
       <header className="w-full">
-        <nav className="flex justify-between mx-auto sticky py-6 px-5">
+        <nav className="flex justify-between sticky py-6 w-[88%] mx-auto">
           <Logo />
           <div className="hidden md:block">
             <AccountButton />
