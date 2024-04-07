@@ -2,7 +2,7 @@ import { DATA } from "../../utils/DATA";
 
 export const CardsBox = () => {
   return (
-    <div className="w-[88%] mx-auto">
+    <div className="w-full mx-auto">
       <div className="">
         <div className="py-2 pb-5">
           <h1 className="text-3xl">Puntos de interes de moda</h1>
@@ -11,9 +11,9 @@ export const CardsBox = () => {
           </h4>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid sm:grid-cols-2 md:grid md:grid-cols-6 gap-5 h-screen">
+        <div className="grid grid-cols-2 sm:grid sm:grid-cols-2 md:grid md:grid-cols-6 lg:grid lg:grid-cols-4 gap-5 h-screen">
           {DATA.slice(0, 2).map((puntos_interes, index) => (
-            <div className="border-none w-full h-full pb-5 col-span-2 sm:col-span-2 md:col-span-2">
+            <div className="border-none w-full h-full pb-5 col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2">
               <div
                 className={` w-full border-none rounded-md px-2 h-full`}
                 style={{
