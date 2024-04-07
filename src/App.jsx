@@ -1,12 +1,13 @@
-import { NavBar, CardsBox } from "./components";
+import { NavBar } from "./components/"
+import { Link, Outlet } from "react-router-dom"
 
 export const App = () => {
   return (
-    <div className="font-dmSans">
+    <div className="w-11/12 mx-auto" >
       <NavBar />
-      <CardsBox />
+      <Outlet />
     </div>
-  );
-};
+  )
+}
 
 export default App;
