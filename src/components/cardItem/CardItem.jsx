@@ -31,7 +31,7 @@ export const CardItem = ({ puntos_interes }) => {
       initial="hidden"
       animate={mainControladores}
       transition={{ duration: 0.5, delay: 0.25 }}
-      className="border-none rounded-md w-full h-full"
+      className="border-none rounded-md w-full h-full cursor-pointer"
       style={{
         backgroundImage: `url(${puntos_interes.imagen})`,
         backgroundSize: `cover`,

@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { AnimatePresence, useCycle } from "framer-motion";
 import { motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
@@ -16,8 +15,8 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="">
-      <header className="w-full">
+    <div className="px-5">
+      <header className="w-full bg-transparent">
         <nav className="flex justify-between sticky py-6 w-full mx-auto">
           <Logo />
           <div className="hidden md:block">
