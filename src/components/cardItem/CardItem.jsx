@@ -31,37 +31,33 @@ export const CardItem = ({ puntos_interes }) => {
       initial="hidden"
       animate={mainControladores}
       transition={{ duration: 0.5, delay: 0.25 }}
-      className="border-none w-full col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 h-64"
+      className="border-none rounded-md w-full h-full"
+      style={{
+        backgroundImage: `url(${puntos_interes.imagen})`,
+        backgroundSize: `cover`,
+      }}
     >
-      <div
-        className="border-none rounded-md w-full h-full"
-        style={{
-          backgroundImage: `url(${puntos_interes.imagen})`,
-          backgroundSize: `cover`,
-        }}
-      >
-        <div className="flex items-start w-full h-full relative">
-          <div
-            className="sm:flex w-full py-1 px-2 flex-col absolute 
+      <div className="flex items-start w-full h-full relative">
+        <div
+          className="sm:flex w-full py-1 px-2 flex-col absolute 
           bottom-0 rounded-b-md bg-gradient-to-t from-green-800"
-          >
-            <h1 className="text-md font-bold text-white">
-              {puntos_interes.nombre}
-            </h1>
-            <h1 className="text-white text-sm font-light">
-              {puntos_interes.comarca}
-            </h1>
-          </div>
-          <div className="flex w-full justify-end absolute bottom-2 items-center px-2">
-            <div className={`border-none px-1 py-1 rounded-md`}>
-              {
-                <img
-                  src={obtenerPngTipo(puntos_interes.tipo)}
-                  alt={puntos_interes.tipo}
-                  className="w-7 h-full"
-                />
-              }
-            </div>
+        >
+          <h1 className="text-md font-bold text-white">
+            {puntos_interes.nombre}
+          </h1>
+          <h1 className="text-white text-sm font-light">
+            {puntos_interes.comarca}
+          </h1>
+        </div>
+        <div className="flex w-full justify-end absolute bottom-2 items-center px-2">
+          <div className={`border-none px-1 py-1 rounded-md`}>
+            {
+              <img
+                src={obtenerPngTipo(puntos_interes.tipo)}
+                alt={puntos_interes.tipo}
+                className="w-7 h-full"
+              />
+            }
           </div>
         </div>
       </div>
