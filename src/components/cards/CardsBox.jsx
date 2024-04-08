@@ -81,27 +81,29 @@ export const CardsBox = () => {
               className="border-none w-full col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 h-64"
             >
               <div
-                className="border rounded-md px-2 w-full h-full"
+                className="border rounded-md w-full h-full"
                 style={{
                   backgroundImage: `url(${puntos_interes.imagen})`,
                   backgroundSize: `cover`,
                 }}
               >
-                <div className="flex items-end w-full h-full">
-                  <h1
-                    className="text-xl  font-bold text-white"
-                    style={{ textShadow: "12px 2px 4px rgba(0, 0, 0, 0.5)" }}
-                  >
-                    {puntos_interes.nombre}
-                  </h1>
-                  <div className={`border-none px-1 py-1 rounded-md`}>
-                    {
-                      <img
-                        src={obtenerPngTipo(puntos_interes.tipo)}
-                        alt={puntos_interes.tipo}
-                        className="w-7 h-full"
-                      />
-                    }
+                <div className="flex items-start w-full h-full relative">
+                  <div className="flex bg-white w-full">
+                    <h1
+                      className="text-xl font-bold text-black"
+                      // style={{ textShadow: "12px 2px 4px rgba(0, 0, 0, 0.5)" }}
+                    >
+                      {puntos_interes.nombre}
+                    </h1>
+                    <div className={`border-none px-1 py-1 rounded-md`}>
+                      {
+                        <img
+                          src={obtenerPngTipo(puntos_interes.tipo)}
+                          alt={puntos_interes.tipo}
+                          className="w-7 h-full"
+                        />
+                      }
+                    </div>
                   </div>
                 </div>
               </div>

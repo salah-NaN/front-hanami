@@ -3,7 +3,7 @@ export const LayoutHanami = () => {
     <div className="">
       {/* navbar (header) */}
       <header>{/* NavBar */}</header>
-        
+      {/* children */}
       {/* div footer */}
       <div className="">{/* Footer */}</div>
     </div>
