@@ -13,7 +13,7 @@ export const CardsBox = () => {
             Opciones más populares entre la comunidad viajera de Cataluña
           </h4>
         </div>
-        <div className="grid grid-cols-2 sm:grid sm:grid-cols-2 md:grid md:grid-cols-6 lg:grid lg:grid-cols-8 gap-5">
+        <div className="grid grid-cols-2 sm:grid sm:grid-cols-2 md:grid md:grid-cols-6 lg:grid lg:grid-cols-8 xl:grid xl:grid-cols-8 gap-5">
           {DATA.slice(0, 2).map((puntos_interes) => (
             <div className="border-none w-full col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-4 h-64">
               <CardItem puntos_interes={puntos_interes} />
