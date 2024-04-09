@@ -10,6 +10,12 @@ export default {
         dmSans: 'DM Sans'
       }
     },
+    // screens: {
+    //   'ms': '320px',
+    //   'mm': '375px',
+    //   'ml': '425px',
+    //   'md': '725px'
+    // }
   },
   plugins: [],
 }

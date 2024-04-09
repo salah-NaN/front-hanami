@@ -3,7 +3,7 @@ import { motion, useInView, useAnimation } from "framer-motion";
 import { DATA } from "../../utils/DATA";
 import CardItem from "../cardItem/CardItem";
 
-export const CardsBox = () => {
+export const CardsBox = ({paginacion}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -16,7 +16,7 @@ export const CardsBox = () => {
   }, [isInView]);
 
   return (
-    <div className="relative z-10 flex flex-col items-center w-full h-full px-1">
+    <div className="relative z-10 flex flex-col items-center w-full h-full px-1" ref={paginacion}>
       <div className="w-full mx-auto py-28">
         <div className="">
           <div className="py-2 pb-5" ref={ref}>
