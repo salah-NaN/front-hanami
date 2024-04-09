@@ -1,8 +1,9 @@
 export const SearchBar = () => {
   return (
-    <>
+    <div className="w-full">
       <form
-        className="my-24 flex flex-col w-9/12 mx-auto h-[168px] rounded-xl border border-[#c5c5c5] relative -top-[86px] bg-[#ffffff] 
+        className="my-24 flex flex-col w-10/12 mx-auto h-[168px] 
+        rounded-xl border border-[#c5c5c5] relative -top-[86px] bg-[#ffffff] 
             lg:-top-9 lg:h-fit lg:w-9/12 lg:flex-row "
       >
         <input
@@ -26,7 +27,7 @@ export const SearchBar = () => {
         </div>
         <button className="w-full h-14">Enviar</button>
       </form>
-    </>
+    </div>
   );
 }
 

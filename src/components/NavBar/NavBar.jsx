@@ -15,11 +15,11 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="px-5">
+    <div className="w-11/12 mx-auto sm:11/12 sm:max-auto">
       <header className="w-full bg-transparent">
         <nav className="flex justify-between sticky py-6 w-full mx-auto">
           <Logo />
-          <div className="hidden md:block">
+          <div className="hidden md:inline">
             <AccountButton />
           </div>
           <div className="flex items-center md:hidden lg:hidden xl:hidden">

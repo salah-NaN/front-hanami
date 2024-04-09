@@ -1,6 +1,5 @@
 import { CardsBox } from "../components";
 import Banner from "../components/Banner";
-import SearchBar from "../components/SearchBar";
 
 export const Inicio = () => {
   return (
@@ -8,7 +7,9 @@ export const Inicio = () => {
       <div className="">
         <Banner />
       </div>
-      <CardsBox />
+      <div className="w-9/12 mx-auto">
+        <CardsBox />
+      </div>
     </>
   );
 };

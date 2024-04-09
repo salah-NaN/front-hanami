@@ -40,7 +40,7 @@ export const CardItem = ({ puntos_interes }) => {
       <div className="flex items-start w-full h-full relative">
         <div
           className="sm:flex w-full py-1 px-2 flex-col absolute 
-          bottom-0 rounded-b-md bg-gradient-to-t from-green-800"
+          bottom-0 rounded-b-md bg-gradient-to-t from-[#008000]"
         >
           <h1 className="text-md font-bold text-white">
             {puntos_interes.nombre}
