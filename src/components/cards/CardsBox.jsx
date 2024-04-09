@@ -29,7 +29,7 @@ export const CardsBox = ({paginacion}) => {
               initial="hidden"
               animate={mainControladores}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-7xl pb-2"
+              className="text-5xl md:text-6xl pb-2"
             >
               Puntos de interes de moda
             </motion.h1>
@@ -41,7 +41,7 @@ export const CardsBox = ({paginacion}) => {
               }}
               initial="hidden"
               animate={mainControladores}
-              transition={{ duration: 0.5, delay: 0.25 }} className="text-xl">
+              transition={{ duration: 0.5, delay: 0.25 }} className="text-md">
               Opciones más populares entre la comunidad viajera de Cataluña
             </motion.h4>
           </div>

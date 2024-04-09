@@ -36,7 +36,7 @@ export const Banner = ({ paginacionScrollHome }) => {
         >
           Toda la belleza de Cataluña en un solo clic
         </h1>
-        <div className="relative mt-12">
+        <div className="relative mt-12 ml:w-72">
           <div className="absolute inset-0 bg-green-300 rounded-full blur-sm"></div>
           <div className="relative border-none bg-white rounded-full py-2 bg-transparent md:px-6 lg:w-fit">
             <article className="text-wrap lg:text-nowrap text-black text-sm md:text-md lg:text-md xl:text-md 2xl:text-3xl lg:w-fit px-3">

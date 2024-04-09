@@ -1,21 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        dmSans: 'DM Sans'
-      }
+        dmSans: "DM Sans",
+      },
     },
-    // screens: {
-    //   'ms': '320px',
-    //   'mm': '375px',
-    //   'ml': '425px',
-    //   'md': '725px'
-    // }
+    screens: {
+      'xs': "320px",
+      // => @media (min-width: 320px) { ... }
+      'ml': "375px",
+      // => @media (min-width: 375px) { ... }
+      'mx': "425px",
+      // => @media (min-width: 425px) { ... }
+      'md': "640px",
+      // => @media (min-width: 640px) { ... }
+      'lg': "1024px",
+      // => @media (min-width: 1024px) { ... }
+      'xl': "1280px",
+      // => @media (min-width: 1280px) { ... }
+      '2xl': "1536px"
+      // => @media (min-width: 1536px) { ... }
+    },
   },
   plugins: [],
-}
+};
