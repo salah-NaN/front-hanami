@@ -17,7 +17,7 @@ export const Inicio = () => {
       <div className="">
         <Banner paginacionScrollHome={paginacionScrollHome} />
       </div>
-      <div className="w-9/12 mx-auto">
+      <div className="w-11/12 mx-auto">
         <CardsBox paginacion={paginacion} />
       </div>
     </>
