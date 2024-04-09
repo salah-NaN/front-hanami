@@ -10,8 +10,9 @@ export const DATA = [
     nombre: "Casa rural",
     descripcion: 'Casa rural con chimenea y vistas',
     imagen: "/images/casa_rural_viña.jpeg",
+    poblacion: 'Barcelona',
     comarca: 'Barcelones',
-    tipo: 'Girones'
+    tipo: 'Cerezo'
   },
   {
     nombre: "Loft en el Raval",
@@ -31,7 +32,7 @@ export const DATA = [
     nombre: "Casa de campo",
     descripcion: 'Casa de campo con piscina y zona de barbacoa',
     imagen: "/images/casa_campo_olivos.jpeg",
-    comarca: 'Tarragones',
+    comarca: 'Girones',
     tipo: 'Olivo'
   },
   {
