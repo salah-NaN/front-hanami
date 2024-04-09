@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { AnimatePresence, useCycle } from "framer-motion";
 import { motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
@@ -16,11 +15,11 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="">
-      <header className="w-full">
-        <nav className="flex justify-between sticky py-6 w-[88%] mx-auto">
+    <div className="w-11/12 mx-auto sm:11/12 sm:max-auto">
+      <header className="w-full bg-transparent">
+        <nav className="flex justify-between sticky py-6 w-full mx-auto">
           <Logo />
-          <div className="hidden md:block">
+          <div className="hidden md:inline">
             <AccountButton />
           </div>
           <div className="flex items-center md:hidden lg:hidden xl:hidden">
@@ -28,15 +27,14 @@ export const NavBar = () => {
           </div>
         </nav>
       </header>
-      <div>
-        <AnimatePresence>
-          {mobileNav && (
-            <motion.div className="fixed z-20 top-0 w-full h-screen">
-              <NavLinks toggleMenu={toggleMenu} mobileNav={mobileNav} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+
+      <AnimatePresence>
+        {mobileNav && (
+          <motion.div className="fixed z-20 top-0 left-0 w-full h-screen">
+            <NavLinks toggleMenu={toggleMenu} mobileNav={mobileNav} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

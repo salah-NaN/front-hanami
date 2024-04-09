@@ -1,13 +1,15 @@
-import { NavBar } from "./components/"
-import { Link, Outlet } from "react-router-dom"
+import { NavBar } from "./components/";
+import { Outlet } from "react-router-dom";
+import LayoutHanami from "./layout/LayoutHanami";
 
 export const App = () => {
   return (
-    <div className="w-11/12 mx-auto" >
-      <NavBar />
-      <Outlet />
-    </div>
-  )
-}
+    <LayoutHanami />
+    // <div className="w-[90%] sm:w-[92%] md:w-[90%] lg:w-[70%] mx-auto">
+    //   <NavBar />
+    //   <Outlet />
+    // </div>
+  );
+};
 
 export default App;
