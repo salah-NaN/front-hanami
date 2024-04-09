@@ -5,7 +5,6 @@ import {
   animate,
 } from "framer-motion";
 import { useEffect } from "react";
-import { SearchBar } from "./SearchBar";
 import Flecha from "./flecha/Flecha";
 
 const COLORS = ["#008000", "#00FF00", "#87E196", "#98FB98"];
@@ -62,7 +61,6 @@ export const Banner = ({ paginacionScrollHome }) => {
           </div>
         </div>
 
-        {/* <SearchBar /> */}
         <div className="h-screen absolute bottom-40">
           <Flecha paginacionScrollHome={paginacionScrollHome} />
         </div>

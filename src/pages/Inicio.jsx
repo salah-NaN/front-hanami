@@ -1,6 +1,5 @@
 import { useRef } from 'react'
-import { CardsBox } from "../components";
-import Banner from "../components/Banner";
+import { CardsBox, SearchBar, Banner } from "../components";
 
 export const Inicio = () => {
 
@@ -16,6 +15,9 @@ export const Inicio = () => {
     <>
       <div className="">
         <Banner paginacionScrollHome={paginacionScrollHome} />
+      </div>
+      <div className=''>
+        <SearchBar />
       </div>
       <div className="w-11/12 mx-auto">
         <CardsBox paginacion={paginacion} />
