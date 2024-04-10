@@ -27,7 +27,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* aqui se puede crar la ruta de las temporadas si se requiere */}
         <Route path='/actividades/:id' element={<Actividades />} ></Route>
 
-        <Route path='/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route>
+        <Route path='/mapa/:quehacer/:localidad/:fecha/:flor' element={<Mapa />} ></Route>
+        {/* <Route path='/puntos_interes/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route>
+        <Route path='/actividades/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route> */}
       </Route>
     </Routes>
   </BrowserRouter>
