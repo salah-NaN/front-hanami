@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PopUp } from "./PopUp";
 
 export const SearchBar = () => {
+  const navigate = useNavigate();
   const url = "http://localhost:3000/api";
+
+  const queHacer = ["Punto de Interes", "Actividades"];
+
   const [flores, setFlores] = useState([]);
 
   const [searchForm, setSearchForm] = useState({
-    localizacion: "",
+    localizacion: null,
     fecha: null,
-    flor: "",
+    flor: null,
+    queHacer: null,
   });
 
-  const [popUp, setPopUp] = useState(false);
+  const [popUp, setPopUp] = useState({
+    flor: false,
+    queHacer: false,
+  });
 
   useEffect(() => {
     //Llamamos a la api para recoger las flores que tiene la base de datos, y poder construir el select
@@ -26,9 +36,10 @@ export const SearchBar = () => {
   useEffect(() => {
     //Seteamos los valores por defecto de el SearchForm
     setSearchForm({
-      localizacion: "",
+      localizacion: null,
       fecha: null,
       flor: flores[0]?.especie,
+      queHacer: null,
     });
   }, [flores]);
 
@@ -38,23 +49,30 @@ export const SearchBar = () => {
       flor: flor,
     });
 
-    setPopUp(false);
+    setPopUp({ flor: false, queHacer: popUp.queHacer });
+  };
+
+  const setQueHacer = (queHacer) => {
+    setSearchForm({
+      ...searchForm,
+      queHacer: queHacer,
+    });
+
+    setPopUp({ flor: popUp.flor, queHacer: false });
   };
 
   const onSubmitSearch = () => {
     event.preventDefault();
+    //desestructuramos el objeto de searchForm
+    const { localizacion, fecha, flor, queHacer } = searchForm;
 
-    fetch(url + "")
-      .then((res) => res.json())
-      .then((busqueda) => console.log(busqueda))
-      .catch((error) => console.log(error));
+    //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url si no hay datos pues metemos esto %
+    navigate(`/mapa/${queHacer || "%"}/${localizacion || "%"}/${fecha || "%"}/${flor || "%"}`);
   };
 
   return (
     <div className="">
-      <h1 className="text-center pt-20 text-7xl">
-        Busca los que te salga de los huevos
-      </h1>
+      <h1 className="text-center pt-20 text-7xl">Busca cositas</h1>
       <div className="w-full h-96 flex items-center">
         <form
           onSubmit={onSubmitSearch}
@@ -82,29 +100,43 @@ export const SearchBar = () => {
             ></input>
           </div>
           <div className="w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
-            <button className="w-full h-full" onClick={() => setPopUp(!popUp)}>
-              Que plantas quieres ver?
-            </button>
-            {popUp && (
-              <div className="relative">
-                <div className="w-60 absolute top-10">
-                  <div className="flex flex-col justify-start w-full border rounded-lg p-2">
-                    {flores.map((flor) => {
-                      return (
-                        <div
-                          className="pt-1"
-                          onClick={() => setFloresPopUp(flor.especie)}
-                        >
-                          <button className="text-start w-full cursor-pointer">
-                            {flor.especie}
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
+            <div
+              className="flex justify-center items-center w-full h-full cursor-pointer"
+              onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
+            >
+              <div className="">Que plantas quieres ver?</div>
+            </div>
+
+            {popUp?.flor === true ? (
+              <PopUp opciones={flores} fn={setFloresPopUp} />
+            ) : null}
+          </div>
+
+          <div className="w-full">
+            <div
+              className="w-full h-full flex justify-center items-center border border-[#c5c5c5] cursor-pointer hover:bg-[#EBEBEB]"
+              onClick={() => setPopUp({ ...popUp, queHacer: !popUp.queHacer })}
+            >
+              <div className="">Que quieres hacer?</div>
+            </div>
+
+            <div className="w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+              <div
+                className=""
+                onClick={() =>
+                  setPopUp({
+                    ...popUp,
+                    queHacer: !popUp.queHacer,
+                  })
+                }
+              >
+                <div className="">
+                  {popUp.queHacer === true ? (
+                    <PopUp opciones={queHacer} fn={setQueHacer} />
+                  ) : null}
                 </div>
               </div>
-            )}
+            </div>
           </div>
           <button className="w-full h-14" type="submit">
             Enviar
