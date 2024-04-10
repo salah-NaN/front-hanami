@@ -6,7 +6,7 @@ export const SearchBar = () => {
   const navigate = useNavigate();
   const url = "http://localhost:3000/api";
 
-  const queHacer = ["Punto de Interes", "Actividades"];
+  const queHacer = ["Punto_de_Interes", "Actividades"];
 
   const [flores, setFlores] = useState([]);
 
