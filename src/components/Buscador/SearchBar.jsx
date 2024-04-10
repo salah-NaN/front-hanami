@@ -10,6 +10,8 @@ export const SearchBar = () => {
     flor: "",
   });
 
+  const [popUp, setPopUp] = useState(false);
+
   useEffect(() => {
     //Llamamos a la api para recoger las flores que tiene la base de datos, y poder construir el select
     fetch(url + "/flores")
@@ -30,6 +32,15 @@ export const SearchBar = () => {
     });
   }, [flores]);
 
+  const setFloresPopUp = (flor) => {
+    setSearchForm({
+      ...searchForm,
+      flor: flor,
+    });
+
+    setPopUp(false);
+  };
+
   const onSubmitSearch = () => {
     event.preventDefault();
 
@@ -48,7 +59,7 @@ export const SearchBar = () => {
         <form
           onSubmit={onSubmitSearch}
           className="my-24 flex flex-col w-10/12 mx-auto h-[168px] 
-        rounded-xl border border-[#c5c5c5] bg-[#ffffff] 
+        rounded-full border border-black bg-[#ffffff] 
             lg:-top-9 lg:h-fit lg:w-9/12 lg:flex-row "
         >
           <input
@@ -56,8 +67,8 @@ export const SearchBar = () => {
               setSearchForm({ ...searchForm, localizacion: event.target.value })
             }
             placeholder="Busca la ciudad"
-            className="w-full h-14 focus:outine-none rounded-t-lg border-b border-[#c5c5c5] bg-[#ffffff]
-                lg:border-none  lg:rounded-l-xl "
+            className="w-full h-14 focus:outine-none rounded-t-full border border-[#c5c5c5] bg-[#ffffff]
+                lg:border-none lg:rounded-full"
           ></input>
           <div className="w-full h-14 flex border-b border-[#c5c5c5] lg:border-none bg-red-500">
             <input
@@ -70,18 +81,30 @@ export const SearchBar = () => {
               type="date"
             ></input>
           </div>
-          <div className="w-full">
-            <select
-              className="w-full h-full border-r border-[#c5c5c5]"
-              defaultValue={flores[0]?.especie}
-              onChange={() =>
-                setSearchForm({ ...searchForm, flor: event.target.value })
-              }
-            >
-              {flores.map((flor) => {
-                return <option value={flor.especie}>{flor.especie}</option>;
-              })}
-            </select>
+          <div className="w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+            <button className="w-full h-full" onClick={() => setPopUp(!popUp)}>
+              Que plantas quieres ver?
+            </button>
+            {popUp && (
+              <div className="relative">
+                <div className="w-60 absolute top-10">
+                  <div className="flex flex-col justify-start w-full border rounded-lg p-2">
+                    {flores.map((flor) => {
+                      return (
+                        <div
+                          className="pt-1"
+                          onClick={() => setFloresPopUp(flor.especie)}
+                        >
+                          <button className="text-start w-full cursor-pointer">
+                            {flor.especie}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <button className="w-full h-14" type="submit">
             Enviar
