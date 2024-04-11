@@ -18,6 +18,7 @@ export default function Dropdown() {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+  
   return (
     <div className="select-none" ref={dropdownRef}>
       <button className="relative" onClick={() => setIsOpen(!isOpen)}>

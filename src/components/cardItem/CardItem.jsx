@@ -3,6 +3,7 @@ import { motion, useInView, useAnimation } from "framer-motion";
 import { Flecha } from "../flecha/Flecha";
 
 export const CardItem = ({ puntos_interes }) => {
+  
   const ref = useRef(null);
   const showFlecha = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -51,13 +52,6 @@ export const CardItem = ({ puntos_interes }) => {
             {puntos_interes.comarca}
           </h1>
         </div>
-        {/* <motion.div
-          className="w-full"
-          initial={{ opacity: 0 }} // Establece la opacidad inicial en 0
-          whileHover={{ scale: 1.2, opacity: 1 }}
-        >
-          <h1>Hola</h1>
-        </motion.div> */}
         <div className="flex w-full justify-end absolute bottom-2 items-center px-2">
           <div className={`border-none px-1 py-1 rounded-md`}>
             {

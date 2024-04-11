@@ -4,11 +4,11 @@ import { CardsBox, SearchBar, Banner } from "../components";
 export const Inicio = () => {
 
   //Seteamos el valor por defecto que sea null de useRef 
-  const paginacion = useRef(null);
+  const moveToSearchBar = useRef(null);
 
 
   const paginacionScrollHome = () => {
-    paginacion.current.scrollIntoView({ behavior: "smooth" });
+    moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
@@ -17,10 +17,10 @@ export const Inicio = () => {
         <Banner paginacionScrollHome={paginacionScrollHome} />
       </div>
       <div className=''>
-        <SearchBar />
+        <SearchBar moveToSearchBar={moveToSearchBar} />
       </div>
       <div className="w-11/12 mx-auto">
-        <CardsBox paginacion={paginacion} />
+        <CardsBox />
       </div>
     </>
   );

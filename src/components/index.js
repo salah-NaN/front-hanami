@@ -6,3 +6,4 @@ export * from './NavBar/NavLinks';
 export * from './cards/CardsBox';
 export * from './Buscador/SearchBar';
 export * from './Banner';
+export * from './cardItem/CardItem';
