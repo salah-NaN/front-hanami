@@ -1,68 +1,51 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
+
+//constantes
+const URL = 'http://localhost:3000/api'
 
 // las imágenes de los cerezos
 // import cerezas from '../../../public/images/cerezas'
 
-const dataPDI = [{
-  id: 1,
-  nombre: 'bodega manolo',
-  descripcion: 'loremipsum',
-  latitud: 41.6092,
-  longitud: 2.1477,
-  ubicacion: 'C/Angel, 10',
-  poblacion: 'Terrasa',
-  comarca: 'Bages',
-  propietario_id: 2,
-  tipo: 'Viña'
-},
-{
-  id: 2,
-  nombre: 'campo aguilar',
-  descripcion: 'loremipsum',
-  latitud: 41.7092,
-  longitud: 2.1470,
-  ubicacion: 'C/Francisco, 31',
-  poblacion: 'St Fruitos Bages',
-  comarca: 'Bages',
-  propietario_id: 2,
-  tipo: 'Cerezo'
-},
-{
-  id: 3,
-  nombre: 'bodega manolo',
-  descripcion: 'loremipsum',
-  latitud: 41.4092,
-  longitud: 2.0477,
-  ubicacion: 'C/Angel, 10',
-  poblacion: 'Terrasa',
-  comarca: 'Bages',
-  propietario_id: 2,
-  tipo: 'Viña'
-},
-{
-  id: 4,
-  nombre: 'campo aguilar',
-  descripcion: 'loremipsum',
-  latitud: 41.3092,
-  longitud: 2.0470,
-  ubicacion: 'C/Francisco, 31',
-  poblacion: 'St Fruitos Bages',
-  comarca: 'Bages',
-  propietario_id: 2,
-  tipo: 'Cerezo'
-}
-]
-
-
 export default function Mapa() {
-  const mapRef = useRef(null);
-  const [puntosInteres, setPuntosInteres] = useState(dataPDI)
+  // referencia del mapa
+  const mapRef = useRef(null)
+  // donde se almacenan todos los puntos de interes
+  const [puntosInteres, setPuntosInteres] = useState([])
+  // state para controlar que se ejecute solo una vez
+  const [primerRender, setPrimerRender] = useState(true)
+  // instancia del useNavigate para usar el redirect al clicar un marker
+  const redirect = useNavigate()
 
+  // los iconos de todas las etapas de los arboles florales
+  const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
+    'CerezoCapullo', 'CerezoInicioFlor', 'CerezoMaxFloracion', 'CerezoMuerto', 'CerezoPequenio', 'CerezoMediano', 'CerezoGrande',
+    'LavandaCapullo', 'LavandaInicioFlor', 'LavandaMaxFloracion', 'LavandaMuerta',
+    'OlivoFlor', 'OlivoPequenio', 'OlivoMediano', 'OlivoGrande']
+
+
+  const iconos = etapas.map(icono => (
+    {
+      [icono]: L.icon({
+        iconUrl: `/images/${icono}.png`,
+        iconSize: [28, 28],
+        iconAnchor: [14, 28]
+      })
+    }
+  ))
+  // el icono de más de una temporada
+  const moreIcon = L.icon({
+    iconUrl: `/images/moreIcon.svg`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28]
+  })
+
+
+  // fetch para sacar todos los puntos de interes y todas sus temporadas
   useEffect(() => {
-
-    // fetch para sacar todos los puntos de interes y todas sus temporadas
     const options = {
       method: 'GET',
       headers: {
@@ -70,198 +53,97 @@ export default function Mapa() {
       },
       credentials: 'include'
     }
-    // fetch(URL + '/todos_puntos_interes', options)
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(err => console.log(err))
-
-
-
-
-    // creación del mapa y todos los markers según el fetch de la api
-    const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(ourMap);
-
-
-    // mapeo de todos los markers y asignacion de diseño de marker en switch case
-    {
-      puntosInteres.map(punto => {
-
-        // switch case para cada tipo de flor, su estado de floracion o 'frutacion'
-        // dependienda de punto.tipo y punto.temporadas.nombre
-        // switch (punto) {
-        //   case value:
-            
-        //     break;
-        
-        //   default:
-        //     break;
-        // }
-
-        return L.marker([punto.latitud, punto.longitud], { icon: cerezoCapullo }).addTo(ourMap)
+    fetch(URL + '/todos_puntos_interes', options)
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res)
+        setPuntosInteres(res)
       })
-    }
+      .catch(err => console.log(err))
   }, []);
 
-  // estados de la viña
-  const viñaFlor = L.icon({
-    iconUrl: '/images/cerezas.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const viñaUvaPequenia = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const viñaUvaMediana = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const viñaUvaGrande = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
+  useEffect(() => {
+    if (!primerRender) {
+      // creación del mapa y todos los markers según el fetch de la api
+      const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(ourMap);
+
+      // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
+      puntosInteres.map(punto => {
+        // borrar
+        // extraer la temporada que coincida con la fecha de hoy
+        // const laTemporada = punto.temporadas.find(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
+        // console.log(laTemporada)
+
+        // correccion: se deben sacar las temporadas con un filter
+        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
+
+        // mapeo de las
+        // distinción de si 0 temporadas, 1 o más
+        return temporadasCoincidentes.length = 0
+          ?
+          null
+          :
+          (
+            temporadasCoincidentes === 1
+              ?
+              L
+                .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
+                .addTo(ourMap)
+                .on('click', () => {
+                  redirect(`/puntosInteres/${punto.id}`)
+                })
+                .bindPopup(`<h6>${punto.nombre}</h6>`)
+              :
+              // aqui está lo de meter el hover con varios iconoss
+              // también hay que meterlo en los markers anteriores
+              L
+                .marker([punto.latitud, punto.longitud], { icon: moreIcon })
+                .addTo(ourMap)
+                .on('click', () => {
+                  redirect(`/puntosInteres/${punto.id}`)
+                })
+                .bindPopup(`<h6>${punto.nombre}</h6>`)
+          )
+
+          
+
+        // esto borrar
+        // si no existe temporada no se crea un marcador y ya
+        // return laTemporada === undefined ? null :
+        //   L
+        //     .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === laTemporada.nombre)[laTemporada.nombre] })
+        //     .addTo(ourMap)
+        //     .on('click', () => {
+        //       redirect(`/puntosInteres/${punto.id}`)
+        //     })
+      })
+    } else {
+      setPrimerRender(false)
+    }
+  }, [puntosInteres])
 
 
-  
+  // funciones
+  function fechaInluidaEnRangoFechas(fechaDeterminada, fechaInicial, fechaFinal) {
+    return (fechaDeterminada >= fechaInicial && fechaDeterminada <= fechaFinal)
+  }
 
-
-
-
-
-  // estados del cerezo
-  const cerezoCapullo = L.icon({
-    iconUrl: '/images/cerezas.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const cerezoInicioFlor = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const cerezoMaxFloracion = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const cerezoMuerto = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-
-  // estados de la lavanda
-  const LavandaCapullo = L.icon({
-    iconUrl: '/images/cerezas.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const LavandaInicioFlor = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const LavandaMaxFloracion = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const LavandaMuerto = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-
-
-
-  // estados del olivo
-  const olivoFlor = L.icon({
-    iconUrl: '/images/cerezas.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const olivoPequenio = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const olivoMediano = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-  const olivoGrande = L.icon({
-    iconUrl: '',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32]
-  })
-
-
-
-
-
-  // {
-  //   puntosInteres.map(punto => {
-  //     console.log(punto)
-  //     return L.marker([punto.latitud, punto.longitud])
-  //   })
-  // }
-
-  // L.marker([puntosInteres[0].latitud, puntosInteres[0].longitud]).addTo(ourMap)
 
   return (
-    <div id="map" ref={mapRef} className='w-full h-[500px]' />
+    <div id="map" ref={mapRef} className='w-full h-[500px]' >
+
+    {/* este div se ha de meter en el hover de los markers que tengan más de una temporada */}
+      <div>
+        <h6>{punto.nombre}</h6>
+        <div>
+          {temporadasCoincidentes.map(t => <img src={`/images/${t.nombre}.png`} ></img>)}
+        </div>
+      </div>
+      
+    </div>
   );
 }
-
-
-
-
-
-
-
-// import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
-// import React, { useEffect, useRef } from 'react';
-// import 'leaflet/dist/leaflet.css'; // Importa los estilos de Leaflet
-
-
-
-
-// const location = {
-//     "lat": 41.393620,
-//     "long": 2.153842
-// }
-
-
-
-
-// export default function Mapa() {
-
-//     return (
-//         <div className='w-full bg-red-300' >
-//             <MapContainer
-//                 center={[41.6092, 2.1477]}
-//                 style={{ height: "500px", width: "100%" }}
-//                 zoom={8}
-//                 scrollWheelZoom={true}>
-//                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-//             </MapContainer>
-
-
-
-
-
-//         </div>
-//     )
-// }
-
-

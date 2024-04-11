@@ -15,17 +15,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
     <Routes>
+      {/* login y register tienen que estar fuera de el layout porque
+      el navbar el footer no ha de estar presente, si no solo el navBar*/}
+      <Route path='/login' element={<Login />} ></Route>
+      <Route path='/register' element={<Register />} ></Route>
       <Route path='/' element={<App />}>
         {/* el inicio */}
-        <Route index element={ <Inicio/> } ></Route>
-        {/* el register y el login */}
-        <Route path='/login' element={<Login />} ></Route>
-        <Route path='/register' element={<Register />} ></Route>
-        {/* las rutas de cada tabla */}
+        <Route index element={<Inicio />} ></Route>
+
+        {/* abajo están las rutas de cada tabla */}
         <Route path='/puntosInteres/:id' element={<PuntoInteres />} ></Route>
         {/* aqui se puede crar la ruta de las temporadas si se requiere */}
+        {/* tambien se puede añadir la ruta de los propietarios, segun lo consesemos */}
         <Route path='/actividades/:id' element={<Actividades />} ></Route>
-        
+
       </Route>
     </Routes>
   </BrowserRouter>

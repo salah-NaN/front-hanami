@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { CardsBox } from "../components";
 import Banner from "../components/Banner";
+import Footer from '../components/Footer'
+import Mapa from '../components/mapa/Mapa'
 
 export const Inicio = () => {
 
@@ -19,7 +21,10 @@ export const Inicio = () => {
       </div>
       <div className="w-11/12 mx-auto">
         <CardsBox paginacion={paginacion} />
+        <Mapa />
       </div>
+      <Footer/>
+
     </>
   );
 };
