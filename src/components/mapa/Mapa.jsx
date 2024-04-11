@@ -73,22 +73,15 @@ export default function Mapa() {
 
       // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
       puntosInteres.map(punto => {
-        // borrar
-        // extraer la temporada que coincida con la fecha de hoy
-        // const laTemporada = punto.temporadas.find(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
-        // console.log(laTemporada)
-
-        // correccion: se deben sacar las temporadas con un filter
+        // extraer las temporadas que coincida con la fecha de hoy
         const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
-
-        // mapeo de las
         // distinción de si 0 temporadas, 1 o más
-        return temporadasCoincidentes.length = 0
+        return temporadasCoincidentes.length === 0
           ?
           null
           :
           (
-            temporadasCoincidentes === 1
+            temporadasCoincidentes.length === 1
               ?
               L
                 .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
@@ -96,30 +89,40 @@ export default function Mapa() {
                 .on('click', () => {
                   redirect(`/puntosInteres/${punto.id}`)
                 })
-                .bindPopup(`<h6>${punto.nombre}</h6>`)
+                .on('mouseover', function (e) {
+                  L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`
+                      <div>
+                        <h6>${punto.nombre}</h6>
+                        <div>
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/images/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                        </div>
+                      </div>
+                    `)
+                    .openOn(ourMap);
+                })
               :
-              // aqui está lo de meter el hover con varios iconoss
-              // también hay que meterlo en los markers anteriores
               L
                 .marker([punto.latitud, punto.longitud], { icon: moreIcon })
                 .addTo(ourMap)
                 .on('click', () => {
                   redirect(`/puntosInteres/${punto.id}`)
                 })
-                .bindPopup(`<h6>${punto.nombre}</h6>`)
+                .on('mouseover', function (e) {
+                  L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`
+                      <div>
+                        <h6>${punto.nombre}</h6>
+                        <div>
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/images/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                        </div>
+                      </div>
+                    `)
+                    .openOn(ourMap);
+                })
           )
-
-          
-
-        // esto borrar
-        // si no existe temporada no se crea un marcador y ya
-        // return laTemporada === undefined ? null :
-        //   L
-        //     .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === laTemporada.nombre)[laTemporada.nombre] })
-        //     .addTo(ourMap)
-        //     .on('click', () => {
-        //       redirect(`/puntosInteres/${punto.id}`)
-        //     })
       })
     } else {
       setPrimerRender(false)
@@ -133,17 +136,19 @@ export default function Mapa() {
   }
 
 
-  return (
-    <div id="map" ref={mapRef} className='w-full h-[500px]' >
 
-    {/* este div se ha de meter en el hover de los markers que tengan más de una temporada */}
-      <div>
-        <h6>{punto.nombre}</h6>
-        <div>
-          {temporadasCoincidentes.map(t => <img src={`/images/${t.nombre}.png`} ></img>)}
-        </div>
-      </div>
-      
-    </div>
+
+  return (
+    <>
+      <div id="map" ref={mapRef} className='w-full h-[500px]' ></div>
+      {/* <Slider
+        aria-label="Custom marks"
+        defaultValue={Date.now.getDay()}
+        getAriaValueText={valuetext}
+        step={10}
+        valueLabelDisplay="auto"
+        marks={marks}
+      /> */}
+    </>
   );
 }
