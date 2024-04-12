@@ -3,7 +3,6 @@ import { motion, useInView, useAnimation } from "framer-motion";
 
 export const CardHotTrendItem = ({ hotTrend }) => {
   
-  console.log(hotTrend)
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
