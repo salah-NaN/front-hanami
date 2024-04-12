@@ -3,4 +3,7 @@ export * from './NavBar/NavBar';
 export * from './NavBar/AccountButton';
 export * from './NavBar/HanburgerButton';
 export * from './NavBar/NavLinks';
-export * from './cards/CardsBox';
+export * from './Buscador/SearchBar';
+export * from './Banner';
+export * from './cardItem/CardItemMap';
+export * from './cardItem/CardHotTrendItem';

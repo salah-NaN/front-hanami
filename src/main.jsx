@@ -8,7 +8,9 @@ import Register from './pages/Register.jsx'
 import Inicio from './pages/Inicio.jsx'
 import PuntoInteres from './pages/PuntoInteres.jsx'
 import Actividades from './pages/Actividades.jsx'
-import LayoutHanami from './layout/LayoutHanami.jsx'
+// import LayoutHanami from './layout/LayoutHanami.jsx'
+import Mapa from './components/mapa/Mapa.jsx'
+import Busqueda from './pages/Busqueda.jsx'
 
 
 
@@ -29,6 +31,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* aqui se puede crar la ruta de las temporadas si se requiere */}
         {/* tambien se puede añadir la ruta de los propietarios, segun lo consesemos */}
         <Route path='/actividades/:id' element={<Actividades />} ></Route>
+
+
+
+        <Route path='/busqueda/:quehacer/:localizacion/:fecha/:flor'
+           element={<Busqueda />} ></Route>
 
       </Route>
     </Routes>
