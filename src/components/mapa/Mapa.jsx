@@ -24,7 +24,7 @@ export default function Mapa() {
   const redirect = useNavigate()
   // state para guardar la fecha seleccionada por slider
   const [fechaSlider, setFechaSlider] = useState(new Date().getDate())
-  const [mapaCreado, setMapaCreado] = useState(false)
+  const [mapa, setMapa] = useState(false)
 
   // los iconos de todas las etapas de los arboles florales
   const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
@@ -74,6 +74,9 @@ export default function Mapa() {
     if (!primerRender) {
 
       const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+
+      setMapa(ourMap)
+
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -134,10 +137,10 @@ export default function Mapa() {
           )
       })
       
-      return () => {
-        ourMap.off()
-        ourMap.remove()
-    }
+    //   return () => {
+    //     ourMap.off()
+    //     ourMap.remove()
+    // }
 
     } else {
       setPrimerRender(false)
@@ -147,13 +150,13 @@ export default function Mapa() {
 
   // distribución de los markers en cada punto del mapa
   useEffect(() => {
-    if(!primerRenderv2){
+    if(!primerRenderv2 && mapa){
 
-      const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+      // const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(ourMap);
+      // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      //   attribution: '© OpenStreetMap contributors'
+      // }).addTo(ourMap);
 
       const fecha = new Date().setDate(fechaSlider)
 
@@ -171,7 +174,7 @@ export default function Mapa() {
               ?
               L
                 .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
-                .addTo(ourMap)
+                .addTo(mapa)
                 .on('click', () => {
                   redirect(`/puntosInteres/${punto.id}`)
                 })
@@ -186,12 +189,12 @@ export default function Mapa() {
                         </div>
                       </div>
                     `)
-                    .openOn(ourMap);
+                    .openOn(mapa);
                 })
               :
               L
                 .marker([punto.latitud, punto.longitud], { icon: moreIcon })
-                .addTo(ourMap)
+                .addTo(mapa)
                 .on('click', () => {
                   redirect(`/puntosInteres/${punto.id}`)
                 })
@@ -206,16 +209,16 @@ export default function Mapa() {
                         </div>
                       </div>
                     `)
-                    .openOn(ourMap);
+                    .openOn(mapa);
                 })
           )
       })
 
 
-      return () => {
-        ourMap.off()
-        ourMap.remove()
-    }
+    //   return () => {
+    //     ourMap.off()
+    //     ourMap.remove()
+    // }
 
     } else {
       setPrimerRenderv2(false)
