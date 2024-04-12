@@ -6,6 +6,7 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 import Flecha from "./flecha/Flecha";
+import DescripcionBanner from "./description/DescripcionBanner";
 
 const COLORS = ["#008000", "#00FF00", "#87E196", "#98FB98"];
 
@@ -41,27 +42,9 @@ export const Banner = ({ paginacionScrollHome }) => {
         >
           Toda la belleza de Cataluña en un solo clic
         </h1>
-        <div className="relative mt-12 ml:w-72 mx:w-80 md:w-96 lg:w-fit px-1">
-          <div className="absolute inset-0 bg-green-300 rounded-full blur-sm"></div>
-          <div className="relative border-none bg-white rounded-full py-2 bg-transparent md:px-6 lg:w-fit">
-            <article className="text-wrap lg:text-nowrap text-black text-sm md:text-md lg:text-md xl:text-md 2xl:text-xl lg:w-fit px-3">
-              <p className="text-center leading-normal">
-                Explora, aprende y conecta con la esencia natural de Cataluña.
-              </p>
-              <p className="text-center leading-normal">
-                Cual sera tu proximo destino?
-              </p>
-            </article>
-            {/* <article className="text-wrap lg:text-nowrap text-black text-sm md:text-md lg:text-md ms:w-60 mm:w-80 md:w-96 xl:text-md 2xl:text-3xl lg:w-fit px-3">
-              <p className="text-center">
-                Explora, aprende y conecta con la esencia natural de Cataluña.
-              </p>
-              <p className="text-center">Cual sera tu proximo destino?</p>
-            </article> */}
-          </div>
-        </div>
+        <DescripcionBanner />
 
-        <div className="h-screen fixed bottom-0 right-0">
+        <div className="h-screen absolute bottom-20 lg:absolute lg:bottom-20 xl:absolute xl:bottom-29 2xl:absolute 2xl:bottom-80">
           <Flecha paginacionScrollHome={paginacionScrollHome} />
         </div>
       </div>
