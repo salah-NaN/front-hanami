@@ -38,32 +38,31 @@ export const CardItemMap = ({ puntos_interes }) => {
         backgroundSize: `cover`,
       }}
     >
-      <motion.div
-        className="bg-red-red
+      <div className="">
+        <motion.div
+          className="bg-red-red
       w-full ml:flex ml:flex-col mx:flex mx:flex-col
-       md:flex md:flex-row bg-sky-200 h-full py-4"
-      >
-        <div className="flex justify-start px-2 bg-red-300">
-          <div className={`border-none w-full h-full px-1 py-1 rounded-md`}>
-            {
-              <img
-                src={obtenerPngTipo(puntos_interes.tipo)}
-                alt={puntos_interes.tipo}
-                className=""
-              />
-            }
+       md:flex md:flex-row bg-sky-200 h-full border"
+        >
+          <div className="flex justify-start px-2 bg-red-300">
+            <div className={`border-none w-full h-full px-1 py-1 rounded-md`}>
+              {
+                <img
+                  src={obtenerPngTipo(puntos_interes.tipo)}
+                  alt={puntos_interes.tipo}
+                  className=""
+                />
+              }
+            </div>
           </div>
-        </div>
-        {/* Items card mapa */}
-        <div className="px-2">
-          <h1 className="text-xl text-semibold pt-1">{puntos_interes.nombre}</h1>
-          <div className="flex py-1">
-            <h1 className="text-md">{puntos_interes.comarca},</h1>
-            <h1 className="text-md px-1">🚹 Raul</h1>
+          {/* Items card mapa */}
+          <div className="px-2 bg-white w-full">
+            <h1 className="text-xl text-semibold pt-1 text-green-600">
+              {puntos_interes.nombre}
+            </h1>
+            <div className="border">{puntos_interes.tipo}</div>
           </div>
-          <p>⭐️⭐️⭐️⭐️</p>
-        </div>
-        {/* <div
+          {/* <div
           className="sm:flex w-full py-1 px-2 flex flex-row absolute 
           bottom-0 rounded-b-md bg-gradient-to-t from-[#008000]"
         >
@@ -85,7 +84,8 @@ export const CardItemMap = ({ puntos_interes }) => {
             {puntos_interes.comarca}
           </h1>
         </div> */}
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

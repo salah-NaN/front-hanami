@@ -36,15 +36,15 @@ export const Banner = ({ paginacionScrollHome }) => {
             text-transparent 
             lg:w-11/12 2xl:max-w-screen-2xl 
             sm:text-5xl sm:leading-tight 
-            md:text-6xl lg:text-7xl 
-            md:leading-tight xl:text-8xl 2xl:text-[12rem]"
+            md:text-6xl lg:text-5xl 
+            md:leading-tight xl:text-6xl 2xl:text-[7rem]"
         >
           Toda la belleza de Cataluña en un solo clic
         </h1>
         <div className="relative mt-12 ml:w-72 mx:w-80 md:w-96 lg:w-fit px-1">
           <div className="absolute inset-0 bg-green-300 rounded-full blur-sm"></div>
           <div className="relative border-none bg-white rounded-full py-2 bg-transparent md:px-6 lg:w-fit">
-            <article className="text-wrap lg:text-nowrap text-black text-sm md:text-md lg:text-md xl:text-md 2xl:text-3xl lg:w-fit px-3">
+            <article className="text-wrap lg:text-nowrap text-black text-sm md:text-md lg:text-md xl:text-md 2xl:text-xl lg:w-fit px-3">
               <p className="text-center leading-normal">
                 Explora, aprende y conecta con la esencia natural de Cataluña.
               </p>
