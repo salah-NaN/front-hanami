@@ -11,6 +11,7 @@ import Actividades from './pages/Actividades.jsx'
 import LayoutHanami from './layout/LayoutHanami.jsx'
 
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
