@@ -15,23 +15,23 @@ export const Busqueda = () => {
   }, []);
 
   return (
-    <div className="w-11/12 mx-auto">
-      <div className="grid grid-cols-2">
+    <div className="w-11/12 mx-auto border-none">
+      <div className="grid grid-cols-2 border-none rounded-md">
         <div className="">
-          <div className="grid grid-cols-1 max-auto h-full">
+          <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
             {filterData?.slice(0, 2).map((puntos_interes) => (
-              <div className="border-none w-full h-full">
+              <div className="w-full h-full overscroll-contain">
                 <CardItemMap puntos_interes={puntos_interes} />
               </div>
             ))}
             {filterData?.slice(2, 6).map((puntos_interes) => (
-              <div className="border-none w-full h-full">
+              <div className="w-full h-full">
                 <CardItemMap puntos_interes={puntos_interes} />
               </div>
             ))}
           </div>
         </div>
-        <div className="bg-sky-200">{/* Mapa */}Mapa</div>
+        <div className="bg-sky-200 border rounded-md">{/* Mapa */}Mapa</div>
       </div>
     </div>
   );

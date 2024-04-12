@@ -36,8 +36,8 @@ export const Banner = ({ paginacionScrollHome }) => {
             text-transparent 
             lg:w-11/12 2xl:max-w-screen-2xl 
             sm:text-5xl sm:leading-tight 
-            md:text-6xl lg:text-5xl 
-            md:leading-tight xl:text-6xl 2xl:text-[7rem]"
+            md:text-6xl lg:text-6xl 
+            md:leading-tight xl:text-8xl 2xl:text-[7rem]"
         >
           Toda la belleza de Cataluña en un solo clic
         </h1>
