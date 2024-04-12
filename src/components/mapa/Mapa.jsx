@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
+import SliderCustom from '../SliderCustom';
 
 //constantes
 const URL = 'http://localhost:3000/api'
+
 
 // las imágenes de los cerezos
 // import cerezas from '../../../public/images/cerezas'
@@ -17,8 +18,13 @@ export default function Mapa() {
   const [puntosInteres, setPuntosInteres] = useState([])
   // state para controlar que se ejecute solo una vez
   const [primerRender, setPrimerRender] = useState(true)
+  // state para controlar que se ejecute solo una vez
+  const [primerRenderv2, setPrimerRenderv2] = useState(true)
   // instancia del useNavigate para usar el redirect al clicar un marker
   const redirect = useNavigate()
+  // state para guardar la fecha seleccionada por slider
+  const [fechaSlider, setFechaSlider] = useState(new Date().getDate())
+  const [mapaCreado, setMapaCreado] = useState(false)
 
   // los iconos de todas las etapas de los arboles florales
   const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
@@ -26,7 +32,7 @@ export default function Mapa() {
     'LavandaCapullo', 'LavandaInicioFlor', 'LavandaMaxFloracion', 'LavandaMuerta',
     'OlivoFlor', 'OlivoPequenio', 'OlivoMediano', 'OlivoGrande']
 
-
+  // mapeo de los nombres de temporada a todos los iconos correspondientes
   const iconos = etapas.map(icono => (
     {
       [icono]: L.icon({
@@ -62,14 +68,17 @@ export default function Mapa() {
       .catch(err => console.log(err))
   }, []);
 
+
+  // creación del mapa y todos los markers según el fetch de la api
   useEffect(() => {
     if (!primerRender) {
-      // creación del mapa y todos los markers según el fetch de la api
+
       const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(ourMap);
+
 
       // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
       puntosInteres.map(punto => {
@@ -124,31 +133,104 @@ export default function Mapa() {
                 })
           )
       })
+      
+      return () => {
+        ourMap.off()
+        ourMap.remove()
+    }
+
     } else {
       setPrimerRender(false)
     }
   }, [puntosInteres])
 
 
+  // distribución de los markers en cada punto del mapa
+  useEffect(() => {
+    if(!primerRenderv2){
+
+      const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(ourMap);
+
+      const fecha = new Date().setDate(fechaSlider)
+
+      // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
+      puntosInteres.map(punto => {
+        // extraer las temporadas que coincida con la fecha de hoy
+        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
+        // distinción de si 0 temporadas, 1 o más
+        return temporadasCoincidentes.length === 0
+          ?
+          null
+          :
+          (
+            temporadasCoincidentes.length === 1
+              ?
+              L
+                .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
+                .addTo(ourMap)
+                .on('click', () => {
+                  redirect(`/puntosInteres/${punto.id}`)
+                })
+                .on('mouseover', function (e) {
+                  L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`
+                      <div>
+                        <h6>${punto.nombre}</h6>
+                        <div>
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/images/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                        </div>
+                      </div>
+                    `)
+                    .openOn(ourMap);
+                })
+              :
+              L
+                .marker([punto.latitud, punto.longitud], { icon: moreIcon })
+                .addTo(ourMap)
+                .on('click', () => {
+                  redirect(`/puntosInteres/${punto.id}`)
+                })
+                .on('mouseover', function (e) {
+                  L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(`
+                      <div>
+                        <h6>${punto.nombre}</h6>
+                        <div>
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/images/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                        </div>
+                      </div>
+                    `)
+                    .openOn(ourMap);
+                })
+          )
+      })
+
+
+      return () => {
+        ourMap.off()
+        ourMap.remove()
+    }
+
+    } else {
+      setPrimerRenderv2(false)
+    }
+  }, [fechaSlider])
+
   // funciones
   function fechaInluidaEnRangoFechas(fechaDeterminada, fechaInicial, fechaFinal) {
     return (fechaDeterminada >= fechaInicial && fechaDeterminada <= fechaFinal)
   }
 
-
-
-
   return (
     <>
       <div id="map" ref={mapRef} className='w-full h-[500px]' ></div>
-      {/* <Slider
-        aria-label="Custom marks"
-        defaultValue={Date.now.getDay()}
-        getAriaValueText={valuetext}
-        step={10}
-        valueLabelDisplay="auto"
-        marks={marks}
-      /> */}
+      <SliderCustom fechaSlider={fechaSlider} setFechaSlider={setFechaSlider} />
     </>
   );
 }
