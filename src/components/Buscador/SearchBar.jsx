@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { PopUp } from "./PopUp";
 
-export const SearchBar = () => {
+export const SearchBar = ({ moveToSearchBar }) => {
   const navigate = useNavigate();
+  const ref = useRef();
   const url = "http://localhost:3000/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
@@ -66,12 +67,17 @@ export const SearchBar = () => {
     //desestructuramos el objeto de searchForm
     const { localizacion, fecha, flor, queHacer } = searchForm;
 
-    //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url si no hay datos pues metemos esto %
-    navigate(`/mapa/${queHacer || "%"}/${localizacion || "%"}/${fecha || "%"}/${flor || "%"}`);
+    //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
+    // si no hay datos pues metemos esto %
+    navigate(
+      `/busqueda/${queHacer || ";"}/${localizacion || ";"}/${fecha || ";"}/${
+        flor || ";"
+      }`
+    );
   };
 
   return (
-    <div className="">
+    <div className="" ref={moveToSearchBar}>
       <h1 className="text-center pt-20 text-7xl">Busca cositas</h1>
       <div className="w-full h-96 flex items-center">
         <form

@@ -1,10 +1,10 @@
-import { ref, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
-import { Flecha } from "../flecha/Flecha";
 
-export const CardItem = ({ puntos_interes }) => {
+export const CardHotTrendItem = ({ hotTrend }) => {
+  
+  console.log(hotTrend)
   const ref = useRef(null);
-  const showFlecha = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   const mainControladores = useAnimation();
@@ -35,7 +35,7 @@ export const CardItem = ({ puntos_interes }) => {
       transition={{ duration: 0.5, delay: 0.25 }}
       className="border-none rounded-md w-full h-full cursor-pointer"
       style={{
-        backgroundImage: `url(${puntos_interes.imagen})`,
+        backgroundImage: `url(${hotTrend?.imagen})`,
         backgroundSize: `cover`,
       }}
     >
@@ -45,25 +45,18 @@ export const CardItem = ({ puntos_interes }) => {
           bottom-0 rounded-b-md bg-gradient-to-t from-[#008000]"
         >
           <h1 className="text-md font-bold text-white">
-            {puntos_interes.nombre}
+            {hotTrend?.nombre}
           </h1>
           <h1 className="text-white text-sm font-light">
-            {puntos_interes.comarca}
+            {hotTrend?.comarca}
           </h1>
         </div>
-        {/* <motion.div
-          className="w-full"
-          initial={{ opacity: 0 }} // Establece la opacidad inicial en 0
-          whileHover={{ scale: 1.2, opacity: 1 }}
-        >
-          <h1>Hola</h1>
-        </motion.div> */}
         <div className="flex w-full justify-end absolute bottom-2 items-center px-2">
           <div className={`border-none px-1 py-1 rounded-md`}>
             {
               <img
-                src={obtenerPngTipo(puntos_interes.tipo)}
-                alt={puntos_interes.tipo}
+                src={obtenerPngTipo(hotTrend?.tipo)}
+                alt={hotTrend?.tipo}
                 className="w-7 h-full"
               />
             }
@@ -74,4 +67,4 @@ export const CardItem = ({ puntos_interes }) => {
   );
 };
 
-export default CardItem;
+export default CardHotTrendItem;
