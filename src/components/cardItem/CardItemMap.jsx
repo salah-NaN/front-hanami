@@ -4,6 +4,7 @@ import { motion, useInView, useAnimation } from "framer-motion";
 
 export const CardItemMap = ({ puntos_interes }) => {
   const [value, setValue] = useState(2);
+  const [image, setImage] = useState("");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -15,13 +16,17 @@ export const CardItemMap = ({ puntos_interes }) => {
     }
   }, [isInView]);
 
-  //Pensar si esto deberia ser así, de hecho yo diria que no, las imagenes deberian estar en el back
-  const obtenerPngTipo = (tipo) => {
-    if (tipo === "Olivo") return "./images/olivos.png";
-    if (tipo === "Lavanda") return "./images/lavanda.png";
-    if (tipo === "Viña") return "./images/uva.png";
-    if (tipo === "Cerezo") return "./images/cerezas.png";
-  };
+  useEffect(() => {
+    const url = "http://localhost:3000";
+    fetch(url + "/public/")
+      .then((res) => res)
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  }, [puntos_interes]);
+  // if (tipo === "Olivo") return "./images/olivos.png";
+  // if (tipo === "Lavanda") return "./images/lavanda.png";
+  // if (tipo === "Viña") return "./images/uva.png";
+  // if (tipo === "Cerezo") return "./images/cerezas.png";
 
   return (
     <motion.div
@@ -47,13 +52,7 @@ export const CardItemMap = ({ puntos_interes }) => {
         >
           <div className="flex justify-start px-2 bg-red-300 border-none rounded-md">
             <div className={`w-full h-full px-1 py-1`}>
-              {
-                <img
-                  src={obtenerPngTipo(puntos_interes.tipo)}
-                  alt={puntos_interes.tipo}
-                  className=""
-                />
-              }
+              {<img src={image} alt={puntos_interes.tipo} className="" />}
             </div>
           </div>
 
@@ -63,10 +62,14 @@ export const CardItemMap = ({ puntos_interes }) => {
               {puntos_interes.nombre}
             </h1>
             <Rating value={value} name="disabled" readOnly emptyIcon />
-            <div className="border w-fit px-1 rounded-md">{puntos_interes.tipo}</div>
+            <div className="border w-fit px-1 rounded-md">
+              {puntos_interes.tipo}
+            </div>
           </div>
           <div className="w-1/4 flex justify-end items-end bg-white px-1 py-1">
-            <button className="border-none bg-green-200 h-fit py-1 px-2 rounded-md">Contactar</button>
+            <button className="border-none bg-green-200 h-fit py-1 px-2 rounded-md">
+              Contactar
+            </button>
           </div>
         </motion.div>
       </div>

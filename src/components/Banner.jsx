@@ -61,7 +61,7 @@ export const Banner = ({ paginacionScrollHome }) => {
           </div>
         </div>
 
-        <div className="h-screen absolute bottom-40">
+        <div className="h-screen fixed bottom-0 right-0">
           <Flecha paginacionScrollHome={paginacionScrollHome} />
         </div>
       </div>
