@@ -137,7 +137,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
                 }
               >
                 <div className="">
-                  {popUp.queHacer === true ? (
+                  {popUp?.queHacer === true ? (
                     <PopUp opciones={queHacer} fn={setQueHacer} />
                   ) : null}
                 </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { SearchBar, Banner, CardHotTrendItem } from "../components";
 import CardBox from "../components/cardItem/CardBox";
+import SliderItems from "../components/SliderItems/SliderItems";
 
 export const Inicio = () => {
   //Seteamos el valor por defecto que sea null de useRef
@@ -29,6 +30,11 @@ export const Inicio = () => {
       </div>
       <div className="">
         <CardBox hotTrends={hotTrends} />
+      </div>
+
+      <div className="w-11/12 mx-auto pt-40">
+        <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
+        <SliderItems hotTrends={hotTrends} />
       </div>
     </>
   );
