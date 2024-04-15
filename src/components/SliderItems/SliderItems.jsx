@@ -19,6 +19,10 @@ const SliderItems = ({
 }) => {
   const swiperRef = useRef(null);
   const [nextSlideState, setNextSlideState] = useState(true);
+  const [selectedButton, setSelectedButton] = useState({
+    puntos_interes: true,
+    actividades: false,
+  });
 
   const nextSlide = () => {
     swiperRef.current.swiper.slidePrev();
@@ -26,6 +30,11 @@ const SliderItems = ({
   };
 
   const swipeActividades = () => {
+    setSelectedButton({
+      puntos_interes: false,
+      actividades: true,
+    });
+
     fetch(url + `actividades`)
       .then((res) => res.json())
       .then((actividades) => setActividadOrPuntoInteres(actividades))
@@ -33,6 +42,11 @@ const SliderItems = ({
   };
 
   const swipePuntosInteres = () => {
+    setSelectedButton({
+      puntos_interes: true,
+      actividades: false,
+    });
+
     fetch(url + `puntos_interes`)
       .then((res) => res.json())
       .then((puntos_interes) => setActividadOrPuntoInteres(puntos_interes))
@@ -44,13 +58,21 @@ const SliderItems = ({
       <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
       <div className="flex gap-5">
         <button
-          className="bg-white border border-[#7EB479] px-3 py-2 rounded-md text-[#7EB479]"
+          className={`bg-white px-3 py-2 rounded-md  ${
+            selectedButton.puntos_interes === true
+              ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
+              : `text-black`
+          }`}
           onClick={swipePuntosInteres}
         >
           Puntos de interes
         </button>
         <button
-          className="bg-white border border-[#7EB479] px-3 py-2 rounded-md text-[#7EB479]"
+          className={`bg-white px-3 py-2 rounded-md  ${
+            selectedButton.actividades === true
+              ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
+              : `text-black`
+          }`}
           onClick={swipeActividades}
         >
           Actividades
@@ -78,7 +100,7 @@ const SliderItems = ({
         </Swiper>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden md:block pt-5">
         <Swiper
           className="mySwiper"
           spaceBetween={50}
@@ -92,7 +114,6 @@ const SliderItems = ({
               slidesPerView: 4, // Cambia a 2 slides por vista en pantallas de 640px o menos
               spaceBetween: 10, // Espacio entre slides
             },
-            // Puedes agregar más configuraciones para otros tamaños de pantalla si es necesario
           }}
         >
           {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
