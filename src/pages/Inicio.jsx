@@ -10,15 +10,21 @@ export const Inicio = () => {
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
-    fetch(url + `/puntos_interes/;/;/;`)
+    fetch(url + `puntos_interes/;/;/;`)
       .then((res) => res.json())
       .then((hotTrends) => setHotTrends(hotTrends))
       .catch((error) => console.log(error));
   }, []);
 
+
+  useEffect(() => {
+    console.log(hotTrends)
+  }, [hotTrends])
+
   const paginacionScrollHome = () => {
     moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
   };
+
 
   return (
     <>
@@ -45,7 +51,7 @@ export const Inicio = () => {
         </div>
 
       </div>
-      <Footer/>
+      <Footer />
 
     </>
   );
