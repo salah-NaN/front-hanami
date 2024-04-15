@@ -12,7 +12,7 @@ import "./style.css";
 
 import { PrevArrow, NextArrow } from "../flecha";
 
-const SliderItems = ({ actividadOrPuntoInteres }) => {
+const SliderItems = ({ url, setActividadOrPuntoInteres, actividadOrPuntoInteres }) => {
   const swiperRef = useRef(null);
   const [nextSlideState, setNextSlideState] = useState(true);
 
@@ -21,19 +21,43 @@ const SliderItems = ({ actividadOrPuntoInteres }) => {
     setNextSlideState(false);
   };
 
+  const swipeActividades = () => {
+    fetch(url + `actividades`)
+      .then((res) => res.json())
+      .then((actividades) => setActividadOrPuntoInteres(actividades))
+      .catch((error) => console.log(error));
+  };
+
+  const swipePuntosInteres = () => {
+    fetch(url + `puntos_interes`)
+      .then((res) => res.json())
+      .then((puntos_interes) => setActividadOrPuntoInteres(puntos_interes))
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <>
-      <div className="flex justify-start w-60 px-5 md:hidden">
-        <Swiper
-          effect={"cards"}
-          grabCursor={true}
-          modules={[EffectCards]}
-          className="w-60 h-52 overflow-visible"
+    <div className="">
+      <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
+      <div className="flex gap-5">
+        <button
+          className="bg-white border border-[#7EB479] px-3 py-2 rounded-md text-[#7EB479]"
+          onClick={swipePuntosInteres}
         >
+          Puntos de interes
+        </button>
+        <button
+          className="bg-white border border-[#7EB479] px-3 py-2 rounded-md text-[#7EB479]"
+          onClick={swipeActividades}
+        >
+          Actividades
+        </button>
+      </div>
+      <div className="flex justify-start w-60 px-2 md:hidden border-none py-5">
+        <Swiper effect={"cards"} grabCursor={true} modules={[EffectCards]}>
           {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
             <>
-              <SwiperSlide className="">
-                <div className="h-30 border-none">{puntoInteresActividad.nombre}</div>
+              <SwiperSlide className="border-none rounded-lg" key={puntoInteresActividad.id}>
+                <div className="">{puntoInteresActividad.nombre}</div>
               </SwiperSlide>
             </>
           ))}
@@ -50,8 +74,8 @@ const SliderItems = ({ actividadOrPuntoInteres }) => {
           breakpoints={{
             // Configuración para tamaños de pantalla más pequeños (móviles)
             640: {
-              slidesPerView: 2, // Cambia a 2 slides por vista en pantallas de 640px o menos
-              spaceBetween: 20, // Espacio entre slides
+              slidesPerView: 4, // Cambia a 2 slides por vista en pantallas de 640px o menos
+              spaceBetween: 10, // Espacio entre slides
             },
             // Puedes agregar más configuraciones para otros tamaños de pantalla si es necesario
           }}
@@ -81,7 +105,7 @@ const SliderItems = ({ actividadOrPuntoInteres }) => {
       </div> */}
         </Swiper>
       </div>
-    </>
+    </div>
   );
 };
 

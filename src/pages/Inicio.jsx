@@ -12,29 +12,15 @@ export const Inicio = () => {
 
   useEffect(() => {
     fetch(url + `/puntos_interes/;/;/;`)
-        .then((res) => res.json())
-        .then((hotTrends) => setHotTrends(hotTrends))
+      .then((res) => res.json())
+      .then((hotTrends) => setHotTrends(hotTrends))
       .catch((error) => console.log(error));
 
     fetch(url + `puntos_interes`)
       .then((res) => res.json())
       .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
-    .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
-
-  const swipeActividades = () => {
-    fetch(url + `actividades`)
-      .then((res) => res.json())
-      .then((actividades) => setActividadOrPuntoInteres(actividades))
-      .catch((error) => console.log(error));
-  };
-
-  const swipePuntosInteres = () => {
-    fetch(url + `puntos_interes`)
-      .then((res) => res.json())
-      .then((puntos_interes) => setActividadOrPuntoInteres(puntos_interes))
-      .catch((error) => console.log(error));
-  };
 
   const paginacionScrollHome = () => {
     moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
@@ -53,16 +39,9 @@ export const Inicio = () => {
       </div>
 
       <div className="w-11/12 mx-auto pt-40">
-        <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
-        <div className="flex gap-5">
-          <button className="" onClick={swipePuntosInteres}>
-            Puntos de interes
-          </button>
-          <button className="" onClick={swipeActividades}>
-            Actividades
-          </button>
+        <div className="pt-10">
+          <SliderItems url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} actividadOrPuntoInteres={actividadOrPuntoInteres}/>
         </div>
-        <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} />
       </div>
     </>
   );
