@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 // constantes
 const URL = 'http://localhost:3000/api'
-export default function PuntoInteres(){
+export const PuntoInteres = () => {
   
     const {id} = useParams()
 
