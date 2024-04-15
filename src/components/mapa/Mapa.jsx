@@ -36,7 +36,7 @@ export default function Mapa() {
   const iconos = etapas.map(icono => (
     {
       [icono]: L.icon({
-        iconUrl: `/images/${icono}.png`,
+        iconUrl: `http://localhost:3000/img/${icono}.png`,
         iconSize: [28, 28],
         iconAnchor: [14, 28]
       })
@@ -44,7 +44,7 @@ export default function Mapa() {
   ))
   // el icono de más de una temporada
   const moreIcon = L.icon({
-    iconUrl: `/images/moreIcon.svg`,
+    iconUrl: `http://localhost:3000/img/moreIcon.svg`,
     iconSize: [28, 28],
     iconAnchor: [14, 28]
   })
