@@ -86,7 +86,7 @@ export default function Mapa() {
       // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
       puntosInteres.map(punto => {
         // extraer las temporadas que coincida con la fecha de hoy
-        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
+        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
         // distinción de si 0 temporadas, 1 o más
         return temporadasCoincidentes.length === 0
           ?
@@ -136,11 +136,11 @@ export default function Mapa() {
                 })
           )
       })
-      
-    //   return () => {
-    //     ourMap.off()
-    //     ourMap.remove()
-    // }
+
+      //   return () => {
+      //     ourMap.off()
+      //     ourMap.remove()
+      // }
 
     } else {
       setPrimerRender(false)
@@ -150,21 +150,27 @@ export default function Mapa() {
 
   // distribución de los markers en cada punto del mapa
   useEffect(() => {
-    if(!primerRenderv2 && mapa){
+    if (!primerRenderv2) {
 
-      // const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
-
-      // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      //   attribution: '© OpenStreetMap contributors'
-      // }).addTo(ourMap);
-
-      const fecha = new Date().setDate(fechaSlider)
+      const fecha2 = new Date()
+      const fecha = new Date()
+      fecha.setDate(fechaSlider)
+      
+      // antes de mapear los markers se han de eliminar previamente
+      mapa.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+           layer.remove();
+        }
+      });
 
       // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
       puntosInteres.map(punto => {
         // extraer las temporadas que coincida con la fecha de hoy
-        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)))
+        const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
         // distinción de si 0 temporadas, 1 o más
+
+        console.log(temporadasCoincidentes)
+
         return temporadasCoincidentes.length === 0
           ?
           null
@@ -215,10 +221,10 @@ export default function Mapa() {
       })
 
 
-    //   return () => {
-    //     ourMap.off()
-    //     ourMap.remove()
-    // }
+      //   return () => {
+      //     ourMap.off()
+      //     ourMap.remove()
+      // }
 
     } else {
       setPrimerRenderv2(false)
