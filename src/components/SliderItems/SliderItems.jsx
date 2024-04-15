@@ -12,7 +12,11 @@ import "./style.css";
 
 import { PrevArrow, NextArrow } from "../flecha";
 
-const SliderItems = ({ url, setActividadOrPuntoInteres, actividadOrPuntoInteres }) => {
+const SliderItems = ({
+  url,
+  setActividadOrPuntoInteres,
+  actividadOrPuntoInteres,
+}) => {
   const swiperRef = useRef(null);
   const [nextSlideState, setNextSlideState] = useState(true);
 
@@ -52,17 +56,28 @@ const SliderItems = ({ url, setActividadOrPuntoInteres, actividadOrPuntoInteres 
           Actividades
         </button>
       </div>
-      <div className="flex justify-start w-60 px-2 md:hidden border-none py-5">
-        <Swiper effect={"cards"} grabCursor={true} modules={[EffectCards]}>
-          {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
-            <>
-              <SwiperSlide className="border-none rounded-lg" key={puntoInteresActividad.id}>
-                <div className="">{puntoInteresActividad.nombre}</div>
-              </SwiperSlide>
-            </>
-          ))}
+      <div className="flex md:hidden border-none py-10 w-full">
+        <Swiper
+          effect={"cards"}
+          grabCursor={true}
+          modules={[EffectCards]}
+          direction={"vertical"}
+        >
+          <div className="">
+            {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
+              <>
+                <SwiperSlide
+                  className="border-none rounded-lg w-full"
+                  key={puntoInteresActividad.id}
+                >
+                  <div className="">{puntoInteresActividad.nombre}</div>
+                </SwiperSlide>
+              </>
+            ))}
+          </div>
         </Swiper>
       </div>
+
       <div className="hidden md:block">
         <Swiper
           className="mySwiper"
