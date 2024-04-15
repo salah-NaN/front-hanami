@@ -1,12 +1,9 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-
 // constantes
 const URL = 'http://localhost:3000/api'
-
-
 export default function PuntoInteres(){
-
+  
     const {id} = useParams()
 
 
@@ -36,8 +33,10 @@ export default function PuntoInteres(){
     // contiene las actividades asociadas a las temporadas
 
     return(
-        <>
+        <div className="">
             {'punto de interes' + id}
-        </>
+        </div>
     )
 }
+
+export default PuntoInteres;

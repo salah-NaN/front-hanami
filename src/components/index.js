@@ -7,3 +7,4 @@ export * from './Buscador/SearchBar';
 export * from './Banner';
 export * from './cardItem/CardItemMap';
 export * from './cardItem/CardHotTrendItem';
+export * from './flecha';
