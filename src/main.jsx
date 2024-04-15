@@ -8,9 +8,10 @@ import Register from "./pages/Register.jsx";
 import Inicio from "./pages/Inicio.jsx";
 import PuntoInteres from "./pages/PuntoInteres.jsx";
 import Actividades from "./pages/Actividades.jsx";
-// import LayoutHanami from './layout/LayoutHanami.jsx'
 import Mapa from "./components/mapa/Mapa.jsx";
 import Busqueda from "./pages/Busqueda.jsx";
+
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
