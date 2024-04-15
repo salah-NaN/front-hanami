@@ -8,7 +8,6 @@ export const PuntoInteres = () => {
 
 
     useEffect(() => {
-        console.log(id)
         const options = {
             method: 'GET',
             headers: {
