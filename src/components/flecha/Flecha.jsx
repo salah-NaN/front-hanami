@@ -10,7 +10,7 @@ export const Flecha = ({paginacionScrollHome}) => {
       <div className="flex justify-center items-end h-full">
         <svg
           viewBox="0 0 24 24"
-          stroke-width="1"
+          strokeWidth="1"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           color="#000000"
@@ -19,9 +19,9 @@ export const Flecha = ({paginacionScrollHome}) => {
           <path
             d="M12 3L12 21M12 21L20.5 12.5M12 21L3.5 12.5"
             stroke="#000000"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       </div>

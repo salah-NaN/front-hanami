@@ -33,8 +33,8 @@ export const PuntoInteres = () => {
     // contiene las actividades asociadas a las temporadas
 
     return(
-        <div className="">
-            {'punto de interes' + id}
+        <div className="w-11/12 mx-auto">
+            <h1>{}</h1>
         </div>
     )
 }
