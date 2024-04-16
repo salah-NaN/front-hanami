@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardItemMap } from "../components";
+import MapComponent from "../components/mapa/MapComponent";
 
 const Busqueda = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
@@ -33,6 +34,8 @@ const Busqueda = () => {
         </div>
         <div className="bg-sky-200 border rounded-md">{/* Mapa */}Mapa</div>
       </div>
+
+      {/* <MapComponent puntosInteres={filterData} setPuntosInteres={setFilterData} /> */}
     </div>
   );
 };
