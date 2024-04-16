@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
@@ -12,6 +12,10 @@ const URL = 'http://localhost:3000/api'
 // import cerezas from '../../../public/images/cerezas'
 
 export default function Mapa({ puntosInteres, setPuntosInteres }) {
+    // ruta actual
+    const location = useLocation();
+    console.log('testttt')
+    console.log(location)
     // referencia del mapa
     const mapRef = useRef(null)
     // state para controlar que se ejecute solo una vez
@@ -57,9 +61,27 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             setMapa(ourMap)
 
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(ourMap);
+            // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //     attribution: '© OpenStreetMap contributors'
+            // }).addTo(ourMap);
+
+            // vista Google Steets
+            let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleStreets.addTo(ourMap)
+
+
+            // vista satelital
+            // var mapLink = '<a href="http://www.esri.com/">Esri</a>';
+            // var wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+
+            // L.tileLayer(
+            //     'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            //     attribution: '&copy; ' + mapLink + ', ' + wholink,
+            //     maxZoom: 18,
+            // }).addTo(ourMap);
 
 
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
@@ -218,6 +240,9 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     return (
         <>
             <div id="map" ref={mapRef} className='w-full h-[500px]' ></div>
+            {
+
+            }
             <SliderCustom fechaSlider={fechaSlider} setFechaSlider={setFechaSlider} />
         </>
     );
