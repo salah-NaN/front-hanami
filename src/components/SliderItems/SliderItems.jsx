@@ -75,7 +75,7 @@ const SliderItems = ({
   };
 
   return (
-    <div className="md:w-[95%] lg:w-[95%] xl:w-[97%] 2xl:w-[98%] w-full mx-auto">
+    <div className="md:w-[94%] lg:w-[96%] xl:w-[96%] 2xl:w-[98%] w-full mx-auto">
       <h1 className="text-4xl pb-4">Donde quieres ir hoy?</h1>
       <div className="flex gap-5">
         <button

@@ -47,7 +47,7 @@ export const Inicio = () => {
       <div className="w-10/12 mx-auto">
         <CardBox hotTrends={hotTrends} />
       </div>
-      <div className="pt-10 md:w-[87%] lg:md-[84%] w-10/12 mx-auto relative">
+      <div className="pt-10 md:w-[89%] lg:w-[87%] xl:w-[87%] 2xl:w-[85%] w-10/12 mx-auto relative">
         <SliderItems
           url={url}
           setActividadOrPuntoInteres={setActividadOrPuntoInteres}

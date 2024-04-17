@@ -29,15 +29,15 @@ export const Banner = ({ paginacionScrollHome }) => {
       className="relative grid min-h-screen place-items-center overflow-hidden
        bg-gray-950 px-2 py-24 text-gray-200"
     >
-      <div className="z-10 flex flex-col items-center w-full h-full relative">
+      <div className="z-10 flex flex-col items-center w-10/12 lg:w-11/12 mx-auto h-full relative">
         <h1
           className="w-full text-center bg-gradient-to-br from-black to-slate-300
-            bg-clip-text text-5xl
+            bg-clip-text text-4xl mx:tracking-wide mx:text-4xl
             font-medium leading-tight 
             text-transparent 
             lg:w-11/12 2xl:max-w-screen-2xl 
             sm:text-5xl sm:leading-tight 
-            md:text-6xl lg:text-6xl 
+            md:text-5xl lg:text-7xl 
             md:leading-tight xl:text-8xl 2xl:text-[7rem]"
         >
           Toda la belleza de Cataluña en un solo clic
