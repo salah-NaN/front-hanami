@@ -14,7 +14,7 @@ export const Flecha = ({paginacionScrollHome}) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           color="#000000"
-          className="w-10 animate-bounce"
+          className="w-8 sm:w-10 animate-bounce"
         >
           <path
             d="M12 3L12 21M12 21L20.5 12.5M12 21L3.5 12.5"

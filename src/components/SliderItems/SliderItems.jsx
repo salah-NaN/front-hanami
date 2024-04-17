@@ -145,10 +145,9 @@ const SliderItems = ({
           ref={swiperRef}
           modules={[Navigation]}
           breakpoints={{
-            // Configuración para tamaños de pantalla más pequeños (móviles)
             640: {
-              slidesPerView: 3, // Cambia a 2 slides por vista en pantallas de 640px o menos
-              spaceBetween: 10, // Espacio entre slides
+              slidesPerView: 3,
+              spaceBetween: 10,
             },
             320: {
               effect: 'cards'

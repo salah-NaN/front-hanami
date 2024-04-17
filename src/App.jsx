@@ -16,9 +16,22 @@ export const App = () => {
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/puntosInteres/:id" element={<LayoutHanami><PuntoInteres /></LayoutHanami>}></Route>
-          <Route path="/actividades/:id" element={<Actividades />}></Route>
-
+          <Route
+            path="/puntosInteres/:id"
+            element={
+              <LayoutHanami>
+                <PuntoInteres />
+              </LayoutHanami>
+            }
+          ></Route>
+          <Route
+            path="/actividades/:id"
+            element={
+              <LayoutHanami>
+                <Actividades />
+              </LayoutHanami>
+            }
+          ></Route>
           <Route
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
             element={<Busqueda />}

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -6,6 +7,12 @@ export default {
       fontFamily: {
         dmSans: "DM Sans",
       },
+    },
+    screens: {
+      'xs': '320px',
+      'xm': '375px',
+      'xp': '425px',
+      ...defaultTheme.screens,
     },
     // screens: {
     //   'xs': "320px",

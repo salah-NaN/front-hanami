@@ -30,20 +30,23 @@ export const Banner = ({ paginacionScrollHome }) => {
        bg-gray-950 px-2 py-24 text-gray-200"
     >
       <div className="z-10 flex flex-col items-center w-10/12 lg:w-11/12 mx-auto h-full relative">
-        <h1
-          className="w-full text-center bg-gradient-to-br from-black to-slate-300
-            bg-clip-text text-4xl mx:tracking-wide mx:text-4xl
-            font-medium leading-tight 
+        <div className="flex xp:w-96 md:w-full ">
+          <h1
+            className="w-full text-center bg-gradient-to-br from-black to-slate-300
+            bg-clip-text xs:text-[2.30rem] xs:tracking-wide xs:text-pretty
+            xm:text-5xl
+            leading-tight 
             text-transparent 
-            lg:w-11/12 2xl:max-w-screen-2xl 
-            sm:text-5xl sm:leading-tight 
-            md:text-5xl lg:text-7xl 
-            md:leading-tight xl:text-8xl 2xl:text-[7rem]"
-        >
-          Toda la belleza de Cataluña en un solo clic
-        </h1>
-        <DescripcionBanner />
-
+            2xl:max-w-screen-2xl
+            2xl:mx-auto
+            md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem]"
+          >
+            Toda la belleza de Cataluña en un solo clic
+          </h1>
+        </div>
+        <div className="pt-8">
+          <DescripcionBanner />
+        </div>
         <div className="h-screen absolute bottom-20 lg:absolute lg:bottom-20 xl:absolute xl:bottom-29 2xl:absolute 2xl:bottom-80">
           <Flecha paginacionScrollHome={paginacionScrollHome} />
         </div>
