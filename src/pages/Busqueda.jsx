@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardItemMap } from "../components";
-import MapComponent from "../components/mapa/MapComponent";
+import MapaSinSlider from "../components/mapa/MapaSinSlider";
+import {motion} from 'framer-motion'
+import GrowShrinkMap from "../components/GrowShrinkMap";
 
 const Busqueda = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
+  // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
+
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
     fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
-      .then((filterData) => setFilterData(filterData))
+      .then((filterData) => {
+        setFilterData(filterData)
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -32,10 +38,20 @@ const Busqueda = () => {
             ))}
           </div>
         </div>
-        <div className="bg-sky-200 border rounded-md">{/* Mapa */}Mapa</div>
+
+        <motion.div className="relative flex justify-end w-full origin-left"
+                initial={{ width: '300px' }}
+                animate={{ width: '100%' }}
+                transition={{duration: 1}}
+            >
+          <GrowShrinkMap/>
+          {
+            filterData && <MapaSinSlider puntosInteres={filterData} setPuntosInteres={setFilterData} />
+          }
+            </motion.div>
+
       </div>
 
-      {/* <MapComponent puntosInteres={filterData} setPuntosInteres={setFilterData} /> */}
     </div>
   );
 };
