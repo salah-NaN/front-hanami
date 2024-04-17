@@ -22,13 +22,11 @@ const Busqueda = () => {
   }, []);
 
 
-
+  // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   const tempoRepetidas = filterData.map(e => e.temporadas.map(t => t.nombre))
   const distinctTemporadas = []
-
   tempoRepetidas.forEach(t => {
     t.forEach(nombreTemporada => {
-
       if (!distinctTemporadas.includes(nombreTemporada)) {
         distinctTemporadas.push(nombreTemporada)
       }
