@@ -19,22 +19,19 @@ const SliderItems = ({
   actividadOrPuntoInteres,
 }) => {
   const swiperRef = useRef(null);
-  const [nextSlideState, setNextSlideState] = useState(true);
   const [selectedButton, setSelectedButton] = useState({
     puntos_interes: true,
     actividades: false,
   });
 
-  const [isMobile, setIsMobile] = useState(null);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setIsMobile(window.innerWidth < 768 ? true : false);
-  // }, [window]);
+  const prevSlide = () => {
+    swiperRef.current.swiper.slidePrev();
+  };
 
   const nextSlide = () => {
-    swiperRef.current.swiper.slidePrev();
-    setNextSlideState(false);
+    swiperRef.current.swiper.slideNext();
   };
 
   const swipeActividades = () => {
@@ -78,8 +75,8 @@ const SliderItems = ({
   };
 
   return (
-    <div className="w-[96%] mx-auto">
-      <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
+    <div className="md:w-[95%] lg:w-[95%] xl:w-[97%] 2xl:w-[98%] w-full mx-auto">
+      <h1 className="text-4xl pb-4">Donde quieres ir hoy?</h1>
       <div className="flex gap-5">
         <button
           className={`bg-white px-3 py-2 rounded-md  ${
@@ -138,7 +135,7 @@ const SliderItems = ({
 
       {/* PC */}
       <div
-        className="hidden md:block pt-5 bg-green-200 h-72 w-full border-none rounded-md"
+        className="hidden md:block pt-5 h-64 w-full border-none rounded-md"
         key={"pc"}
       >
         <Swiper
@@ -150,8 +147,11 @@ const SliderItems = ({
           breakpoints={{
             // Configuración para tamaños de pantalla más pequeños (móviles)
             640: {
-              slidesPerView: 4, // Cambia a 2 slides por vista en pantallas de 640px o menos
+              slidesPerView: 3, // Cambia a 2 slides por vista en pantallas de 640px o menos
               spaceBetween: 10, // Espacio entre slides
+            },
+            320: {
+              effect: 'cards'
             },
           }}
         >
@@ -181,13 +181,13 @@ const SliderItems = ({
 
         <div
           className="custom-prev border-none rounded-full shadow-xl bg-white"
-          onClick={nextSlide}
+          onClick={prevSlide}
         >
           <PrevArrow />
         </div>
         <div
           className="custom-next border-none rounded-full shadow-xl bg-white"
-          onClick={() => swiperRef.current.swiper.slideNext()}
+          onClick={nextSlide}
         >
           <NextArrow />
         </div>

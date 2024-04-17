@@ -36,18 +36,18 @@ export const Inicio = () => {
   };
 
   return (
-    <>
-      <header><NavBar /></header>
-      <div className="">
+    <div className="">
+      <NavBar />
+      <div className="w-full">
         <Banner paginacionScrollHome={paginacionScrollHome} />
       </div>
-      <div className="">
+      <div className="w-10/12 mx-auto hidden md:block">
         <SearchBar moveToSearchBar={moveToSearchBar} />
       </div>
       <div className="w-10/12 mx-auto">
         <CardBox hotTrends={hotTrends} />
       </div>
-      <div className="pt-10 w-[87%] mx-auto relative">
+      <div className="pt-10 md:w-[87%] lg:md-[84%] w-10/12 mx-auto relative">
         <SliderItems
           url={url}
           setActividadOrPuntoInteres={setActividadOrPuntoInteres}
@@ -55,7 +55,7 @@ export const Inicio = () => {
         />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

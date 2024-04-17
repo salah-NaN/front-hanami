@@ -79,10 +79,10 @@ export const SearchBar = ({ moveToSearchBar }) => {
   return (
     <div className="" ref={moveToSearchBar}>
       <h1 className="text-center pt-20 text-7xl">Busca cositas</h1>
-      <div className="w-full h-96 flex items-center ">
+      <div className="w-full h-96 flex items-center">
         <form
           onSubmit={onSubmitSearch}
-          className="my-24 flex flex-col w-10/12 mx-auto h-[168px] 
+          className="my-24 flex flex-col w-full mx-auto h-[168px] 
         rounded-full border border-black bg-[#ffffff] 
             lg:-top-9 lg:h-fit lg:w-9/12 lg:flex-row "
         >

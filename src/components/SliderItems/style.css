@@ -7,10 +7,10 @@
 .custom-next {
   position: absolute;
   right: 0;
-  top: 60%;
+  top: 65%;
   transform: translateY(-60%);
-  width: 50px;
-  height: 50px;
+  width: 43px;
+  height: 43px;
   color: white;
   font-size: 24px;
   display: flex;
@@ -23,10 +23,10 @@
 .custom-prev {
   position: absolute;
   left: 0;
-  top: 60%;
+  top: 65%;
   transform: translateY(-60%);
-  width: 50px;
-  height: 50px;
+  width: 43px;
+  height: 43px;
   color: white;
   font-size: 24px;
   display: flex;
