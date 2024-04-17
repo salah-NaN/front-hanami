@@ -66,7 +66,7 @@ const SliderItems = ({
       .then((puntos_interes) =>
         setActividadOrPuntoInteres(
           puntos_interes?.map((e) => {
-            return { ...e, queEs: "punto_interes" };
+            return { ...e, queEs: "puntosInteres" };
           })
         )
       )
@@ -78,7 +78,7 @@ const SliderItems = ({
   };
 
   return (
-    <div className="">
+    <div className="w-[96%] mx-auto">
       <h1 className="text-3xl pb-4">Donde quieres ir hoy?</h1>
       <div className="flex gap-5">
         <button
@@ -103,39 +103,48 @@ const SliderItems = ({
         </button>
       </div>
 
+      {/*  MOBILE  */}
       {/* {isMobile === true && ( */}
-        <div className="flex md:hidden border-none py-10 w-full">
-          <Swiper
-            effect={"cards"}
-            grabCursor={true}
-            modules={[EffectCards]}
-            direction={"vertical"}
-          >
-            <div className="">
-              {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
-                <div key={puntoInteresActividad?.id}>
-                  <div className="bg-red-500 w-full">
-                    <SwiperSlide
-                      className="border-none rounded-lg w-full"
-                      key={puntoInteresActividad.id}
-                      onClick={() => onNavigateItem(puntoInteresActividad.queEs, puntoInteresActividad.id)}
-                    >
-                      <div className="">{puntoInteresActividad.nombre}</div>
-                    </SwiperSlide>
-                  </div>
+      <div className="flex md:hidden border-none py-10 w-full">
+        <Swiper
+          effect={"cards"}
+          grabCursor={true}
+          modules={[EffectCards]}
+          direction={"vertical"}
+        >
+          <div className="">
+            {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
+              <div key={puntoInteresActividad?.id}>
+                <div className="bg-red-500 w-full">
+                  <SwiperSlide
+                    className="border-none rounded-lg bg-sky-400"
+                    key={puntoInteresActividad.id}
+                    onClick={() =>
+                      onNavigateItem(
+                        puntoInteresActividad.queEs,
+                        puntoInteresActividad.id
+                      )
+                    }
+                  >
+                    <div className="">{puntoInteresActividad.nombre}</div>
+                  </SwiperSlide>
                 </div>
-              ))}
-            </div>
-          </Swiper>
-        </div>
+              </div>
+            ))}
+          </div>
+        </Swiper>
+      </div>
       {/* )} */}
 
-      <div className="hidden md:block pt-5" key={"pc"}>
+      {/* PC */}
+      <div
+        className="hidden md:block pt-5 bg-green-200 h-72 w-full border-none rounded-md"
+        key={"pc"}
+      >
         <Swiper
-          className="mySwiper"
+          className="mySwiper h-full"
           spaceBetween={50}
           slidesPerView={5}
-          navigation
           ref={swiperRef}
           modules={[Navigation]}
           breakpoints={{
@@ -146,29 +155,42 @@ const SliderItems = ({
             },
           }}
         >
-          {
-            actividadOrPuntoInteres?.map((puntoInteresActividad) => (
-              <div key={puntoInteresActividad?.id}>
-                <SwiperSlide onClick={() => onNavigateItem(puntoInteresActividad.queEs, puntoInteresActividad.id)}>
-                  <div className="h-52 border-none rounded-md p-3">
-                    <div className="flex flex-col h-full">
-                      <div className="bg-red-300 h-4/5 w-full border-none rounded-md"></div>
-                      <div className="flex w-full h-1/4 justify-start items-end p-2 font-semibold">
-                        {puntoInteresActividad?.nombre}
-                      </div>
+          {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
+            <div key={puntoInteresActividad?.id}>
+              <SwiperSlide
+                className=""
+                onClick={() =>
+                  onNavigateItem(
+                    puntoInteresActividad.queEs,
+                    puntoInteresActividad.id
+                  )
+                }
+              >
+                <div className="h-full border-none rounded-md bg-green-300">
+                  <div className="flex flex-col h-full">
+                    <div className="bg-sky-300 h-4/5 w-full border-none rounded-md"></div>
+                    <div className="flex w-full h-1/4 justify-start items-end p-2 font-semibold">
+                      {puntoInteresActividad?.nombre}
                     </div>
                   </div>
-                </SwiperSlide>
-              </div>
-            ))}
-          {/* <div className="custom-prev border-none rounded-full shadow-xl bg-white" onClick={nextSlide}>
-        <PrevArrow />
-      </div>
-
-      <div className="custom-next border-none rounded-full shadow-xl bg-white" onClick={() => swiperRef.current.swiper.slideNext()}>
-        <NextArrow />
-      </div> */}
+                </div>
+              </SwiperSlide>
+            </div>
+          ))}
         </Swiper>
+
+        <div
+          className="custom-prev border-none rounded-full shadow-xl bg-white"
+          onClick={nextSlide}
+        >
+          <PrevArrow />
+        </div>
+        <div
+          className="custom-next border-none rounded-full shadow-xl bg-white"
+          onClick={() => swiperRef.current.swiper.slideNext()}
+        >
+          <NextArrow />
+        </div>
       </div>
     </div>
   );

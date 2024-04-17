@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 
 
 
-export default function Actividades(){
+export const Actividades = () => {
 
     const {id} = useParams()
 
@@ -12,3 +12,5 @@ export default function Actividades(){
         </>
     )
 }
+
+export default Actividades

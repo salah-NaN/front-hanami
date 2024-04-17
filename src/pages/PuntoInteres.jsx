@@ -34,7 +34,7 @@ export const PuntoInteres = () => {
 
     return(
         <div className="w-11/12 mx-auto">
-            <h1>{}</h1>
+            <h1></h1>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardItemMap } from "../components";
 
-const Busqueda = () => {
+export const Busqueda = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
   const [filterData, setFilterData] = useState([]);
 
