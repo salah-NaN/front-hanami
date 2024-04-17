@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
@@ -12,8 +12,6 @@ const URL = 'http://localhost:3000/api'
 // import cerezas from '../../../public/images/cerezas'
 
 export default function Mapa({ puntosInteres, setPuntosInteres }) {
-    // ruta actual
-    const location = useLocation();
     // referencia del mapa
     const mapRef = useRef(null)
     // state para controlar que se ejecute solo una vez
@@ -88,8 +86,8 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
-                // extraer las temporadas que coincida con la fecha de hoy
-                const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
+                // extraer las temporadas
+                const temporadasCoincidentes = punto.temporadas
                 // distinción de si 0 temporadas, 1 o más
                 return temporadasCoincidentes.length === 0
                     ?
@@ -151,101 +149,11 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     }, [puntosInteres])
 
 
-    // distribución de los markers en cada punto del mapa
-    useEffect(() => {
-        if (!primerRenderv2) {
-
-            const fecha2 = new Date()
-            const fecha = new Date()
-            fecha.setDate(fechaSlider)
-
-            // antes de mapear los markers se han de eliminar previamente
-            mapa.eachLayer((layer) => {
-                if (layer instanceof L.Marker) {
-                    layer.remove();
-                }
-            });
-
-            // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
-            puntosInteres.map(punto => {
-                // extraer las temporadas que coincida con la fecha de hoy
-                const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
-                // distinción de si 0 temporadas, 1 o más
-
-                console.log(temporadasCoincidentes)
-
-                return temporadasCoincidentes.length === 0
-                    ?
-                    null
-                    :
-                    (
-                        temporadasCoincidentes.length === 1
-                            ?
-                            L
-                                .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
-                                .addTo(mapa)
-                                .on('click', () => {
-                                    redirect(`/puntosInteres/${punto.id}`)
-                                })
-                                .on('mouseover', function (e) {
-                                    L.popup()
-                                        .setLatLng(e.latlng)
-                                        .setContent(`
-                      <div>
-                        <h6>${punto.nombre}</h6>
-                        <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
-                        </div>
-                      </div>
-                    `)
-                                        .openOn(mapa);
-                                })
-                            :
-                            L
-                                .marker([punto.latitud, punto.longitud], { icon: moreIcon })
-                                .addTo(mapa)
-                                .on('click', () => {
-                                    redirect(`/puntosInteres/${punto.id}`)
-                                })
-                                .on('mouseover', function (e) {
-                                    L.popup()
-                                        .setLatLng(e.latlng)
-                                        .setContent(`
-                      <div>
-                        <h6>${punto.nombre}</h6>
-                        <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
-                        </div>
-                      </div>
-                    `)
-                                        .openOn(mapa);
-                                })
-                    )
-            })
-
-
-            //   return () => {
-            //     ourMap.off()
-            //     ourMap.remove()
-            // }
-
-        } else {
-            setPrimerRenderv2(false)
-        }
-    }, [fechaSlider])
-
-    // funciones
-    function fechaInluidaEnRangoFechas(fechaDeterminada, fechaInicial, fechaFinal) {
-        return (fechaDeterminada >= fechaInicial && fechaDeterminada <= fechaFinal)
-    }
 
     return (
         <>
             <div id="map" ref={mapRef} className={`w-full ${location.pathname === '/' ? 'h-[500px]' : 'h-full'}`} ></div>
-            {
-                location.pathname === '/' && <SliderCustom fechaSlider={fechaSlider} setFechaSlider={setFechaSlider} />
-            }
-            
+
         </>
     );
 }

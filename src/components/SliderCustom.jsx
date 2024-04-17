@@ -29,7 +29,7 @@ export default function SliderCustom({ fechaSlider, setFechaSlider }) {
   }
 
   return (
-    <>
+    <div className='mt-9 z-50'>
       <Slider
         aria-label="Temperature"
         defaultValue={(new Date().getDate())}
@@ -41,6 +41,6 @@ export default function SliderCustom({ fechaSlider, setFechaSlider }) {
         max={31}
         onChange={handleSlider}
       />
-    </>
+    </div>
   );
 }
