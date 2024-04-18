@@ -43,12 +43,13 @@ export const Inicio = () => {
       <div className="">
         <SearchBar moveToSearchBar={moveToSearchBar} />
       </div>
-      <div className="">
+      {/* <div className="">
         <CardBox hotTrends={hotTrends} />
       </div>
         <div className="pt-10 w-11/12 mx-auto">
           <SliderItems url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} actividadOrPuntoInteres={actividadOrPuntoInteres} />
-        </div>
+        </div> */}
+      <Mapa/>
       <Footer />
     </>
   );
