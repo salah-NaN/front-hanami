@@ -1,19 +1,18 @@
 import { FormControl, ListItemText, MenuItem, Select } from "@mui/material"
 import { setOptions } from "leaflet"
-import { useRef, useState, useEffect, useContext} from "react";
-import filterContext from "../context/filterContext";
+import { useRef, useState, useEffect, } from "react";
 
-const Filter = ({ array: temporadas }) => {
-  // const a = asignarControladorCheckboxes()
+const Filter = ({ setFiltros, array: temporadas }) => {
+  // inputs donde se guardarán los inputs de los checkboxes para filtrar
+  const [inputs, setInputs] = useState([]);
+const [flag, setFlag] = useState(true)
+
   // input de los checkbox que conforman el select
-  const [inputs, setInputs] = useState([])
+  // const [inputs, setInputs] = useState([]);
   // controlador para definir si el filtro es visible o no 
-  const [visible, setVisible] = useState(false)
-  //objeto formado por los inputs y su nombre convertido ,
-  const [test,setTest] =useState({}) 
+  const [visible, setVisible] = useState(false);
   // referencia para que se cierre cuando se clique fuera del div 
   const dropdownRef = useRef(null);
-  const {filtros, setFiltros} = useContext(filterContext)
 
   const nombreConvertido = [
     {
@@ -21,76 +20,76 @@ const Filter = ({ array: temporadas }) => {
       convertido: 'Boton Blanco'
     },
     {
-      nombre:'CerezoGrande',
-      convertido:'Cerezo Grande'
+      nombre: 'CerezoGrande',
+      convertido: 'Cerezo Grande'
     },
     {
       nombre: 'CerezoInicioFlor',
       convertido: ' Inicio Floración'
     },
     {
-      nombre:'CerezoMaxFloracion',
-      convertido:'Flor Abierta'
+      nombre: 'CerezoMaxFloracion',
+      convertido: 'Flor Abierta'
     },
     {
       nombre: 'CerezoMediano',
       convertido: 'Cerezo Mediano '
     },
     {
-      nombre:'CerezoMuerto',
-      convertido:'Caida de la flor'
+      nombre: 'CerezoMuerto',
+      convertido: 'Caida de la flor'
     },
     {
       nombre: 'CerezoPequenio',
       convertido: 'Cerezo Pequeño'
     },
     {
-      nombre:'LavandaCapullo',
-      convertido:'Lavanda sin brotes'
+      nombre: 'LavandaCapullo',
+      convertido: 'Lavanda sin brotes'
     },
     {
       nombre: 'LavandaInicioFlor',
       convertido: 'Brotes de Lavanda'
     },
     {
-      nombre:'LavandaMaxFloracion',
-      convertido:'Lavanda en Flor'
+      nombre: 'LavandaMaxFloracion',
+      convertido: 'Lavanda en Flor'
     },
     {
       nombre: 'LavandaMuerta',
       convertido: 'Lavanda para Cosechar'
     },
     {
-      nombre:'OlivoFlor',
-      convertido:'Olivo Floracion'
+      nombre: 'OlivoFlor',
+      convertido: 'Olivo Floracion'
     },
     {
-      nombre:'OlivoGrande',
-      convertido:'Olivo Cuajado'
+      nombre: 'OlivoGrande',
+      convertido: 'Olivo Cuajado'
     },
     {
-      nombre:'OlivoMediano',
-      convertido:'Olivo Carolas visibles'
+      nombre: 'OlivoMediano',
+      convertido: 'Olivo Carolas visibles'
     },
     {
-      nombre:'OlivoPequenio',
-      convertido:'Olivo Inicio'
+      nombre: 'OlivoPequenio',
+      convertido: 'Olivo Inicio'
     },
     {
-      nombre:'ViñaFlor',
-      convertido:'Vid en Flor'
+      nombre: 'ViñaFlor',
+      convertido: 'Vid en Flor'
     },
     {
-      nombre:'ViñaUvaGrande',
-      convertido:'Vid Madura'
+      nombre: 'ViñaUvaGrande',
+      convertido: 'Vid Madura'
     },
     {
-      nombre:'ViñaUvaMediana',
-      convertido:'Vid Inicio(Veraison)'
+      nombre: 'ViñaUvaMediana',
+      convertido: 'Vid Inicio(Veraison)'
     },
     {
-      nombre:'ViñaUvaPequeña',
-      convertido:'Vid Cuajado'
+      nombre: 'ViñaUvaPequeña',
+      convertido: 'Vid Cuajado'
     }
   ]
 
@@ -107,55 +106,63 @@ const Filter = ({ array: temporadas }) => {
     };
   }, []);
 
+  // esto es un apaño para que cuando las temporadas cambien 
+  // se pueda usar la funcion asignarControladorCheckboxes
   useEffect(() => {
-
-      const retorno = asignarControladorCheckboxes()
-      setInputs(retorno)
-
+    const retorno = asignarControladorCheckboxes()
+    setInputs(retorno)
   }, [temporadas])
 
-  // funciones 
+  // funciones
   // funcion para preparar los inputs de los checkbox del filtro
   function asignarControladorCheckboxes() {
     let x = [{}]
     const arrObj = temporadas.map(temporada => {
       nombreConvertido.map(nc => {
-        if(nc.nombre === temporada){
-            x = { nombre:nc.convertido , temporada ,seteado:false}
-          }
-        })
-        return  x
+        if (nc.nombre === temporada) {
+          x = { nombre: nc.convertido, temporada, seteado: false }
+        }
       })
+      return x
+    })
     return arrObj
   }
 
+  // funcion para modificar el state del checkbox de cada input
   const handleCheckbox = (event) => {
-    const { name, checked } = event.target
+    const { name } = event.target
     const inputsNuevos = inputs.map(i => {
-      if(i.temporada === name){
+      if (i.temporada === name) {
         i.seteado = !i.seteado
       }
       return i
-    }) 
+    })
     setInputs(inputsNuevos)
   }
 
 
+  // testeo
   useEffect(() => {
-    const filtrados = []
-/*     inputs.map(i=> {
-      if (i.seteado !== false ) {
-        console.log("asdf",i.temporada);
-        filtrados.push(i.temporada)
-      }
-    }) */
-    const test1 = inputs.filter(i => i.seteado)
-    console.log("asdfasdfasdfasdfasd",filtrados);
-/*     setFiltros(test1)   
- */   
+      console.log('test')
+      console.log(inputs)
+    // setFiltros(['olivo'])
   }, [inputs])
 
-  
+  // useEffect(() => {
+  //   console.log('test2')
+  //   console.log(filtros)
+  // }, [filtros])
+
+
+
+
+  // este useEffect filtra los inputs que están checkeados
+  // useEffect(() => {
+  //   const filtrados = inputs.filter(i => i.seteado)
+  //   console.log("asdfasdfasdfasdfasd", filtrados);
+  //   setFiltros(filtrados)
+  // }, [inputs])
+
   return (
     <div ref={dropdownRef}>
       <button
@@ -166,22 +173,22 @@ const Filter = ({ array: temporadas }) => {
       <div >
         <ul className={`${visible ? 'absolute' : 'hidden'}`}>
 
-        {inputs.map(i =>   {
-              return<li>
-                <label>
-                  {i.nombre}
-                </label>
-                <input type="checkbox"
-                  name={i.temporada}
-                  id={i.temporada}
-                  value = {i.temporada}
-                  checked={i.seteado}
-                  onChange={handleCheckbox}>
+          {inputs.map(i => {
+            return <li>
+              <label>
+                {i.nombre}
+              </label>
+              <input type="checkbox"
+                name={i.temporada}
+                id={i.temporada}
+                value={i.temporada}
+                checked={i.seteado}
+                onChange={handleCheckbox}>
 
-                </input>
-              </li>
-            } )
-          } 
+              </input>
+            </li>
+          })
+          }
         </ul>
       </div>
     </div>

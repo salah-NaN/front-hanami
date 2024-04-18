@@ -5,13 +5,14 @@ import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import {motion} from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/Filter";
-import filterContext from "../context/filterContext";
 
 const Busqueda = () => {
   const {quehacer, localizacion, fecha, flor} = useParams();
-  const [filtros, setFiltros] = useState([]);
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
+  const [filtros, setFiltros] = useState([]);
+
+
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
@@ -22,6 +23,8 @@ const Busqueda = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  
 
   // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   const tempoRepetidas = filterData.map((e) =>
@@ -37,7 +40,6 @@ const Busqueda = () => {
   });
 
   return (
-    <filterContext.Provider value={{filtros , setFiltros}}>
       <>
         <div>
           <div className="w-11/12 mx-auto border-none">
@@ -63,20 +65,19 @@ const Busqueda = () => {
                 animate={{width: "100%"}}
                 transition={{duration: 1}}
               >
-                {filterData && (
+                {/* {filterData && (
                   <MapaSinSlider
                     puntosInteres={filterData}
                     setPuntosInteres={setFilterData}
                   />
-                )}
+                )} */}
               </motion.div>
             </div>
           </div>
         </div>
 
-        <Filter array={distinctTemporadas} />
+        <Filter setFiltros={setFiltros}  array={distinctTemporadas} />
       </>
-    </filterContext.Provider>
   );
 };
 
