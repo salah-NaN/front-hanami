@@ -6,6 +6,7 @@ import CardBox from "../components/cardItem/CardBox";
 import SliderItems from "../components/SliderItems/SliderItems";
 import { CardHotTrendItem } from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
+import Paralax from "../components/Paralax";
 
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
@@ -39,18 +40,18 @@ export const Inicio = () => {
   }, []);
 
   useEffect(() => {
-    console.log(isInView)
+    console.log(isInView);
     isInView === true
-      // ? mainControladorFlecha.start({
-      //     opacity: 0,
-      //     transitionDuration: 0,
-      //   })
-      // : mainControladorFlecha.start({
-      //     opacity: 1,
-      //     transitionDuration: 0,
-      //   });
-    ? setIsVisible(false)
-    : setIsVisible(true);
+      ? // ? mainControladorFlecha.start({
+        //     opacity: 0,
+        //     transitionDuration: 0,
+        //   })
+        // : mainControladorFlecha.start({
+        //     opacity: 1,
+        //     transitionDuration: 0,
+        //   });
+        setIsVisible(false)
+      : setIsVisible(true);
   }, [isInView]);
 
   const paginacionScrollHome = () => {
@@ -59,14 +60,15 @@ export const Inicio = () => {
 
   return (
     <div className="">
-      <NavBar />
-      <div className="w-full">
+      {/* <NavBar /> */}
+      <div className="">
         <div className="">
-          <Banner
+          <Paralax />
+          {/* <Banner
             paginacionScrollHome={paginacionScrollHome}
             mainControladorFlecha={mainControladorFlecha}
             isVisible={isVisible}
-          />
+          /> */}
         </div>
       </div>
       <div className="" ref={scrollBuscadorRef}>
