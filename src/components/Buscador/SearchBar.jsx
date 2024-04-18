@@ -82,7 +82,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
       <div className="w-full h-96 flex items-center">
         <form
           onSubmit={onSubmitSearch}
-          className="my-24 flex flex-col w-10/12 mx-auto h-[168px] 
+          className="my-24 flex flex-col w-full mx-auto h-[168px] 
         rounded-full border border-black bg-[#ffffff] 
             lg:-top-9 lg:h-fit lg:w-9/12 lg:flex-row "
         >

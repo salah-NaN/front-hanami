@@ -15,8 +15,8 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto sm:11/12 sm:max-auto">
-      <header className="w-full bg-transparent">
+    <div className="w-10/12 mx-auto">
+      <header className="w-full">
         <nav className="flex justify-between sticky py-6 w-full mx-auto">
           <Logo />
           <div className="hidden md:inline">

@@ -4,13 +4,11 @@ import { useState, useEffect } from "react"
 // constantes
 const URL = 'http://localhost:3000/api'
 
-
-export default function Actividades() {
-
+export const Actividades = () => {
   const [actividad, setActividad] = useState({})
-  const { id } = useParams()
-
-  // fetch para sacar la información de la actividad específica
+  const { id } = useParams();
+  
+   // fetch para sacar la información de la actividad específica
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -48,5 +46,7 @@ export default function Actividades() {
       >{actividad.temporada?.puntos_intere?.descripcion + ' lorem ipsum dolor sit amet consectetur adipisicing elit. Officia debitis tenetur iusto quis. Ducimus reprehenderit aliquam sunt adipisci repellat? Unde, nobis modi. Eaque '}</p>
 
     </div>
-  )
+  ) 
 }
+
+export default Actividades

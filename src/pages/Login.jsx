@@ -3,7 +3,7 @@ import { useState } from "react"
 // constantes 
 const URL = 'http://localhost:3000/api'
 
-export default function Login() {
+export const Login = () => {
     const [inputs, setInputs] = useState({ email: '', password: '' })
 
 
@@ -74,3 +74,5 @@ export default function Login() {
         </div>
     )
 }
+
+export default Login;

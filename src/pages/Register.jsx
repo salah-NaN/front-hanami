@@ -3,7 +3,7 @@ import { useState } from "react"
 // constantes 
 const URL = 'http://localhost:3000/api'
 
-export default function Register() {
+export const Register = () => {
     const [inputs, setInputs] = useState({ nombre: '', email: '', password: '' })
 
 
@@ -81,4 +81,6 @@ export default function Register() {
             lg:block lg:w-1/2  lg:bg-sky-800" ></div>
         </div>
     )
-}
+};
+
+export default Register;
