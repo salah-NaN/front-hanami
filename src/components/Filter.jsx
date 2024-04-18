@@ -4,12 +4,17 @@ import { useRef, useState, useEffect } from "react";
 
 
 const Filter = ({ array: temporadas }) => {
+  // const a = asignarControladorCheckboxes()
   // input de los checkbox que conforman el select
-  const [inputs, setInputs] = useState(asignarControladorCheckboxes())
+  const [inputs, setInputs] = useState({})
   // controlador para definir si el filtro es visible o no 
   const [visible, setVisible] = useState(false)
   // referencia para que se cierre cuando se clique fuera del div 
   const dropdownRef = useRef(null);
+
+
+  console.log('estas toemporasdfsdkjfldsjf')
+  console.log(temporadas)
 
   // para que se cierre cuando se clique fuera del div
   useEffect(() => {
@@ -24,6 +29,14 @@ const Filter = ({ array: temporadas }) => {
     };
   }, []);
 
+  useEffect(() => {
+
+      const retorno = asignarControladorCheckboxes()
+      console.log('retorno')
+      console.log(retorno)
+      setInputs(retorno)
+
+  }, [temporadas])
 
   // funciones 
   // funcion para preparar los inputs de los checkbox del filtro
@@ -38,11 +51,26 @@ const Filter = ({ array: temporadas }) => {
     })
     return o
   }
+
+  const a = [
+    {
+      nombre: 'ViñaFlor',
+      convertido: 'Viña en flor'
+    },
+    
+  ]
+
+  const alea = {
+    Viñaflor: {
+      settado: true,
+      nombrea: 'Viña de flor'
+    }
+  }
   const handleCheckbox = (event) => {
     const { name, checked } = event.target
 
     console.log(name, checked, 'ALGO MAS')
-    setInputs({...inputs, [name]: event.target.checked})
+    setInputs({ ...inputs, [name]: event.target.checked })
 
   }
 
