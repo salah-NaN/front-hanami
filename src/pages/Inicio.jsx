@@ -54,6 +54,7 @@ export const Inicio = () => {
           actividadOrPuntoInteres={actividadOrPuntoInteres}
         />
       </div>
+      //<Mapa/>
       <Footer />
     </div>
   );

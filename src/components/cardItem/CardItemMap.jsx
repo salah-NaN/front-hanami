@@ -16,13 +16,13 @@ export const CardItemMap = ({ puntos_interes }) => {
     }
   }, [isInView]);
 
-  useEffect(() => {
-    const url = "http://localhost:3000";
-    fetch(url + "/public/")
-      .then((res) => res)
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-  }, [puntos_interes]);
+  // useEffect(() => {
+  //   const url = "http://localhost:3000";
+  //   fetch(url + "/public/")
+  //     .then((res) => res)
+  //     .then((data) => console.log(data))
+  //     .catch((error) => console.log(error));
+  // }, [puntos_interes]);
   // if (tipo === "Olivo") return "./images/olivos.png";
   // if (tipo === "Lavanda") return "./images/lavanda.png";
   // if (tipo === "Viña") return "./images/uva.png";
