@@ -71,7 +71,7 @@ export const Actividades = () => {
           + ' - '
           + new Date(actividad.temporada?.fecha_fin).toLocaleDateString()}
       </h4>
-      <h5 className="text-[24px] font-thin mb-2.5"
+      <h5 className="text-[24px]  mb-2.5"
       >{actividad.temporada?.puntos_intere?.nombre}</h5>
       {/* imagenes */}
       {componentToRender}
