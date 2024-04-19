@@ -75,31 +75,6 @@ export const Actividades = () => {
       >{actividad.temporada?.puntos_intere?.nombre}</h5>
       {/* imagenes */}
       {componentToRender}
-
-      
-      {/* <div className="w-full grid grid-cols-2 h-52 bg-slate-900">
-        {
-          provisionalImageNames.map(image => (
-            <img className="overflow-hidden " src={`http://localhost:3000/img/${image}`} ></img>
-          ))
-        }
-      </div> */}
-
-      
-
-      {/* <div className="w-full  h-52
-      md:grid md:grid-cols-2 md:gap-2 md:h-60 ">
-        <img className="w-full h-52
-        md:h-60 "
-         src="http://localhost:3000/img/camposLavandaMaxFloracion.jpeg" ></img>
-        <div className="w-full h-52
-         md:h-60 
-         z-30  backdrop-filter backdrop-blur-lg bg-opacity-90" >
-          <img className="w-full h-52
-          md:h-60 "
-           src="http://localhost:3000/img/camposMaxFloracionLavandaSol.jpeg" ></img>
-        </div>
-      </div> */}
       <p className="text-[16px] mt-2 mb-4 font-medium text-[#3a3a3a] "
       >{actividad.temporada?.puntos_intere?.ubicacion + ', ' + actividad.temporada?.puntos_intere?.poblacion}<a  > - link maps</a></p>
       {/* descripcion */}
