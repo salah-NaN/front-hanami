@@ -8,8 +8,8 @@ const marks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 // funcion para crear el las marcas dinámicas
 const setMarks = () => {
   const mapeado = marks.map((mark) => {
-    // const o = { value: fechaActual.getDate(), label: fechaActual.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('')}
-    const o = { value: fechaActual.getDate(), }
+    const o = { value: fechaActual.getDate(), label: fechaActual.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('')}
+    // const o = { value: fechaActual.getDate(), }
     fechaActual.setDate(fechaActual.getDate() + 1)
     return o
   })
@@ -19,6 +19,12 @@ const setMarks = () => {
 }
 
 const fechas = setMarks()
+
+// const marks = new Array().fill
+
+// codigo de prueba
+
+
 
 
 export default function SliderCustom({ fechaSlider, setFechaSlider }) {
