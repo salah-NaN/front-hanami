@@ -8,7 +8,6 @@ import {
   Busqueda,
   Register,
 } from "./pages";
-import { Switch } from "@mui/material";
 
 export const App = () => {
   return (

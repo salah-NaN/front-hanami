@@ -1,12 +1,14 @@
-import Footer from "../components/Footer";
-import Mapa from "../components/mapa/Mapa";
 import { useEffect, useRef, useState } from "react";
-import { SearchBar, Banner, NavBar } from "../components";
-import CardBox from "../components/cardItem/CardBox";
-import SliderItems from "../components/SliderItems/SliderItems";
-import { CardHotTrendItem } from "../components";
+import {
+  CardHotTrendItem,
+  Banner,
+  SliderItems,
+  CardBox,
+  SearchBar,
+  Mapa,
+  Footer,
+} from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
-import Paralax from "../components/Paralax";
 
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
@@ -14,7 +16,7 @@ export const Inicio = () => {
   const moveToSearchBar = useRef(null);
   const isSearchBarComponent = useRef(null);
   const [hotTrends, setHotTrends] = useState([]);
-  const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState();
+  const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
 
   const scrollBuscadorRef = useRef(false);
   const isInView = useInView(scrollBuscadorRef);
@@ -22,10 +24,10 @@ export const Inicio = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // fetch(url + `puntos_interes/;/;/;`)
-    //   .then((res) => res.json())
-    //   .then((hotTrends) => setHotTrends(hotTrends))
-    //   .catch((error) => console.log(error));
+    fetch(url + `puntos_interes/;/;/;`)
+      .then((res) => res.json())
+      .then((hotTrends) => setHotTrends(hotTrends))
+      .catch((error) => console.log(error));
 
     fetch(url + `puntos_interes`)
       .then((res) => res.json())
@@ -40,7 +42,6 @@ export const Inicio = () => {
   }, []);
 
   useEffect(() => {
-    console.log(isInView);
     isInView === true
       ? // ? mainControladorFlecha.start({
         //     opacity: 0,
@@ -60,30 +61,24 @@ export const Inicio = () => {
 
   return (
     <div className="">
-      {/* <NavBar /> */}
       <div className="">
-        <div className="">
-          <Paralax />
-          {/* <Banner
-            paginacionScrollHome={paginacionScrollHome}
-            mainControladorFlecha={mainControladorFlecha}
-            isVisible={isVisible}
-          /> */}
+        <Banner />
+      </div>
+      <div className=" mx-auto" ref={scrollBuscadorRef}>
+        <div className="py-28 w-10/12 mx-auto">
+          <h1 className="text-5xl text-center pb-6">Busca por el mapa</h1>
+          <Mapa />
+        </div>
+        <div className="w-10/12 mx-auto">
+          <CardBox hotTrends={hotTrends} />
+        </div>
+        <div className="py-32">
+          <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
+            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
+          </div>
         </div>
       </div>
-      <div className="" ref={scrollBuscadorRef}>
-        {/* <div
-          className="w-10/12 mx-auto hidden md:block"
-          ref={isSearchBarComponent}
-        >
-          <SearchBar moveToSearchBar={moveToSearchBar} />
-        </div> */}
-
-        <div className="w-10/12 mx-auto"></div>
-        <div className="pt-10 md:w-[89%] lg:w-[87%] xl:w-[87%] 2xl:w-[85%] w-10/12 mx-auto relative"></div>
-        <Mapa />
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

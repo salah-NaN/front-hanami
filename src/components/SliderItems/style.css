@@ -5,6 +5,28 @@
 
 
 .custom-next {
+  width: 43px;
+  height: 43px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.custom-prev {
+  width: 43px;
+  height: 43px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* .custom-next {
   position: absolute;
   right: 0;
   top: 65%;
@@ -27,14 +49,14 @@
   transform: translateY(-60%);
   width: 43px;
   height: 43px;
-  color: white;
+  color: red;
   font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 10;
-}
+} */
 
 .swiper-slide {
   /* display: flex; */

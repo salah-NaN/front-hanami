@@ -11,7 +11,7 @@ const URL = 'http://localhost:3000/api'
 // las imágenes de los cerezos
 // import cerezas from '../../../public/images/cerezas'
 
-export default function Mapa() {
+export const Mapa = () => {
   // referencia del mapa
   const mapRef = useRef(null)
   // donde se almacenan todos los puntos de interes
@@ -243,3 +243,5 @@ export default function Mapa() {
     </>
   );
 }
+
+export default Mapa;

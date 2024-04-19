@@ -13,7 +13,7 @@ import "./style.css";
 import { PrevArrow, NextArrow } from "../flecha";
 import { Link, useNavigate } from "react-router-dom";
 
-const SliderItems = ({
+export const SliderItems = ({
   url,
   setActividadOrPuntoInteres,
   actividadOrPuntoInteres,
@@ -42,13 +42,19 @@ const SliderItems = ({
 
     fetch(url + `actividades`)
       .then((res) => res.json())
-      .then((actividades) =>
+      .then((actividades) => {
         setActividadOrPuntoInteres(
-          actividades?.map((e) => {
-            return { ...e, queEs: "actividades" };
+          actividades.map((act) => {
+            return { ...act, queEs: "actividades" };
           })
-        )
-      )
+        );
+        // setActividadOrPuntoInteres(actividadOrPuntoInteres => {
+        //    return actividades?.map((e) => {
+        //     return { ...e, queEs: "actividades" };
+        //   })
+        // }
+        // );
+      })
       .catch((error) => console.log(error));
   };
 
@@ -75,33 +81,36 @@ const SliderItems = ({
   };
 
   return (
-    <div className="md:w-[94%] lg:w-[96%] xl:w-[96%] 2xl:w-[98%] w-full mx-auto">
-      <h1 className="text-4xl pb-4">Donde quieres ir hoy?</h1>
-      <div className="flex gap-5">
-        <button
-          className={`bg-white px-3 py-2 rounded-md  ${
-            selectedButton.puntos_interes === true
-              ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
-              : `text-black`
-          }`}
-          onClick={swipePuntosInteres}
-        >
-          Puntos de interes
-        </button>
-        <button
-          className={`bg-white px-3 py-2 rounded-md  ${
-            selectedButton.actividades === true
-              ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
-              : `text-black`
-          }`}
-          onClick={swipeActividades}
-        >
-          Actividades
-        </button>
+    <div
+      className="md:w-[94%] md:mx-auto lg:w-[96%] lg:mx-auto xl:w-[96%] 
+     2xl:w-[98%] 2xl:mx-auto w-full mx-auto"
+    >
+      <div className="w-full mx-auto">
+        <h1 className="text-4xl pb-4">Donde quieres ir hoy?</h1>
+        <div className="flex gap-5">
+          <button
+            className={`bg-white px-3 py-2 rounded-md  ${
+              selectedButton.puntos_interes === true
+                ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
+                : `text-black`
+            }`}
+            onClick={swipePuntosInteres}
+          >
+            Puntos de interes
+          </button>
+          <button
+            className={`bg-white px-3 py-2 rounded-md  ${
+              selectedButton.actividades === true
+                ? `border text-[#7EB479] border-[#7EB479] bg-[#ebf7eb]`
+                : `text-black`
+            }`}
+            onClick={swipeActividades}
+          >
+            Actividades
+          </button>
+        </div>
       </div>
-
       {/*  MOBILE  */}
-      {/* {isMobile === true && ( */}
       <div className="flex md:hidden border-none py-10 w-full">
         <Swiper
           effect={"cards"}
@@ -131,7 +140,6 @@ const SliderItems = ({
           </div>
         </Swiper>
       </div>
-      {/* )} */}
 
       {/* PC */}
       <div
@@ -150,7 +158,7 @@ const SliderItems = ({
               spaceBetween: 10,
             },
             320: {
-              effect: 'cards'
+              effect: "cards",
             },
           }}
         >
@@ -178,17 +186,19 @@ const SliderItems = ({
           ))}
         </Swiper>
 
-        <div
-          className="custom-prev border-none rounded-full shadow-xl bg-white"
-          onClick={prevSlide}
-        >
-          <PrevArrow />
-        </div>
-        <div
-          className="custom-next border-none rounded-full shadow-xl bg-white"
-          onClick={nextSlide}
-        >
-          <NextArrow />
+        <div className="absolute flex justify-between w-full bottom-28  right-0">
+          <div
+            className="custom-prev border-none rounded-full shadow-xl bg-white"
+            onClick={prevSlide}
+          >
+            <PrevArrow />
+          </div>
+          <div
+            className="custom-next border-none rounded-full shadow-xl bg-white"
+            onClick={nextSlide}
+          >
+            <NextArrow />
+          </div>
         </div>
       </div>
     </div>
