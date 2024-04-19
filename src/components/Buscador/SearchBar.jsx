@@ -77,7 +77,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
   };
 
   return (
-    <div className="z-30" ref={moveToSearchBar}>
+    <div className="z-20" ref={moveToSearchBar}>
       {/* <h1 className="text-center pt-20 text-7xl">Busca cositas</h1>  */}
       <div className="w-full flex items-center">
         <form

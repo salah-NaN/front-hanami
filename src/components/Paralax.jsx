@@ -21,8 +21,7 @@ export const Paralax = () => {
     >
       <NavBar />
       <div className="absolute">
-        <div className="mt-12 mx:w-80 md:w-96 lg:w-11/12 lg:mx-auto px-1 z-30">
-          {/* <div className="absolute inset-0 border-none rounded-xl backdrop-blur-sm bg-[#ececec19]"></div> */}
+        <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
           <div
             className="relative border-none
                   rounded-xl
@@ -30,26 +29,25 @@ export const Paralax = () => {
           >
             <h1
               style={{ y: textY }}
-              className="text-semibold text-8xl relative z-30 w-full text-center text-bold bg-gradient-to-br from-white to-slate-200
-                    bg-clip-text xs:text-[2.30rem] xs:tracking-wide xs:text-pretty
-                    p-2
+              className="text-semibold text-8xl relative z-20 w-full text-center
+              text-bold bg-gradient-to-br from-white to-slate-200
+                    bg-clip-text xs:text-[2.30rem] xs:tracking-wide xs:text-pretty p-2
                     xm:text-5xl
                     leading-tight 
                     text-transparent 
-                    2xl:max-w-screen-2xl
-                    2xl:mx-auto
-                    md:text-7xl md:tracking-wide text-shadow-lg lg:text-7xl xl:text-8xl 2xl:text-[7rem]"
+                    2xl:max-w-screen-2xl 2xl:mx-auto
+                    md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem]"
             >
               Toda la belleza de Cataluña en un solo clic
             </h1>
           </div>
         </div>
-        <div className="flex w-full justify-center z-30">
+        <div className="flex w-full justify-center">
           <SearchBar />
         </div>
       </div>
-      <div className="absolute inset-0 z-0 grid grid-cols-6 md:grid-cols-4">
-       <div className="absolute inset-0 backdrop-blur-sm"></div> 
+      <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">
+       <div className="absolute inset-0 backdrop-blur-sm"></div>
         <div
           className=""
           style={{
