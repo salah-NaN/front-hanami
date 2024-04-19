@@ -8,3 +8,7 @@ export * from './Banner';
 export * from './cardItem/CardItemMap';
 export * from './cardItem/CardHotTrendItem';
 export * from './flecha';
+export * from './SliderItems/SliderItems';
+export * from './cardItem/CardBox';
+export * from './mapa/Mapa';
+export * from './Footer';
