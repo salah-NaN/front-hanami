@@ -1,21 +1,39 @@
 import { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-export const CardItemMap = ({ puntos_interes }) => {
+export const CardItemMap = ({ puntos_interes , quehacer }) => {
   const [value, setValue] = useState(2);
   const [image, setImage] = useState("");
+  const navigate = useNavigate();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   const mainControladores = useAnimation();
 
+  console.log('holi',puntos_interes.id , quehacer);
   useEffect(() => {
     if (isInView) {
       mainControladores.start("visible");
     }
   }, [isInView]);
 
+  function redirectQueHacer(){
+    event.preventDefault();
+
+    if (quehacer === "Punto_de_Interes") {
+      navigate(
+        `/puntosInteres/${puntos_interes.id}`
+      );
+    }
+    if (quehacer === "Actividades") {
+      navigate(
+        `/actividades/${puntos_interes.id}`
+      );
+    }
+  }
+  console.log(puntos_interes);
   // useEffect(() => {
   //   const url = "http://localhost:3000";
   //   fetch(url + "/public/")
@@ -61,13 +79,13 @@ export const CardItemMap = ({ puntos_interes }) => {
             <h1 className="text-xl text-semibold pt-1 text-green-600">
               {puntos_interes.nombre}
             </h1>
-            <Rating value={value} name="disabled" readOnly emptyIcon />
+            <Rating value={value} name="disabled"  readOnly emptyIcon />
             <div className="border w-fit px-1 rounded-md">
               {puntos_interes.tipo}
             </div>
           </div>
           <div className="w-1/4 flex justify-end items-end bg-white px-1 py-1">
-            <button className="border-none bg-green-200 h-fit py-1 px-2 rounded-md">
+            <button className="border-none bg-green-200 h-fit py-1 px-2 rounded-md" onClick={()=>redirectQueHacer()}>
               Contactar
             </button>
           </div>

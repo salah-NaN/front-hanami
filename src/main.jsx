@@ -10,6 +10,7 @@ import PuntoInteres from "./pages/PuntoInteres.jsx";
 import Actividades from "./pages/Actividades.jsx";
 import Mapa from "./components/mapa/Mapa.jsx";
 import Busqueda from "./pages/Busqueda.jsx";
+import BusquedaActividad from "./pages/BusquedaActividad.jsx";
 
 
 
@@ -31,8 +32,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
           element={<Busqueda />}
         ></Route>
-        {/* <Route path='/puntos_interes/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route>
-        <Route path='/actividades/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route> */}
+        <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={<BusquedaActividad />} ></Route>
+        {/* <Route path='/puntos_interes/:localizacion/:fecha/:flor' element={<Busqueda />} ></Route>
+         */}
       </Route>
     </Routes>
   </BrowserRouter>

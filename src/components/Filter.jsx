@@ -128,7 +128,7 @@ const Filter = ({ setFilters, filterData }) => {
   //   //   const retorno = asignarControladorCheckboxes()
   //   // setInputs(retorno)
   // }, [temporadas])
-
+console.log('desde el filter ',filterData);
   // funciones
   // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   function generateDistinctTemporadas() {
@@ -204,14 +204,14 @@ const Filter = ({ setFilters, filterData }) => {
 
 
       <div >
-        <ul className={`${visible ? 'absolute' : 'hidden'}`}>
+        <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}>
 
           {inputs.map(i => {
-            return <li>
+            return <li className="">
               <label>
                 {i.nombre}
               </label>
-              <input type="checkbox"
+              <input type="checkbox" 
                 name={i.temporada}
                 id={i.temporada}
                 value={i.temporada}

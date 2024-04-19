@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/Filter";
 
-const Busqueda = () => {
+const BusquedaActividad = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
@@ -16,42 +16,41 @@ const Busqueda = () => {
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
-    fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
+    fetch(url + `actividades/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
-        setFilterData(filterData);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
+          setFilterData(filterData);
+        })
+        .catch((error) => console.log(error));
+    }, []);
+    
   useEffect(() => {
     console.log('cosa',filters)
   }, [filters])
-
   
 
   return (
     <>
       <div>
         <div className="w-11/12 mx-auto border-none">
-        <Filter setFilters={setFilters} filterData={filterData} />
-          <div className="grid grid-cols-2 border-none rounded-md">
+{/*         <Filter setFilters={setFilters} filterData={filterData} />
+ */}          <div className="flex flex-col border-none rounded-md">
             <div className="">
               <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
-                {filterData?.slice(0, 2).map((puntos_interes) => (
+                 {filterData?.slice(0, 2).map((puntos_interes) => (
                   <div className="w-full h-full overscroll-contain">
                     <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
                 ))}
                 {filterData?.slice(2, 6).map((puntos_interes) => (
                   <div className="w-full h-full">
-                    <CardItemMap puntos_interes={puntos_interes}   quehacer={quehacer}/>
+                    <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                ))}
+                ))} 
               </div>
             </div>
 
-            <motion.div
+{/*             <motion.div
               className="relative flex justify-end w-full origin-left"
               initial={{ width: "300px" }}
               animate={{ width: "100%" }}
@@ -63,7 +62,7 @@ const Busqueda = () => {
                     setPuntosInteres={setFilterData}
                   />
                 )} 
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </div>
@@ -73,4 +72,4 @@ const Busqueda = () => {
   );
 };
 
-export default Busqueda;
+export default BusquedaActividad;
