@@ -110,6 +110,7 @@ export const SliderItems = ({
           </button>
         </div>
       </div>
+
       {/*  MOBILE  */}
       <div className="flex md:hidden border-none py-10 w-full">
         <Swiper
@@ -151,14 +152,11 @@ export const SliderItems = ({
           spaceBetween={50}
           slidesPerView={5}
           ref={swiperRef}
-          modules={[Navigation]}
+          modules={[Navigation, EffectCards]}
           breakpoints={{
             640: {
               slidesPerView: 3,
               spaceBetween: 10,
-            },
-            320: {
-              effect: "cards",
             },
           }}
         >

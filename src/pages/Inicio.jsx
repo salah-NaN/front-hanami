@@ -61,7 +61,7 @@ export const Inicio = () => {
 
   return (
     <div className="">
-      <div className="">
+      <div className="" id="banner">
         <Banner />
       </div>
       <div className="bg-[#FFFFFF]" ref={scrollBuscadorRef}>
