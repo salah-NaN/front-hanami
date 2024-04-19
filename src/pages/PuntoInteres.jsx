@@ -16,13 +16,13 @@ export const PuntoInteres = () => {
       .catch((err) => console.log(err));
   }, []);
 
+
   // el fetch contiene la info del Pdi
   // contiene la info de que flores tiene
   // contiene el propietaraio asociado
   // contiene las imágenes asociadas
   // contiene las temporadas asociadas
   // contiene las actividades asociadas a las temporadas
-
   return (
     <div className="">
       <h1 className="text-2xl">{dataPuntoInteres?.nombre}</h1>

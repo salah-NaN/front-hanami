@@ -41,7 +41,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
     setSearchForm({
       localizacion: null,
       fecha: null,
-      flor: flores[0]?.especie,
+      flor: null,
       queHacer: null,
     });
   }, [flores]);
