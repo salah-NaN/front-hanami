@@ -2,18 +2,19 @@ import { FormControl, ListItemText, MenuItem, Select } from "@mui/material"
 import { setOptions } from "leaflet"
 import { useRef, useState, useEffect, } from "react";
 
-const Filter = ({ setFiltros, array: temporadas }) => {
+
+
+
+
+const Filter = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
   const [inputs, setInputs] = useState([]);
-const [flag, setFlag] = useState(true)
-
-  // input de los checkbox que conforman el select
-  // const [inputs, setInputs] = useState([]);
-  // controlador para definir si el filtro es visible o no 
+  // controlador para definir si el filtro es visible o no
   const [visible, setVisible] = useState(false);
-  // referencia para que se cierre cuando se clique fuera del div 
+  // referencia para que se cierre cuando se clique fuera del div
   const dropdownRef = useRef(null);
 
+  // constants
   const nombreConvertido = [
     {
       nombre: 'CerezoCapullo',
@@ -93,6 +94,7 @@ const [flag, setFlag] = useState(true)
     }
   ]
 
+  // useEffects
   // para que se cierre cuando se clique fuera del div
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -106,18 +108,49 @@ const [flag, setFlag] = useState(true)
     };
   }, []);
 
-  // esto es un apaño para que cuando las temporadas cambien 
-  // se pueda usar la funcion asignarControladorCheckboxes
   useEffect(() => {
-    const retorno = asignarControladorCheckboxes()
-    setInputs(retorno)
-  }, [temporadas])
+    if (inputs.length === 0) {
+      let distinct = generateDistinctTemporadas()
+      distinct = asignarControladorCheckboxes(distinct)
+      setInputs(distinct)
+    }
+  }, [filterData])
+
+  useEffect(() => {
+    setFilters(inputs)
+  }, [inputs])
+
+  // useEffect(() => {
+  //   console.log(temporadas)
+  //   if(temporadas){
+
+  //   }
+  //   //   const retorno = asignarControladorCheckboxes()
+  //   // setInputs(retorno)
+  // }, [temporadas])
 
   // funciones
+  // seleccionar infomacion de las temporadas que se van a mapear en el filtro
+  function generateDistinctTemporadas() {
+    const tempoRepetidas = filterData.map((e) =>
+      e.temporadas.map((t) => t.nombre)
+    );
+    const distinctTemporadas = [];
+    tempoRepetidas.forEach((t) => {
+      t.forEach((nombreTemporada) => {
+        if (!distinctTemporadas.includes(nombreTemporada)) {
+          distinctTemporadas.push(nombreTemporada);
+        }
+      });
+    });
+
+    return distinctTemporadas
+  }
+
   // funcion para preparar los inputs de los checkbox del filtro
-  function asignarControladorCheckboxes() {
+  function asignarControladorCheckboxes(tempos) {
     let x = [{}]
-    const arrObj = temporadas.map(temporada => {
+    const arrObj = tempos.map(temporada => {
       nombreConvertido.map(nc => {
         if (nc.nombre === temporada) {
           x = { nombre: nc.convertido, temporada, seteado: false }
@@ -142,11 +175,11 @@ const [flag, setFlag] = useState(true)
 
 
   // testeo
-  useEffect(() => {
-      console.log('test')
-      console.log(inputs)
-    // setFiltros(['olivo'])
-  }, [inputs])
+  // useEffect(() => {
+  //   console.log('test')
+  //   console.log(inputs)
+  //   setFiltros(['olivo'])
+  // }, [inputs])
 
   // useEffect(() => {
   //   console.log('test2')
