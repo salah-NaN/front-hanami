@@ -4,7 +4,7 @@ import { motion, MotionConfig } from "framer-motion";
 
 
 
-export default function Footer() {
+export const Footer = () => {
 //     const ref = useRef(null);
 //   const isInView = useInView(ref, { once: true });
 
@@ -41,3 +41,5 @@ export default function Footer() {
         </div>
     )
 }
+
+export default Footer;

@@ -1,6 +1,8 @@
-export const DescripcionBanner = () => {
+import { motion } from 'framer-motion'
+
+export const DescripcionBanner = ({descY}) => {
   return (
-    <div className="relative mt-12 ml:w-72 mx:w-80 md:w-96 lg:w-fit px-1">
+    <motion.div className="relative mt-12 ml:w-72 mx:w-80 md:w-96 lg:w-fit px-1 z-30" style={{y: descY}}>
       <div className="absolute inset-0 bg-green-300 rounded-full blur-sm"></div>
 
       <div className="relative border-none bg-white rounded-full 
@@ -13,7 +15,7 @@ export const DescripcionBanner = () => {
           </p>
         </article>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
