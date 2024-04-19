@@ -20,7 +20,7 @@ export const Banner = () => {
       ref={ref}
     >
       <NavBar />
-      <div className="absolute">
+      <div className="absolute bottom-80">
         <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
           <div
             className="relative border-none
@@ -42,7 +42,7 @@ export const Banner = () => {
             </h1>
           </div>
         </div>
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center py-8">
           <SearchBar />
         </div>
       </div>
