@@ -64,9 +64,9 @@ export const Inicio = () => {
       <div className="">
         <Banner />
       </div>
-      <div className=" mx-auto" ref={scrollBuscadorRef}>
-        <div className="py-28 w-10/12 mx-auto">
-          <h1 className="text-5xl text-center pb-6">Busca por el mapa</h1>
+      <div className="bg-[#FFFFFF]" ref={scrollBuscadorRef}>
+        <div className="py-12 w-10/12 mx-auto">
+          <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
           <Mapa />
         </div>
         <div className="w-10/12 mx-auto">

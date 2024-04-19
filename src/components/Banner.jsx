@@ -97,7 +97,7 @@ export const Banner = () => {
         <div
           className=""
           style={{
-            backgroundImage: `url(/cerezo.jpg)`,
+            backgroundImage: `url(/cerezoflor2.jpg)`,
             backgroundSize: `cover`,
             position: "relative",
             width: "100%",
