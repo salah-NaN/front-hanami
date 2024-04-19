@@ -72,12 +72,12 @@ export const Inicio = () => {
         </div>
       </div>
       <div className="" ref={scrollBuscadorRef}>
-        <div
+        {/* <div
           className="w-10/12 mx-auto hidden md:block"
           ref={isSearchBarComponent}
         >
           <SearchBar moveToSearchBar={moveToSearchBar} />
-        </div>
+        </div> */}
 
         <div className="w-10/12 mx-auto"></div>
         <div className="pt-10 md:w-[89%] lg:w-[87%] xl:w-[87%] 2xl:w-[85%] w-10/12 mx-auto relative"></div>
