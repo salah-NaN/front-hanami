@@ -69,7 +69,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
   };
 
   const handleCloseModal = (event) => {
-    if(!event.target.closest('.button')){
+    if(!event.target.closest('.button') && (!event.target.closest('.fecha'))){
       setPopUp({...popUp, fecha: false});
     }
   };
@@ -122,7 +122,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
               }
               placeholder="Busca la ciudad"
               className="w-full h-14 focus:outine-none border rounded-l-full border-[#c5c5c5] bg-[#ffffff]
-                lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] "
+                lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
             ></input>
           </div>
           <div className="col-span-2 h-14 flex border-b border-[#c5c5c5] lg:border-none bg-red-500">

@@ -1,15 +1,14 @@
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 export const PopUpFecha = () => {
   return (
-    <div className="bg-red-500 w-full absolute bottom-0">
-      <input
-        onChange={() =>
-          setSearchForm({ ...searchForm, fecha: event.target.value })
-        }
-        placeholder="Introduce tu fecha"
-        className="px-3 w-full border-r border-[#c5c5c5] bg-[#ffffff]
-                    lg:border-r lg:border-l lg:border-[#c5c5c5]"
-        type="date"
-      ></input>
+    <div className="absolute top-80
+     fecha bg-white border-none rounded-md">
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateCalendar />
+      </LocalizationProvider>
     </div>
   );
 };

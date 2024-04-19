@@ -158,6 +158,14 @@ export const SliderItems = ({
               slidesPerView: 3,
               spaceBetween: 10,
             },
+            // 375: {
+            //   slidesPerView: 1,
+            //   spaceBetween: 10,
+            //   modules: [EffectCards],
+            //   effect: "cards",
+            //   grabCursor: true,
+            //   direction: "vertical",
+            // },
           }}
         >
           {actividadOrPuntoInteres?.map((puntoInteresActividad) => (
