@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { NavBar } from "../components";
 // constantes
 const URL = "http://localhost:3000/api";
 export const PuntoInteres = () => {

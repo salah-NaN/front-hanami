@@ -29,14 +29,10 @@ export const Inicio = () => {
       .then((hotTrends) => setHotTrends(hotTrends))
       .catch((error) => console.log(error));
 
-    fetch(url + `puntos_interes`)
+    fetch(url + `/actividades_or_puntointeres`)
       .then((res) => res.json())
       .then((puntosInteres) =>
-        setActividadOrPuntoInteres(
-          puntosInteres?.map((e) => {
-            return { ...e, queEs: "puntosInteres" };
-          })
-        )
+        setActividadOrPuntoInteres(puntosInteres)
       )
       .catch((error) => console.log(error));
   }, []);
@@ -74,11 +70,10 @@ export const Inicio = () => {
         </div>
         <div className="py-32">
           <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
-            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
+            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
           </div>
         </div>
       </div>
-      //<Mapa/>
       <Footer />
     </div>
   );

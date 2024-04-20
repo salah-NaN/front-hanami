@@ -8,6 +8,7 @@ import {
   Busqueda,
   Register,
 } from "./pages";
+import { NavBar } from "./components";
 
 export const App = () => {
   return (
@@ -33,7 +34,11 @@ export const App = () => {
           ></Route>
           <Route
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
-            element={<Busqueda />}
+            element={
+              <LayoutHanami>
+                <Busqueda />
+              </LayoutHanami>
+            }
           ></Route>
           <Route path="/" element={<Inicio />}></Route>
         </Routes>
