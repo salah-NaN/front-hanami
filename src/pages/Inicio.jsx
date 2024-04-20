@@ -78,7 +78,6 @@ export const Inicio = () => {
           </div>
         </div>
       </div>
-      //<Mapa/>
       <Footer />
     </div>
   );
