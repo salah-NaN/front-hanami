@@ -6,7 +6,7 @@ export const LayoutHanami = ({children}) => {
     xl:w-3/4 xl:mx-auto">
       {/* navbar (header) */}
       <NavBar />
-      <div className="bg-[#fefefe] w-10/12 mx-auto">
+      <div className="bg-[#fafafa] w-10/12 mx-auto">
         {children}
       </div>
       {/* div footer */}
