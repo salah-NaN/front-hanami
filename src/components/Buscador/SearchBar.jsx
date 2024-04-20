@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { PopUp } from "./PopUp";
 import PopUpFecha from "./PopUpFecha";
+import { ButtonSearch } from "./";
 
 export const SearchBar = ({ moveToSearchBar }) => {
   const navigate = useNavigate();
@@ -69,8 +70,8 @@ export const SearchBar = ({ moveToSearchBar }) => {
   };
 
   const handleCloseModal = (event) => {
-    if(!event.target.closest('.button') && (!event.target.closest('.fecha'))){
-      setPopUp({...popUp, fecha: false});
+    if (!event.target.closest(".button") && !event.target.closest(".fecha")) {
+      setPopUp({ ...popUp, fecha: false });
     }
   };
 
@@ -103,16 +104,33 @@ export const SearchBar = ({ moveToSearchBar }) => {
 
   return (
     <div
-      className="z-20 h-full w-8/12 mx-auto border rounded-full shadow-sm shadow-white bg-white"
+      className="z-20 h-full w-10/12 mx-auto border rounded-full shadow-sm shadow-white bg-white"
       ref={moveToSearchBar}
     >
-      {/* <h1 className="text-center pt-20 text-7xl">Busca cositas</h1>  */}
       <div className="w-full flex items-center">
         <form
           onSubmit={onSubmitSearch}
-          className="w-full h-full grid grid-cols-12"
+          className="w-full h-full grid gridgrid-cols-12"
         >
-          <div className="w-full col-span-4">
+          <div className="w-fit border-none rounded-xl">
+            <button className="w-full flex items-center gap-0">
+              <ButtonSearch
+                stylesButton={{
+                  backGround: `bg-white`,
+                  svgColor: `stroke-black`,
+                }}
+              />
+              <div className="">
+                <div className="text-bold flex justify-start">¿Donde quieres ir?</div>
+                <div className="flex flex-row w-fit">
+                  <div className="text-sm font-light pr-1">Cualquier...</div>
+                  <div className="text-sm font-light pr-1">Añade...</div>
+                  <div className="text-sm font-light">Que quie...</div>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div className="w-full col-span-4 hidden md:block">
             <input
               onChange={() =>
                 setSearchForm({
@@ -125,7 +143,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
                 lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
             ></input>
           </div>
-          <div className="col-span-2 h-14 flex border-b border-[#c5c5c5] lg:border-none bg-red-500">
+          <div className="hidden md:flex col-span-2 h-14 border-b border-[#c5c5c5] lg:border-none bg-red-500">
             <div
               className="px-3 w-full border-r border-[#c5c5c5] bg-[#ffffff]
                    flex items-center justify-center lg:border-r lg:border-l
@@ -137,7 +155,7 @@ export const SearchBar = ({ moveToSearchBar }) => {
             </div>
             {popUp.fecha ? <PopUpFecha /> : null}
           </div>
-          <div className="col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+          <div className="hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
             <div
               className="flex justify-center items-center w-full h-full cursor-pointer"
               onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
@@ -150,44 +168,14 @@ export const SearchBar = ({ moveToSearchBar }) => {
             ) : null}
           </div>
 
-          <div className="w-full col-span-4">
+          <div className="hidden md:block w-full col-span-4">
             <div
               className="w-full h-full flex justify-between items-center border border-[#c5c5c5] cursor-pointer
                hover:bg-[#EBEBEB] border-none rounded-full"
               onClick={() => setPopUp({ ...popUp, queHacer: !popUp.queHacer })}
             >
               <div className="px-3">Que quieres hacer?</div>
-              <div className="">
-                <button
-                  className="w-full h-14 flex justify-center items-center bg-green-400 hover:bg-green-700 border-none rounded-full px-4"
-                  type="submit"
-                >
-                  <svg
-                    width="25px"
-                    height="25px"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="#FFFFFF"
-                  >
-                    <path
-                      d="M17 17L21 21"
-                      stroke="#FFFFFF"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                    <path
-                      d="M3 11C3 15.4183 6.58172 19 11 19C13.213 19 15.2161 18.1015 16.6644 16.6493C18.1077 15.2022 19 13.2053 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11Z"
-                      stroke="#FFFFFF"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+              <ButtonSearch />
             </div>
 
             <div className="col-span-1 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">

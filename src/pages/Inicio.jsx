@@ -13,15 +13,11 @@ import { motion, useInView, useAnimation } from "framer-motion";
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
   //Seteamos el valor por defecto que sea null de useRef
-  const moveToSearchBar = useRef(null);
   const isSearchBarComponent = useRef(null);
   const [hotTrends, setHotTrends] = useState([]);
   const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
 
   const scrollBuscadorRef = useRef(false);
-  const isInView = useInView(scrollBuscadorRef);
-  const mainControladorFlecha = useAnimation();
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     fetch(url + `puntos_interes/;/;/;`)
@@ -36,24 +32,6 @@ export const Inicio = () => {
       )
       .catch((error) => console.log(error));
   }, []);
-
-  useEffect(() => {
-    isInView === true
-      ? // ? mainControladorFlecha.start({
-        //     opacity: 0,
-        //     transitionDuration: 0,
-        //   })
-        // : mainControladorFlecha.start({
-        //     opacity: 1,
-        //     transitionDuration: 0,
-        //   });
-        setIsVisible(false)
-      : setIsVisible(true);
-  }, [isInView]);
-
-  const paginacionScrollHome = () => {
-    moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <div className="">
