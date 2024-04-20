@@ -9,6 +9,7 @@ const ModalGridImages = ({ modalVisible, setModalVisible, listImages }) => {
             <div className={` ${modalVisible ? 'absolute' : 'hidden'} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50
                 w-full h-full my-2 py-6 px-8  `}>
                 <div className=" relative overflow-y-scroll w-full bg-[#fefefe] py-6 pt-16 px-14 rounded-lg
+                lg:w-8/12 lg:mx-auto
                 xl:w-7/12 xl:mx-auto">
                     <img src={arrow} 
                     className="size-8 absolute top-4 left-12"
