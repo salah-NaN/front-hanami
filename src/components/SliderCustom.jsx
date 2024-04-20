@@ -29,7 +29,6 @@ const setMarks = () => {
   const mapped = marks.map((mark) => {
     const actualDate = new Date(new Date().setDate(mark));
     const o = { value: mark, label: mark %4 === 0 ? actualDate.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('') : ''}
-    console.log(o)
     return o
   })
   
@@ -37,7 +36,6 @@ const setMarks = () => {
 }
 
 const fechas = setMarks()
-console.log(fechas)
 
 function diasDelMesActual() {
   const fechaActual = new Date();
