@@ -2,7 +2,8 @@ import { NavBar } from "../components";
 
 export const LayoutHanami = ({children}) => {
   return (
-    <div className="w-10/11 mx-auto">
+    <div className="w-10/11 mx-auto
+    xl:w-3/4 xl:mx-auto">
       {/* navbar (header) */}
       <NavBar />
       <div className="bg-[#fefefe] w-10/12 mx-auto">
