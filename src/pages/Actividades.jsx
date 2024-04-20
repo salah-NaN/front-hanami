@@ -12,14 +12,8 @@ export default function Actividades() {
 
   // fetch para sacar la información de la actividad específica
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    }
-    fetch(URL + '/actividad_page/' + id, options)
+
+    fetch(URL + '/actividad_page/' + id)
       .then(res => res.json())
       .then(res => {
         console.log(res)

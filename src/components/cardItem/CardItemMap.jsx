@@ -12,7 +12,6 @@ export const CardItemMap = ({ puntos_interes , quehacer }) => {
 
   const mainControladores = useAnimation();
 
-  console.log('holi',puntos_interes.id , quehacer);
   useEffect(() => {
     if (isInView) {
       mainControladores.start("visible");
@@ -33,7 +32,6 @@ export const CardItemMap = ({ puntos_interes , quehacer }) => {
       );
     }
   }
-  console.log(puntos_interes);
   // useEffect(() => {
   //   const url = "http://localhost:3000";
   //   fetch(url + "/public/")

@@ -1,28 +1,28 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 // constantes
 const URL = 'http://localhost:3000/api'
 export const PuntoInteres = () => {
+  const [puntoInteres, setPuntoInteres] =useState({})
+  const {id} = useParams()
   
-    const {id} = useParams()
+  
+  useEffect(() => {
 
-
-    useEffect(() => {
-        const options = {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-          }
-          fetch(URL + '/punto_interes_page/' + id, options)
+          fetch(URL + '/punto_interes_page/' + id)
             .then(res => res.json())
             .then(res => {
-              console.log(res)
-            })
-            .catch(err => console.log(err))
+               setPuntoInteres(res)
+              })
+              .catch(err => console.log(err))
     }, [])
 
+    
+    useEffect(()=>{
+
+      console.log('asdfasdf',puntoInteres)
+
+    },[puntoInteres])
 
     // el fetch contiene la info del Pdi 
     // contiene la info de que flores tiene
@@ -32,9 +32,28 @@ export const PuntoInteres = () => {
     // contiene las actividades asociadas a las temporadas
 
     return(
-        <div className="">
-            {'punto de interes' + id}
-        </div>
+<div className="w-11/12 mx-auto" >
+ 
+   <div>
+    <h2 className="text-3xl mb-1"
+      >{puntoInteres.nombre}</h2></div> 
+      
+      
+{        puntoInteres.temporadas.map(t=> (
+          <h4 className="text-[15px] mb-8">     
+                {t.nombre+ ' '+
+                  new Date(t?.fecha_inicio).toLocaleDateString()
+                  + ' - '
+                  + new Date(t?.fecha_fin).toLocaleDateString()}
+          </h4>  
+        ))}
+      <div className="w-full h-52 bg-slate-900"></div>
+      <p className="text-[16px] mt-1 mb-4"
+      >{puntoInteres.ubicacion + ', ' + puntoInteres.poblacion}</p>
+      <p className=""
+      >{puntoInteres.descripcion + ' lorem ipsum dolor sit amet consectetur adipisicing elit. Officia debitis tenetur iusto quis. Ducimus reprehenderit aliquam sunt adipisci repellat? Unde, nobis modi. Eaque '}</p>
+  
+    </div>
     )
 }
 

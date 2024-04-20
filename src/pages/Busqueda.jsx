@@ -28,7 +28,6 @@ const Busqueda = () => {
     console.log('cosa',filters)
   }, [filters])
 
-  
 
   return (
     <>
