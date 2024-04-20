@@ -2,10 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
     font-family: "DM Sans", sans-serif;
-}
+} */
 
 body {
     background-color: #fefefe;
 }
+
+
+@font-face {
+    font-family: Circular;
+    src: url('./fonts/Gilroy-Regular.ttf');
+  }
+  
+
+body {
+    background-color: #fafafa;
+    /* background-image: url('./assets/fondo.jpg');
+    background-size: cover; */
+    font-family: Circular;
+}
+
