@@ -33,7 +33,7 @@ export const Actividades = () => {
 
   if (windowWidth <= 640) {
     componentToRender = <Swiper images={actividad.imagenes}/>;
-  } else if (windowWidth <= 1024) {
+  } else if (windowWidth <= 900) {
     componentToRender = <GridTwo images={actividad.imagenes}/>;
   } else {
     componentToRender = <GridFive images={actividad.imagenes}/>;

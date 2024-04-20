@@ -15,7 +15,8 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="w-full z-30 absolute top-0 shadow-sm">
+    <div className="w-full z-30 absolute top-0 shadow-sm
+    xl:w-3/4 xl:mx-auto">
       <header className="">
         {/* <div className="absolute inset-0 backdrop-blur-sm"></div> */}
         <div className="sticky border border-[#ececec19] border-r-0 border-l-0 border-t-0">

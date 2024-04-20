@@ -9,8 +9,7 @@ const GridFive = ({ images }) => {
 
     return (
         <>
-            <div className="grid grid-cols-4 grid-rows-2 gap-1.5 h-68
-        xl:h-96">
+            <div className="grid grid-cols-4 grid-rows-2 gap-1.5 h-68">
                 {
                     images && images.map((image, index) => {
                         if (index === 0) {
