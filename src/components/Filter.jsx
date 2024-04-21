@@ -128,7 +128,6 @@ const Filter = ({ setFilters, filterData }) => {
   //   //   const retorno = asignarControladorCheckboxes()
   //   // setInputs(retorno)
   // }, [temporadas])
-console.log('desde el filter ',filterData);
   // funciones
   // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   function generateDistinctTemporadas() {

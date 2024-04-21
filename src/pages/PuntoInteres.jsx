@@ -39,7 +39,7 @@ export const PuntoInteres = () => {
       >{puntoInteres.nombre}</h2></div> 
       
       
-{        puntoInteres.temporadas.map(t=> (
+{        puntoInteres?.temporadas?.map(t=> (
           <h4 className="text-[15px] mb-8">     
                 {t.nombre+ ' '+
                   new Date(t?.fecha_inicio).toLocaleDateString()
