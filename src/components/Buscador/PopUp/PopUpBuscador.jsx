@@ -2,7 +2,6 @@ import { MotionConfig, motion } from "framer-motion";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ButtonSearch from "../ButtonSearch";
 import { useState } from "react";
 import { IconPLanta, PopUpFecha } from "./";
@@ -15,7 +14,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
   const [openInput, setOpenInput] = useState(false);
   const [clickChoice, setClickChoice] = useState({
     punto_interes: true,
-    actividades: false
+    actividades: false,
   });
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -27,15 +26,17 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
 
   const clickChoicePuntoInteres = () => {
     setClickChoice({
-
-    })
-  }
+      punto_interes: true,
+      actividades: false,
+    });
+  };
 
   const clickChoiceActividad = () => {
     setClickChoice({
-
-    })
-  }
+      punto_interes: false,
+      actividades: true,
+    });
+  };
 
   return (
     <MotionConfig
@@ -83,9 +84,30 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                 ></path>
               </svg>
             </button>
-            <div className="flex w-full justify-center items-center gap-5 font-light text-sm">
-              <div className="">Punto de Interes</div>
-              <div className="">Actividades</div>
+            <div
+              className={`flex w-full justify-center items-center gap-5 font-light text-sm 
+            `}
+            >
+              <div
+                className={`${
+                  clickChoice.punto_interes === true
+                    ? `border-b border-black transition duration-150 ease-out `
+                    : ``
+                }`}
+                onClick={clickChoicePuntoInteres}
+              >
+                Punto de Interes
+              </div>
+              <div
+                className={`${
+                  clickChoice.actividades === true
+                    ? `border-b border-black transition duration-150 ease-out `
+                    : ``
+                }`}
+                onClick={clickChoiceActividad}
+              >
+                Actividades
+              </div>
             </div>
           </div>
         </motion.div>
@@ -104,110 +126,147 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
           }}
         >
           <motion.div className="shadow-xl">
-            <Accordion
-              defaultExpanded
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-              className="border rounded-xl"
-            >
-              <AccordionSummary
-                aria-controls="panel1bh-content"
-                expandIcon={<IconDondeIr />}
-                id="panel1bh-header"
-                className="border border-black"
+            <motion.div className="border-none shadow-md pb-2">
+              <Accordion
+                defaultExpanded
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
+                className="border rounded-xl"
               >
-                <h1 className="text-bold text-xl py-2">¿Donde quieres ir?</h1>
-              </AccordionSummary>
-              <AccordionDetails className="border-none">
-                <div className="">
-                  <div
-                    className="flex items-center border rounded-xl text-[17px]"
-                    onClick={openInputSearch}
-                  >
-                    <ButtonSearch
-                      stylesButton={{
-                        backGround: `bg-white`,
-                        svgColor: `stroke-black`,
-                        hover: `hover:bg-white`,
-                        size: `h-12`,
-                      }}
-                    />
-                    {openInput === true ? (
-                      <input
-                        type="text"
-                        placeholder="Introduce tu destino"
-                        className="focus:ring-0 focus:outline-none
+                <AccordionSummary
+                  aria-controls="panel1bh-content"
+                  expandIcon={<IconDondeIr />}
+                  id="panel1bh-header"
+                  className="border border-black"
+                >
+                  <h1 className="text-bold text-xl py-2">¿Donde quieres ir?</h1>
+                </AccordionSummary>
+                <AccordionDetails className="border-none">
+                  <div className="">
+                    <div
+                      className="flex items-center border rounded-xl text-[17px]"
+                      onClick={openInputSearch}
+                    >
+                      <ButtonSearch
+                        stylesButton={{
+                          backGround: `bg-white`,
+                          svgColor: `stroke-black`,
+                          hover: `hover:bg-white`,
+                          size: `h-12`,
+                        }}
+                      />
+                      {openInput === true ? (
+                        <input
+                          type="text"
+                          placeholder="Introduce tu destino"
+                          className="focus:ring-0 focus:outline-none
                           flex w-full items-center h-full border-none
                           rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
-                        autoFocus
-                      />
-                    ) : (
-                      <>
-                        <p>Introduce tu destino</p>
-                      </>
-                    )}
-                  </div>
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          <p>Introduce tu destino</p>
+                        </>
+                      )}
+                    </div>
 
-                  <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50">
-                      <img src="/barcelona_comarca.svg" />
-                      <h1 className="text-sm text-right">Barcelona</h1>
-                    </div>
-                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
-                      <img src="/girona.svg" />
-                      <h1 className="text-sm text-right">Girona</h1>
-                    </div>
-                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
-                      <img src="/tarragona.svg" />
-                      <h1 className="text-sm text-right">Tarragon</h1>
-                    </div>
-                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
-                      <img src="/lleida.svg" />
-                      <h1 className="text-sm text-right">Lleida</h1>
+                    <div className="grid grid-cols-2 gap-3 mt-4">
+                      <div className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50">
+                        <img src="/barcelona_comarca.svg" />
+                        <h1 className="text-sm text-right">Barcelona</h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img src="/girona.svg" />
+                        <h1 className="text-sm text-right">Girona</h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img src="/tarragona.svg" />
+                        <h1 className="text-sm text-right">Tarragon</h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img src="/lleida.svg" />
+                        <h1 className="text-sm text-right">Lleida</h1>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-              className="border-none rounded-xl"
-            >
-              <AccordionSummary
-                aria-controls="panel2bh-content"
-                id="panel2bh-header"
-                className="border border-black rounded-xl"
-                expandIcon={<IconFecha />}
+                </AccordionDetails>
+              </Accordion>
+            </motion.div>
+
+            <motion.div className="border shadow-md">
+              <Accordion
+                expanded={expanded === "panel2"}
+                onChange={handleChange("panel2")}
+                className="border-none rounded-xl"
               >
-                <h1 className="text-xl text-bold py-2">¿Cuando quieres ir?</h1>
-              </AccordionSummary>
-              <AccordionDetails>
-                <PopUpFecha />
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
-              <AccordionSummary
-                expandIcon={<IconPLanta />}
-                aria-controls="panel3bh-content"
-                id="panel3bh-header"
-                className="border border-black "
+                <AccordionSummary
+                  aria-controls="panel2bh-content"
+                  id="panel2bh-header"
+                  className="border border-black rounded-xl"
+                  expandIcon={<IconFecha />}
+                >
+                  <h1 className="text-xl text-bold py-2">
+                    ¿Cuando quieres ir?
+                  </h1>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <PopUpFecha />
+                </AccordionDetails>
+              </Accordion>
+            </motion.div>
+            {clickChoice.punto_interes ? (
+              <motion.div
+                className="border-none pt-2 shadow-md rounded-lg"
+                initial={{ scale: 0 }}
+                animate={{ rotate: 0, scale: 1 }}
               >
-                <h1 className="text-xl text-bold py-2">
-                  ¿Que plantas quieres ver?
-                </h1>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex justify-between w-full">
-                  <div className="border rounded-lg px-3 py-2 gap-2 text-[18px] flex">Olivos<img src={`http://localhost:3000/img/LavandaMaxFloracion.png`} alt="" className="w-7" /></div>
-                  <div className="border rounded-lg px-3 text-[18px]"><img src="" alt="" /> Lavanda</div>
-                  <div className="border rounded-lg px-3 text-[18px]"><img src="" alt="" /> Cerezos</div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
+                <Accordion
+                  expanded={expanded === "panel3"}
+                  onChange={handleChange("panel3")}
+                >
+                  <AccordionSummary
+                    expandIcon={<IconPLanta />}
+                    aria-controls="panel3bh-content"
+                    id="panel3bh-header"
+                    className="border border-black "
+                  >
+                    <h1 className="text-xl text-bold py-2">
+                      ¿Que plantas quieres ver?
+                    </h1>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="w-11/12 mx-auto border rounded-xl px-3 py-1 bg-slate-50">
+                        <img
+                          src={`http://localhost:3000/img/LavandaMaxFloracion.png`}
+                        />
+                        <h1 className="text-sm text-right flex justify-end">
+                          Lavanda
+                        </h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img
+                          src={`http://localhost:3000/img/cerezas.png`}
+                          className="h-fit"
+                        />
+                        <h1 className="text-sm text-right">Cerezo</h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img
+                          src={`http://localhost:3000/img/viñaUvaGrande.png`}
+                        />
+                        <h1 className="text-sm text-right">Viña</h1>
+                      </div>
+                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                        <img src={`http://localhost:3000/img/olivos.png`} />
+                        <h1 className="text-sm text-right">Olivo</h1>
+                      </div>
+                    </div>
+                  </AccordionDetails>
+                </Accordion>
+              </motion.div>
+            ) : null}
           </motion.div>
         </motion.div>
       </motion.div>
