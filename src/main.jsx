@@ -3,14 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {
-  Actividades,
-  Inicio,
-  Login,
-  PuntoInteres,
-  Busqueda,
-  Register,
-} from "./pages";
+
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Inicio from "./pages/Inicio.jsx";
+import PuntoInteres from "./pages/PuntoInteres.jsx";
+import Actividades from "./pages/Actividades.jsx";
+import Mapa from "./components/mapa/Mapa.jsx";
+import Busqueda from "./pages/Busqueda.jsx";
+import BusquedaActividad from "./pages/BusquedaActividad.jsx";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <App />
@@ -28,13 +30,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   //       {/* aqui se puede crar la ruta de las temporadas si se requiere */}
   //       <Route path="/actividades/:id" element={<Actividades />}></Route>
 
-  //       <Route
-  //         path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
-  //         element={<Busqueda />}
-  //       ></Route>
-  //       {/* <Route path='/puntos_interes/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route>
-  //        <Route path='/actividades/mapa/:localidad/:fecha/:flor' element={<Mapa />} ></Route> */}
-  //     </Route>
-  //   </Routes>
-  // </BrowserRouter>
+
+        <Route
+          path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
+          element={<Busqueda />}
+        ></Route>
+        <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={<BusquedaActividad />} ></Route>
+        {/* <Route path='/puntos_interes/:localizacion/:fecha/:flor' element={<Busqueda />} ></Route>
+         */}
+      </Route>
+    </Routes>
+  </BrowserRouter>
+
 );
