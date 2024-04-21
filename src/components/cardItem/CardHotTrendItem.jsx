@@ -14,14 +14,6 @@ export const CardHotTrendItem = ({ hotTrend }) => {
     }
   }, [isInView]);
 
-  //Pensar si esto deberia ser así, de hecho yo diria que no, las imagenes deberian estar en el back
-  const obtenerPngTipo = (tipo) => {
-    if (tipo === "Olivo") return "./images/olivos.png";
-    if (tipo === "Lavanda") return "./images/lavanda.png";
-    if (tipo === "Viña") return "./images/uva.png";
-    if (tipo === "Cerezo") return "./images/cerezas.png";
-  };
-
   return (
     <motion.div
       ref={ref}
@@ -34,7 +26,7 @@ export const CardHotTrendItem = ({ hotTrend }) => {
       transition={{ duration: 0.5, delay: 0.25 }}
       className="border-none rounded-md w-full h-full cursor-pointer"
       style={{
-        backgroundImage: `url(${hotTrend?.imagen})`,
+        backgroundImage: `url(localhost:3000/api/${hotTrend.imagen}.png)`,
         backgroundSize: `cover`,
       }}
     >
@@ -53,7 +45,7 @@ export const CardHotTrendItem = ({ hotTrend }) => {
             <div className={`border-none px-1 py-1 rounded-md`}>
               {
                 <img
-                  src={obtenerPngTipo(hotTrend?.tipo)}
+                  // src={`localhost:3000/img/${hotTrend.imagen.nombre}${hotTrend.imagen.tipo}`}
                   alt={hotTrend?.tipo}
                   className="w-7 h-full"
                 />

@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import DescripcionBanner from "./description/DescripcionBanner";
+import React, { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, useCycle } from "framer-motion";
 import { NavBar, SearchBar } from ".";
+import { PopUpBuscador } from "./Buscador/PopUp";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const Banner = () => {
   const ref = useRef(null);
+  // const [openPopUp, setOpenPopUp] = useState(false);
+  const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -14,13 +17,35 @@ export const Banner = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
   const descY = useTransform(scrollYProgress, [0, 1], ["0%", "800%"]);
 
+  const openPopUpBuscador = () => {
+    toggleMobileNav();
+  };
+
+  //Impedir que se pueda hacer scroll cuando salte el popUp de buscar
+  useEffect(() => {
+    if (mobileNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [mobileNav]);
+
   return (
     <div
       className="w-full h-screen overflow-hidden relative grid place-items-center"
       ref={ref}
     >
       <NavBar />
-      <div className="absolute bottom-80">
+      {mobileNav === true ? (
+        <div className="relative">
+          <AnimatePresence>
+            <motion.div className=" fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
+              <PopUpBuscador toggleMobileNav={toggleMobileNav} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      ) : null}
+      <div className="absolute md:bottom-80">
         <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
           <div
             className="relative border-none
@@ -43,11 +68,10 @@ export const Banner = () => {
           </div>
         </div>
         <div className="flex w-full justify-center py-8">
-          <SearchBar />
+          <SearchBar openPopUpBuscador={openPopUpBuscador} />
         </div>
       </div>
       <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">
-        {/* <div className="absolute inset-0 backdrop-blur-sm"></div> */}
         <div
           className="hover:backdrop-blur-0"
           style={{

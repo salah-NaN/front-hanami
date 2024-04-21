@@ -9,6 +9,7 @@ import {
   Busqueda,
   Register,
 } from "./pages";
+import { NavBar } from "./components";
 
 export const App = () => {
   return (

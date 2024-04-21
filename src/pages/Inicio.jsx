@@ -13,15 +13,11 @@ import { motion, useInView, useAnimation } from "framer-motion";
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
   //Seteamos el valor por defecto que sea null de useRef
-  const moveToSearchBar = useRef(null);
   const isSearchBarComponent = useRef(null);
   const [hotTrends, setHotTrends] = useState([]);
   const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
 
   const scrollBuscadorRef = useRef(false);
-  const isInView = useInView(scrollBuscadorRef);
-  const mainControladorFlecha = useAnimation();
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     fetch(url + `puntos_interes/;/;/;`)
@@ -29,35 +25,13 @@ export const Inicio = () => {
       .then((hotTrends) => setHotTrends(hotTrends))
       .catch((error) => console.log(error));
 
-    fetch(url + `puntos_interes`)
+    fetch(url + `/actividades_or_puntointeres`)
       .then((res) => res.json())
       .then((puntosInteres) =>
-        setActividadOrPuntoInteres(
-          puntosInteres?.map((e) => {
-            return { ...e, queEs: "puntosInteres" };
-          })
-        )
+        setActividadOrPuntoInteres(puntosInteres)
       )
       .catch((error) => console.log(error));
   }, []);
-
-  useEffect(() => {
-    isInView === true
-      ? // ? mainControladorFlecha.start({
-        //     opacity: 0,
-        //     transitionDuration: 0,
-        //   })
-        // : mainControladorFlecha.start({
-        //     opacity: 1,
-        //     transitionDuration: 0,
-        //   });
-        setIsVisible(false)
-      : setIsVisible(true);
-  }, [isInView]);
-
-  const paginacionScrollHome = () => {
-    moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <div className="">
@@ -74,7 +48,7 @@ export const Inicio = () => {
         </div>
         <div className="py-32">
           <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
-            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
+            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
           </div>
         </div>
       </div>
