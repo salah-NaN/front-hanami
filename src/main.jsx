@@ -16,8 +16,11 @@ import BusquedaActividad from "./pages/BusquedaActividad.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <App />
-  // <BrowserRouter>
-  //   <Routes>
+
+
+);
+
+
   //     <Route path="/" element={<App />}>
   //       {/* el inicio */}
   //       <Route index element={<Inicio />}></Route>
@@ -30,16 +33,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   //       {/* aqui se puede crar la ruta de las temporadas si se requiere */}
   //       <Route path="/actividades/:id" element={<Actividades />}></Route>
 
-
-        <Route
-          path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
-          element={<Busqueda />}
-        ></Route>
-        <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={<BusquedaActividad />} ></Route>
-        {/* <Route path='/puntos_interes/:localizacion/:fecha/:flor' element={<Busqueda />} ></Route>
-         */}
-      </Route>
-    </Routes>
-  </BrowserRouter>
-
-);
