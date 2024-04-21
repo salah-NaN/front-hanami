@@ -58,7 +58,6 @@ export const Busqueda = () => {
   return (
     
       <div className="mt-20" >
-
         <div className="w-11/12 mx-auto border-none">
           <Filter setFilters={setFilters} filterData={filterData} />
 
