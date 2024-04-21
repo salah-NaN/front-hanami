@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/Filter";
 
-const BusquedaActividad = () => {
+export const  BusquedaActividad = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
