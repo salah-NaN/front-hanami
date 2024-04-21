@@ -1,14 +1,13 @@
-import { Outlet } from "react-router-dom";
 import { NavBar } from "../components";
 
-export const LayoutHanami = () => {
+export const LayoutHanami = ({children}) => {
   return (
-    <div className="">
+    <div className="w-10/11 mx-auto
+    xl:w-3/4 xl:mx-auto">
       {/* navbar (header) */}
-      {/* <header></header> */}
       <NavBar />
-      <div className="bg-[#fefefe]">
-        <Outlet />
+      <div className="bg-[#fafafa] w-10/12 mx-auto">
+        {children}
       </div>
       {/* div footer */}
       <div className="">{/* Footer */}</div>

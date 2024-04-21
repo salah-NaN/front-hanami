@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+
 // constantes
-const URL = 'http://localhost:3000/api'
+const URL = "http://localhost:3000/api";
 export const PuntoInteres = () => {
   const [puntoInteres, setPuntoInteres] =useState({})
   const {id} = useParams()
@@ -58,3 +59,4 @@ export const PuntoInteres = () => {
 }
 
 export default PuntoInteres;
+

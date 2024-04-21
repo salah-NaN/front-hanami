@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -6,22 +7,19 @@ export default {
       fontFamily: {
         dmSans: "DM Sans",
       },
+      boxShadow: {
+        button: '0px 8px 0px 0px white',
+        press: '0px 3px 0px 0px white'
+      },
+      bgBack: {
+        'redd': "#FFFFFF"
+      }
     },
     screens: {
-      'xs': "320px",
-      // => @media (min-width: 320px) { ... }
-      'ml': "375px",
-      // => @media (min-width: 375px) { ... }
-      'mx': "425px",
-      // => @media (min-width: 425px) { ... }
-      'md': "640px",
-      // => @media (min-width: 640px) { ... }
-      'lg': "1024px",
-      // => @media (min-width: 1024px) { ... }
-      'xl': "1280px",
-      // => @media (min-width: 1280px) { ... }
-      '2xl': "1536px"
-      // => @media (min-width: 1536px) { ... }
+      'xs': '320px',
+      'xm': '375px',
+      'xp': '425px',
+      ...defaultTheme.screens,
     },
   },
   plugins: [],

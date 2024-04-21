@@ -1,17 +1,27 @@
-import Footer from '../components/Footer'
-import Mapa from '../components/mapa/Mapa'
 import { useEffect, useRef, useState } from "react";
-import { SearchBar, Banner } from "../components";
-import CardBox from "../components/cardItem/CardBox";
-import SliderItems from "../components/SliderItems/SliderItems";
-import {CardHotTrendItem} from '../components';
+import {
+  CardHotTrendItem,
+  Banner,
+  SliderItems,
+  CardBox,
+  SearchBar,
+  Mapa,
+  Footer,
+} from "../components";
+import { motion, useInView, useAnimation } from "framer-motion";
 
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
   //Seteamos el valor por defecto que sea null de useRef
   const moveToSearchBar = useRef(null);
+  const isSearchBarComponent = useRef(null);
   const [hotTrends, setHotTrends] = useState([]);
   const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
+
+  const scrollBuscadorRef = useRef(false);
+  const isInView = useInView(scrollBuscadorRef);
+  const mainControladorFlecha = useAnimation();
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     fetch(url + `puntos_interes/;/;/;`)
@@ -21,37 +31,55 @@ export const Inicio = () => {
 
     fetch(url + `puntos_interes`)
       .then((res) => res.json())
-      .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
+      .then((puntosInteres) =>
+        setActividadOrPuntoInteres(
+          puntosInteres?.map((e) => {
+            return { ...e, queEs: "puntosInteres" };
+          })
+        )
+      )
       .catch((error) => console.log(error));
   }, []);
 
-
   useEffect(() => {
-    console.log(hotTrends)
-  }, [hotTrends])
+    isInView === true
+      ? // ? mainControladorFlecha.start({
+        //     opacity: 0,
+        //     transitionDuration: 0,
+        //   })
+        // : mainControladorFlecha.start({
+        //     opacity: 1,
+        //     transitionDuration: 0,
+        //   });
+        setIsVisible(false)
+      : setIsVisible(true);
+  }, [isInView]);
 
   const paginacionScrollHome = () => {
     moveToSearchBar.current.scrollIntoView({ behavior: "smooth" });
   };
 
-
   return (
-    <>
-      <div className="">
-        <Banner paginacionScrollHome={paginacionScrollHome} />
+    <div className="">
+      <div className="" id="banner">
+        <Banner />
       </div>
-      <div className="">
-        <SearchBar moveToSearchBar={moveToSearchBar} />
+      <div className="bg-[#FFFFFF]" ref={scrollBuscadorRef}>
+        <div className="py-12 w-10/12 mx-auto">
+          <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
+          <Mapa />
+        </div>
+        <div className="w-10/12 mx-auto">
+          <CardBox hotTrends={hotTrends} />
+        </div>
+        <div className="py-32">
+          <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
+            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
+          </div>
+        </div>
       </div>
-      {/* <div className="">
-        <CardBox hotTrends={hotTrends} />
-      </div>
-        <div className="pt-10 w-11/12 mx-auto">
-          <SliderItems url={url} setActividadOrPuntoInteres={setActividadOrPuntoInteres} actividadOrPuntoInteres={actividadOrPuntoInteres} />
-        </div> */}
-      <Mapa/>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -15,17 +15,21 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto sm:11/12 sm:max-auto">
-      <header className="w-full bg-transparent">
-        <nav className="flex justify-between sticky py-6 w-full mx-auto">
-          <Logo />
-          <div className="hidden md:inline">
-            <AccountButton />
-          </div>
-          <div className="flex items-center md:hidden lg:hidden xl:hidden">
-            <HanburgerButton toggleMenu={toggleMenu} />
-          </div>
-        </nav>
+    <div className="w-full z-30 absolute top-0 shadow-sm
+    xl:w-3/4 xl:mx-auto">
+      <header className="">
+        {/* <div className="absolute inset-0 backdrop-blur-sm"></div> */}
+        <div className="sticky border border-[#ececec19] border-r-0 border-l-0 border-t-0">
+          <nav className="w-10/12 max-auto flex justify-between sticky py-3 mx-auto">
+            <Logo />
+            <div className="hidden md:inline">
+              <AccountButton />
+            </div>
+            <div className="flex items-center md:hidden lg:hidden xl:hidden">
+              <HanburgerButton toggleMenu={toggleMenu} />
+            </div>
+          </nav>
+        </div>
       </header>
 
       <AnimatePresence>
