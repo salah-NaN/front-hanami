@@ -2,7 +2,9 @@ export const ButtonSearch = ({ stylesButton }) => {
   return (
     <div className="">
       <button
-        className={`w-full ${stylesButton?.size} h-14 flex justify-center items-center ${stylesButton?.backGround} ${stylesButton?.svgColor} bg-green-300  ${stylesButton?.hover} hover:bg-green-700 border-none rounded-full px-4`}
+        className={`w-full ${stylesButton?.size} h-14 flex justify-center 
+        items-center ${stylesButton?.backGround} ${stylesButton?.svgColor} 
+         ${stylesButton?.hover} hover:bg-green-700 border-none rounded-full px-4`}
         type="submit"
       >
         <svg

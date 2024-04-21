@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ButtonSearch from "../ButtonSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconPLanta, PopUpFecha } from "./";
 
 import IconDondeIr from "./IconDondeIr";
@@ -12,10 +12,19 @@ import IconFecha from "./IconFecha";
 export const PopUpBuscador = ({ toggleMobileNav }) => {
   const [expanded, setExpanded] = useState(false);
   const [openInput, setOpenInput] = useState(false);
+
   const [clickChoice, setClickChoice] = useState({
     punto_interes: true,
     actividades: false,
   });
+
+  const [formData, setFormData] = useState({
+    localizacion: null,
+    fecha: null,
+    planta: null,
+    eleccion: "puntoInteres",
+  });
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -36,6 +45,22 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
       punto_interes: false,
       actividades: true,
     });
+  };
+
+  useEffect(() => {
+    if (clickChoice.actividades) {
+      onChangeForm({ eleccion: `actividades` });
+    } else {
+      onChangeForm({ eleccion: `puntoInteres` });
+    }
+  }, [clickChoice]);
+
+  const onChangeForm = (data) => {
+    setFormData({ ...formData, ...data });
+  };
+
+  const onFormSubmit = () => {
+    //FETCH
   };
 
   return (
@@ -112,6 +137,24 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
           </div>
         </motion.div>
 
+        <motion.div className="bg-slate-50 absolute bottom-0 w-full px-5 h-20 flex justify-end items-center">
+          <div className="">
+            <button
+              className="border-none rounded-lg pr-4 text-md bg-green-400 text-white flex items-center"
+              type="submit"
+            >
+              <ButtonSearch
+                stylesButton={{
+                  size: `w-10 h-11`,
+                  backGround: ``,
+                  svgColor: `stroke-white`,
+                }}
+              />
+              <h1 className="font-bold">Buscar</h1>
+            </button>
+          </div>
+        </motion.div>
+
         <motion.div
           className="h-screen text-2xl w-11/12 mx-auto"
           variants={{
@@ -163,6 +206,9 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                           flex w-full items-center h-full border-none
                           rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
                           autoFocus
+                          onChange={() =>
+                            onChangeForm({ localizacion: event.target.value })
+                          }
                         />
                       ) : (
                         <>
@@ -172,19 +218,39 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 mt-4">
-                      <div className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50">
+                      <div
+                        className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50"
+                        onClick={(event) =>
+                          onChangeForm({ localizacion: `Barcelona` })
+                        }
+                      >
                         <img src="/barcelona_comarca.svg" />
                         <h1 className="text-sm text-right">Barcelona</h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={(event) =>
+                          onChangeForm({ localizacion: `Girona` })
+                        }
+                      >
                         <img src="/girona.svg" />
                         <h1 className="text-sm text-right">Girona</h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={(event) =>
+                          onChangeForm({ localizacion: `Tarragona` })
+                        }
+                      >
                         <img src="/tarragona.svg" />
                         <h1 className="text-sm text-right">Tarragon</h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={(event) =>
+                          onChangeForm({ localizacion: `Lleida` })
+                        }
+                      >
                         <img src="/lleida.svg" />
                         <h1 className="text-sm text-right">Lleida</h1>
                       </div>
@@ -211,7 +277,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                   </h1>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <PopUpFecha />
+                  <PopUpFecha onChangeForm={onChangeForm} />
                 </AccordionDetails>
               </Accordion>
             </motion.div>
@@ -237,7 +303,10 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                   </AccordionSummary>
                   <AccordionDetails>
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="w-11/12 mx-auto border rounded-xl px-3 py-1 bg-slate-50">
+                      <div
+                        className="w-11/12 mx-auto border rounded-xl px-3 py-1 bg-slate-50"
+                        onClick={() => onChangeForm({ planta: `Lavanda` })}
+                      >
                         <img
                           src={`http://localhost:3000/img/LavandaMaxFloracion.png`}
                         />
@@ -245,20 +314,29 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                           Lavanda
                         </h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={() => onChangeForm({ planta: `Cerezo` })}
+                      >
                         <img
                           src={`http://localhost:3000/img/cerezas.png`}
                           className="h-fit"
                         />
                         <h1 className="text-sm text-right">Cerezo</h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={() => onChangeForm({ planta: `Viña` })}
+                      >
                         <img
                           src={`http://localhost:3000/img/viñaUvaGrande.png`}
                         />
                         <h1 className="text-sm text-right">Viña</h1>
                       </div>
-                      <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <div
+                        className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
+                        onClick={() => onChangeForm({ planta: `Olivo` })}
+                      >
                         <img src={`http://localhost:3000/img/olivos.png`} />
                         <h1 className="text-sm text-right">Olivo</h1>
                       </div>
