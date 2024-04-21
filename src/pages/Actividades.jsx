@@ -54,8 +54,7 @@ export const Actividades = () => {
   }, [])
 
   return (
-    <div className="mt-4" >
-      <CardContent></CardContent>
+    <div className="mt-20" >
       <h2 className="text-3xl mb-1"
       >{actividad.nombre}</h2>
       <h4 className="text-[16px] font-medium mb-8"
