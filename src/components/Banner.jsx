@@ -1,9 +1,13 @@
-import React, { useRef } from "react";
-import { useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { useScroll, useTransform , useCycle} from "framer-motion";
 import { NavBar, SearchBar } from ".";
+import { PopUpBuscador } from "./Buscador/PopUp";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const Banner = () => {
   const ref = useRef(null);
+  // const [openPopUp, setOpenPopUp] = useState(false);
+  const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -13,12 +17,25 @@ export const Banner = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
   const descY = useTransform(scrollYProgress, [0, 1], ["0%", "800%"]);
 
+  const openPopUpBuscador = () => {
+    toggleMobileNav();
+  };
+
   return (
     <div
       className="w-full h-screen overflow-hidden relative grid place-items-center"
       ref={ref}
     >
       <NavBar />
+      {mobileNav === true ? (
+        <div className="relative">
+          <AnimatePresence>
+            <motion.div className="fixed z-30 top-0 left-0 w-full h-screen">
+              <PopUpBuscador toggleMobileNav={toggleMobileNav} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      ) : null}
       <div className="absolute md:bottom-80">
         <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
           <div
@@ -42,7 +59,7 @@ export const Banner = () => {
           </div>
         </div>
         <div className="flex w-full justify-center py-8">
-          <SearchBar />
+          <SearchBar openPopUpBuscador={openPopUpBuscador} />
         </div>
       </div>
       <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">

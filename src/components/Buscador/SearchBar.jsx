@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { PopUp } from "./PopUp";
-import PopUpFecha from "./PopUpFecha";
-import { ButtonSearch } from "./";
+import { PopUp, PopUpFecha, PopUpBuscador } from "./PopUp";
+import { ButtonSearch, BuscadorMobil } from "./";
 
-export const SearchBar = ({ moveToSearchBar }) => {
+export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const navigate = useNavigate();
   const ref = useRef();
   const url = "http://localhost:3000/api";
@@ -102,103 +101,93 @@ export const SearchBar = ({ moveToSearchBar }) => {
     );
   };
 
+
+
   return (
-    <div
-      className="z-20 h-full w-10/12 mx-auto border rounded-full shadow-sm shadow-white bg-white"
-      ref={moveToSearchBar}
-    >
-      <div className="w-full flex items-center">
-        <form
-          onSubmit={onSubmitSearch}
-          className="w-full h-full grid gridgrid-cols-12"
-        >
-          <div className="w-fit border-none rounded-xl">
-            <button className="w-full flex items-center gap-0">
-              <ButtonSearch
-                stylesButton={{
-                  backGround: `bg-white`,
-                  svgColor: `stroke-black`,
-                }}
-              />
-              <div className="">
-                <div className="text-bold flex justify-start">¿Donde quieres ir?</div>
-                <div className="flex flex-row w-fit">
-                  <div className="text-sm font-light pr-1">Cualquier...</div>
-                  <div className="text-sm font-light pr-1">Añade...</div>
-                  <div className="text-sm font-light">Que quie...</div>
-                </div>
-              </div>
-            </button>
-          </div>
-          <div className="w-full col-span-4 hidden md:block">
-            <input
-              onChange={() =>
-                setSearchForm({
-                  ...searchForm,
-                  localizacion: event.target.value,
-                })
-              }
-              placeholder="Busca la ciudad"
-              className="w-full h-14 focus:outine-none border rounded-l-full border-[#c5c5c5] bg-[#ffffff]
-                lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
-            ></input>
-          </div>
-          <div className="hidden md:flex col-span-2 h-14 border-b border-[#c5c5c5] lg:border-none bg-red-500">
-            <div
-              className="px-3 w-full border-r border-[#c5c5c5] bg-[#ffffff]
-                   flex items-center justify-center lg:border-r lg:border-l
-                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button"
-              id="button-open"
-              onClick={(event) => setFechaPopUp(event)}
-            >
-              Cuando quieres ir?
-            </div>
-            {popUp.fecha ? <PopUpFecha /> : null}
-          </div>
-          <div className="hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
-            <div
-              className="flex justify-center items-center w-full h-full cursor-pointer"
-              onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
-            >
-              <div className="text-sm">Que plantas quieres ver?</div>
-            </div>
+    <>
+      <div
+        className="z-20 h-full w-10/12 mx-auto border rounded-full shadow-sm shadow-white bg-white"
+        ref={moveToSearchBar}
+      >
+        <div className="w-full flex items-center">
+          <form
+            onSubmit={onSubmitSearch}
+            className="w-full h-full grid gridgrid-cols-12 relative"
+          >
+            <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
 
-            {popUp?.flor === true ? (
-              <PopUp opciones={flores} fn={setFloresPopUp} />
-            ) : null}
-          </div>
-
-          <div className="hidden md:block w-full col-span-4">
-            <div
-              className="w-full h-full flex justify-between items-center border border-[#c5c5c5] cursor-pointer
-               hover:bg-[#EBEBEB] border-none rounded-full"
-              onClick={() => setPopUp({ ...popUp, queHacer: !popUp.queHacer })}
-            >
-              <div className="px-3">Que quieres hacer?</div>
-              <ButtonSearch />
-            </div>
-
-            <div className="col-span-1 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
-              <div
-                className=""
-                onClick={() =>
-                  setPopUp({
-                    ...popUp,
-                    queHacer: !popUp.queHacer,
+            <div className="w-full col-span-4 hidden md:block">
+              <input
+                onChange={() =>
+                  setSearchForm({
+                    ...searchForm,
+                    localizacion: event.target.value,
                   })
                 }
+                placeholder="Busca la ciudad"
+                className="w-full h-14 focus:outine-none border rounded-l-full border-[#c5c5c5] bg-[#ffffff]
+                lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
+              ></input>
+            </div>
+            <div className="hidden md:flex col-span-2 h-14 border-b border-[#c5c5c5] lg:border-none bg-red-500">
+              <div
+                className="px-3 w-full border-r border-[#c5c5c5] bg-[#ffffff]
+                   flex items-center justify-center lg:border-r lg:border-l
+                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button"
+                id="button-open"
+                onClick={(event) => setFechaPopUp(event)}
               >
-                <div className="">
-                  {popUp?.queHacer === true ? (
-                    <PopUp opciones={queHacer} fn={setQueHacer} />
-                  ) : null}
+                Cuando quieres ir?
+              </div>
+              {popUp.fecha ? <PopUpFecha /> : null}
+            </div>
+            <div className="hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+              <div
+                className="flex justify-center items-center w-full h-full cursor-pointer"
+                onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
+              >
+                <div className="text-sm">Que plantas quieres ver?</div>
+              </div>
+
+              {popUp?.flor === true ? (
+                <PopUp opciones={flores} fn={setFloresPopUp} />
+              ) : null}
+            </div>
+
+            <div className="hidden md:block w-full col-span-4">
+              <div
+                className="w-full h-full flex justify-between items-center border border-[#c5c5c5] cursor-pointer
+               hover:bg-[#EBEBEB] border-none rounded-full"
+                onClick={() =>
+                  setPopUp({ ...popUp, queHacer: !popUp.queHacer })
+                }
+              >
+                <div className="px-3">Que quieres hacer?</div>
+                <ButtonSearch />
+              </div>
+
+              <div className="col-span-1 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+                <div
+                  className=""
+                  onClick={() =>
+                    setPopUp({
+                      ...popUp,
+                      queHacer: !popUp.queHacer,
+                    })
+                  }
+                >
+                  <div className="">
+                    {popUp?.queHacer === true ? (
+                      <PopUp opciones={queHacer} fn={setQueHacer} />
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
