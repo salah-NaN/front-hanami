@@ -1,31 +1,48 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Slider from '@mui/material/Slider';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#4ade80',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 const fechaActual = new Date()
-const marks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-// funcion para crear el las marcas dinámicas
+const marks = Array(diasDelMesActual()).fill(null).map((_, i) => i + 1);
+
 const setMarks = () => {
-  const mapeado = marks.map((mark) => {
-    const o = { value: fechaActual.getDate(), label: fechaActual.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('')}
-    // const o = { value: fechaActual.getDate(), }
-    fechaActual.setDate(fechaActual.getDate() + 1)
+  const mapped = marks.map((mark) => {
+    const actualDate = new Date(new Date().setDate(mark));
+    const o = { value: mark, label: mark %4 === 0 ? actualDate.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('') : ''}
     return o
   })
-
-  fechaActual.setDate(new Date())
-  return mapeado
+  
+  return mapped
 }
 
 const fechas = setMarks()
 
-// const marks = new Array().fill
-
-// codigo de prueba
-
-
-
+function diasDelMesActual() {
+  const fechaActual = new Date();
+  const mesActual = fechaActual.getMonth() + 1;
+  const añoActual = fechaActual.getFullYear();
+  return new Date(añoActual, mesActual, 0).getDate();
+}
 
 export default function SliderCustom({ fechaSlider, setFechaSlider }) {
 
@@ -35,18 +52,24 @@ export default function SliderCustom({ fechaSlider, setFechaSlider }) {
   }
 
   return (
-    <div className='mt-9 z-50'>
+    
+
+
+    <ThemeProvider theme={theme}>
+      <div className='mt-9 z-50'>
       <Slider
-        aria-label="Temperature"
+        aria-label="Custom marks"
         defaultValue={(new Date().getDate())}
         // getAriaValueText={valuetext}
         step={null}
         valueLabelDisplay="auto"
         marks={fechas}
         min={1}
-        max={31}
+        max={diasDelMesActual()}
         onChange={handleSlider}
+        color="primary"
       />
     </div>
+    </ThemeProvider>
   );
 }

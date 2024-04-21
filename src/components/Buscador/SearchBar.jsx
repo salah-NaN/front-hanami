@@ -42,7 +42,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       localizacion: null,
       fecha: null,
       flor: null,
-      queHacer: null,
+      queHacer: "Punto_de_Interes",
     });
   }, [flores]);
 
@@ -93,12 +93,22 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     const { localizacion, fecha, flor, queHacer } = searchForm;
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
-    // si no hay datos pues metemos esto %
+    if(queHacer === "Punto_de_Interes"){
+      // si no hay datos pues metemos esto ;
     navigate(
-      `/busqueda/${queHacer || ";"}/${localizacion || ";"}/${fecha || ";"}/${
+      `/busqueda/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
         flor || ";"
       }`
     );
+  }
+  if(queHacer === "Actividades"){
+    // si no hay datos pues metemos esto ;
+  navigate(
+    `/actividades/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
+      flor || ";"
+    }`
+  );
+  }
   };
 
   return (

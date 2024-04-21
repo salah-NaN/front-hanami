@@ -5,6 +5,7 @@ import {
   Inicio,
   Login,
   PuntoInteres,
+  BusquedaActividad,
   Busqueda,
   Register,
 } from "./pages";
@@ -37,10 +38,16 @@ export const App = () => {
             element={
               <LayoutHanami>
                 <Busqueda />
-              </LayoutHanami>
-            }
+              </LayoutHanami>}
           ></Route>
           <Route path="/" element={<Inicio />}></Route>
+
+        <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={              
+              <LayoutHanami>
+                <BusquedaActividad />
+              </LayoutHanami>}
+        ></Route>
+
         </Routes>
       </BrowserRouter>
     </>
@@ -48,3 +55,15 @@ export const App = () => {
 };
 
 export default App;
+
+
+/* 
+  <BrowserRouter>
+     <Routes>
+
+
+         </Routes>
+
+
+
+*/

@@ -24,10 +24,6 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     const [fechaSlider, setFechaSlider] = useState(new Date().getDate())
     const [mapa, setMapa] = useState(false)
 
-
-    console.log('test')
-    console.log(puntosInteres)
-
     // los iconos de todas las etapas de los arboles florales
     const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
         'CerezoCapullo', 'CerezoInicioFlor', 'CerezoMaxFloracion', 'CerezoMuerto', 'CerezoPequenio', 'CerezoMediano', 'CerezoGrande',

@@ -33,7 +33,7 @@ export const Actividades = () => {
 
   if (windowWidth <= 640) {
     componentToRender = <Swiper images={actividad.imagenes}/>;
-  } else if (windowWidth <= 1024) {
+  } else if (windowWidth <= 900) {
     componentToRender = <GridTwo images={actividad.imagenes}/>;
   } else {
     componentToRender = <GridFive images={actividad.imagenes}/>;
@@ -43,14 +43,8 @@ export const Actividades = () => {
 
   // fetch para sacar la información de la actividad específica
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    }
-    fetch(URL + '/actividad_page/' + id, options)
+
+    fetch(URL + '/actividad_page/' + id)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -75,31 +69,6 @@ export const Actividades = () => {
       >{actividad.temporada?.puntos_intere?.nombre}</h5>
       {/* imagenes */}
       {componentToRender}
-
-      
-      {/* <div className="w-full grid grid-cols-2 h-52 bg-slate-900">
-        {
-          provisionalImageNames.map(image => (
-            <img className="overflow-hidden " src={`http://localhost:3000/img/${image}`} ></img>
-          ))
-        }
-      </div> */}
-
-      
-
-      {/* <div className="w-full  h-52
-      md:grid md:grid-cols-2 md:gap-2 md:h-60 ">
-        <img className="w-full h-52
-        md:h-60 "
-         src="http://localhost:3000/img/camposLavandaMaxFloracion.jpeg" ></img>
-        <div className="w-full h-52
-         md:h-60 
-         z-30  backdrop-filter backdrop-blur-lg bg-opacity-90" >
-          <img className="w-full h-52
-          md:h-60 "
-           src="http://localhost:3000/img/camposMaxFloracionLavandaSol.jpeg" ></img>
-        </div>
-      </div> */}
       <p className="text-[16px] mt-2 mb-4 font-medium text-[#3a3a3a] "
       >{actividad.temporada?.puntos_intere?.ubicacion + ', ' + actividad.temporada?.puntos_intere?.poblacion}<a  > - link maps</a></p>
       {/* descripcion */}
