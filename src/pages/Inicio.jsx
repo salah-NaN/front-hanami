@@ -7,6 +7,7 @@ import {
   SearchBar,
   Mapa,
   Footer,
+  NavBar
 } from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
 
@@ -36,6 +37,7 @@ export const Inicio = () => {
   return (
     <div className="">
       <div className="" id="banner">
+        <NavBar />
         <Banner />
       </div>
       <div className="bg-[#FFFFFF]" ref={scrollBuscadorRef}>

@@ -30,8 +30,8 @@ export const  BusquedaActividad = () => {
   
 
   return (
-    <>
-      <div>
+
+      <div className="mt-20">
         <div className="w-11/12 mx-auto border-none">
 {/*         <Filter setFilters={setFilters} filterData={filterData} />
  */}          <div className="flex flex-col border-none rounded-md">
@@ -68,7 +68,7 @@ export const  BusquedaActividad = () => {
       </div>
 
 
-    </>
+
   );
 };
 
