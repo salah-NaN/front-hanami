@@ -35,7 +35,7 @@ export const Banner = () => {
       className="w-full h-screen overflow-hidden relative grid place-items-center"
       ref={ref}
     >
-      <NavBar />
+      {/* <NavBar /> */}
       {mobileNav === true ? (
         <div className="relative">
           <AnimatePresence>

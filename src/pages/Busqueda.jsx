@@ -56,8 +56,8 @@ export const Busqueda = () => {
   console.log('asdfasdfasdf',filterData[0]?.temporadas[0]?.nombre == filters.filter(f=>f.seteado == true).map(f => f.temporada))
  */
   return (
-    <>
-      <div className="py-20">
+    
+      <div className="mt-20" >
         <div className="w-11/12 mx-auto border-none">
           <Filter setFilters={setFilters} filterData={filterData} />
 
@@ -126,7 +126,7 @@ export const Busqueda = () => {
       </div>
 
 
-    </>
+    
   );
 };
 
