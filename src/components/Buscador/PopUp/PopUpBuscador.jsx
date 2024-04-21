@@ -25,8 +25,16 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
     setOpenInput(true);
   };
 
-  const clickChoicePuntoInteresActividad = () => {
+  const clickChoicePuntoInteres = () => {
+    setClickChoice({
 
+    })
+  }
+
+  const clickChoiceActividad = () => {
+    setClickChoice({
+
+    })
   }
 
   return (
