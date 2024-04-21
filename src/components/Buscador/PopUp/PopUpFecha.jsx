@@ -2,11 +2,11 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-export const PopUpFecha = () => {
+export const PopUpFecha = ({onChangeForm}) => {
   return (
     <div className="">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar />
+        <DateCalendar onChange={(newValue) => onChangeForm({fecha: newValue?.$d})} />
       </LocalizationProvider>
     </div>
   );
