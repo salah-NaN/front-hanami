@@ -7,13 +7,16 @@ import ButtonSearch from "../ButtonSearch";
 import { useState } from "react";
 import { IconPLanta, PopUpFecha } from "./";
 
-
 import IconDondeIr from "./IconDondeIr";
 import IconFecha from "./IconFecha";
 
 export const PopUpBuscador = ({ toggleMobileNav }) => {
   const [expanded, setExpanded] = useState(false);
   const [openInput, setOpenInput] = useState(false);
+  const [clickChoice, setClickChoice] = useState({
+    punto_interes: true,
+    actividades: false
+  });
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -21,6 +24,10 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
   const openInputSearch = () => {
     setOpenInput(true);
   };
+
+  const clickChoicePuntoInteresActividad = () => {
+
+  }
 
   return (
     <MotionConfig
@@ -181,14 +188,16 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                 id="panel3bh-header"
                 className="border border-black "
               >
-                <h1 className="text-xl text-bold py-2">¿Que plantas quieres ver?</h1>
+                <h1 className="text-xl text-bold py-2">
+                  ¿Que plantas quieres ver?
+                </h1>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
+                <div className="flex justify-between w-full">
+                  <div className="border rounded-lg px-3 py-2 gap-2 text-[18px] flex">Olivos<img src={`http://localhost:3000/img/LavandaMaxFloracion.png`} alt="" className="w-7" /></div>
+                  <div className="border rounded-lg px-3 text-[18px]"><img src="" alt="" /> Lavanda</div>
+                  <div className="border rounded-lg px-3 text-[18px]"><img src="" alt="" /> Cerezos</div>
+                </div>
               </AccordionDetails>
             </Accordion>
           </motion.div>
