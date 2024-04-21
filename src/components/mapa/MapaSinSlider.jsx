@@ -70,9 +70,6 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                 }
             });
 
-            console.log('puntosInteres')
-                console.log(puntosInteres)
-
             // const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
 
             // setMapa(ourMap)

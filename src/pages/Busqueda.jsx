@@ -4,7 +4,7 @@ import { CardItemMap } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/Filter";
+import Filter from "../components/filtros/Filter";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
 
 export const Busqueda = () => {
@@ -22,6 +22,7 @@ export const Busqueda = () => {
     fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
+        console.log(filterData)
         setFilterData(filterData);
       })
       .catch((error) => console.log(error));
@@ -32,7 +33,6 @@ export const Busqueda = () => {
       } */
   useEffect(() => {
     setCambio(!cambio)
-    console.log("coso", filters);
   }, [filters])
 
   useEffect(() => {
@@ -45,11 +45,11 @@ export const Busqueda = () => {
   */
 
   useEffect(() => {
-    if (checkedFilters.length > 0) {
-      checkedFilters.map(cf => cf)
-      const test = filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))
-    }
-    console.log("dentro de checkedFilters", checkedFilters);
+    // testeo para ver si el filtro funciona
+    // if (checkedFilters.length > 0) {
+    //   checkedFilters.map(cf => cf)
+    //   const test = filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))
+    // }
   }, [checkedFilters])
   
   return (
