@@ -3,7 +3,7 @@ import { ButtonSearch } from './'
 export const BuscadorMobil = ({openPopUpBuscador}) => {
 
   return (
-    <div className="w-fit border-none rounded-xl">
+    <div className=" md:hidden w-fit border-none rounded-xl">
       <div className="w-full flex items-center gap-0" onClick={openPopUpBuscador}>
         <ButtonSearch
           stylesButton={{

@@ -35,11 +35,10 @@ export const Banner = () => {
       className="w-full h-screen overflow-hidden relative grid place-items-center"
       ref={ref}
     >
-      {/* <NavBar /> */}
       {mobileNav === true ? (
         <div className="relative">
           <AnimatePresence>
-            <motion.div className=" fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
+            <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
               <PopUpBuscador toggleMobileNav={toggleMobileNav} />
             </motion.div>
           </AnimatePresence>

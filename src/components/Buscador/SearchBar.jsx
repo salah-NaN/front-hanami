@@ -93,22 +93,22 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     const { localizacion, fecha, flor, queHacer } = searchForm;
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
-    if(queHacer === "Punto_de_Interes"){
+    if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
-    navigate(
-      `/busqueda/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-        flor || ";"
-      }`
-    );
-  }
-  if(queHacer === "Actividades"){
-    // si no hay datos pues metemos esto ;
-  navigate(
-    `/actividades/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-      flor || ";"
-    }`
-  );
-  }
+      navigate(
+        `/busqueda/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
+          flor || ";"
+        }`
+      );
+    }
+    if (queHacer === "Actividades") {
+      // si no hay datos pues metemos esto ;
+      navigate(
+        `/actividades/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
+          flor || ";"
+        }`
+      );
+    }
   };
 
   return (
@@ -120,10 +120,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
         <div className="w-full flex items-center">
           <form
             onSubmit={onSubmitSearch}
-            className="w-full h-full grid gridgrid-cols-12 relative"
+            className="w-full h-full md:grid md:grid-cols-12 md:relative"
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
-
             <div className="w-full col-span-4 hidden md:block">
               <input
                 onChange={() =>
@@ -148,8 +147,10 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 Cuando quieres ir?
               </div>
               {popUp.fecha ? (
-                <div className="absolute top-80
-                fecha bg-white border-none rounded-md">
+                <div
+                  className="absolute top-80
+                fecha bg-white border-none rounded-md"
+                >
                   <PopUpFecha />
                 </div>
               ) : null}
