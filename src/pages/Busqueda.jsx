@@ -55,81 +55,119 @@ export const Busqueda = () => {
   console.log('filtros desde buscador',filterData?.map( (pi) => pi.temporadas?.map(t=>  t.nombre == checkedFilters.map(f => f.temporada))))
   console.log('asdfasdfasdf',filterData[0]?.temporadas[0]?.nombre == filters.filter(f=>f.seteado == true).map(f => f.temporada))
  */
+  // return (
+
+  //   <div className="mt-20" >
+
+  //     <div className="w-11/12 mx-auto border-none">
+  //       <Filter setFilters={setFilters} filterData={filterData} />
+
+  //       {
+  //         checkedFilters.length == 0 ?
+  //           <div className="grid grid-cols-2 border-none rounded-md">
+  //             <div className="">
+  //               <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
+  //                 {filterData?.map((puntos_interes) => (
+  //                   <div className="w-full h-full overscroll-contain">
+  //                     <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
+  //                   </div>
+  //                 ))}
+
+  //               </div>
+  //             </div>
+
+
+  //               {filterData && (
+  //                 <MapaSinSlider
+  //                   puntosInteres={filterData}
+  //                   setPuntosInteres={setFilterData}
+  //                 />
+  //               )}
+
+
+  //           </div> :
+  //           <div>{
+  //             filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre))).map(puntoInteres => (
+  //               <div>
+  //                 <div className="w-full h-full overscroll-contain">
+  //                   <CardItemMap puntos_interes={puntoInteres} quehacer={quehacer} />
+
+  //                 </div>
+
+  //               </div>
+  //             ))
+
+  //           }
+
+
+  //             <MapaSinSlider
+  //               puntosInteres={filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
+  //               setPuntosInteres={setFilterData}
+  //             />
+
+
+
+
+  //           </div>
+  //       }
+
+  //     </div>
+  //   </div>
+
+
+
+  // );
   return (
-    
-      <div className="mt-20" >
 
-        <div className="w-11/12 mx-auto border-none">
-          <Filter setFilters={setFilters} filterData={filterData} />
+    <div className="mt-20" >
 
-          {
-            checkedFilters.length == 0 ?
-              <div className="grid grid-cols-2 border-none rounded-md">
-                <div className="">
-                  <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
-                    {filterData?.map((puntos_interes) => (
-                      <div className="w-full h-full overscroll-contain">
-                        <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
-                      </div>
-                    ))}
-
+      <div className="w-11/12 mx-auto border-none">
+        <Filter setFilters={setFilters} filterData={filterData} />
+        <div className="grid grid-cols-2 border-none rounded-md">
+          <div className="">
+            <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
+              {
+                checkedFilters.length === 0 
+                ?
+                filterData && filterData?.map((puntos_interes) => (
+                  <div className="w-full h-full overscroll-contain">
+                    <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                </div>
-
-                <motion.div
-                  className="relative flex justify-end w-full origin-left"
-                  initial={{ width: "300px" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 1 }}
-                >
-                  {filterData && (
-                    <MapaSinSlider
-                      puntosInteres={filterData}
-                      setPuntosInteres={setFilterData}
-                    />
-                  )}
-                </motion.div>
-
-              </div> :
-              <div>{
-                filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre))).map(puntoInteres => (
+                ))
+                :
+                filterData && filterData?.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre))).map(puntoInteres => (
                   <div>
                     <div className="w-full h-full overscroll-contain">
                       <CardItemMap puntos_interes={puntoInteres} quehacer={quehacer} />
-
                     </div>
-
                   </div>
                 ))
-
               }
-                
-{/*                 <motion.div
-                        className="relative flex justify-end w-full origin-left"
-                        initial={{ width: "300px" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 1 }}
-                      >
 
-                        <MapaSinSlider
-                          puntosInteres={filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
-                          setPuntosInteres={setFilterData}
-                        />
+            </div>
+          </div>
 
-                      </motion.div> */}
-               
 
-              </div>
+          {filterData && (
+            <MapaSinSlider
+              puntosInteres={checkedFilters.length === 0 ? filterData : filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
+              setPuntosInteres={setFilterData}
+            />
+          )}
 
-          }
 
         </div>
+
+
       </div>
+    </div>
 
 
-    
+
   );
 };
+
+
 
 export default Busqueda;
 /* 

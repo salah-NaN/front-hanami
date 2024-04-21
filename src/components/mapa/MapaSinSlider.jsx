@@ -47,14 +47,35 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
         iconAnchor: [14, 28]
     })
 
+    useEffect(() => {
+
+        const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+
+        setMapa(ourMap)
+
+        let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleStreets.addTo(ourMap)
+    }, [])
+
 
     // creación del mapa y todos los markers según el fetch de la api
     useEffect(() => {
-        if (!primerRender) {
+        if (!primerRender && mapa) {
+            mapa.eachLayer((layer) => {
+                if (layer instanceof L.Marker) {
+                    layer.remove();
+                }
+            });
 
-            const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+            console.log('puntosInteres')
+                console.log(puntosInteres)
 
-            setMapa(ourMap)
+            // const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+
+            // setMapa(ourMap)
 
 
             // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -62,11 +83,11 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             // }).addTo(ourMap);
 
             // vista Google Steets
-            let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleStreets.addTo(ourMap)
+            // let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            //     maxZoom: 20,
+            //     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            // });
+            // googleStreets.addTo(ourMap)
 
 
             // vista satelital
@@ -82,6 +103,9 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
+
+                
+
                 // extraer las temporadas
                 const temporadasCoincidentes = punto.temporadas
                 // distinción de si 0 temporadas, 1 o más
@@ -94,7 +118,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                             ?
                             L
                                 .marker([punto.latitud, punto.longitud], { icon: iconos.find(icon => Object.keys(icon)[0] === temporadasCoincidentes[0].nombre)[temporadasCoincidentes[0].nombre] })
-                                .addTo(ourMap)
+                                .addTo(mapa)
                                 .on('click', () => {
                                     redirect(`/puntosInteres/${punto.id}`)
                                 })
@@ -109,12 +133,12 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                         </div>
                       </div>
                     `)
-                                        .openOn(ourMap);
+                                        .openOn(mapa);
                                 })
                             :
                             L
                                 .marker([punto.latitud, punto.longitud], { icon: moreIcon })
-                                .addTo(ourMap)
+                                .addTo(mapa)
                                 .on('click', () => {
                                     redirect(`/puntosInteres/${punto.id}`)
                                 })
@@ -129,15 +153,11 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                         </div>
                       </div>
                     `)
-                                        .openOn(ourMap);
+                                        .openOn(mapa);
                                 })
                     )
             })
 
-            //   return () => {
-            //     ourMap.off()
-            //     ourMap.remove()
-            // }
 
         } else {
             setPrimerRender(false)
