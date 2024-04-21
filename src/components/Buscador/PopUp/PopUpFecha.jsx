@@ -4,8 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export const PopUpFecha = () => {
   return (
-    <div className="absolute top-80
-     fecha bg-white border-none rounded-md">
+    <div className="">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar />
       </LocalizationProvider>

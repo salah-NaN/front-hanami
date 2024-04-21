@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useScroll, useTransform , useCycle} from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform, useCycle } from "framer-motion";
 import { NavBar, SearchBar } from ".";
 import { PopUpBuscador } from "./Buscador/PopUp";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,6 +21,15 @@ export const Banner = () => {
     toggleMobileNav();
   };
 
+  //Impedir que se pueda hacer scroll cuando salte el popUp de buscar
+  useEffect(() => {
+    if (mobileNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [mobileNav]);
+
   return (
     <div
       className="w-full h-screen overflow-hidden relative grid place-items-center"
@@ -30,7 +39,7 @@ export const Banner = () => {
       {mobileNav === true ? (
         <div className="relative">
           <AnimatePresence>
-            <motion.div className="fixed z-30 top-0 left-0 w-full h-screen">
+            <motion.div className=" fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
               <PopUpBuscador toggleMobileNav={toggleMobileNav} />
             </motion.div>
           </AnimatePresence>

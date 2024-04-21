@@ -5,22 +5,22 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ButtonSearch from "../ButtonSearch";
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
+import { IconPLanta, PopUpFecha } from "./";
+
+
+import IconDondeIr from "./IconDondeIr";
+import IconFecha from "./IconFecha";
 
 export const PopUpBuscador = ({ toggleMobileNav }) => {
   const [expanded, setExpanded] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const useStyles = styled((theme) => ({
-    AccordionStyle: {
-      border: 'none',
-      boxShadow: 'none'
-    }
-  }));
-  
-  const classes = useStyles();
+  const openInputSearch = () => {
+    setOpenInput(true);
+  };
 
   return (
     <MotionConfig
@@ -28,10 +28,9 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
         type: "spring",
         bounce: 0.099,
       }}
-      x
     >
       <motion.div
-        className="bg-white"
+        className="bg-slate-100"
         key="mobile-search"
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}
@@ -43,8 +42,36 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
       >
         <motion.div className="py-5 px-5">
           <div className="w-full flex justify-start">
-            {/* <Logo /> */}
-            <button onClick={() => toggleMobileNav()}>Cerrar</button>
+            <button onClick={() => toggleMobileNav()}>
+              <svg
+                width="30px"
+                height="30px"
+                stroke-width="1"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                color="#000000"
+              >
+                <path
+                  d="M9.17218 14.8284L12.0006 12M14.829 9.17157L12.0006 12M12.0006 12L9.17218 9.17157M12.0006 12L14.829 14.8284"
+                  stroke="#000000"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="#000000"
+                  stroke-width="0.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <div className="flex w-full justify-center items-center gap-5 font-light text-sm">
+              <div className="">Punto de Interes</div>
+              <div className="">Actividades</div>
+            </div>
           </div>
         </motion.div>
 
@@ -61,38 +88,70 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
             },
           }}
         >
-          <motion.div>
-            <Accordion defaultExpanded className={classes.accordion}>
-              {/* <div className="bg-red-300">
-              </div> */}
-              <AccordionDetails
-                className="border-none rounded-t-xl shadow-md"
-                style={{ boxShadow: ` 0px 0px 14px grey` }}
+          <motion.div className="shadow-xl">
+            <Accordion
+              defaultExpanded
+              expanded={expanded === "panel1"}
+              onChange={handleChange("panel1")}
+              className="border rounded-xl"
+            >
+              <AccordionSummary
+                aria-controls="panel1bh-content"
+                expandIcon={<IconDondeIr />}
+                id="panel1bh-header"
+                className="border border-black"
               >
-                <h1 className="text-bold text-2xl py-5">¿Donde quieres ir?</h1>
+                <h1 className="text-bold text-xl py-2">¿Donde quieres ir?</h1>
+              </AccordionSummary>
+              <AccordionDetails className="border-none">
                 <div className="">
-                  <div className="flex items-center border rounded-xl text-[17px]">
+                  <div
+                    className="flex items-center border rounded-xl text-[17px]"
+                    onClick={openInputSearch}
+                  >
                     <ButtonSearch
                       stylesButton={{
                         backGround: `bg-white`,
                         svgColor: `stroke-black`,
-                        hover: `hover:bg-white`
+                        hover: `hover:bg-white`,
+                        size: `h-12`,
                       }}
                     />
-                    Introduce tu destino
+                    {openInput === true ? (
+                      <input
+                        type="text"
+                        placeholder="Introduce tu destino"
+                        className="focus:ring-0 focus:outline-none
+                          flex w-full items-center h-full border-none
+                          rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
+                        autoFocus
+                      />
+                    ) : (
+                      <>
+                        <p>Introduce tu destino</p>
+                      </>
+                    )}
                   </div>
 
-                  <div className="">
-                    
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    <div className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50">
+                      <img src="/barcelona_comarca.svg" />
+                      <h1 className="text-sm text-right">Barcelona</h1>
+                    </div>
+                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <img src="/girona.svg" />
+                      <h1 className="text-sm text-right">Girona</h1>
+                    </div>
+                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <img src="/tarragona.svg" />
+                      <h1 className="text-sm text-right">Tarragon</h1>
+                    </div>
+                    <div className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2">
+                      <img src="/lleida.svg" />
+                      <h1 className="text-sm text-right">Lleida</h1>
+                    </div>
                   </div>
                 </div>
-                {/* <input
-                  type="text"
-                  placeholder="Introduce tu destino"
-                  className="
-                  flex w-full items-center h-full border 
-                  rounded-md placeholder:px-2 placeholder:text-[17px] border-black py-2"
-                /> */}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -101,17 +160,15 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
               className="border-none rounded-xl"
             >
               <AccordionSummary
-                // expandIcon={}
                 aria-controls="panel2bh-content"
                 id="panel2bh-header"
                 className="border border-black rounded-xl"
-              ></AccordionSummary>
+                expandIcon={<IconFecha />}
+              >
+                <h1 className="text-xl text-bold py-2">¿Cuando quieres ir?</h1>
+              </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
+                <PopUpFecha />
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -119,29 +176,13 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
               onChange={handleChange("panel3")}
             >
               <AccordionSummary
-                // expandIcon={}
+                expandIcon={<IconPLanta />}
                 aria-controls="panel3bh-content"
                 id="panel3bh-header"
                 className="border border-black "
-              ></AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
-              <AccordionSummary
-                // expandIcon={}
-                aria-controls="panel4bh-content"
-                id="panel4bh-header"
-                className="border border-black "
-              ></AccordionSummary>
+              >
+                <h1 className="text-xl text-bold py-2">¿Que plantas quieres ver?</h1>
+              </AccordionSummary>
               <AccordionDetails>
                 <Typography>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.

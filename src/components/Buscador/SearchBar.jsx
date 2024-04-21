@@ -101,8 +101,6 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     );
   };
 
-
-
   return (
     <>
       <div
@@ -139,7 +137,12 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               >
                 Cuando quieres ir?
               </div>
-              {popUp.fecha ? <PopUpFecha /> : null}
+              {popUp.fecha ? (
+                <div className="absolute top-80
+                fecha bg-white border-none rounded-md">
+                  <PopUpFecha />
+                </div>
+              ) : null}
             </div>
             <div className="hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
               <div
