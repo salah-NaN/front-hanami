@@ -4,7 +4,8 @@ import { CardItemMap } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/Filter";
+import Filter from "../components/filtros/Filter";
+import FilterActividades from "../components/filtros/FilterActividades";
 
 export const  BusquedaActividad = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
@@ -25,7 +26,9 @@ export const  BusquedaActividad = () => {
     }, []);
     
   useEffect(() => {
-    console.log('cosa',filters)
+  }, [filterData])
+
+  useEffect(() => {
   }, [filters])
   
 
@@ -33,20 +36,30 @@ export const  BusquedaActividad = () => {
 
       <div className="mt-20">
         <div className="w-11/12 mx-auto border-none">
-{/*         <Filter setFilters={setFilters} filterData={filterData} />
- */}          <div className="flex flex-col border-none rounded-md">
+          <FilterActividades setFilters={setFilters} filterData={filterData} />
+          <div className="flex flex-col border-none rounded-md">
             <div className="">
               <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
-                 {filterData?.slice(0, 2).map((puntos_interes) => (
+                 {/* {filterData?.slice(0, 2).map((puntos_interes) => (
                   <div className="w-full h-full overscroll-contain">
                     <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                ))}
-                {filterData?.slice(2, 6).map((puntos_interes) => (
+                ))} */}
+                {
+                  filters.length === 0 
+                  ?
+                  filterData?.map((puntos_interes) => (
                   <div className="w-full h-full">
                     <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                ))} 
+                ))
+                : 
+                filterData && filterData?.filter(pi => filters.includes(pi.temporada.nombre)).map(pi => (
+                  <div className="w-full h-full">
+                    <CardItemMap puntos_interes={pi} quehacer={quehacer} />
+                  </div>
+                )) 
+                } 
               </div>
             </div>
 

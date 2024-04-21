@@ -6,13 +6,17 @@ import { useRef, useState, useEffect, } from "react";
 
 
 
-const Filter = ({ setFilters, filterData }) => {
+const FilterActividades = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
   const [inputs, setInputs] = useState([]);
   // controlador para definir si el filtro es visible o no
   const [visible, setVisible] = useState(false);
   // referencia para que se cierre cuando se clique fuera del div
   const dropdownRef = useRef(null);
+
+
+
+    
 
   // constants
   const nombreConvertido = [
@@ -117,7 +121,8 @@ const Filter = ({ setFilters, filterData }) => {
   }, [filterData])
 
   useEffect(() => {
-    setFilters(inputs)
+    const reducedInputs = inputs.filter(i => i.seteado).map(i => i.temporada)
+    setFilters(reducedInputs)
   }, [inputs])
 
   // useEffect(() => {
@@ -132,15 +137,15 @@ const Filter = ({ setFilters, filterData }) => {
   // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   function generateDistinctTemporadas() {
     const tempoRepetidas = filterData.map((e) =>
-      e.temporadas.map((t) => t.nombre)
+        e.temporada.nombre
     );
+
     const distinctTemporadas = [];
-    tempoRepetidas.forEach((t) => {
-      t.forEach((nombreTemporada) => {
+    tempoRepetidas.forEach((nombreTemporada) => {
         if (!distinctTemporadas.includes(nombreTemporada)) {
           distinctTemporadas.push(nombreTemporada);
         }
-      });
+
     });
 
     return distinctTemporadas
@@ -149,6 +154,7 @@ const Filter = ({ setFilters, filterData }) => {
   // funcion para preparar los inputs de los checkbox del filtro
   function asignarControladorCheckboxes(tempos) {
     let x = [{}]
+    console.log(tempos)
     const arrObj = tempos.map(temporada => {
       nombreConvertido.map(nc => {
         if (nc.nombre === temporada) {
@@ -157,12 +163,24 @@ const Filter = ({ setFilters, filterData }) => {
       })
       return x
     })
-    return arrObj
+    const definitive = []
+    const toSend = arrObj.filter(o => {
+        if(!definitive.includes(o.temporada)){
+          definitive.push(o.temporada)
+          return true
+        } else {
+            return false
+        }
+    })
+    console.log(arrObj)
+    return toSend
   }
 
   // funcion para modificar el state del checkbox de cada input
   const handleCheckbox = (event) => {
     const { name } = event.target
+    // console.log(name)
+    console.log(inputs)
     const inputsNuevos = inputs.map(i => {
       if (i.temporada === name) {
         i.seteado = !i.seteado
@@ -206,11 +224,12 @@ const Filter = ({ setFilters, filterData }) => {
         <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}>
 
           {inputs.map(i => {
+
             return <li className="">
-              <label>
+              <label for={i.temporada}>
                 {i.nombre}
               </label>
-              <input type="checkbox" 
+              <input type="checkbox"
                 name={i.temporada}
                 id={i.temporada}
                 value={i.temporada}
@@ -219,6 +238,7 @@ const Filter = ({ setFilters, filterData }) => {
 
               </input>
             </li>
+
           })
           }
         </ul>
@@ -227,6 +247,6 @@ const Filter = ({ setFilters, filterData }) => {
   )
 }
 
-export default Filter
+export default FilterActividades
 
 
