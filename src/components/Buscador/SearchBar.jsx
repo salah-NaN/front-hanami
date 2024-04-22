@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { PopUp, PopUpFecha, PopUpBuscador } from "./PopUp";
+import { PopUp, PopUpFecha, PopSearchPlace } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 
 export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
@@ -9,9 +9,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const url = "http://localhost:3000/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
-
   const [flores, setFlores] = useState([]);
-
   const [searchForm, setSearchForm] = useState({
     localizacion: null,
     fecha: null,
@@ -20,6 +18,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   });
 
   const [popUp, setPopUp] = useState({
+    buscador: false,
     flor: false,
     queHacer: false,
     fecha: false,
@@ -46,6 +45,15 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     });
   }, [flores]);
 
+  const setBuscadorPopUp = (event) => {
+    setPopUp({
+      buscador: true,
+      flor: false,
+      queHacer: false,
+      fecha: false,
+    });
+  };
+
   const setFloresPopUp = (flor) => {
     setSearchForm({
       ...searchForm,
@@ -61,29 +69,66 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       queHacer: queHacer,
     });
 
-    setPopUp({ flor: popUp.flor, queHacer: false });
+    setPopUp({
+      buscador: false,
+      queHacer: true,
+      flor: false,
+      fecha: false,
+    });
   };
 
   const setFechaPopUp = (event) => {
-    setPopUp({ ...popUp, fecha: !popUp.fecha });
+    setPopUp({
+      buscador: false,
+      queHacer: false,
+      flor: false,
+      fecha: true,
+    });
   };
 
-  const handleCloseModal = (event) => {
-    if (!event.target.closest(".button") && !event.target.closest(".fecha")) {
-      setPopUp({ ...popUp, fecha: false });
+  const handleCloseModal = (event, popUp) => {
+    if (
+      !event.target.closest(".button") &&
+      !event.target.closest("." + popUp)
+    ) {
+      console.log(popUp);
+      setPopUp((upPop) => {
+        return { ...upPop, [popUp]: false };
+      });
     }
   };
 
   useEffect(() => {
     const rootElement = document.getElementById("root");
-    if (popUp) {
-      rootElement.addEventListener("click", handleCloseModal);
-    } else {
-      rootElement.removeEventListener("click", handleCloseModal);
+
+    if (popUp.buscador) {
+      rootElement.addEventListener("click", (event) =>
+        handleCloseModal(event, "buscador")
+      );
     }
 
+    if (popUp.fecha) {
+      rootElement.addEventListener("click", (event) =>
+        handleCloseModal(event, "fecha")
+      );
+    }
+
+    // if (popUp.flor) {
+    //   rootElement.addEventListener("click", (event) =>
+    //     handleCloseModal(event, popUp.flor)
+    //   );
+    // }
+
     return () => {
-      rootElement.removeEventListener("click", handleCloseModal);
+      rootElement.removeEventListener("click", (event) => {
+        handleCloseModal(event, "buscador");
+      });
+      rootElement.removeEventListener("click", (event) => {
+        handleCloseModal(event, "fecha");
+      });
+      // rootElement.removeEventListener('click', (event) => {
+      //   handleCloseModal(event, popUp.flor)
+      // })
     };
   }, [popUp]);
 
@@ -123,18 +168,47 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
             className="w-full h-full md:grid md:grid-cols-12 md:relative"
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
-            <div className="w-full col-span-4 hidden md:block">
-              <input
-                onChange={() =>
-                  setSearchForm({
-                    ...searchForm,
-                    localizacion: event.target.value,
-                  })
-                }
-                placeholder="Busca la ciudad"
-                className="w-full h-14 focus:outine-none border rounded-l-full border-[#c5c5c5] bg-[#ffffff]
-                lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
-              ></input>
+            <div
+              className="w-full col-span-4 hidden md:flex md:px-0 md:w-full md:items-center hover:bg-slate-200 
+              hover:border-none hover:rounded-full button"
+              id="button-open"
+              onClick={() => setBuscadorPopUp()}
+            >
+              {!popUp.buscador ? (
+                <div
+                  className="button"
+                  onClick={setBuscadorPopUp}
+                  id="button-open"
+                >
+                  <div className="px-7">
+                    <h1 className="font-bold text-md">Destino</h1>
+                    <h1 className="text-sm">Elige un destino</h1>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full">
+                  <input
+                    onChange={() =>
+                      setSearchForm({
+                        ...searchForm,
+                        localizacion: event.target.value,
+                      })
+                    }
+                    placeholder="Busca la ciudad"
+                    className="w-full h-14 focus:outine-none border rounded-full border-[#c5c5c5] bg-[#ffffff]
+                      lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] 
+                      focus:ring-0 focus:outline-none focus:bg-white"
+                    autoFocus
+                  ></input>
+                </div>
+              )}
+            </div>
+            <div className="absolute top-[4rem] buscador">
+              {popUp.buscador ? (
+                <div className="">
+                  <PopSearchPlace searchPc={"searchPc"} />
+                </div>
+              ) : null}
             </div>
             <div className="hidden md:flex col-span-2 h-14 border-b border-[#c5c5c5] lg:border-none bg-red-500">
               <div
@@ -148,7 +222,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               </div>
               {popUp.fecha ? (
                 <div
-                  className="absolute top-80
+                  className="absolute top-[4rem]
                 fecha bg-white border-none rounded-md"
                 >
                   <PopUpFecha />
@@ -163,9 +237,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 <div className="text-sm">Que plantas quieres ver?</div>
               </div>
 
-              {popUp?.flor === true ? (
+              {/* {popUp?.flor === true ? (
                 <PopUp opciones={flores} fn={setFloresPopUp} />
-              ) : null}
+              ) : null} */}
             </div>
 
             <div className="hidden md:block w-full col-span-4">
@@ -191,9 +265,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   }
                 >
                   <div className="">
-                    {popUp?.queHacer === true ? (
-                      <PopUp opciones={queHacer} fn={setQueHacer} />
-                    ) : null}
+                    {/* {popUp?.queHacer === true ? ( */}
+                    {/* <PopUp opciones={queHacer} fn={setQueHacer} />
+                    {/* ) : null} */}
                   </div>
                 </div>
               </div>
@@ -204,5 +278,4 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     </>
   );
 };
-
 export default SearchBar;

@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ButtonSearch from "../ButtonSearch";
 import { useEffect, useState } from "react";
-import { IconPLanta, PopUpFecha } from "./";
+import { IconPLanta, PopUpFecha, PopSearchPlace } from "./";
 import { useNavigate } from "react-router-dom";
 
 import IconDondeIr from "./IconDondeIr";
@@ -211,77 +211,12 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                     </h1>
                   </AccordionSummary>
                   <AccordionDetails className="border-none">
-                    <div className="">
-                      <div
-                        className="flex items-center border rounded-xl text-[17px]"
-                        onClick={openInputSearch}
-                      >
-                        <ButtonSearch
-                          stylesButton={{
-                            backGround: `bg-white`,
-                            svgColor: `stroke-black`,
-                            hover: `hover:bg-white`,
-                            size: `h-12`,
-                          }}
-                        />
-                        {openInput === true ? (
-                          <input
-                            type="text"
-                            placeholder="Introduce tu destino"
-                            className="focus:ring-0 focus:outline-none
-                          flex w-full items-center h-full border-none
-                          rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
-                            autoFocus
-                            onChange={() =>
-                              onChangeForm({ localizacion: event.target.value })
-                            }
-                          />
-                        ) : (
-                          <>
-                            <p>Introduce tu destino</p>
-                          </>
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 mt-4">
-                        <div
-                          className="w-11/12 mx-auto border rounded-xl px-3 py-2 bg-slate-50"
-                          onClick={(event) =>
-                            onChangeForm({ localizacion: `Barcelona` })
-                          }
-                        >
-                          <img src="/barcelona_comarca.svg" />
-                          <h1 className="text-sm text-right">Barcelona</h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={(event) =>
-                            onChangeForm({ localizacion: `Girona` })
-                          }
-                        >
-                          <img src="/girona.svg" />
-                          <h1 className="text-sm text-right">Girona</h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={(event) =>
-                            onChangeForm({ localizacion: `Tarragona` })
-                          }
-                        >
-                          <img src="/tarragona.svg" />
-                          <h1 className="text-sm text-right">Tarragon</h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={(event) =>
-                            onChangeForm({ localizacion: `Lleida` })
-                          }
-                        >
-                          <img src="/lleida.svg" />
-                          <h1 className="text-sm text-right">Lleida</h1>
-                        </div>
-                      </div>
-                    </div>
+                    <PopSearchPlace
+                      openInputSearch={openInputSearch}
+                      openInput={openInput}
+                      onChangeForm={onChangeForm}
+                      searchPc={""}
+                    />
                   </AccordionDetails>
                 </Accordion>
               </motion.div>

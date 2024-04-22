@@ -6,7 +6,9 @@ export const PopUpFecha = ({onChangeForm}) => {
   return (
     <div className="">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar onChange={(newValue) => onChangeForm({fecha: newValue?.$d})} />
+        <DateCalendar 
+        onChange={(newValue) => 
+          onChangeForm({fecha: newValue?.$d})} />
       </LocalizationProvider>
     </div>
   );
