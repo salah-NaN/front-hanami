@@ -24,6 +24,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     fecha: false,
   });
 
+  const [isCheck, setIsCheck] = useState("");
+
   useEffect(() => {
     //Llamamos a la api para recoger las flores que tiene la base de datos, y poder construir el select
     fetch(url + "/flores")
@@ -156,21 +158,48 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     }
   };
 
+  useEffect(() => {
+    const { queHacer, flor, buscador, fecha } = popUp;
+
+    const popUpProperties = { queHacer, flor, buscador, fecha };
+
+    const colorMap = {
+      queHacer: "#EBEBEB",
+      flor: "#EBEBEB",
+      buscador: "#EBEBEB",
+      fecha: "#EBEBEB",
+    };
+
+    // Miramos con el find si hay alguna 
+    const isInTrue = Object.entries(popUpProperties).find(
+      ([property, isActive]) => isActive === true
+    );
+    if (isInTrue) {
+      setIsCheck(true);
+    } else {
+      setIsCheck(false);
+    }
+  }, [popUp]);
+
   return (
     <>
       <div
-        className="z-20 h-full w-10/12 mx-auto border rounded-full shadow-sm shadow-white bg-white"
+        className={`z-20 h-20 w-10/12 mx-auto border rounded-full shadow-sm shadow-white ${
+          isCheck === true ? `bg-[#EBEBEB]` : `bg-white`
+        }`}
         ref={moveToSearchBar}
       >
-        <div className="w-full flex items-center">
+        <div className="w-full flex items-center md:relative">
           <form
             onSubmit={onSubmitSearch}
-            className="w-full h-full md:grid md:grid-cols-12 md:relative"
+            className="w-full h-full md:grid md:grid-cols-12 md:h-20"
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
             <div
-              className="w-full col-span-4 hidden md:flex md:px-0 md:w-full md:items-center hover:bg-slate-200 
-              hover:border-none hover:rounded-full button"
+              className={`w-full col-span-4 hidden md:flex md:px-0 md:w-full md:items-center hover:bg-slate-200 
+              hover:border-none hover:rounded-full button hover:shadow-xl ${
+                popUp.buscador ? `bg-slate-200 border-none rounded-full shadow-2xl` : ``
+              }`}
               id="button-open"
               onClick={() => setBuscadorPopUp()}
             >
@@ -195,30 +224,39 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                       })
                     }
                     placeholder="Busca la ciudad"
-                    className="w-full h-14 focus:outine-none border rounded-full border-[#c5c5c5] bg-[#ffffff]
-                      lg:border-none placeholder:px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] 
-                      focus:ring-0 focus:outline-none focus:bg-white"
+                    className={`w-full h-20 focus:outine-none border rounded-full border-[#c5c5c5] bg-[#ffffff]
+                      lg:border-none placeholder:px-0 px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] 
+                      focus:ring-0 focus:outline-none focus:bg-white`}
                     autoFocus
                   ></input>
                 </div>
               )}
             </div>
-            <div className="absolute top-[4rem] buscador">
+            <div className="absolute top-[4rem] left-2 buscador">
               {popUp.buscador ? (
                 <div className="">
                   <PopSearchPlace searchPc={"searchPc"} />
                 </div>
               ) : null}
             </div>
-            <div className="hidden md:flex col-span-2 h-14 border-b border-[#c5c5c5] lg:border-none bg-red-500">
+
+            <div className="hidden md:flex col-span-2 h-full border-b border-[#c5c5c5] lg:border-none">
               <div
-                className="px-3 w-full border-r border-[#c5c5c5] bg-[#ffffff]
+                className={`px-3 w-full border-r border-[#c5c5c5]
                    flex items-center justify-center lg:border-r lg:border-l
-                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button"
+                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button hover:border-none hover:bg-slate-200 hover:rounded-full hover:shadow-xl
+                    ${
+                      popUp.fecha
+                        ? `bg-white border-none rounded-full shadow-xl`
+                        : ``
+                    }`}
                 id="button-open"
                 onClick={(event) => setFechaPopUp(event)}
               >
-                Cuando quieres ir?
+                <div className="flex flex-col justify-start w-full">
+                  <h1 className="font-bold text-md">Fecha</h1>
+                  <h1 className="text-sm truncate">Introduce la fecha</h1>
+                </div>
               </div>
               {popUp.fecha ? (
                 <div
@@ -229,12 +267,20 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 </div>
               ) : null}
             </div>
-            <div className="hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] hover:bg-[#EBEBEB]">
+            <div
+              className={`px-3 hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] 
+            hover:bg-slate-200 hover:border-none hover:rounded-full hover:shadow-xl ${
+              popUp.flor ? `bg-white` : ``
+            }`}
+            >
               <div
                 className="flex justify-center items-center w-full h-full cursor-pointer"
                 onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
               >
-                <div className="text-sm">Que plantas quieres ver?</div>
+                <div className="flex flex-col justify-start w-full">
+                  <h1 className="text-bold text-md">Plantas</h1>
+                  <h1 className="text-sm truncate">Introduce la planta</h1>
+                </div>
               </div>
 
               {/* {popUp?.flor === true ? (

@@ -8,8 +8,8 @@ export const PopSearchPlace = ({
 }) => {
   return (
     <div
-      className={`md:bg-white md:border-none 
-      md:rounded-lg md:px-1 ${
+      className={`md:bg-white md:border-none
+      md:rounded-b-2xl md:px-1 ${
         searchPc === "searchPc" ? "md:w-72 md:py-1" : "px-0 w-full"
       }`}
     >
