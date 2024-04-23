@@ -3,6 +3,11 @@ import { useNavigate, useLocation} from 'react-router-dom';
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
+import './zoomStyleMap.css'
+import FiltroFlor from './FiltroFlor';
+import { compressNormals } from 'three/examples/jsm/utils/GeometryCompressionUtils.js';
+
+
 
 //constantes
 const URL = 'http://localhost:3000/api'
@@ -25,6 +30,9 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     // state para guardar la fecha seleccionada por slider
     const [fechaSlider, setFechaSlider] = useState(new Date().getDate())
     const [mapa, setMapa] = useState(false)
+    // state para saber que flor en el filtro se ha elegido
+    const [selectedRadio, setSelectedRadio] = useState('')
+
 
     // los iconos de todas las etapas de los arboles florales
     const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
@@ -54,7 +62,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     useEffect(() => {
         if (!primerRender) {
 
-            const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+            const ourMap = L.map(mapRef.current, {zoomControl: false}).setView([41.6092, 2.1477], 9);
 
             setMapa(ourMap)
 
@@ -81,11 +89,16 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             //     maxZoom: 18,
             // }).addTo(ourMap);
 
+            L.control.zoom({
+                position:'topright'
+           }).addTo(ourMap);
+
 
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
                 // extraer las temporadas que coincida con la fecha de hoy
                 const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(new Date(), new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
+
                 // distinción de si 0 temporadas, 1 o más
                 return temporadasCoincidentes.length === 0
                     ?
@@ -165,10 +178,12 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
                 // extraer las temporadas que coincida con la fecha de hoy
-                const temporadasCoincidentes = punto.temporadas.filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
+                const temporadasCoincidentes = punto.temporadas
+                .filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
+                // filtrando por tipo de flor 
+                .filter()
+                console.log(selectedRadio)
                 // distinción de si 0 temporadas, 1 o más
-
-                console.log(temporadasCoincidentes)
 
                 return temporadasCoincidentes.length === 0
                     ?
@@ -237,6 +252,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
     return (
         <>
+            <FiltroFlor selectedRadio={selectedRadio} setSelectedRadio={setSelectedRadio}/>
             <div id="map" ref={mapRef} className={`w-full ${location.pathname === '/' ? 'h-[500px]' : 'h-full'}`} ></div>
             {
                 location.pathname === '/' && <SliderCustom fechaSlider={fechaSlider} setFechaSlider={setFechaSlider} />

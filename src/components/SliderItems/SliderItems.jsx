@@ -18,7 +18,6 @@ export const SliderItems = ({
   actividadOrPuntoInteres,
 }) => {
   // const isMobile = window.innerWidth <= 768;
-  console.log(actividadOrPuntoInteres);
   const [selectedButton, setSelectedButton] = useState({
     puntos_interes: true,
     actividades: false,

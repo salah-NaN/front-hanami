@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
+import './zoomStyleMap.css'
 
 //constantes
 const URL = 'http://localhost:3000/api'
@@ -49,7 +50,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
     useEffect(() => {
 
-        const ourMap = L.map(mapRef.current).setView([41.6092, 2.1477], 9);
+        const ourMap = L.map(mapRef.current, {zoomControl: false}).setView([41.6092, 2.1477], 9);
 
         setMapa(ourMap)
 
@@ -58,6 +59,10 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
             });
             googleStreets.addTo(ourMap)
+
+            L.control.zoom({
+                position:'topright'
+           }).addTo(ourMap);
     }, [])
 
 

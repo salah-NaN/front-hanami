@@ -1,0 +1,46 @@
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  font: bold 18px 'Lucida Console', Monaco, monospace;
+  text-indent: 1px;
+  border: none;
+  outline: none;
+
+  }
+.leaflet-control-zoom-out {
+  font-size: 20px;
+  border: none;
+  outline: none;
+
+
+  }
+
+.leaflet-touch .leaflet-control-zoom-in {
+  font-size: 22px;
+  outline: none;
+
+
+  }
+.leaflet-touch .leaflet-control-zoom-out {
+  font-size: 24px;
+  outline: none;
+  }
+
+
+  /* CSS para quitar los bordes de los botones de zoom en Leaflet */
+.leaflet-control-zoom {
+    border-radius: 20px !important;
+    border: none !important; /* Elimina el borde */
+    outline: none;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+
+  }
+  
+  /* Opcional: si deseas mantener el borde en hover */
+  .leaflet-control-zoom:hover {
+      border-radius: 20px !important;
+    border: none !important; /* Elimina el borde en hover */
+  outline: none;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

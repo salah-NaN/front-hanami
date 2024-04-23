@@ -166,7 +166,6 @@ const Filter = ({ setFilters, filterData }) => {
             return false
         }
     })
-    console.log(arrObj)
     return toSend
   }
 

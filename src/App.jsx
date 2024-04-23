@@ -36,9 +36,7 @@ export const App = () => {
           <Route
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
             element={
-              <LayoutHanami>
-                <Busqueda />
-              </LayoutHanami>}
+                <Busqueda />}
           ></Route>
           <Route path="/" element={<Inicio />}></Route>
 
