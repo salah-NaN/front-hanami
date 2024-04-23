@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, version } from "react";
 import { useNavigate } from "react-router-dom";
-import { PopUp, PopUpFecha, PopSearchPlace } from "./PopUp";
+import { PopUp, PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
+import { Calendar } from "@nextui-org/calendar";
 
 export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const navigate = useNavigate();
@@ -48,44 +49,45 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     });
   }, []);
 
-  const setBuscadorPopUp = (event) => {
+  const setBuscadorPopUp = (open) => {
     setPopUp({
-      buscador: true,
+      buscador: open === undefined ? true : open,
       flor: false,
       queHacer: false,
       fecha: false,
     });
   };
 
-  const setFloresPopUp = (flor) => {
-    setSearchForm({
-      ...searchForm,
-      flor: flor,
-    });
-
-    setPopUp({ flor: false, queHacer: popUp.queHacer });
-  };
-
-  const setQueHacer = (queHacer) => {
-    setSearchForm({
-      ...searchForm,
-      queHacer: queHacer,
-    });
-
+  const setFloresPopUp = (open) => {
     setPopUp({
       buscador: false,
-      queHacer: true,
+      flor: open === undefined ? true : open,
+      queHacer: false,
+      fecha: false,
+    });
+    // setSearchForm({
+    //   ...searchForm,
+    //   flor: flor,
+    // });
+
+    // setPopUp({ flor: false, queHacer: popUp.queHacer });
+  };
+
+  const setPopQueHacer = (open) => {
+    setPopUp({
+      buscador: false,
+      queHacer: open === undefined ? true : open,
       flor: false,
       fecha: false,
     });
   };
 
-  const setFechaPopUp = (event) => {
+  const setFechaPopUp = (open) => {
     setPopUp({
       buscador: false,
       queHacer: false,
       flor: false,
-      fecha: true,
+      fecha: open === undefined ? popUp.fecha : open,
     });
   };
 
@@ -94,6 +96,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       !event.target.closest(".button") &&
       !event.target.closest("." + popUp)
     ) {
+      console.log(popUp);
       setPopUp((upPop) => {
         return { ...upPop, [popUp]: false };
       });
@@ -115,11 +118,17 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       );
     }
 
-    // if (popUp.flor) {
-    //   rootElement.addEventListener("click", (event) =>
-    //     handleCloseModal(event, popUp.flor)
-    //   );
-    // }
+    if (popUp.flor) {
+      rootElement.addEventListener("click", (event) =>
+        handleCloseModal(event, "flor")
+      );
+    }
+
+    if (popUp.queHacer) {
+      rootElement.addEventListener("click", (event) =>
+        handleCloseModal(event, "queHacer")
+      );
+    }
 
     return () => {
       rootElement.removeEventListener("click", (event) => {
@@ -128,9 +137,12 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       rootElement.removeEventListener("click", (event) => {
         handleCloseModal(event, "fecha");
       });
-      // rootElement.removeEventListener('click', (event) => {
-      //   handleCloseModal(event, popUp.flor)
-      // })
+      rootElement.removeEventListener("click", (event) => {
+        handleCloseModal(event, "flor");
+      });
+      rootElement.removeEventListener("click", (event) => {
+        handleCloseModal(event, "queHacer");
+      });
     };
   }, [popUp]);
 
@@ -177,7 +189,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   return (
     <>
       <div
-        className={`z-20 h-20 w-10/12 mx-auto border rounded-full shadow-sm shadow-white ${
+        className={`z-20 h-20 flex items-center w-10/12 mx-auto border rounded-full shadow-sm shadow-white ${
           isCheck === true ? `bg-[#EBEBEB]` : `bg-white`
         }`}
         ref={moveToSearchBar}
@@ -189,7 +201,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
             <div
-              className={`w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-slate-200 
+              className={`w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
               hover:border-none hover:rounded-full button hover:shadow-xl ${
                 popUp.buscador
                   ? `bg-slate-200 border-none rounded-full shadow-2xl`
@@ -198,12 +210,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               id="button-open"
               onClick={() => setBuscadorPopUp()}
             >
-              {!popUp.buscador ? (
-                <div
-                  className="button"
-                  onClick={setBuscadorPopUp}
-                  id="button-open"
-                >
+              {popUp.buscador === false ? (
+                <div className="button" id="button-open">
                   <div className="px-7">
                     <h1 className="font-bold text-md">Destino</h1>
                     <h1 className="text-sm">
@@ -238,7 +246,12 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
             <div className="absolute top-[4rem] left-0 buscador">
               {popUp.buscador ? (
                 <div className="">
-                  <PopSearchPlace searchPc={"searchPc"} />
+                  <PopSearchPlace
+                    searchPc={"searchPc"}
+                    setSearchForm={setSearchForm}
+                    searchForm={searchForm}
+                    setBuscadorPopUp={setBuscadorPopUp}
+                  />
                 </div>
               ) : null}
             </div>
@@ -247,7 +260,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               <div
                 className={`px-3 w-full border-r border-[#c5c5c5]
                    flex items-center justify-center lg:border-r lg:border-l
-                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button hover:border-none hover:bg-slate-200 hover:rounded-full hover:shadow-xl
+                    lg:border-[#c5c5c5] text-sm cursor-pointer relative button hover:border-none hover:bg-[#EBEBEB] hover:rounded-full hover:shadow-xl
                     ${
                       popUp.fecha
                         ? `bg-white border-none rounded-full shadow-xl`
@@ -270,24 +283,30 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               {popUp.fecha ? (
                 <div
                   className="absolute top-[5rem]
-                  fecha bg-white border-none rounded-md"
+                  fecha bg-white border-none rounded-md "
                 >
-                  <PopUpFecha
+                  {/* <PopUpFecha
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
+                    setFechaPopUp={setFechaPopUp}
+                  /> */}
+                  <Calendar
+                    aria-label="Date (Page Behaviour)"
+                    pageBehavior="single"
                   />
                 </div>
               ) : null}
             </div>
             <div
               className={`px-3 hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] 
-            hover:bg-slate-200 hover:border-none hover:rounded-full hover:shadow-xl relative ${
+            hover:bg-[#EBEBEB] hover:border-none hover:rounded-full hover:shadow-xl relative ${
               popUp.flor ? `bg-white` : ``
             }`}
             >
               <div
-                className="flex justify-center items-center w-full h-full cursor-pointer"
-                onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
+                className="flex justify-center items-center w-full h-full cursor-pointer button"
+                onClick={() => setFloresPopUp()}
+                id="button-open"
               >
                 <div className="flex flex-col justify-start w-full">
                   <h1 className="text-bold text-md">Flor</h1>
@@ -297,14 +316,13 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                     <div className="flex justify-between">
                       <h1 className="font-[900] text-xl">{searchForm.flor}</h1>
                       <img
-                        src={`http://localhost:3000/img/
-                        ${
+                        src={`http://localhost:3000/img/${
                           searchForm.flor === "Cerezo"
                             ? "cerezas"
                             : searchForm.flor === "Lavanda"
                             ? "LavandaMaxFloracion"
                             : searchForm.flor === "Olivo"
-                            ? "olivo"
+                            ? "olivos"
                             : searchForm.flor === "Viña"
                             ? "ViñaUvaGrande"
                             : ""
@@ -325,36 +343,39 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   <PopUpPlanta
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
+                    setFloresPopUp={setFloresPopUp}
                   />
                 </div>
               ) : null}
             </div>
 
-            <div className="hidden md:block w-full col-span-4">
+            <div className="hidden md:block w-full col-span-4 relative">
               <div
-                className="w-full h-full flex justify-between items-center border border-[#c5c5c5] cursor-pointer
-                 border-none rounded-full"
-                onClick={() =>
-                  setPopUp({ ...popUp, queHacer: !popUp.queHacer })
-                }
+                className="w-full h-full border border-[#c5c5c5] cursor-pointer
+                 border-none rounded-full button"
+                id="button-open"
+                onClick={() => setPopQueHacer()}
               >
-                <div className="px-3 flex gap-10 justify-center w-full">
+                <div className="flex h-full justify-between items-center">
                   <div
-                    className="flex flex-col justify-center items-center w-24 h-20 
-                  hover:bg-[#EBEBEB] hover:border-none hover:rounded-full hover:shadow-xl"
+                    className="w-full h-full flex justify-between items-center hover:shadow-xl 
+                  hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
                   >
-                    <img src="./cometa.png" alt="" className="w-7" />
-                    <h1 className="text-bold">Actividades</h1>
+                    <h1 className="px-3">Que quieres hacer?</h1>
+                    <ButtonSearch />
                   </div>
-                  <div className="flex flex-col justify-center items-center w-26 h-20 hover:bg-[#EBEBEB] hover:border-none hover:rounded-full hover:shadow-xl">
-                    <img src="./campos.png" alt="" className="w-7" />
-                    <h1>Puntos de interes</h1>
-                  </div>
-                </div>
-                <div className="flex justify-end items-center">
-                  <ButtonSearch />
                 </div>
               </div>
+              {popUp?.queHacer ? (
+                <div
+                  className="absolute bg-white w-96 top-[5rem] left-0
+               h-fit border-none rounded-lg p-3 queHacer"
+                >
+                  <PopUpQueHacer />
+                </div>
+              ) : (
+                <div className=""></div>
+              )}
             </div>
           </form>
         </div>

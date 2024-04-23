@@ -1,16 +1,35 @@
 import { ButtonSearch } from "../";
+import { motion } from 'framer-motion';
 
 export const PopSearchPlace = ({
   searchPc,
   openInput,
   onChangeForm,
   openInputSearch,
+  setSearchForm,
+  searchForm,
+  setBuscadorPopUp,
 }) => {
+  const handleFunction = (value) => {
+    if (onChangeForm) {
+      onChangeForm({ ...value });
+    } else {
+      setSearchForm({ ...searchForm, ...value });
+      setBuscadorPopUp(false);
+    }
+  };
   return (
-    <div
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ rotate: 0, scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 30,
+      }}
       className={`md:bg-white md:border-none
       md:rounded-2xl md:p-1 ${
-        searchPc === "searchPc" ? "md:w-[21rem]" : "px-0 w-full"
+        searchPc === "searchPc" ? "md:w-[26rem] md:h-full" : "px-0 w-full"
       }`}
     >
       {searchPc === "" ? (
@@ -34,8 +53,8 @@ export const PopSearchPlace = ({
                           flex w-full items-center h-full border-none
                           rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
               autoFocus
-              onChange={() =>
-                onChangeForm({ localizacion: event.target.value })
+              onChange={(event) =>
+                handleFunction({ localizacion: event.target.value })
               }
             />
           ) : (
@@ -47,40 +66,43 @@ export const PopSearchPlace = ({
       ) : null}
 
       <div
-        className={`grid grid-cols-2 gap-3 mt-5 md:m-1 ${
-          searchPc === "searchPc" ? "md:p-1" : "md:mt-0"
+        className={`mt-5 md:m-1 ${
+          searchPc === "searchPc" ? "md:p-3" : "md:mt-0"
         }`}
       >
-        <div
-          className="md:w-full w-full border rounded-xl px-3 py-2 bg-slate-50"
-          onClick={(event) => onChangeForm({ localizacion: `Barcelona` })}
-        >
-          <img src="/barcelona_comarca.svg" />
-          <h1 className="text-sm text-right">Barcelona</h1>
-        </div>
-        <div
-          className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2"
-          onClick={(event) => onChangeForm({ localizacion: `Girona` })}
-        >
-          <img src="/girona.svg" />
-          <h1 className="text-sm text-right">Girona</h1>
-        </div>
-        <div
-          className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2"
-          onClick={(event) => onChangeForm({ localizacion: `Tarragona` })}
-        >
-          <img src="/tarragona.svg" />
-          <h1 className="text-sm text-right">Tarragon</h1>
-        </div>
-        <div
-          className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2"
-          onClick={(event) => onChangeForm({ localizacion: `Lleida` })}
-        >
-          <img src="/lleida.svg" />
-          <h1 className="text-sm text-right">Lleida</h1>
+        <h1 className="text-bold text-md">Elige una provincia</h1>
+        <div className="grid grid-cols-4 gap-3 md:gap-1 pt-5">
+          <div
+            className="md:w-full w-full border rounded-xl px-3 py-2 bg-slate-50 cursor-pointer hover:bg-[#EBEBEB]"
+            onClick={() => handleFunction({ localizacion: "Barcelona" })}
+          >
+            <img src="/barcelona_comarca.svg" />
+            <h1 className="text-sm text-right">Barcelona</h1>
+          </div>
+          <div
+            className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+            onClick={() => handleFunction({ localizacion: `Girona` })}
+          >
+            <img src="/girona.svg" />
+            <h1 className="text-sm text-right">Girona</h1>
+          </div>
+          <div
+            className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+            onClick={() => handleFunction({ localizacion: `Tarragona` })}
+          >
+            <img src="/tarragona.svg" />
+            <h1 className="text-sm text-right">Tarragon</h1>
+          </div>
+          <div
+            className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+            onClick={() => handleFunction({ localizacion: `Lleida` })}
+          >
+            <img src="/lleida.svg" />
+            <h1 className="text-sm text-right">Lleida</h1>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -95,7 +95,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
       }}
     >
       <motion.div
-        className="bg-slate-100"
+        className="bg-slate-100 "
         key="mobile-search"
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}

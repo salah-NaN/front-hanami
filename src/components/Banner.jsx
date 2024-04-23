@@ -44,13 +44,9 @@ export const Banner = () => {
           </AnimatePresence>
         </div>
       ) : null}
-      <div className="absolute md:bottom-80">
+      <div className="absolute bottom-80 flex flex-col justify-start items-start">
         <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
-          <div
-            className="relative border-none
-                  rounded-xl
-                  py-2 bg-transparent md:px-6 lg:w-fit"
-          >
+          <div className="py-2 bg-transparent md:px-6 lg:w-fit">
             <h1
               style={{ y: textY }}
               className="text-semibold text-8xl relative z-20 w-full text-center
@@ -66,7 +62,7 @@ export const Banner = () => {
             </h1>
           </div>
         </div>
-        <div className="flex w-full justify-center py-8">
+        <div className="flex w-full justify-center items-center">
           <SearchBar openPopUpBuscador={openPopUpBuscador} />
         </div>
       </div>
