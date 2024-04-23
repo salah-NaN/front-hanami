@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ButtonSearch from "../ButtonSearch";
 import { useEffect, useState } from "react";
-import { IconPLanta, PopUpFecha, PopSearchPlace } from "./";
+import { IconPLanta, PopUpFecha, PopSearchPlace, PopUpPlanta } from "./";
 import { useNavigate } from "react-router-dom";
 
 import IconDondeIr from "./IconDondeIr";
@@ -58,6 +58,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
   }, [clickChoice]);
 
   const onChangeForm = (data) => {
+    console.log(data)
     setFormData({ ...formData, ...data });
   };
 
@@ -263,45 +264,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                       </h1>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div
-                          className="w-11/12 mx-auto border rounded-xl px-3 py-1 bg-slate-50"
-                          onClick={() => onChangeForm({ flor: `Lavanda` })}
-                        >
-                          <img
-                            src={`http://localhost:3000/img/LavandaMaxFloracion.png`}
-                          />
-                          <h1 className="text-sm text-right flex justify-end">
-                            Lavanda
-                          </h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={() => onChangeForm({ flor: `Cerezo` })}
-                        >
-                          <img
-                            src={`http://localhost:3000/img/cerezas.png`}
-                            className="h-fit"
-                          />
-                          <h1 className="text-sm text-right">Cerezo</h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={() => onChangeForm({ flor: `Viña` })}
-                        >
-                          <img
-                            src={`http://localhost:3000/img/viñaUvaGrande.png`}
-                          />
-                          <h1 className="text-sm text-right">Viña</h1>
-                        </div>
-                        <div
-                          className="w-11/12 mx-auto bg-slate-50 border rounded-xl px-3 py-2"
-                          onClick={() => onChangeForm({ flor: `Olivo` })}
-                        >
-                          <img src={`http://localhost:3000/img/olivos.png`} />
-                          <h1 className="text-sm text-right">Olivo</h1>
-                        </div>
-                      </div>
+                      <PopUpPlanta onChangeForm={onChangeForm} />
                     </AccordionDetails>
                   </Accordion>
                 </motion.div>
