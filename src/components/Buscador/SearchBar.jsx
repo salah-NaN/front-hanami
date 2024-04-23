@@ -189,7 +189,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
             <div
-              className={`w-full col-span-4 hidden md:flex md:px-0 md:w-full md:items-center hover:bg-slate-200 
+              className={`w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-slate-200 
               hover:border-none hover:rounded-full button hover:shadow-xl ${
                 popUp.buscador
                   ? `bg-slate-200 border-none rounded-full shadow-2xl`
@@ -235,7 +235,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 </div>
               )}
             </div>
-            <div className="absolute top-[4rem] left-2 buscador">
+            <div className="absolute top-[4rem] left-0 buscador">
               {popUp.buscador ? (
                 <div className="">
                   <PopSearchPlace searchPc={"searchPc"} />
@@ -269,7 +269,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               </div>
               {popUp.fecha ? (
                 <div
-                  className="absolute top-[4rem]
+                  className="absolute top-[5rem]
                   fecha bg-white border-none rounded-md"
                 >
                   <PopUpFecha
@@ -290,14 +290,38 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 onClick={() => setPopUp({ ...popUp, flor: !popUp.flor })}
               >
                 <div className="flex flex-col justify-start w-full">
-                  <h1 className="text-bold text-md">Plantas</h1>
-                  <h1 className="text-sm truncate">Introduce la planta</h1>
+                  <h1 className="text-bold text-md">Flor</h1>
+                  {searchForm.flor === null ? (
+                    `Elige una planta?`
+                  ) : (
+                    <div className="flex justify-between">
+                      <h1 className="font-[900] text-xl">{searchForm.flor}</h1>
+                      <img
+                        src={`http://localhost:3000/img/
+                        ${
+                          searchForm.flor === "Cerezo"
+                            ? "cerezas"
+                            : searchForm.flor === "Lavanda"
+                            ? "LavandaMaxFloracion"
+                            : searchForm.flor === "Olivo"
+                            ? "olivo"
+                            : searchForm.flor === "Viña"
+                            ? "ViñaUvaGrande"
+                            : ""
+                        }.png`}
+                        alt=""
+                        className="w-7"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 
               {popUp?.flor === true ? (
-                <div className="absolute bg-white w-96 top-[5rem] left-0
-                h-fit border-none rounded-lg p-3">
+                <div
+                  className="absolute bg-white w-96 top-[5rem] left-0
+                h-fit border-none rounded-lg p-3"
+                >
                   <PopUpPlanta
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
@@ -328,13 +352,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   </div>
                 </div>
                 <div className="flex justify-end items-center">
-                  <ButtonSearch
-                    stylesButton={{
-                      backGround: `bg-[#53cd68]`,
-                      svgColor: `stroke-white`,
-                      size: `h-20 w-20`,
-                    }}
-                  />
+                  <ButtonSearch />
                 </div>
               </div>
             </div>

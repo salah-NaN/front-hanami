@@ -9,8 +9,8 @@ export const PopSearchPlace = ({
   return (
     <div
       className={`md:bg-white md:border-none
-      md:rounded-b-2xl md:px-1 ${
-        searchPc === "searchPc" ? "md:w-72 md:py-1" : "px-0 w-full"
+      md:rounded-2xl md:p-1 ${
+        searchPc === "searchPc" ? "md:w-[21rem]" : "px-0 w-full"
       }`}
     >
       {searchPc === "" ? (
@@ -47,8 +47,8 @@ export const PopSearchPlace = ({
       ) : null}
 
       <div
-        className={`grid grid-cols-2 gap-3 mt-5 ${
-          searchPc === "searchPc" ? "px-3 py-0" : "md:mt-0"
+        className={`grid grid-cols-2 gap-3 mt-5 md:m-1 ${
+          searchPc === "searchPc" ? "md:p-1" : "md:mt-0"
         }`}
       >
         <div
