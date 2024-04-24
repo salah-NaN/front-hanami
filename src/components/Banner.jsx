@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const Banner = () => {
   const ref = useRef(null);
-  // const [openPopUp, setOpenPopUp] = useState(false);
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -36,7 +35,7 @@ export const Banner = () => {
       ref={ref}
     >
       {mobileNav === true ? (
-        <div className="relative">
+        <div className="relative md:hidden">
           <AnimatePresence>
             <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
               <PopUpBuscador toggleMobileNav={toggleMobileNav} />

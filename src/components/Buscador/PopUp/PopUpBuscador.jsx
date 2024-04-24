@@ -94,7 +94,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
       }}
     >
       <motion.div
-        className="bg-slate-100 "
+        className="bg-slate-100 block"
         key="mobile-search"
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}
@@ -248,7 +248,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                       expandIcon={<IconFecha />}
                     >
                       {formData.fecha === null ? (
-                        <h1 className="text-xl text-bold py-2">
+                        <h1 className="text-[15px] text-bold py-2">
                           ¿Cuando quieres ir?
                         </h1>
                       ) : (

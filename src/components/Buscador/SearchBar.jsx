@@ -195,7 +195,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
         <div className="w-full flex items-center md:relative">
           <form
             onSubmit={onSubmitSearch}
-            className="w-full h-full md:grid md:grid-cols-12 md:h-20"
+            className={`w-full h-full ${searchForm.queHacer === "" || searchForm.queHacer === "Punto_de_Interes"
+            ? `md:grid md:grid-cols-12 md:h-20` : `md:grid md:grid-cols-10 md:h-20`}`}
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
             <div
@@ -271,7 +272,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   <h1 className="font-bold text-md">Fecha</h1>
                   <h1 className="text-sm">
                     {searchForm.fecha === null ? (
-                      `Elige un destino`
+                      `Elige una fecha`
                     ) : (
                       <h1 className="font-[900] text-xl">{searchForm.fecha}</h1>
                     )}
@@ -291,57 +292,61 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 </div>
               ) : null}
             </div>
-            <div
-              className={`px-3 hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] 
+            {searchForm.queHacer === "Actividades" ? null : (
+              <div
+                className={`px-3 hidden md:flex col-span-2 w-full border-r border-[#c5c5c5] 
             hover:bg-[#EBEBEB] hover:border-none hover:rounded-full hover:shadow-xl relative ${
               popUp.flor ? `bg-white` : ``
             }`}
-            >
-              <div
-                className="flex justify-center items-center w-full h-full cursor-pointer button"
-                onClick={() => setFloresPopUp()}
-                id="button-open"
               >
-                <div className="flex flex-col justify-start w-full">
-                  <h1 className="text-bold text-md">Flor</h1>
-                  {searchForm.flor === null ? (
-                    `Elige una planta?`
-                  ) : (
-                    <div className="flex justify-between">
-                      <h1 className="font-[900] text-xl">{searchForm.flor}</h1>
-                      <img
-                        src={`http://localhost:3000/img/${
-                          searchForm.flor === "Cerezo"
-                            ? "cerezas"
-                            : searchForm.flor === "Lavanda"
-                            ? "LavandaMaxFloracion"
-                            : searchForm.flor === "Olivo"
-                            ? "olivos"
-                            : searchForm.flor === "Viña"
-                            ? "ViñaUvaGrande"
-                            : ""
-                        }.png`}
-                        alt=""
-                        className="w-7"
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {popUp?.flor === true ? (
                 <div
-                  className="absolute bg-white w-96 top-[6rem] left-0
-                h-fit border-none rounded-2xl p-3"
+                  className="flex justify-center items-center w-full h-full cursor-pointer button"
+                  onClick={() => setFloresPopUp()}
+                  id="button-open"
                 >
-                  <PopUpPlanta
-                    setSearchForm={setSearchForm}
-                    searchForm={searchForm}
-                    setFloresPopUp={setFloresPopUp}
-                  />
+                  <div className="flex flex-col justify-start w-full">
+                    <h1 className="text-bold text-md">Flor</h1>
+                    {searchForm.flor === null ? (
+                      <h1 className="text-sm">Elige una planta?</h1>
+                    ) : (
+                      <div className="flex justify-between">
+                        <h1 className="font-[900] text-xl">
+                          {searchForm.flor}
+                        </h1>
+                        <img
+                          src={`http://localhost:3000/img/${
+                            searchForm.flor === "Cerezo"
+                              ? "cerezas"
+                              : searchForm.flor === "Lavanda"
+                              ? "LavandaMaxFloracion"
+                              : searchForm.flor === "Olivo"
+                              ? "olivos"
+                              : searchForm.flor === "Viña"
+                              ? "ViñaUvaGrande"
+                              : ""
+                          }.png`}
+                          alt=""
+                          className="w-7"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              ) : null}
-            </div>
+
+                {popUp?.flor === true ? (
+                  <div
+                    className="absolute bg-white w-96 top-[6rem] left-0
+                h-fit border-none rounded-2xl p-3"
+                  >
+                    <PopUpPlanta
+                      setSearchForm={setSearchForm}
+                      searchForm={searchForm}
+                      setFloresPopUp={setFloresPopUp}
+                    />
+                  </div>
+                ) : null}
+              </div>
+            )}
 
             <div className="hidden md:block w-full col-span-4 relative">
               <div
@@ -356,12 +361,20 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white"
                   >
                     <div className="flex flex-col px-2">
-                      <h1 className="md:block font-bold">Que quieres hacer?</h1>
+                      <h1 className="md:block font-bold text-sm">Que quieres hacer?</h1>
                       {searchForm.queHacer !== "" ? (
                         <h1>
-                          {searchForm.queHacer === "Punto_de_Interes"
-                            ? "Punto de interes"
-                            : "Actividades"}
+                          {searchForm.queHacer === "Punto_de_Interes" ? (
+                            <div className="flex gap-2 items-center">
+                              <h1 className="text-xl">Punto de interes</h1>
+                              <img src="./campos.png" alt="" className="w-7" />
+                            </div>
+                          ) : (
+                            <div className="flex gap-2 items-center">
+                              <h1 className="text-xl">Actividades</h1>
+                              <img src="./cometa.png" alt="" className="w-7" />
+                            </div>
+                          )}
                         </h1>
                       ) : (
                         <h1 className="text-sm">Elige una opcion</h1>
