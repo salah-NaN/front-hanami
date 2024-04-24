@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { formatDate } from "date-fns";
 // import es from 'date-fns/locale/es'
 
 export const PopUpFecha = ({
@@ -10,6 +11,11 @@ export const PopUpFecha = ({
   searchForm,
   setFechaPopUp,
 }) => {
+  const dateFormat = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
   const handleFunction = (value) => {
     if (onChangeForm) {
       onChangeForm(value);
@@ -47,14 +53,20 @@ export const PopUpFecha = ({
             }}
             onChange={(newValue) =>
               handleFunction({
-                fecha: new Date(newValue?.$d).toLocaleDateString(),
+                fecha: new Date(newValue?.$d).toLocaleDateString(
+                  "es-ES",
+                  dateFormat
+                ),
               })
             }
           />
         ) : (
           <DateCalendar
-            onChange={(newValue) => handleFunction({ fecha: new Date(newValue?.$d)
-              .toLocaleDateString() })}
+            onChange={(newValue) =>
+              handleFunction({
+                fecha: new Date(newValue?.$d).toLocaleDateString(),
+              })
+            }
           />
         )}
       </LocalizationProvider>

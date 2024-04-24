@@ -147,23 +147,23 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
-    console.log(queHacer);
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
       navigate(
-        `/busqueda/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-          flor || ";"
-        }`
+        `/busqueda/${queHacer}/${localizacion || ";"}/${
+          fecha.toLocaleString().replaceAll("/", "-") || ";"
+        }/${flor || ";"}`
       );
     }
     if (queHacer === "Actividades") {
+      console.log(fecha);
       // si no hay datos pues metemos esto ;
       navigate(
-        `/actividades/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-          flor || ";"
-        }`
+        `/actividades/${queHacer}/${localizacion || ";"}/${
+          fecha.toLocaleString().replaceAll("/", "-") || ";"
+        }/${flor || ";"}`
       );
     }
   };
@@ -195,8 +195,12 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
         <div className="w-full flex items-center md:relative">
           <form
             onSubmit={onSubmitSearch}
-            className={`w-full h-full ${searchForm.queHacer === "" || searchForm.queHacer === "Punto_de_Interes"
-            ? `md:grid md:grid-cols-12 md:h-20` : `md:grid md:grid-cols-10 md:h-20`}`}
+            className={`w-full h-full ${
+              searchForm.queHacer === "" ||
+              searchForm.queHacer === "Punto_de_Interes"
+                ? `md:grid md:grid-cols-12 md:h-20`
+                : `md:grid md:grid-cols-10 md:h-20`
+            }`}
           >
             <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
             <div
@@ -361,7 +365,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white"
                   >
                     <div className="flex flex-col px-2">
-                      <h1 className="md:block font-bold text-sm">Que quieres hacer?</h1>
+                      <h1 className="md:block font-bold text-sm">
+                        Que quieres hacer?
+                      </h1>
                       {searchForm.queHacer !== "" ? (
                         <h1>
                           {searchForm.queHacer === "Punto_de_Interes" ? (
