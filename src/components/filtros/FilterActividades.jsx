@@ -172,7 +172,6 @@ const FilterActividades = ({ setFilters, filterData }) => {
             return false
         }
     })
-    console.log(arrObj)
     return toSend
   }
 
