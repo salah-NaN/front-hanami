@@ -48,7 +48,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       localizacion: null,
       fecha: null,
       flor: null,
-      queHacer: "Punto_de_Interes",
+      queHacer: "",
     });
   }, []);
 
@@ -68,12 +68,6 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       queHacer: false,
       fecha: false,
     });
-    // setSearchForm({
-    //   ...searchForm,
-    //   flor: flor,
-    // });
-
-    // setPopUp({ flor: false, queHacer: popUp.queHacer });
   };
 
   const setPopQueHacer = (open) => {
@@ -99,7 +93,6 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       !event.target.closest(".button") &&
       !event.target.closest("." + popUp)
     ) {
-      console.log(popUp);
       setPopUp((upPop) => {
         return { ...upPop, [popUp]: false };
       });
@@ -152,7 +145,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const onSubmitSearch = () => {
     event.preventDefault();
     //desestructuramos el objeto de searchForm
-    const { localizacion, fecha, flor, queHacer } = searchForm;
+    let { localizacion, fecha, flor, queHacer } = searchForm;
+    queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
+    console.log(queHacer);
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
@@ -360,7 +355,18 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                     className="w-full h-full flex justify-between items-center hover:md:shadow-xl hover:xl:shadow-none 
                   hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white"
                   >
-                    <h1 className="px-3 md:block">Que quieres hacer?</h1>
+                    <div className="flex flex-col px-2">
+                      <h1 className="md:block font-bold">Que quieres hacer?</h1>
+                      {searchForm.queHacer !== "" ? (
+                        <h1>
+                          {searchForm.queHacer === "Punto_de_Interes"
+                            ? "Punto de interes"
+                            : "Actividades"}
+                        </h1>
+                      ) : (
+                        <h1 className="text-sm">Elige una opcion</h1>
+                      )}
+                    </div>
                     <div className="lg:hidden xl:flex xl:gap-5">
                       {/* <div className="px-2 flex gap-2 items-center xl:hover:xl:shadow-xl xl:border-none 
                       xl:py-3 xl:rounded-full xl:hover:bg-[#EBEBEB]">
@@ -373,7 +379,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                         <img src="./cometa.png" alt="" className="w-6" />
                       </div> */}
                     </div>
-                    <ButtonSearch />
+                    <buton type="submit">
+                      <ButtonSearch />
+                    </buton>
                   </div>
                 </div>
               </div>
@@ -382,7 +390,11 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   className="absolute bg-white w-full top-[6rem] left-0
                h-fit border-none rounded-lg p-3 queHacer"
                 >
-                  <PopUpQueHacer />
+                  <PopUpQueHacer
+                    setSearchForm={setSearchForm}
+                    searchForm={searchForm}
+                    setPopQueHacer={setPopQueHacer}
+                  />
                 </div>
               ) : (
                 <div className=""></div>
