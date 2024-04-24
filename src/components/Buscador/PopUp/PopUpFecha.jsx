@@ -33,6 +33,18 @@ export const PopUpFecha = ({
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
         {onChangeForm === undefined ? (
           <DateCalendar
+            sx={{
+              width: "100%",
+              display: "flex",
+              alignItems: "start",
+              justifyContent: "center",
+              height: "18rem",
+              padding: "1px 2px 1px 2px",
+              borderRadius: "30px",
+              backgroundColor: "white",
+              paddingX: "1rem",
+              paddingTop: "2rem",
+            }}
             onChange={(newValue) =>
               handleFunction({
                 fecha: new Date(newValue?.$d).toLocaleDateString(),

@@ -12,7 +12,7 @@ export const PopUpQueHacer = () => {
         damping: 30,
       }}
     >
-      <div className="flex justify-between items-center">
+      <div className="">
         <div
           className="cursor-pointer hover:bg-[#EBEBEB] hover:border-none
          hover:rounded-lg px-4 py-2 hover:font-bold flex gap-2 items-center"

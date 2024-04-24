@@ -246,7 +246,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                 </div>
               )}
             </div>
-            <div className="absolute top-[4rem] left-0 buscador">
+            <div className="absolute top-[6rem] left-0 buscador">
               {popUp.buscador ? (
                 <div className="">
                   <PopSearchPlace
@@ -285,8 +285,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               </div>
               {popUp.fecha ? (
                 <div
-                  className="absolute top-[5rem]
-                  fecha bg-white border-none rounded-md "
+                  className="absolute top-[6rem]
+                  fecha"
                 >
                   <PopUpFecha
                     setSearchForm={setSearchForm}
@@ -336,8 +336,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
 
               {popUp?.flor === true ? (
                 <div
-                  className="absolute bg-white w-96 top-[5rem] left-0
-                h-fit border-none rounded-lg p-3"
+                  className="absolute bg-white w-96 top-[6rem] left-0
+                h-fit border-none rounded-2xl p-3"
                 >
                   <PopUpPlanta
                     setSearchForm={setSearchForm}
@@ -357,17 +357,29 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               >
                 <div className="flex h-full justify-between items-center">
                   <div
-                    className="w-full h-full flex justify-between items-center hover:shadow-xl 
-                  hover:border-none hover:rounded-full hover:bg-[#EBEBEB]"
+                    className="w-full h-full flex justify-between items-center hover:md:shadow-xl hover:xl:shadow-none 
+                  hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white"
                   >
-                    <h1 className="px-3">Que quieres hacer?</h1>
+                    <h1 className="px-3 md:block">Que quieres hacer?</h1>
+                    <div className="lg:hidden xl:flex xl:gap-5">
+                      {/* <div className="px-2 flex gap-2 items-center xl:hover:xl:shadow-xl xl:border-none 
+                      xl:py-3 xl:rounded-full xl:hover:bg-[#EBEBEB]">
+                        <h1 className="font-bold">Puntos de interes</h1>
+                        <img src="./campos.png" alt="" className="w-6" />
+                      </div>
+                      <div className="flex gap-2 items-center xl:hover:xl:shadow-xl xl:border-none 
+                      xl:py-3 xl:rounded-full xl:hover:bg-[#EBEBEB] px-2">
+                        <h1 className="font-bold">Actividades</h1>
+                        <img src="./cometa.png" alt="" className="w-6" />
+                      </div> */}
+                    </div>
                     <ButtonSearch />
                   </div>
                 </div>
               </div>
               {popUp?.queHacer ? (
                 <div
-                  className="absolute bg-white w-96 top-[5rem] left-0
+                  className="absolute bg-white w-96 top-[6rem] left-0
                h-fit border-none rounded-lg p-3 queHacer"
                 >
                   <PopUpQueHacer />
