@@ -6,7 +6,7 @@ import { ButtonSearch, BuscadorMobil } from "./";
 export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const navigate = useNavigate();
   const ref = useRef();
-  const url = "http://localhost:3000/api";
+  const url = "http://hanami.westeurope.cloudapp.azure.com/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
 

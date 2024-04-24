@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
 
 //constantes
-const URL = 'http://localhost:3000/api'
+const URL = '/api'
 
 
 // las imágenes de los cerezos
@@ -36,7 +36,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     const iconos = etapas.map(icono => (
         {
             [icono]: L.icon({
-                iconUrl: `http://localhost:3000/img/${icono}.png`,
+                iconUrl: `/api/img/${icono}.png`,
                 iconSize: [28, 28],
                 iconAnchor: [14, 28]
             })
@@ -44,7 +44,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     ))
     // el icono de más de una temporada
     const moreIcon = L.icon({
-        iconUrl: `http://localhost:3000/img/moreIcon.svg`,
+        iconUrl: `/api/img/moreIcon.svg`,
         iconSize: [28, 28],
         iconAnchor: [14, 28]
     })
@@ -107,7 +107,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                       <div>
                         <h6>${punto.nombre}</h6>
                         <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/api/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
                         </div>
                       </div>
                     `)
@@ -127,7 +127,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                       <div>
                         <h6>${punto.nombre}</h6>
                         <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/api/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
                         </div>
                       </div>
                     `)
@@ -190,7 +190,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                       <div>
                         <h6>${punto.nombre}</h6>
                         <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/api/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
                         </div>
                       </div>
                     `)
@@ -210,7 +210,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                       <div>
                         <h6>${punto.nombre}</h6>
                         <div>
-                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="http://localhost:3000/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
+                          ${temporadasCoincidentes.map(t => `<img style='width:40px; margin: auto ' src="/api/img/${t.nombre}.png" alt="${t.nombre}" />`).join('')}
                         </div>
                       </div>
                     `)

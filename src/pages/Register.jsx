@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 // constantes 
-const URL = 'http://localhost:3000/api'
+const URL = '/api'
 
 export const Register = () => {
     const [inputs, setInputs] = useState({ nombre: '', email: '', password: '' })

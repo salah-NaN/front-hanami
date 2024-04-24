@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import MapComponent from './MapComponent'
 //constantes
-const URL = 'http://localhost:3000/api'
+const URL = '/api'
 
 
 // las imágenes de los cerezos

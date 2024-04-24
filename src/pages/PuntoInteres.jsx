@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { NavBar } from "../components";
 // constantes
-const URL = "http://localhost:3000/api";
+const URL = "http://hanami.westeurope.cloudapp.azure.com/api";
 export const PuntoInteres = () => {
   const [puntoInteres, setPuntoInteres] =useState({})
   const {id} = useParams()

@@ -11,7 +11,7 @@ import {
 import { motion, useInView, useAnimation } from "framer-motion";
 
 export const Inicio = () => {
-  let url = "http://localhost:3000/api/";
+  let url = "http://hanami.westeurope.cloudapp.azure.com/api/";
   //Seteamos el valor por defecto que sea null de useRef
   const isSearchBarComponent = useRef(null);
   const [hotTrends, setHotTrends] = useState([]);

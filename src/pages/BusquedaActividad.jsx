@@ -15,7 +15,7 @@ export const  BusquedaActividad = () => {
 
 
   useEffect(() => {
-    const url = "http://localhost:3000/api/";
+    const url = "http://hanami.westeurope.cloudapp.azure.com/api/";
     fetch(url + `actividades/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {

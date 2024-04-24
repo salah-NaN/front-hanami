@@ -6,7 +6,7 @@ import GridTwo from '../components/Imagenes/GridTwo';
 import GridFive from '../components/Imagenes/GridFive';
 
 // constantes
-const URL = 'http://localhost:3000/api'
+const URL = '/api'
 
 const provisionalImageNames = ['camposLavandaMaxFloracion.jpeg', 'camposMaxFloracionLavandaSol.jpeg', 'casa_campo_olivos.jpeg', 'camposMaxFloracionLavandaSol2.webp']
 

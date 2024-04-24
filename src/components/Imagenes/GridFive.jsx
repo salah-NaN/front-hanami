@@ -13,13 +13,13 @@ const GridFive = ({ images }) => {
                 {
                     images && images.map((image, index) => {
                         if (index === 0) {
-                            return <img key={image.id} className="w-full h-full col-span-2 row-span-2 rounded-lg" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
+                            return <img key={image.id} className="w-full h-full col-span-2 row-span-2 rounded-lg" src={`/api/img/${image.nombre}${image.tipo}`} ></img>
                         } else if (index > 0 && index < 4) {
-                            return <img key={image.id} className="w-full h-full  rounded-lg" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
+                            return <img key={image.id} className="w-full h-full  rounded-lg" src={`/api/img/${image.nombre}${image.tipo}`} ></img>
                         } else if (index === 4) {
-                            {/* return <img key={image.id} className="w-full h-full" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img> */ }
+                            {/* return <img key={image.id} className="w-full h-full" src={`/api/img/${image.nombre}${image.tipo}`} ></img> */ }
                             return <div key={image.id} className="b relative  w-full h-full">
-                                <img className="  w-full h-full rounded-lg " src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} >
+                                <img className="  w-full h-full rounded-lg " src={`/api/img/${image.nombre}${image.tipo}`} >
                                 </img>
                                 <div className="absolute size-full top-0 backdrop-blur-sm rounded-lg z-10" ></div>
                                 <div className={` absolute z-20 bottom-9 left-1/2 -translate-x-1/2 translate-y-1/2 text-[#fcfcfc] bg-black/60 px-3 py-1.5 rounded-lg cursor-pointer hover:bg-black/80 hover:underline transition-all duration-100`}

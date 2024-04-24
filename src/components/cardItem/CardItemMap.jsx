@@ -33,7 +33,7 @@ export const CardItemMap = ({ puntos_interes , quehacer }) => {
     }
   }
   // useEffect(() => {
-  //   const url = "http://localhost:3000";
+  //   const url = "";
   //   fetch(url + "/public/")
   //     .then((res) => res)
   //     .then((data) => console.log(data))

@@ -45,7 +45,7 @@ export const CardHotTrendItem = ({ hotTrend }) => {
             <div className={`border-none px-1 py-1 rounded-md`}>
               {
                 <img
-                  // src={`localhost:3000/img/${hotTrend.imagen.nombre}${hotTrend.imagen.tipo}`}
+                  // src={`localhost:3000/api/img/${hotTrend.imagen.nombre}${hotTrend.imagen.tipo}`}
                   alt={hotTrend?.tipo}
                   className="w-7 h-full"
                 />
