@@ -12,7 +12,7 @@ export const PopUpFecha = ({
 }) => {
   const handleFunction = (value) => {
     if (onChangeForm) {
-      onChangeForm(...value);
+      onChangeForm(value);
     } else {
       setSearchForm({ ...searchForm, ...value });
       setFechaPopUp(false);
@@ -41,7 +41,8 @@ export const PopUpFecha = ({
           />
         ) : (
           <DateCalendar
-            onChange={(newValue) => handleFunction({ fecha: newValue?.$d })}
+            onChange={(newValue) => handleFunction({ fecha: new Date(newValue?.$d)
+              .toLocaleDateString() })}
           />
         )}
       </LocalizationProvider>

@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme');
-const {nextui} = require('@nextui-org/theme');
 
 export default {
   content: [
@@ -26,5 +25,4 @@ export default {
       ...defaultTheme.screens,
     },
   },
-  plugins: [nextui()],
 };

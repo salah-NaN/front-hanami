@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { PopUp, PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
-import { Calendar } from "@nextui-org/calendar";
+// import { Calendar } from "@nextui-org/calendar";
+// import {parseDate} from "@internationalized/date";
 
 export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const url = "http://localhost:3000/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
+  // const [value, setValue] = useState(parseDate("2024-03-07"));
+
   const [flores, setFlores] = useState([]);
   const [searchForm, setSearchForm] = useState({
     localizacion: null,
@@ -285,14 +288,10 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   className="absolute top-[5rem]
                   fecha bg-white border-none rounded-md "
                 >
-                  {/* <PopUpFecha
+                  <PopUpFecha
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
                     setFechaPopUp={setFechaPopUp}
-                  /> */}
-                  <Calendar
-                    aria-label="Date (Page Behaviour)"
-                    pageBehavior="single"
                   />
                 </div>
               ) : null}

@@ -58,7 +58,6 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
   }, [clickChoice]);
 
   const onChangeForm = (data) => {
-    console.log(data)
     setFormData({ ...formData, ...data });
   };
 
@@ -193,82 +192,117 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
               },
             }}
           >
-            <motion.div className="shadow-xl">
-              <motion.div className="border-none shadow-md pb-2">
-                <Accordion
-                  defaultExpanded
-                  expanded={expanded === "panel1"}
-                  onChange={handleChange("panel1")}
-                  className="border rounded-xl"
-                >
-                  <AccordionSummary
-                    aria-controls="panel1bh-content"
-                    expandIcon={<IconDondeIr />}
-                    id="panel1bh-header"
-                    className="border border-black"
-                  >
-                    <h1 className="text-bold text-xl py-2">
-                      ¿Donde quieres ir?
-                    </h1>
-                  </AccordionSummary>
-                  <AccordionDetails className="border-none">
-                    <PopSearchPlace
-                      openInputSearch={openInputSearch}
-                      openInput={openInput}
-                      onChangeForm={onChangeForm}
-                      searchPc={""}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </motion.div>
-
-              <motion.div className="border shadow-md">
-                <Accordion
-                  expanded={expanded === "panel2"}
-                  onChange={handleChange("panel2")}
-                  className="border-none rounded-xl"
-                >
-                  <AccordionSummary
-                    aria-controls="panel2bh-content"
-                    id="panel2bh-header"
-                    className="border border-black rounded-xl"
-                    expandIcon={<IconFecha />}
-                  >
-                    <h1 className="text-xl text-bold py-2">
-                      ¿Cuando quieres ir?
-                    </h1>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <PopUpFecha onChangeForm={onChangeForm} />
-                  </AccordionDetails>
-                </Accordion>
-              </motion.div>
-              {clickChoice.punto_interes ? (
-                <motion.div
-                  className="border-none pt-2 shadow-md rounded-lg"
-                  initial={{ scale: 0 }}
-                  animate={{ rotate: 0, scale: 1 }}
-                >
+            <motion.div className="h-full">
+              <motion.div className="shadow-xl">
+                <motion.div className="border-none shadow-md pb-2">
                   <Accordion
-                    expanded={expanded === "panel3"}
-                    onChange={handleChange("panel3")}
+                    defaultExpanded
+                    expanded={expanded === "panel1"}
+                    onChange={handleChange("panel1")}
+                    className="border rounded-xl"
                   >
                     <AccordionSummary
-                      expandIcon={<IconPLanta />}
-                      aria-controls="panel3bh-content"
-                      id="panel3bh-header"
-                      className="border border-black "
+                      aria-controls="panel1bh-content"
+                      expandIcon={<IconDondeIr />}
+                      id="panel1bh-header"
+                      className="border border-black"
                     >
-                      <h1 className="text-xl text-bold py-2">
-                        ¿Que plantas quieres ver?
-                      </h1>
+                      {formData.localizacion === undefined ? (
+                        <div className="">
+                          <h1 className="text-bold text-xl py-2">
+                            ¿Donde quieres ir?
+                          </h1>
+                        </div>
+                      ) : (
+                        <div className="">
+                          <h1 className="text-bold text-xl">
+                            {formData.localizacion}
+                          </h1>
+                          <h1 className="text-[15px] py-2">
+                            ¿Donde quieres ir?
+                          </h1>
+                        </div>
+                      )}
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <PopUpPlanta onChangeForm={onChangeForm} />
+                    <AccordionDetails className="border-none">
+                      <PopSearchPlace
+                        openInputSearch={openInputSearch}
+                        openInput={openInput}
+                        onChangeForm={onChangeForm}
+                        searchPc={""}
+                      />
                     </AccordionDetails>
                   </Accordion>
                 </motion.div>
-              ) : null}
+
+                <motion.div className="border shadow-md">
+                  <Accordion
+                    expanded={expanded === "panel2"}
+                    onChange={handleChange("panel2")}
+                    className="border-none rounded-xl"
+                  >
+                    <AccordionSummary
+                      aria-controls="panel2bh-content"
+                      id="panel2bh-header"
+                      className="border border-black rounded-xl"
+                      expandIcon={<IconFecha />}
+                    >
+                      {formData.fecha === null ? (
+                        <h1 className="text-xl text-bold py-2">
+                          ¿Cuando quieres ir?
+                        </h1>
+                      ) : (
+                        <div className="">
+                          <h1 className="text-xl font-bold">{formData.fecha}</h1>
+                          <h1 className="text-sm py-2">¿Cuando quieres ir?</h1>
+                        </div>
+                      )}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <div className="flex justify-center">
+                        <PopUpFecha onChangeForm={onChangeForm} />
+                      </div>
+                    </AccordionDetails>
+                  </Accordion>
+                </motion.div>
+                {clickChoice.punto_interes ? (
+                  <motion.div
+                    className="border-none pt-2 shadow-md rounded-lg"
+                    initial={{ scale: 0 }}
+                    animate={{ rotate: 0, scale: 1 }}
+                  >
+                    <Accordion
+                      expanded={expanded === "panel3"}
+                      onChange={handleChange("panel3")}
+                    >
+                      <AccordionSummary
+                        expandIcon={<IconPLanta planta={formData.flor} />}
+                        aria-controls="panel3bh-content"
+                        id="panel3bh-header"
+                        className="border border-black "
+                      >
+                        {formData.eleccion === undefined ? (
+                          <h1 className="text-xl text-bold py-2">
+                            ¿Que plantas quieres ver?
+                          </h1>
+                        ) : (
+                          <div className="">
+                            <h1 className="text-xl font-bold">
+                              {formData.flor}
+                            </h1>
+                            <h1 className="text-[15px] py-2">
+                              ¿Que plantas quieres ver?
+                            </h1>
+                          </div>
+                        )}
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <PopUpPlanta onChangeForm={onChangeForm} />
+                      </AccordionDetails>
+                    </Accordion>
+                  </motion.div>
+                ) : null}
+              </motion.div>
             </motion.div>
           </motion.div>
         </form>

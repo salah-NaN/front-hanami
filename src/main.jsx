@@ -12,12 +12,9 @@ import Actividades from "./pages/Actividades.jsx";
 import Mapa from "./components/mapa/Mapa.jsx";
 import Busqueda from "./pages/Busqueda.jsx";
 import BusquedaActividad from "./pages/BusquedaActividad.jsx";
-import { NextUIProvider } from "@nextui-org/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <NextUIProvider>
     <App />
-  </NextUIProvider>
 );
 
 //     <Route path="/" element={<App />}>

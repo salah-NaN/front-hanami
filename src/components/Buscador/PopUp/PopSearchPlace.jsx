@@ -70,8 +70,8 @@ export const PopSearchPlace = ({
           searchPc === "searchPc" ? "md:p-3" : "md:mt-0"
         }`}
       >
-        <h1 className="text-bold text-md">Elige una provincia</h1>
-        <div className="grid grid-cols-4 gap-3 md:gap-1 pt-5">
+        <h1 className="md:text-bold md:text-md text-[20px]">Elige una provincia</h1>
+        <div className="grid grid-cols-2 md:grid md:grid-cols-4 gap-3 md:gap-1 pt-5">
           <div
             className="md:w-full w-full border rounded-xl px-3 py-2 bg-slate-50 cursor-pointer hover:bg-[#EBEBEB]"
             onClick={() => handleFunction({ localizacion: "Barcelona" })}
