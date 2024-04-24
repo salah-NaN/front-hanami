@@ -12,9 +12,11 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const url = "http://localhost:3000/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
+  const [puntosDeInteres, setPuntosDeInteres] = useState([]);
+  const [foundWord, setFoundWord] = useState([]);
   // const [value, setValue] = useState(parseDate("2024-03-07"));
 
-  const [flores, setFlores] = useState([]);
+  // const [flores, setFlores] = useState([]);
   const [searchForm, setSearchForm] = useState({
     localizacion: null,
     fecha: [],
@@ -32,15 +34,53 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const [isCheck, setIsCheck] = useState("");
 
   useEffect(() => {
-    //Llamamos a la api para recoger las flores que tiene la base de datos, y poder construir el select
-    fetch(url + "/flores")
+    fetch(url + "/puntos_interes")
       .then((res) => res.json())
-      //seteamos las flores en el estado que sera un array de las flores
-      .then((flores) => {
-        setFlores(flores);
-      })
+      .then((puntos_interes) => setPuntosDeInteres(puntos_interes))
       .catch((error) => console.log(error));
+    // //Llamamos a la api para recoger las flores que tiene la base de datos, y poder construir el select
+    // fetch(url + "/flores")
+    //   .then((res) => res.json())
+    //   //seteamos las flores en el estado que sera un array de las flores
+    //   .then((flores) => {
+    //     setFlores(flores);
+    //   })
+    //   .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    const { localizacion } = searchForm;
+    if (localizacion === "") {
+      setFoundWord([]);
+    }
+
+    console.log(localizacion);
+    let arr = [];
+    puntosDeInteres.map((item) => {
+      console.log(item.poblacion);
+      if (localizacion) {
+        if (
+          item?.poblacion?.toLowerCase().includes(localizacion.toLowerCase()) ||
+          item?.poblacion?.toUpperCase().includes(localizacion.toUpperCase())
+        ) {
+          arr.push({ poblacion: item?.poblacion, provincia: item?.provincia });
+        }
+      }
+    });
+
+    /* Hacemos el new set para que no hayan duplicados.
+        Luego pues convertimos los datos del array arr para pasarlos a stringify y apartir de ahí
+        quitar los datos duplicados
+    */
+    arr = new Set(
+      arr.map((poblacion) =>
+        JSON.stringify({ poblacion: poblacion.poblacion, provincia: poblacion.provincia })
+      )
+    );
+    /* Creamos un nuevo array y parseamos el json a un objeto */
+    const poblacionProvinciaUnicos = Array.from(arr).map((str) => JSON.parse(str));
+    setFoundWord([...poblacionProvinciaUnicos]);
+  }, [searchForm.localizacion]);
 
   useEffect(() => {
     //Seteamos los valores por defecto de el SearchForm
@@ -249,6 +289,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               {popUp.buscador ? (
                 <div className="">
                   <PopSearchPlace
+                    foundWord={foundWord}
                     searchPc={"searchPc"}
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
