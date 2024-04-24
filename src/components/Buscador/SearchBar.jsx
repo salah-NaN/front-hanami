@@ -379,7 +379,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               </div>
               {popUp?.queHacer ? (
                 <div
-                  className="absolute bg-white w-96 top-[6rem] left-0
+                  className="absolute bg-white w-full top-[6rem] left-0
                h-fit border-none rounded-lg p-3 queHacer"
                 >
                   <PopUpQueHacer />
