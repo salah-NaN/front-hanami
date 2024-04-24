@@ -71,17 +71,17 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
     if (eleccion === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
       navigate(
-        `/busqueda/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-          flor || ";"
-        }`
+        `/busqueda/${queHacer}/${localizacion || ";"}/${
+          fecha?.toLocaleString().replaceAll("/", "-") || ";"
+        }/${flor || ";"}`
       );
     }
     if (queHacer === "Actividades") {
       // si no hay datos pues metemos esto ;
       navigate(
-        `/actividades/${queHacer}/${localizacion || ";"}/${fecha || ";"}/${
-          flor || ";"
-        }`
+        `/actividades/${queHacer}/${localizacion || ";"}/${
+          fecha?.toLocaleString().replaceAll("/", "-") || ";"
+        }/${flor || ";"}`
       );
     }
   };
@@ -253,7 +253,9 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                         </h1>
                       ) : (
                         <div className="">
-                          <h1 className="text-xl font-bold">{formData.fecha}</h1>
+                          <h1 className="text-xl font-bold">
+                            {formData.fecha}
+                          </h1>
                           <h1 className="text-sm py-2">¿Cuando quieres ir?</h1>
                         </div>
                       )}

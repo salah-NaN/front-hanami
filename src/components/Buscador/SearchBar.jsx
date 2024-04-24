@@ -153,16 +153,15 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
       // si no hay datos pues metemos esto ;
       navigate(
         `/busqueda/${queHacer}/${localizacion || ";"}/${
-          fecha.toLocaleString().replaceAll("/", "-") || ";"
+          fecha?.toLocaleString().replaceAll("/", "-") || ";"
         }/${flor || ";"}`
       );
     }
     if (queHacer === "Actividades") {
-      console.log(fecha);
       // si no hay datos pues metemos esto ;
       navigate(
         `/actividades/${queHacer}/${localizacion || ";"}/${
-          fecha.toLocaleString().replaceAll("/", "-") || ";"
+          fecha?.toLocaleString().replaceAll("/", "-") || ";"
         }/${flor || ";"}`
       );
     }

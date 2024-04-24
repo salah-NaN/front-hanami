@@ -18,7 +18,9 @@ export const Busqueda = () => {
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
-    fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    if(fecha !== ';'){
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
 
     fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
