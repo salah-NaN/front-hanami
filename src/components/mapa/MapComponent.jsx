@@ -159,7 +159,6 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
         }
     }, [puntosInteres])
 
-
     // distribución de los markers en cada punto del mapa
     useEffect(() => {
         if (!primerRenderv2) {
@@ -181,8 +180,19 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                 const temporadasCoincidentes = punto.temporadas
                 .filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
                 // filtrando por tipo de flor 
-                .filter()
-                console.log(selectedRadio)
+                .filter(t => {
+                    let response
+                    
+                    if(selectedRadio !== 'todasFlores' && !!selectedRadio){
+                        response = t.flore.especie.toLowerCase() === selectedRadio.toLowerCase()
+                    } else {
+                        response = true
+                    }
+
+                    return response
+                })
+
+
                 // distinción de si 0 temporadas, 1 o más
 
                 return temporadasCoincidentes.length === 0
@@ -234,16 +244,10 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
                     )
             })
 
-
-            //   return () => {
-            //     ourMap.off()
-            //     ourMap.remove()
-            // }
-
         } else {
             setPrimerRenderv2(false)
         }
-    }, [fechaSlider])
+    }, [fechaSlider, selectedRadio])
 
     // funciones
     function fechaInluidaEnRangoFechas(fechaDeterminada, fechaInicial, fechaFinal) {

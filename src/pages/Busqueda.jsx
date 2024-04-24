@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { CardItemMap, NavBar } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
@@ -18,8 +18,31 @@ export const Busqueda = () => {
   const [checkedFilters, setCheckedFilters] = useState([])
   const [cambio, setCambio] = useState(false)
   const [mapSizeFull, setMapSizeFull] = useState(false)
+  const [posicionScroll, setPosicionScroll] = useState(window.scrollY)
+  const redirect = useNavigate()
 
 
+  useEffect(() => {
+    
+    window.addEventListener('onscroll', () => {
+      setPosicionScroll(window.scrollY)
+    })
+
+
+    return () => {
+      window.addEventListener('onscroll', () => {
+        setPosicionScroll(window.scrollY)
+      })
+    }
+  }, [])
+
+  // constantes 
+ 
+  
+  useEffect(() => {
+    console.log(posicionScroll)
+
+  },[posicionScroll])
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
@@ -55,7 +78,6 @@ export const Busqueda = () => {
     //   const test = filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))
     // }
   }, [checkedFilters])
-
 
 
   return (
@@ -112,25 +134,37 @@ export const Busqueda = () => {
 
 
         {/* mapa */}
-        <div className={`xm:h-[550px]
+        <div className={`fixed w-full h-[300px]
+        xm:h-[450px]
         xp:h-[630px]
-        sm:h-[750px]
-        fixed w-full
-          lg:${mapSizeFull ? 'w-full' : 'w-5/12'} lg:fixed lg:top-[75px] lg:h-dvh lg:z-20
-          xl:${mapSizeFull ? 'w-full' : 'w-1/3'}`}>
+        sm:h-[500px]
+        md:h-[700px]
+        ${mapSizeFull ? 'lg:w-full' : 'lg:w-5/12'} lg:w-5/12 lg:fixed lg:top-[75px] lg:h-dvh lg:z-20
+        ${mapSizeFull ? 'lg:w-full' : 'xl:w-1/3'}`}>
           {filterData && (
             <MapaSinSlider
               puntosInteres={checkedFilters.length === 0 ? filterData : filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
               setPuntosInteres={setFilterData}
             />
           )}
-          {/* boton expandir mapa */}
-          <img className="hidden 
-              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:left-3 lg:block lg:rounded-full lg:shadow-lg lg:hover:bg-[#ededed] lg:absolute lg:top-[9px] lg:cursor-pointer"
+
+          {/* boton expandir mapa en tamaño lg en adelante*/}
+          <img className="hidden
+              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:left-3 lg:block lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] lg:absolute lg:top-[9px] lg:cursor-pointer"
             src={mapSizeFull ? arrowRight : arrow}
             onClick={() => setMapSizeFull(!mapSizeFull)}
           ></img>
         </div>
+
+        {/* boton ir al mapa en tamaño sm hasta md*/}
+        {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
+        <a href="#"
+        className={` flex justify-between items-center px-2.5 py-1.5 fixed z-30 bottom-12 left-1/2 -translate-x-1/2 bg-red-700 
+          lg:hidden`}>
+          <p>Mostrar mapa</p>
+          <img className="size-5"
+            src={arrowRight} ></img>
+        </a>
 
 
 

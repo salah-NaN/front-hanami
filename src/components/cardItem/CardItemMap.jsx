@@ -59,12 +59,13 @@ export const CardItemMap = ({ puntos_interes, quehacer }) => {
         backgroundImage: `url(${puntos_interes.imagen})`,
         backgroundSize: `cover`,
       }}
+      onClick={()=>redirectQueHacer()}
     >
 
       <div className="flex flex-col px-5">
         <div className={`w-full h-full`}>
           <img src={`http://localhost:3000/img/${puntos_interes?.imagenes[0]?.nombre}${puntos_interes?.imagenes[0]?.tipo}`}
-            className="rounded-lg size-full" />
+            className="rounded-lg size-full"/>
         </div>
         <h4 className="text-[17px] mb-1 mt-3 font-semibold">
           {puntos_interes.nombre}
