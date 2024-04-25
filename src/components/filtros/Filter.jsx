@@ -6,7 +6,7 @@ import { useRef, useState, useEffect, } from "react";
 
 
 
-const Filter = ({ setFilters, filterData }) => {
+export const Filter = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
   const [inputs, setInputs] = useState([]);
   // controlador para definir si el filtro es visible o no

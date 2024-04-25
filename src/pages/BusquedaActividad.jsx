@@ -10,7 +10,7 @@ import FilterCategoria from "../components/filtros/FilterCategoria";
 import CardActividades from "../components/cards/CardActividades"
 
 export const  BusquedaActividad = () => {
-  const { quehacer, localizacion, fecha, flor } = useParams();
+  let { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -20,6 +20,9 @@ export const  BusquedaActividad = () => {
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
+    if (fecha !== ";") {
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
     fetch(url + `actividades/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
