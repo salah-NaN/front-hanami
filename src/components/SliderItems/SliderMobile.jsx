@@ -19,7 +19,7 @@ export const SliderMobile = ({puntosInteresActividades}) => {
         <div className="">
           {puntosInteresActividades.map((e) => e.nombre)}
           {puntosInteresActividades?.map((puntoInteresActividad) => (
-            <div key={puntoInteresActividad?.queEs}>
+            <div key={puntoInteresActividad?.id}>
               <div className="bg-red-500 w-full">
                 <SwiperSlide
                   className="border-none rounded-lg bg-sky-400"

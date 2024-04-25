@@ -4,14 +4,15 @@ import { CardItemMap, NavBar } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/filtros/Filter";
+import Filter from "../components/Filter";
+import { format, parse } from "date-fns";
+import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
 import arrow from '../assets/nav-arrow-left2.svg'
 import arrowRight from '../assets/nav-arrow-right.svg'
 
-
 export const Busqueda = () => {
-  const { quehacer, localizacion, fecha, flor } = useParams();
+  let { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -37,15 +38,13 @@ export const Busqueda = () => {
   }, [])
 
   // constantes 
- 
-  
-  useEffect(() => {
-    console.log(posicionScroll)
-
-  },[posicionScroll])
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
+    if(fecha !== ';'){
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
+
     fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
@@ -59,74 +58,21 @@ export const Busqueda = () => {
         console.log("hola");
       } */
   useEffect(() => {
-    setCambio(!cambio)
-  }, [filters])
+    setCambio(!cambio);
+  }, [filters]);
 
   useEffect(() => {
-    setCheckedFilters(filters?.filter(f => f.seteado == true).map(f => f.temporada))
-  }, [cambio])
+    setCheckedFilters(
+      filters?.filter((f) => f.seteado == true).map((f) => f.temporada)
+    );
+  }, [cambio]);
 
   /* 
   pi => pi.temporadas.map(t=>t.nombre)
   
   */
-
-  useEffect(() => {
-    // testeo para ver si el filtro funciona
-    // if (checkedFilters.length > 0) {
-    //   checkedFilters.map(cf => cf)
-    //   const test = filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))
-    // }
-  }, [checkedFilters])
-
-
   return (
-
-    // <div className="mt-20" >
-    //   {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
-
-    //   <div className="flex flex-col rounded-md
-    //     md:flex-row-reverse">
-
-
-    //     {/* mapa */}
-    //     <div className="relative w-full">
-    //       <div className="fixed w-10/12 left-1/2 -translate-x-1/2 h-96 z-10 right-0">
-    //         {filterData && (
-    //           <MapaSinSlider
-    //             puntosInteres={checkedFilters.length === 0 ? filterData : filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
-    //             setPuntosInteres={setFilterData}
-    //           />
-    //         )}
-    //       </div>
-    //     </div>
-
-
-
-    //     {/* cards */}
-    //     <div className="absolute z-20 top-1/2  flex flex-col bg-red-500 rounded-lg w-full ">
-    //       {
-    //         checkedFilters.length === 0
-    //           ?
-    //           filterData && filterData?.map((puntos_interes) => (
-    //             <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
-    //           ))
-    //           :
-    //           filterData && filterData?.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre))).map(puntoInteres => (
-    //             <CardItemMap puntos_interes={puntoInteres} quehacer={quehacer} />
-    //           ))
-    //       }
-
-    //     </div>
-
-
-
-    //   </div>
-
-
-    // </div>
     <>
-
       <NavBar />
       {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
       <div className=" mt-[66px] flex flex-col rounded-md
@@ -195,10 +141,6 @@ export const Busqueda = () => {
 
 
     </>
-
   );
 };
-
-
-
 export default Busqueda;

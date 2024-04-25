@@ -103,7 +103,6 @@ export const SliderItems = ({
         </div>
       </div>
       <SliderMobile puntosInteresActividades={puntosInteresActividades} />
-
       <SliderPc puntosInteresActividades={puntosInteresActividades} />
     </div>
   );
