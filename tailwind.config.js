@@ -25,4 +25,5 @@ export default {
       ...defaultTheme.screens,
     },
   },
+  plugins: [],
 };

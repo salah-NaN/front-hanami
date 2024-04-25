@@ -7,7 +7,7 @@ const SwiperComponent = ({ images }) => {
 
   return (
     <>
-      <div className="flex md:hidden border-none py-10 w-full">
+      <div className="flex md:hidden border-none w-full">
         <Swiper
           effect={"cards"}
           grabCursor={true}
@@ -22,7 +22,7 @@ const SwiperComponent = ({ images }) => {
                     className="border-none rounded-lg "
                     key={image.id}
                   >
-                    <img className="w-full " src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
+                    <img className="w-full" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
                   </SwiperSlide>
                 </div>
               </div>

@@ -19,7 +19,7 @@ const GridTwo = ({ images }) => {
                         return <div key={image.id} className="b relative w-full h-52">
                             <img  className=" w-full h-52 rounded-lg " src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} >
                             </img>
-                            <div className="absolute size-full top-0 backdrop-blur-sm rounded-lg z-10" ></div>
+                            <div className="absolute size-full top-0 backdrop-blur-sm rounded-lg z-10 hover:backdrop-blur-0 transition-all duration-300" ></div>
                             <div className={` absolute z-20 bottom-9 left-1/2 -translate-x-1/2 translate-y-1/2 text-[#fcfcfc] bg-black/60 px-3 py-1.5 rounded-lg cursor-pointer hover:bg-black/80 hover:underline transition-all duration-200`} 
                             onClick={() => setModalVisible(!modalVisible)}>
                                 Ver más

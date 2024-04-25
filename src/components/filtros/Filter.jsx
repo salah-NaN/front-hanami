@@ -157,7 +157,16 @@ const Filter = ({ setFilters, filterData }) => {
       })
       return x
     })
-    return arrObj
+    const definitive = []
+    const toSend = arrObj.filter(o => {
+        if(!definitive.includes(o.temporada)){
+          definitive.push(o.temporada)
+          return true
+        } else {
+            return false
+        }
+    })
+    return toSend
   }
 
   // funcion para modificar el state del checkbox de cada input

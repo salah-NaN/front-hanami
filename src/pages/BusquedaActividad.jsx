@@ -4,13 +4,17 @@ import { CardItemMap } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/Filter";
+import Filter from "../components/filtros/Filter";
+import FilterActividades from "../components/filtros/FilterActividades";
+import FilterCategoria from "../components/filtros/FilterCategoria";
+import CardActividades from "../components/cards/CardActividades"
 
 export const  BusquedaActividad = () => {
   const { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [filtersType, setFiltersType] = useState([]);
 
 
 
@@ -24,29 +28,55 @@ export const  BusquedaActividad = () => {
         .catch((error) => console.log(error));
     }, []);
     
+  // useEffect(() => {
+  // }, [filterData])
+
   useEffect(() => {
-    console.log('cosa',filters)
+    // console.log(filterData)
   }, [filters])
+
+  useEffect(() => {
+    console.log(filtersType)
+    const b = filterData.filter(a => a.categoria)
+    console.log(filterData)
+  }, [filtersType])
   
 
   return (
 
       <div className="mt-20">
         <div className="w-11/12 mx-auto border-none">
-{/*         <Filter setFilters={setFilters} filterData={filterData} />
- */}          <div className="flex flex-col border-none rounded-md">
+          <FilterActividades setFilters={setFilters} filterData={filterData} />
+          <FilterCategoria setFiltersType={setFiltersType} filterData={filterData}/>
+          <div className="flex flex-col border-none rounded-md">
             <div className="">
               <div className="grid grid-cols-1 max-auto overflow-y-auto h-[600px]">
-                 {filterData?.slice(0, 2).map((puntos_interes) => (
+                 {/* {filterData?.slice(0, 2).map((puntos_interes) => (
                   <div className="w-full h-full overscroll-contain">
                     <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                ))}
-                {filterData?.slice(2, 6).map((puntos_interes) => (
+                ))} */}
+                {
+                  filters.length === 0 && filtersType.length === 0
+                  ?
+                  filterData?.map((puntos_interes) => (
                   <div className="w-full h-full">
-                    <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
+                    <CardActividades puntos_interes={puntos_interes} quehacer={quehacer} />
                   </div>
-                ))} 
+                ))
+                : 
+                filterData && filterData?.filter(pi => {
+                  return filters.length !== 0 ? filters.includes(pi.temporada.nombre) : true
+                })
+                .filter(pi => {
+                  return filtersType.length !== 0 ? filtersType.includes(pi.categoria) : true 
+                })
+                .map(pi => (
+                  <div className="w-full h-full">
+                    <CardActividades puntos_interes={pi} quehacer={quehacer} />
+                  </div>
+                )) 
+                } 
               </div>
             </div>
 
