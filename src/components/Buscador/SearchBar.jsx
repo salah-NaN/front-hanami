@@ -48,13 +48,18 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     //   .catch((error) => console.log(error));
   }, []);
 
+  //Buscador input
   useEffect(() => {
     const { localizacion } = searchForm;
     if (localizacion === "") {
       setFoundWord([]);
     }
 
-    console.log(localizacion);
+    setSearchForm({
+      ...searchForm,
+      provincia: null,
+    });
+
     let arr = [];
     puntosDeInteres.map((item) => {
       console.log(item.poblacion);
@@ -74,11 +79,16 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     */
     arr = new Set(
       arr.map((poblacion) =>
-        JSON.stringify({ poblacion: poblacion.poblacion, provincia: poblacion.provincia })
+        JSON.stringify({
+          poblacion: poblacion.poblacion,
+          provincia: poblacion.provincia,
+        })
       )
     );
     /* Creamos un nuevo array y parseamos el json a un objeto */
-    const poblacionProvinciaUnicos = Array.from(arr).map((str) => JSON.parse(str));
+    const poblacionProvinciaUnicos = Array.from(arr).map((str) =>
+      JSON.parse(str)
+    );
     setFoundWord([...poblacionProvinciaUnicos]);
   }, [searchForm.localizacion]);
 
@@ -257,11 +267,16 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                   <div className="px-7">
                     <h1 className="font-bold text-md">Destino</h1>
                     <h1 className="text-sm">
-                      {searchForm.localizacion === null ? (
+                      {searchForm.localizacion === null &&
+                      searchForm?.provincia === undefined ? (
                         `Elige un destino`
                       ) : (
                         <h1 className="font-[900] text-xl">
-                          {searchForm?.localizacion}
+                          {searchForm?.localizacion != null
+                            ? searchForm.localizacion
+                            : searchForm?.provincia !== undefined
+                            ? searchForm?.provincia
+                            : null}
                         </h1>
                       )}
                     </h1>
@@ -277,6 +292,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                       })
                     }
                     placeholder="Busca la ciudad"
+                    value={searchForm?.localizacion}
                     className={`w-full h-20 focus:outine-none border rounded-full border-[#c5c5c5] bg-[#ffffff]
                       lg:border-none placeholder:px-0 px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] 
                       focus:ring-0 focus:outline-none focus:bg-white`}
