@@ -268,13 +268,13 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                     <h1 className="font-bold text-md">Destino</h1>
                     <h1 className="text-sm">
                       {searchForm.localizacion === null &&
-                      searchForm?.provincia === undefined ? (
+                      searchForm?.provincia === undefined && searchForm.localizacion === null || searchForm.localizacion === "" && searchForm?.provincia === null ? (
                         `Elige un destino`
                       ) : (
                         <h1 className="font-[900] text-xl">
-                          {searchForm?.localizacion != null
-                            ? searchForm.localizacion
-                            : searchForm?.provincia !== undefined
+                          {searchForm?.localizacion !== ""
+                            ? searchForm?.localizacion
+                            : searchForm?.provincia !== null
                             ? searchForm?.provincia
                             : null}
                         </h1>
@@ -292,7 +292,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                       })
                     }
                     placeholder="Busca la ciudad"
-                    value={searchForm?.localizacion}
+                    value={searchForm?.localizacion || searchForm?.provincia}
                     className={`w-full h-20 focus:outine-none border rounded-full border-[#c5c5c5] bg-[#ffffff]
                       lg:border-none placeholder:px-0 px-5 hover:border-none hover:rounded-full hover:bg-[#EBEBEB] 
                       focus:ring-0 focus:outline-none focus:bg-white`}

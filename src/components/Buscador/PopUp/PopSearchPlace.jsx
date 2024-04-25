@@ -72,7 +72,8 @@ export const PopSearchPlace = ({
         <div className="h-[15rem]">
           <div className="p-2 overflow-auto h-full">
             {foundWord?.map((words) => (
-              <div className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] p-3 cursor-pointer overflow-hidden">
+              <div className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] p-3 cursor-pointer overflow-hidden"
+              onClick={() => handleFunction({localizacion: words?.poblacion})}>
                 <div className="flex items-center gap-2">
                   <div className="bg-[#DDDDDD] border-none rounded-md p-2">
                     <img src="./location.png" alt="" className="w-7" />
