@@ -4,7 +4,7 @@ import { CardItemMap, NavBar } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/Filter";
+import Filter from "../components/filtros/Filter";
 import { format, parse } from "date-fns";
 import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
