@@ -4,14 +4,15 @@ import { CardItemMap, NavBar } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import Filter from "../components/filtros/Filter";
+import Filter from "../components/Filter";
+import { format, parse } from "date-fns";
+import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
 import arrow from '../assets/nav-arrow-left2.svg'
 import arrowRight from '../assets/nav-arrow-right.svg'
 
-
 export const Busqueda = () => {
-  const { quehacer, localizacion, fecha, flor } = useParams();
+  let { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -40,6 +41,10 @@ export const Busqueda = () => {
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
+    if(fecha !== ';'){
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
+
     fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
@@ -50,17 +55,18 @@ export const Busqueda = () => {
   }, []);
 
   useEffect(() => {
-    setCambio(!cambio)
-  }, [filters])
+    setCambio(!cambio);
+  }, [filters]);
 
   useEffect(() => {
-    setCheckedFilters(filters?.filter(f => f.seteado == true).map(f => f.temporada))
-  }, [cambio])
+    setCheckedFilters(
+      filters?.filter((f) => f.seteado == true).map((f) => f.temporada)
+    );
+  }, [cambio]);
 
   return (
 
     <>
-
       <NavBar />
       {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
       <div className=" mt-[66px] flex flex-col rounded-md
@@ -123,7 +129,4 @@ export const Busqueda = () => {
     </>
   );
 };
-
-
-
 export default Busqueda;

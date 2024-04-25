@@ -45,7 +45,7 @@ export const SliderPc = ({ puntosInteresActividades }) => {
         }}
       >
         {puntosInteresActividades.map((puntosInteresAct) => (
-          <div key={puntosInteresAct.queEs}>
+          <div key={puntosInteresAct.id + 8000}>
             <SwiperSlide
               className=""
               onClick={() =>
