@@ -37,12 +37,6 @@ export const Busqueda = () => {
   }, [])
 
   // constantes 
- 
-  
-  useEffect(() => {
-    console.log(posicionScroll)
-
-  },[posicionScroll])
 
   useEffect(() => {
     const url = "http://localhost:3000/api/";
@@ -55,9 +49,6 @@ export const Busqueda = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  /*     if(filterData.map(fd => fd.temporadas.map(t => t.nombre)) == filters?.filter(f=>f.seteado == true).map(f => f.temporada)){
-        console.log("hola");
-      } */
   useEffect(() => {
     setCambio(!cambio)
   }, [filters])
@@ -66,65 +57,8 @@ export const Busqueda = () => {
     setCheckedFilters(filters?.filter(f => f.seteado == true).map(f => f.temporada))
   }, [cambio])
 
-  /* 
-  pi => pi.temporadas.map(t=>t.nombre)
-  
-  */
-
-  useEffect(() => {
-    // testeo para ver si el filtro funciona
-    // if (checkedFilters.length > 0) {
-    //   checkedFilters.map(cf => cf)
-    //   const test = filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))
-    // }
-  }, [checkedFilters])
-
-
   return (
 
-    // <div className="mt-20" >
-    //   {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
-
-    //   <div className="flex flex-col rounded-md
-    //     md:flex-row-reverse">
-
-
-    //     {/* mapa */}
-    //     <div className="relative w-full">
-    //       <div className="fixed w-10/12 left-1/2 -translate-x-1/2 h-96 z-10 right-0">
-    //         {filterData && (
-    //           <MapaSinSlider
-    //             puntosInteres={checkedFilters.length === 0 ? filterData : filterData.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre)))}
-    //             setPuntosInteres={setFilterData}
-    //           />
-    //         )}
-    //       </div>
-    //     </div>
-
-
-
-    //     {/* cards */}
-    //     <div className="absolute z-20 top-1/2  flex flex-col bg-red-500 rounded-lg w-full ">
-    //       {
-    //         checkedFilters.length === 0
-    //           ?
-    //           filterData && filterData?.map((puntos_interes) => (
-    //             <CardItemMap puntos_interes={puntos_interes} quehacer={quehacer} />
-    //           ))
-    //           :
-    //           filterData && filterData?.filter(pi => pi.temporadas.find(t => checkedFilters.includes(t.nombre))).map(puntoInteres => (
-    //             <CardItemMap puntos_interes={puntoInteres} quehacer={quehacer} />
-    //           ))
-    //       }
-
-    //     </div>
-
-
-
-    //   </div>
-
-
-    // </div>
     <>
 
       <NavBar />
@@ -166,9 +100,6 @@ export const Busqueda = () => {
             src={arrowRight} ></img>
         </a>
 
-
-
-
         {/* cards */}
         <div className={`pt-10 absolute z-10 top-1/2 w-full grid grid-cols-1 gap-y-9 bg-[#fafafa] rounded-lg
           md:grid-cols-2 md:gap-x-3
@@ -188,14 +119,8 @@ export const Busqueda = () => {
           }
 
         </div>
-
-
-
       </div>
-
-
     </>
-
   );
 };
 
