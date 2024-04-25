@@ -107,7 +107,7 @@ export const Actividades = () => {
             >{actividad.temporada?.puntos_intere?.descripcion + ' lorem ipsum dolor sit amet consectetur adipisicing elit. Officia debitis tenetur iusto quis. Ducimus reprehenderit aliquam sunt adipisci repellat? Unde, nobis modi. Eaque '}</p>
           </div>
           {/* contacto */}
-          <div className="flex flex-col w-full mt-5 py-3 px-5 bg-[#86e094]/20 shadow-md rounded-lg border border-transparent hover:border-[#86e094] transition-all duration-300 
+          <div className="flex flex-col w-full mt-5 py-3 px-5 bg-[#fafafa] shadow-lg rounded-lg border border-[#8d8d8d]
         md:w-4/12 md:sticky md:items-center md:h-fit
         lg:w-3/12">
             {/* nombre propietario? */}
