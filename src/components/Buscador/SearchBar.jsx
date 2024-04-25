@@ -211,6 +211,14 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
 
+    if (searchForm?.provincia !== null) {
+      localizacion = "provincia:" + searchForm?.provincia;
+    }
+
+    if (searchForm?.localizacion !== null) {
+      localizacion = "poblacion:" + searchForm?.localizacion;
+    }
+
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;

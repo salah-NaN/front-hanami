@@ -68,7 +68,7 @@ export const PopSearchPlace = ({
         </div>
       ) : null}
 
-      {searchForm.localizacion !== null && searchForm.localizacion !== "" ? (
+      {searchForm?.localizacion !== null && searchForm?.localizacion !== "" ? (
         <div className="h-[15rem]">
           <div className="p-2 overflow-auto h-full">
             {foundWord?.map((words) => (
