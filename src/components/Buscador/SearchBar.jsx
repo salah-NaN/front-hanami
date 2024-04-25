@@ -1,10 +1,8 @@
-import { useEffect, useState, useRef, version } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { PopUp, PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
+import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
-// import { Calendar } from "@nextui-org/calendar";
-// import {parseDate} from "@internationalized/date";
 
 export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   const navigate = useNavigate();
@@ -217,6 +215,7 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
     }
   };
 
+  //useEffect para cambiar el color del buscador en funcion si hay alguna popUp activado o no
   useEffect(() => {
     const { queHacer, flor, buscador, fecha } = popUp;
 
@@ -330,13 +329,13 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
               >
                 <div className="flex flex-col justify-start w-full">
                   <h1 className="font-bold text-md">Fecha</h1>
-                  <h1 className="text-sm">
+                  <div className="text-sm">
                     {searchForm.fecha === null ? (
                       `Elige una fecha`
                     ) : (
                       <h1 className="font-[900] text-xl">{searchForm.fecha}</h1>
                     )}
-                  </h1>
+                  </div>
                 </div>
               </div>
               {popUp.fecha ? (
@@ -454,9 +453,9 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
                         <img src="./cometa.png" alt="" className="w-6" />
                       </div> */}
                     </div>
-                    <buton type="submit">
+                    <div>
                       <ButtonSearch />
-                    </buton>
+                    </div>
                   </div>
                 </div>
               </div>

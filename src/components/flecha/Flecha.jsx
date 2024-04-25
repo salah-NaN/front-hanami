@@ -16,7 +16,7 @@ export const Flecha = ({ paginacionScrollHome, mainControladorFlecha }) => {
       animate={mainControladorFlecha}
     >
       <svg
-        stroke-width="1"
+        strokeWidth="1"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +26,8 @@ export const Flecha = ({ paginacionScrollHome, mainControladorFlecha }) => {
         <path
           d="M6 9L12 15L18 9"
           stroke="#000000"
-          stroke-width="1"
-          stroke-linecap="round"
+          strokeWidth="1"
+          strokeinecap="round"
           stroke-linejoin="round"
         ></path>
       </svg>
