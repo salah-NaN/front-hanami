@@ -17,6 +17,18 @@ export const App = () => {
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
+        <Route
+            path="/register"
+            element={
+                <Register />
+            }
+          ></Route>
+          <Route
+            path="/login"
+            element={
+                <Login />
+            }
+          ></Route>
           <Route
             path="/puntosInteres/:id"
             element={

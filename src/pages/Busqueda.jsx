@@ -54,9 +54,6 @@ export const Busqueda = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  /*     if(filterData.map(fd => fd.temporadas.map(t => t.nombre)) == filters?.filter(f=>f.seteado == true).map(f => f.temporada)){
-        console.log("hola");
-      } */
   useEffect(() => {
     setCambio(!cambio);
   }, [filters]);
@@ -67,11 +64,8 @@ export const Busqueda = () => {
     );
   }, [cambio]);
 
-  /* 
-  pi => pi.temporadas.map(t=>t.nombre)
-  
-  */
   return (
+
     <>
       <NavBar />
       {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
@@ -112,9 +106,6 @@ export const Busqueda = () => {
             src={arrowRight} ></img>
         </a>
 
-
-
-
         {/* cards */}
         <div className={`pt-10 absolute z-10 top-1/2 w-full grid grid-cols-1 gap-y-9 bg-[#fafafa] rounded-lg
           md:grid-cols-2 md:gap-x-3
@@ -134,12 +125,7 @@ export const Busqueda = () => {
           }
 
         </div>
-
-
-
       </div>
-
-
     </>
   );
 };
