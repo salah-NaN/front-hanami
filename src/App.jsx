@@ -8,25 +8,34 @@ import {
   BusquedaActividad,
   Busqueda,
   Register,
+  MisResenias
 } from "./pages";
 import { NavBar } from "./components";
+import { useState } from "react";
+import ClienteContext from "./context/ClienteContext";
+
 
 export const App = () => {
+
+  const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: '' })
+
+
   return (
-    <>
+    <ClienteContext.Provider value={{ log, setLog }}>
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
-        <Route
+          <Route
             path="/register"
             element={
-                <Register />
+              <Register />
             }
           ></Route>
           <Route
             path="/login"
             element={
-                <Login />
+
+              <Login />
             }
           ></Route>
           <Route
@@ -46,21 +55,30 @@ export const App = () => {
             }
           ></Route>
           <Route
+            path="/misResenias/:clienteId"
+            element={
+              <LayoutHanami>
+                <MisResenias />
+              </LayoutHanami>
+            }
+          ></Route>
+          <Route
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
             element={
-                <Busqueda />}
+              <Busqueda />}
           ></Route>
           <Route path="/" element={<Inicio />}></Route>
 
-        <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={              
-              <LayoutHanami>
-                <BusquedaActividad />
-              </LayoutHanami>}
-        ></Route>
+          <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={
+            <LayoutHanami>
+              <BusquedaActividad />
+            </LayoutHanami>}
+          ></Route>
 
         </Routes>
       </BrowserRouter>
-    </>
+    </ClienteContext.Provider>
+
   );
 };
 
