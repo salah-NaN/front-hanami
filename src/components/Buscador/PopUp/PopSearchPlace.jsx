@@ -1,5 +1,6 @@
 import { ButtonSearch } from "../";
 import { motion } from "framer-motion";
+import { ProvinciasComponent } from "./";
 
 export const PopSearchPlace = ({
   searchPc,
@@ -48,22 +49,24 @@ export const PopSearchPlace = ({
             }}
           />
           {openInput === true ? (
-            <input
-              type="text"
-              value={searchForm?.localizacion}
-              placeholder="Introduce tu destino"
-              className="focus:ring-0 focus:outline-none
+            <div className="">
+              <input
+                type="text"
+                value={searchForm?.localizacion}
+                placeholder="Introduce tu destino"
+                className="focus:ring-0 focus:outline-none
                           flex w-full items-center h-full border-none
                           rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
-              autoFocus
-              onChange={(event) =>
-                handleFunction({ localizacion: event.target.value })
-              }
-            />
+                autoFocus
+                onChange={(event) =>
+                  handleFunction({ localizacion: event.target.value })
+                }
+              />
+            </div>
           ) : (
-            <>
+            <div className="">
               <p>Introduce tu destino</p>
-            </>
+            </div>
           )}
         </div>
       ) : null}
@@ -72,8 +75,12 @@ export const PopSearchPlace = ({
         <div className="h-[15rem]">
           <div className="p-2 overflow-auto h-full">
             {foundWord?.map((words) => (
-              <div className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] p-3 cursor-pointer overflow-hidden"
-              onClick={() => handleFunction({localizacion: words?.poblacion})}>
+              <div
+                className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] p-3 cursor-pointer overflow-hidden"
+                onClick={() =>
+                  handleFunction({ localizacion: words?.poblacion })
+                }
+              >
                 <div className="flex items-center gap-2">
                   <div className="bg-[#DDDDDD] border-none rounded-md p-2">
                     <img src="./location.png" alt="" className="w-7" />
@@ -87,7 +94,7 @@ export const PopSearchPlace = ({
             ))}
           </div>
         </div>
-      ) : searchForm.localizacion === null || searchForm.localizacion === "" ? (
+      ) : searchForm?.localizacion === null || searchForm?.localizacion === "" ? (
         <div
           className={`mt-5 md:m-1 ${
             searchPc === "searchPc" ? "md:p-3" : "md:mt-0"

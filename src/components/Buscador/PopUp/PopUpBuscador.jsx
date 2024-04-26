@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MotionConfig, motion } from "framer-motion";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { styled } from "@mui/material";
 import ButtonSearch from "../ButtonSearch";
-import { useEffect, useState } from "react";
 import { IconPLanta, PopUpFecha, PopSearchPlace, PopUpPlanta } from "./";
-import { useNavigate } from "react-router-dom";
 
 import IconDondeIr from "./IconDondeIr";
 import IconFecha from "./IconFecha";
@@ -20,11 +21,11 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
     actividades: false,
   });
 
-  const [formData, setFormData] = useState({
+  const [searchForm, setSearchForm] = useState({
     localizacion: null,
-    fecha: null,
+    fecha: [],
     flor: null,
-    eleccion: "puntoInteres",
+    queHacer: null,
   });
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -58,13 +59,13 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
   }, [clickChoice]);
 
   const onChangeForm = (data) => {
-    setFormData({ ...formData, ...data });
+    setSearchForm({ ...searchForm, ...data });
   };
 
   const onFormSubmit = () => {
     event.preventDefault();
     //desestructuramos el objeto de searchForm
-    const { localizacion, eleccion, flor, fecha } = formData;
+    const { localizacion, eleccion, flor, fecha } = searchForm;
     const queHacer = eleccion;
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
@@ -193,13 +194,18 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
             }}
           >
             <motion.div className="h-full">
-              <motion.div className="shadow-xl">
-                <motion.div className="border-none shadow-md pb-2">
+              <motion.div className="">
+                <motion.div className="border-none pb-2">
                   <Accordion
+                    square="false"
                     defaultExpanded
                     expanded={expanded === "panel1"}
                     onChange={handleChange("panel1")}
-                    className="border rounded-xl"
+                    sx={{
+                      border: "none",
+                      borderRadius: "20px",
+                    }}
+                    className="shadow-2xl"
                   >
                     <AccordionSummary
                       aria-controls="panel1bh-content"
@@ -207,7 +213,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                       id="panel1bh-header"
                       className="border border-black"
                     >
-                      {formData.localizacion === undefined ? (
+                      {searchForm.localizacion === undefined ? (
                         <div className="">
                           <h1 className="text-bold text-xl py-2">
                             ¿Donde quieres ir?
@@ -216,7 +222,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                       ) : (
                         <div className="">
                           <h1 className="text-bold text-xl">
-                            {formData.localizacion}
+                            {searchForm.localizacion}
                           </h1>
                           <h1 className="text-[15px] py-2">
                             ¿Donde quieres ir?
@@ -229,32 +235,38 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                         openInputSearch={openInputSearch}
                         openInput={openInput}
                         onChangeForm={onChangeForm}
+                        searchForm={searchForm}
                         searchPc={""}
                       />
                     </AccordionDetails>
                   </Accordion>
                 </motion.div>
 
-                <motion.div className="border shadow-md">
+                <motion.div className="">
                   <Accordion
                     expanded={expanded === "panel2"}
                     onChange={handleChange("panel2")}
-                    className="border-none rounded-xl"
+                    // className="border-none rounded-xl"
+                    square="false"
+                    sx={{
+                      border: "none",
+                      borderRadius: "20px",
+                    }}
                   >
                     <AccordionSummary
                       aria-controls="panel2bh-content"
                       id="panel2bh-header"
-                      className="border border-black rounded-xl"
+                      className=""
                       expandIcon={<IconFecha />}
                     >
-                      {formData.fecha === null ? (
+                      {searchForm.fecha === null ? (
                         <h1 className="text-[15px] text-bold py-2">
                           ¿Cuando quieres ir?
                         </h1>
                       ) : (
                         <div className="">
                           <h1 className="text-xl font-bold">
-                            {formData.fecha}
+                            {searchForm.fecha}
                           </h1>
                           <h1 className="text-sm py-2">¿Cuando quieres ir?</h1>
                         </div>
@@ -269,28 +281,33 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                 </motion.div>
                 {clickChoice.punto_interes ? (
                   <motion.div
-                    className="border-none pt-2 shadow-md rounded-lg"
+                    className="border-none pt-2 rounded-lg"
                     initial={{ scale: 0 }}
                     animate={{ rotate: 0, scale: 1 }}
                   >
                     <Accordion
                       expanded={expanded === "panel3"}
                       onChange={handleChange("panel3")}
+                      square="false"
+                      sx={{
+                        border: "none",
+                        borderRadius: "20px",
+                      }}
                     >
                       <AccordionSummary
-                        expandIcon={<IconPLanta planta={formData.flor} />}
+                        expandIcon={<IconPLanta planta={searchForm.flor} />}
                         aria-controls="panel3bh-content"
                         id="panel3bh-header"
                         className="border border-black "
                       >
-                        {formData.eleccion === undefined ? (
+                        {searchForm.eleccion === undefined ? (
                           <h1 className="text-xl text-bold py-2">
                             ¿Que plantas quieres ver?
                           </h1>
                         ) : (
                           <div className="">
                             <h1 className="text-xl font-bold">
-                              {formData.flor}
+                              {searchForm.flor}
                             </h1>
                             <h1 className="text-[15px] py-2">
                               ¿Que plantas quieres ver?
