@@ -10,10 +10,14 @@ export const PopSearchPlace = ({
   searchForm,
   setBuscadorPopUp,
   foundWord,
+  setExpanded
 }) => {
-  const handleFunction = (value) => {
+  const handleFunction = (value, close) => {
     if (onChangeForm) {
-      onChangeForm({ ...value });
+      if(close){
+        setExpanded(false);
+      }
+      onChangeForm(value);
     } else {
       setSearchForm({ ...searchForm, ...value });
       setBuscadorPopUp(false);
@@ -48,7 +52,7 @@ export const PopSearchPlace = ({
             }}
           />
           {openInput === true ? (
-            <div className="">
+            <div className="w-full">
               <input
                 type="text"
                 value={searchForm?.localizacion}
@@ -58,7 +62,7 @@ export const PopSearchPlace = ({
                           rounded-md placeholder:px-1 placeholder:text-[17px] border-black py-2"
                 autoFocus
                 onChange={(event) =>
-                  handleFunction({ localizacion: event.target.value })
+                  handleFunction({ localizacion: event.target.value }, false)
                 }
               />
             </div>
@@ -72,28 +76,29 @@ export const PopSearchPlace = ({
 
       {searchForm?.localizacion !== null && searchForm?.localizacion !== "" ? (
         <div className="h-[15rem]">
-          <div className="p-2 overflow-auto h-full">
+          <div className="md:p-2 overflow-auto h-full">
             {foundWord?.map((words) => (
               <div
-                className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] p-3 cursor-pointer overflow-hidden"
+                className="flex gap-1 hover:border-none hover:rounded-lg hover:bg-[#EBEBEB] md:p-3 py-3 cursor-pointer overflow-hidden"
                 onClick={() =>
-                  handleFunction({ localizacion: words?.poblacion })
+                  handleFunction({ localizacion: words?.poblacion }, true)
                 }
               >
                 <div className="flex items-center gap-2">
                   <div className="bg-[#DDDDDD] border-none rounded-md p-2">
-                    <img src="./location.png" alt="" className="w-7" />
+                    <img src="./location.png" alt="" className="md:w-7 w-5" />
                   </div>
-                  <h1 className="text-md">{words.poblacion},</h1>
+                  <h1 className="md:text-md text-[20px]">{words.poblacion},</h1>
                 </div>
                 <div className="flex items-center">
-                  <h1 className="text-md">{words.provincia}</h1>
+                  <h1 className="md:text-md text-[20px]">{words.provincia}</h1>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      ) : searchForm?.localizacion === null || searchForm?.localizacion === "" ? (
+      ) : searchForm?.localizacion === null ||
+        searchForm?.localizacion === "" ? (
         <div
           className={`mt-5 md:m-1 ${
             searchPc === "searchPc" ? "md:p-3" : "md:mt-0"
@@ -105,28 +110,28 @@ export const PopSearchPlace = ({
           <div className="grid grid-cols-2 md:grid md:grid-cols-4 gap-3 md:gap-1 pt-5">
             <div
               className="md:w-full w-full border rounded-xl px-3 py-2 bg-slate-50 cursor-pointer hover:bg-[#EBEBEB]"
-              onClick={() => handleFunction({ provincia: "Barcelona" })}
+              onClick={() => handleFunction({ provincia: "Barcelona" }, true)}
             >
               <img src="/barcelona_comarca.svg" />
               <h1 className="text-sm text-right">Barcelona</h1>
             </div>
             <div
               className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
-              onClick={() => handleFunction({ provincia: `Girona` })}
+              onClick={() => handleFunction({ provincia: `Girona` } , true)}
             >
               <img src="/girona.svg" />
               <h1 className="text-sm text-right">Girona</h1>
             </div>
             <div
               className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
-              onClick={() => handleFunction({ provincia: `Tarragona` })}
+              onClick={() => handleFunction({ provincia: `Tarragona` }, true)}
             >
               <img src="/tarragona.svg" />
               <h1 className="text-sm text-right">Tarragon</h1>
             </div>
             <div
               className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
-              onClick={() => handleFunction({ provincia: `Lleida` })}
+              onClick={() => handleFunction({ provincia: `Lleida` }, true)}
             >
               <img src="/lleida.svg" />
               <h1 className="text-sm text-right">Lleida</h1>

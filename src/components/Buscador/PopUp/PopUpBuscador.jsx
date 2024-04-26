@@ -270,7 +270,7 @@ export const PopUpBuscador = ({
                       ) : (
                         <div className="">
                           <h1 className="text-bold text-xl">
-                            {searchForm.localizacion}
+                            {searchForm.localizacion || searchForm?.provincia}
                           </h1>
                           <h1 className="text-[15px] py-2">
                             ¿Donde quieres ir?
@@ -286,6 +286,7 @@ export const PopUpBuscador = ({
                         onChangeForm={onChangeForm}
                         searchForm={searchForm}
                         searchPc={""}
+                        setExpanded={setExpanded}
                       />
                     </AccordionDetails>
                   </Accordion>
@@ -295,7 +296,6 @@ export const PopUpBuscador = ({
                   <Accordion
                     expanded={expanded === "panel2"}
                     onChange={handleChange("panel2")}
-                    // className="border-none rounded-xl"
                     square="false"
                     sx={{
                       border: "none",
@@ -323,7 +323,7 @@ export const PopUpBuscador = ({
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="flex justify-center">
-                        <PopUpFecha onChangeForm={onChangeForm} />
+                        <PopUpFecha onChangeForm={onChangeForm} setExpanded={setExpanded} />
                       </div>
                     </AccordionDetails>
                   </Accordion>
@@ -370,7 +370,7 @@ export const PopUpBuscador = ({
                         )}
                       </AccordionSummary>
                       <AccordionDetails>
-                        <PopUpPlanta onChangeForm={onChangeForm} />
+                        <PopUpPlanta onChangeForm={onChangeForm} setExpanded={setExpanded} />
                       </AccordionDetails>
                     </Accordion>
                   </motion.div>
