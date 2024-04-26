@@ -70,11 +70,21 @@ export const PopUpBuscador = ({
   const onFormSubmit = () => {
     event.preventDefault();
     //desestructuramos el objeto de searchForm
-    const { localizacion, eleccion, flor, fecha } = searchForm;
-    const queHacer = eleccion;
+    let { localizacion, fecha, flor, queHacer } = searchForm;
+    queHacer = queHacer === null ? "Punto_de_Interes" : queHacer;
+
+    if (searchForm?.provincia !== null) {
+      localizacion = "provincia:" + searchForm?.provincia;
+    }
+
+    if (searchForm?.localizacion !== null) {
+      localizacion = "poblacion:" + searchForm?.localizacion;
+    }
+
+    console.log(localizacion, fecha, flor, queHacer)
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
-    if (eleccion === "Punto_de_Interes") {
+    if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
       navigate(
         `/busqueda/${queHacer}/${localizacion || ";"}/${
@@ -189,7 +199,7 @@ export const PopUpBuscador = ({
                 <div
                   className={`${
                     clickChoice.punto_interes === true
-                      ? `border-b border-black transition duration-150 ease-out `
+                      ? `border-b text-xl cursor-pointer border-black transition duration-150 ease-out`
                       : ``
                   }`}
                   onClick={clickChoicePuntoInteres}
@@ -199,7 +209,7 @@ export const PopUpBuscador = ({
                 <div
                   className={`${
                     clickChoice.actividades === true
-                      ? `border-b border-black transition duration-150 ease-out `
+                      ? `border-b text-xl cursor-pointer border-black transition duration-150 ease-out`
                       : ``
                   }`}
                   onClick={clickChoiceActividad}
@@ -323,7 +333,10 @@ export const PopUpBuscador = ({
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="flex justify-center">
-                        <PopUpFecha onChangeForm={onChangeForm} setExpanded={setExpanded} />
+                        <PopUpFecha
+                          onChangeForm={onChangeForm}
+                          setExpanded={setExpanded}
+                        />
                       </div>
                     </AccordionDetails>
                   </Accordion>
@@ -370,7 +383,10 @@ export const PopUpBuscador = ({
                         )}
                       </AccordionSummary>
                       <AccordionDetails>
-                        <PopUpPlanta onChangeForm={onChangeForm} setExpanded={setExpanded} />
+                        <PopUpPlanta
+                          onChangeForm={onChangeForm}
+                          setExpanded={setExpanded}
+                        />
                       </AccordionDetails>
                     </Accordion>
                   </motion.div>
