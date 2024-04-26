@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
+import useCustomSearch from "../../hooks/useCustomSearch";
 
 export const SearchBar = ({
   moveToSearchBar,
@@ -10,30 +11,19 @@ export const SearchBar = ({
   puntosDeInteres,
   setPuntosDeInteres,
 }) => {
-  const navigate = useNavigate();
-  const ref = useRef();
-
-  const queHacer = ["Punto_de_Interes", "Actividades"];
-  // const [puntosDeInteres, setPuntosDeInteres] = useState([]);
-  const [foundWord, setFoundWord] = useState([]);
-  // const [value, setValue] = useState(parseDate("2024-03-07"));
-
-  // const [flores, setFlores] = useState([]);
-  const [searchForm, setSearchForm] = useState({
-    localizacion: null,
-    fecha: [],
-    flor: null,
-    queHacer: null,
-  });
-
-  const [popUp, setPopUp] = useState({
-    buscador: false,
-    flor: false,
-    queHacer: false,
-    fecha: false,
-  });
-
-  const [isCheck, setIsCheck] = useState("");
+  const {
+    navigate,
+    ref,
+    setFoundWord,
+    foundWord,
+    setSearchForm,
+    searchForm,
+    setPopUp,
+    popUp,
+    setIsCheck,
+    isCheck,
+    togglePopUp
+  } = useCustomSearch(puntosDeInteres);
 
   //Seleccionamos el input donde el div de buscar
   let divBuscar = document.querySelector(".buscar_div");
@@ -43,94 +33,41 @@ export const SearchBar = ({
     inputField.focus();
   });
 
-  //Buscador input
-  useEffect(() => {
-    const { localizacion } = searchForm;
-    if (localizacion === "") {
-      setFoundWord([]);
-    }
+  // const setBuscadorPopUp = (open) => {
+  //   setPopUp({
+  //     buscador: open === undefined ? true : open,
+  //     flor: false,
+  //     queHacer: false,
+  //     fecha: false,
+  //   });
+  // };
 
-    setSearchForm({
-      ...searchForm,
-      provincia: null,
-    });
+  // const setFloresPopUp = (open) => {
+  //   setPopUp({
+  //     buscador: false,
+  //     flor: open === undefined ? true : open,
+  //     queHacer: false,
+  //     fecha: false,
+  //   });
+  // };
 
-    let arr = [];
-    puntosDeInteres.map((item) => {
-      if (localizacion) {
-        if (
-          item?.poblacion?.toLowerCase().includes(localizacion.toLowerCase()) ||
-          item?.poblacion?.toUpperCase().includes(localizacion.toUpperCase())
-        ) {
-          arr.push({ poblacion: item?.poblacion, provincia: item?.provincia });
-        }
-      }
-    });
+  // const setPopQueHacer = (open) => {
+  //   setPopUp({
+  //     buscador: false,
+  //     queHacer: open === undefined ? true : open,
+  //     flor: false,
+  //     fecha: false,
+  //   });
+  // };
 
-    /* Hacemos el new set para que no hayan duplicados.
-        Luego pues convertimos los datos del array arr para pasarlos a stringify y apartir de ahí
-        quitar los datos duplicados
-    */
-    arr = new Set(
-      arr.map((poblacion) =>
-        JSON.stringify({
-          poblacion: poblacion.poblacion,
-          provincia: poblacion.provincia,
-        })
-      )
-    );
-    /* Creamos un nuevo array y parseamos el json a un objeto */
-    const poblacionProvinciaUnicos = Array.from(arr).map((str) =>
-      JSON.parse(str)
-    );
-    setFoundWord([...poblacionProvinciaUnicos]);
-  }, [searchForm.localizacion]);
-
-  useEffect(() => {
-    //Seteamos los valores por defecto de el SearchForm
-    setSearchForm({
-      localizacion: null,
-      fecha: null,
-      flor: null,
-      queHacer: "",
-    });
-  }, []);
-
-  const setBuscadorPopUp = (open) => {
-    setPopUp({
-      buscador: open === undefined ? true : open,
-      flor: false,
-      queHacer: false,
-      fecha: false,
-    });
-  };
-
-  const setFloresPopUp = (open) => {
-    setPopUp({
-      buscador: false,
-      flor: open === undefined ? true : open,
-      queHacer: false,
-      fecha: false,
-    });
-  };
-
-  const setPopQueHacer = (open) => {
-    setPopUp({
-      buscador: false,
-      queHacer: open === undefined ? true : open,
-      flor: false,
-      fecha: false,
-    });
-  };
-
-  const setFechaPopUp = (open) => {
-    setPopUp({
-      buscador: false,
-      queHacer: false,
-      flor: false,
-      fecha: open === undefined ? true : open,
-    });
-  };
+  // const setFechaPopUp = (open) => {
+  //   setPopUp({
+  //     buscador: false,
+  //     queHacer: false,
+  //     flor: false,
+  //     fecha: open === undefined ? true : open,
+  //   });
+  // };
 
   const handleCloseModal = (event, popUp) => {
     if (
@@ -208,7 +145,7 @@ export const SearchBar = ({
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
 
-    console.log(searchForm?.localizacion, searchForm?.provincia)
+    console.log(searchForm?.localizacion, searchForm?.provincia);
     if (searchForm?.provincia !== undefined) {
       localizacion = "provincia:" + searchForm?.provincia;
     }
@@ -216,8 +153,6 @@ export const SearchBar = ({
     if (searchForm?.localizacion !== null) {
       localizacion = "poblacion:" + searchForm?.localizacion;
     }
-
-    console.log(localizacion)
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
@@ -263,7 +198,8 @@ export const SearchBar = ({
                 popUp.buscador ? `bg-white rounded-full` : ``
               }`}
               id="button-open"
-              onClick={() => setBuscadorPopUp()}
+              onClick={() => togglePopUp({buscador: !popUp.buscador})}
+              // onClick={() => setBuscadorPopUp()}
             >
               <div className="px-5 flex flex-col">
                 <label htmlFor="buscar_input" id="label" className="">
@@ -296,7 +232,7 @@ export const SearchBar = ({
                     searchPc={"searchPc"}
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
-                    setBuscadorPopUp={setBuscadorPopUp}
+                    // setBuscadorPopUp={setBuscadorPopUp}
                   />
                 </div>
               ) : null}

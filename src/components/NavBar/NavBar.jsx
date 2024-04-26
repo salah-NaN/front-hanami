@@ -1,8 +1,8 @@
 import { AnimatePresence, useCycle } from "framer-motion";
 import { motion } from "framer-motion";
-import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
+import { AccountButton, Logo, HanburgerButton, NavLinks, SearchBar } from "../";
 
-export const NavBar = () => {
+export const NavBar = ({isBusqueda}) => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
 
   const toggleMenu = () => {
@@ -16,6 +16,11 @@ export const NavBar = () => {
         <div className="sticky border-r-0 border-l-0 border-t-0">
           <nav className="w-10/12 max-auto flex justify-between py-3 mx-auto">
             <Logo />
+            {
+              isBusqueda ? (
+                <SearchBar />
+              ) : null
+            }
             <div className="hidden md:inline">
               <AccountButton />
             </div>

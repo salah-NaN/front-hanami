@@ -7,7 +7,8 @@ import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/filtros/Filter";
 import FilterActividades from "../components/filtros/FilterActividades";
 import FilterCategoria from "../components/filtros/FilterCategoria";
-import CardActividades from "../components/cards/CardActividades"
+import CardActividades from "../components/cards/CardActividades";
+import { format, parse } from "date-fns";
 
 export const  BusquedaActividad = () => {
   let { quehacer, localizacion, fecha, flor } = useParams();
