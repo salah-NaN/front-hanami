@@ -8,6 +8,7 @@ import {
   BusquedaActividad,
   Busqueda,
   Register,
+  MiPerfil
 } from "./pages";
 import { NavBar } from "./components";
 
@@ -27,6 +28,12 @@ export const App = () => {
             path="/login"
             element={
                 <Login />
+            }
+          ></Route>
+          <Route
+            path="/MiPerfil"
+            element={
+                <MiPerfil />
             }
           ></Route>
           <Route
