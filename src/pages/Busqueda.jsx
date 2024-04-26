@@ -64,10 +64,10 @@ export const Busqueda = () => {
   return (
 
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
       <div
-        className=" mt-[66px] flex flex-col rounded-md
+        className="mt-[0px] flex flex-col rounded-md
         lg:flex-row-reverse"
       >
         {/* mapa */}

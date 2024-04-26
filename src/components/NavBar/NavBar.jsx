@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
 import BuscadorOtrasPaginas from "../Buscador/BuscadorOtrasPaginas";
 
-export const NavBar = ({otrasPaginas}) => {
-  
+export const NavBar = () => {
   const location = useLocation();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
@@ -19,15 +18,15 @@ export const NavBar = ({otrasPaginas}) => {
   }
 
   return (
-    <div className="w-full z-30 absolute top-0
-    xl:w-3/4 mx-auto left-0 right-0">
+    <div className="w-full z-10 absolute top-0
+    xl:w-3/4 mx-auto left-0 right-0 bg-red-600">
       <header className="">
-        <div className="sticky border-r-0 border-l-0 border-t-0">
+        <div className="overflow-visible border-r-0 border-l-0 border-t-0 bg-red-500">
           <nav className="w-10/12 max-auto flex justify-between py-3 mx-auto">
             <Logo />
             {
               location.pathname !== '/' ? (
-                <BuscadorOtrasPaginas />
+                <BuscadorOtrasPaginas openPopUpBuscador={openPopUpBuscador} />
               ) : null
             }
             <div className="hidden md:inline">
