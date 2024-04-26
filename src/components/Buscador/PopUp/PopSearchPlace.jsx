@@ -10,11 +10,11 @@ export const PopSearchPlace = ({
   searchForm,
   setBuscadorPopUp,
   foundWord,
-  setExpanded
+  setExpanded,
 }) => {
   const handleFunction = (value, close) => {
     if (onChangeForm) {
-      if(close){
+      if (close) {
         setExpanded(false);
       }
       onChangeForm(value);
@@ -117,7 +117,7 @@ export const PopSearchPlace = ({
             </div>
             <div
               className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
-              onClick={() => handleFunction({ provincia: `Girona` } , true)}
+              onClick={() => handleFunction({ provincia: `Girona` }, true)}
             >
               <img src="/girona.svg" />
               <h1 className="text-sm text-right">Girona</h1>
@@ -127,7 +127,7 @@ export const PopSearchPlace = ({
               onClick={() => handleFunction({ provincia: `Tarragona` }, true)}
             >
               <img src="/tarragona.svg" />
-              <h1 className="text-sm text-right">Tarragon</h1>
+              <h1 className="text-sm text-right">Tarragona</h1>
             </div>
             <div
               className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
