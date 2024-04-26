@@ -8,7 +8,7 @@ import Filter from "../components/filtros/Filter";
 import { format, parse } from "date-fns";
 import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
-import arrow from '../assets/nav-arrow-left2.svg'
+import arrow from '../assets/nav-arrow-left.svg'
 import arrowRight from '../assets/nav-arrow-right.svg'
 
 export const Busqueda = () => {
