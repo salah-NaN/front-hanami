@@ -92,8 +92,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             L.control.zoom({
                 position:'topright'
            }).addTo(ourMap);
-
-
+           
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
                 // extraer las temporadas que coincida con la fecha de hoy

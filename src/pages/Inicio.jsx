@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import {
   CardHotTrendItem,
   Banner,
@@ -10,6 +10,8 @@ import {
   NavBar,
 } from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
+import ClienteContext from "../context/ClienteContext";
+
 
 export const Inicio = () => {
   let url = "http://localhost:3000/api/";
@@ -19,6 +21,13 @@ export const Inicio = () => {
   const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
 
   const scrollBuscadorRef = useRef(false);
+  
+  // contexto para ver si está logueado un cliente o no
+  const {log, setLog} = useContext(ClienteContext)
+
+
+    console.log(log)
+
 
   useEffect(() => {
     fetch(url + `puntos_interes/;/;/;`)
@@ -30,7 +39,10 @@ export const Inicio = () => {
       .then((res) => res.json())
       .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
       .catch((error) => console.log(error));
+
   }, []);
+
+
 
   return (
     <div className="bg-white">

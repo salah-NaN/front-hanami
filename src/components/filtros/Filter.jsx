@@ -237,5 +237,3 @@ export const Filter = ({ setFilters, filterData }) => {
 }
 
 export default Filter
-
-

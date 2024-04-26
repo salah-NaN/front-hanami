@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
+import ClienteContext from "../context/ClienteContext";
 
 // constantes 
 const URL = 'http://localhost:3000/api'
@@ -6,6 +7,8 @@ const URL = 'http://localhost:3000/api'
 export const Login = () => {
     const [inputs, setInputs] = useState({ email: '', password: '' })
 
+    // contexto para ver si está logueado un cliente o no
+    const { log, setLog } = useContext(ClienteContext)
 
     // funciones 
     const handleInputs = (event) => {
@@ -31,6 +34,10 @@ export const Login = () => {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                console.log('log')
+                console.log(log)
+                
+                setLog(res)
             })
             .catch(err => {
                 console.log(err)
@@ -38,6 +45,11 @@ export const Login = () => {
         // limpiar inputs
         setInputs({ email: '', password: '' })
     }
+
+
+    useEffect(() => {
+        console.log(log)
+    }, [log])
 
     return (
         <div className=" w-11/12 mx-auto border border-gray-900 mt-40
