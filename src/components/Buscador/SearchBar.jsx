@@ -279,7 +279,7 @@ export const SearchBar = ({
                       }
                       placeholder="Busca la ciudad"
                       value={searchForm?.localizacion || searchForm?.provincia}
-                      className={`w-full focus:outine-none border rounded-full border-[#c5c5c5] bg-transparent
+                      className={`w-full focus:outine-none border-none rounded-full border-[#c5c5c5] bg-transparent
                        lg:border-none placeholder:px-0 hover:border-none hover:rounded-full 
                        focus:ring-0 focus:outline-none px-3`}
                       autoFocus
