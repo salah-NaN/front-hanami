@@ -1,5 +1,6 @@
 import { ButtonSearch } from "../";
 import { motion } from "framer-motion";
+import useCustomSearch from "../../../hooks/useCustomSearch";
 
 export const PopSearchPlace = ({
   searchPc,
@@ -8,19 +9,22 @@ export const PopSearchPlace = ({
   openInputSearch,
   setSearchForm,
   searchForm,
-  setBuscadorPopUp,
+  // setBuscadorPopUp,
   foundWord,
   setExpanded
 }) => {
+  const { togglePopUp } = useCustomSearch();
   const handleFunction = (value, close) => {
     if (onChangeForm) {
       if(close){
-        setExpanded(false);
+        togglePopUp();
+        // setExpanded(false);
       }
       onChangeForm(value);
     } else {
       setSearchForm({ ...searchForm, ...value });
-      setBuscadorPopUp(false);
+      // setBuscadorPopUp(false);
+      togglePopUp({buscador: false});
     }
   };
 
@@ -55,7 +59,7 @@ export const PopSearchPlace = ({
             <div className="w-full">
               <input
                 type="text"
-                value={searchForm?.localizacion}
+                value={searchForm?.localizacion || ""}
                 placeholder="Introduce tu destino"
                 className="focus:ring-0 focus:outline-none
                           flex w-full items-center h-full border-none

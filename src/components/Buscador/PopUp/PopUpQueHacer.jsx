@@ -1,17 +1,20 @@
 import { motion } from "framer-motion";
+import useCustomSearch from "../../../hooks/useCustomSearch";
 
 export const PopUpQueHacer = ({
   setSearchForm,
   searchForm,
   setPopQueHacer,
 }) => {
+
+  const { togglePopUp } = useCustomSearch();
   const handleFunction = (value) => {
     if (setSearchForm) {
       setSearchForm({
         ...searchForm,
         ...value,
       });
-      setPopQueHacer(false);
+      togglePopUp({[Object.keys(value)]: false});
     }
   };
 

@@ -22,122 +22,20 @@ export const SearchBar = ({
     popUp,
     setIsCheck,
     isCheck,
-    togglePopUp
+    togglePopUp,
   } = useCustomSearch(puntosDeInteres);
 
-  //Seleccionamos el input donde el div de buscar
-  let divBuscar = document.querySelector(".buscar_div");
-  let inputField = document.querySelector("#buscar_input");
-
-  divBuscar?.addEventListener("click", () => {
-    inputField.focus();
-  });
-
-  // const setBuscadorPopUp = (open) => {
-  //   setPopUp({
-  //     buscador: open === undefined ? true : open,
-  //     flor: false,
-  //     queHacer: false,
-  //     fecha: false,
-  //   });
-  // };
-
-  // const setFloresPopUp = (open) => {
-  //   setPopUp({
-  //     buscador: false,
-  //     flor: open === undefined ? true : open,
-  //     queHacer: false,
-  //     fecha: false,
-  //   });
-  // };
-
-  // const setPopQueHacer = (open) => {
-  //   setPopUp({
-  //     buscador: false,
-  //     queHacer: open === undefined ? true : open,
-  //     flor: false,
-  //     fecha: false,
-  //   });
-  // };
-
-  // const setFechaPopUp = (open) => {
-  //   setPopUp({
-  //     buscador: false,
-  //     queHacer: false,
-  //     flor: false,
-  //     fecha: open === undefined ? true : open,
-  //   });
-  // };
-
-  const handleCloseModal = (event, popUp) => {
-    if (
-      !event.target.closest(".button") &&
-      !event.target.closest("." + popUp)
-    ) {
-      setPopUp((upPop) => {
-        return { ...upPop, [popUp]: false };
-      });
-    }
-  };
-
-  //useEffect para cambiar el color del buscador en funcion si hay alguna popUp activado o no
-  //Y para cerrar los popUps clickando fuera
   useEffect(() => {
-    const { queHacer, flor, buscador, fecha } = popUp;
-
-    const popUpProperties = { queHacer, flor, buscador, fecha };
-
-    // Miramos con el find si hay alguna
-    const isInTrue = Object.entries(popUpProperties).find(
-      ([property, isActive]) => isActive === true
-    );
-    if (isInTrue) {
-      setIsCheck(true);
-    } else {
-      setIsCheck(false);
-    }
-
-    const rootElement = document.getElementById("root");
-
-    if (popUp.buscador) {
-      rootElement.addEventListener("click", (event) =>
-        handleCloseModal(event, "buscador")
-      );
-    }
-
-    if (popUp.fecha) {
-      rootElement.addEventListener("click", (event) =>
-        handleCloseModal(event, "fecha")
-      );
-    }
-
-    if (popUp.flor) {
-      rootElement.addEventListener("click", (event) =>
-        handleCloseModal(event, "flor")
-      );
-    }
-
-    if (popUp.queHacer) {
-      rootElement.addEventListener("click", (event) =>
-        handleCloseModal(event, "queHacer")
-      );
-    }
-
-    return () => {
-      rootElement.removeEventListener("click", (event) => {
-        handleCloseModal(event, "buscador");
-      });
-      rootElement.removeEventListener("click", (event) => {
-        handleCloseModal(event, "fecha");
-      });
-      rootElement.removeEventListener("click", (event) => {
-        handleCloseModal(event, "flor");
-      });
-      rootElement.removeEventListener("click", (event) => {
-        handleCloseModal(event, "queHacer");
-      });
-    };
+    console.log(popUp.buscador)
   }, [popUp]);
+
+  // //Seleccionamos el input donde el div de buscar
+  // let divBuscar = document.querySelector(".buscar_div");
+  // let inputField = document.querySelector("#buscar_input");
+
+  // divBuscar?.addEventListener("click", () => {
+  //   inputField.focus();
+  // });
 
   const onSubmitSearch = () => {
     event.preventDefault();
@@ -145,7 +43,6 @@ export const SearchBar = ({
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
 
-    console.log(searchForm?.localizacion, searchForm?.provincia);
     if (searchForm?.provincia !== undefined) {
       localizacion = "provincia:" + searchForm?.provincia;
     }
@@ -185,7 +82,7 @@ export const SearchBar = ({
           <form
             onSubmit={onSubmitSearch}
             className={`w-full h-full ${
-              searchForm.queHacer === "" ||
+              searchForm.queHacer === null ||
               searchForm.queHacer === "Punto_de_Interes"
                 ? `md:grid md:grid-cols-12 md:h-20`
                 : `md:grid md:grid-cols-10 md:h-20`
@@ -198,8 +95,7 @@ export const SearchBar = ({
                 popUp.buscador ? `bg-white rounded-full` : ``
               }`}
               id="button-open"
-              onClick={() => togglePopUp({buscador: !popUp.buscador})}
-              // onClick={() => setBuscadorPopUp()}
+              onClick={() => togglePopUp({ buscador: true })}
             >
               <div className="px-5 flex flex-col">
                 <label htmlFor="buscar_input" id="label" className="">
@@ -214,7 +110,7 @@ export const SearchBar = ({
                         })
                       }
                       placeholder="Busca la ciudad"
-                      value={searchForm?.localizacion || searchForm?.provincia}
+                      value={searchForm?.localizacion || searchForm?.provincia || ""}
                       className={`w-full focus:outine-none border-none rounded-full border-[#c5c5c5] bg-transparent
                        lg:border-none placeholder:px-0 hover:border-none hover:rounded-full 
                        focus:ring-0 focus:outline-none px-3`}
@@ -225,7 +121,7 @@ export const SearchBar = ({
               </div>
             </div>
             <div className="absolute top-[6rem] left-0 buscador">
-              {popUp.buscador ? (
+              {popUp?.buscador === true ? (
                 <div className="">
                   <PopSearchPlace
                     foundWord={foundWord}
@@ -249,12 +145,12 @@ export const SearchBar = ({
                         : ``
                     }`}
                 id="button-open"
-                onClick={() => setFechaPopUp()}
+                onClick={() => togglePopUp({ fecha: true })}
               >
                 <div className="flex flex-col justify-start w-full">
                   <h1 className="font-bold text-md">Fecha</h1>
                   <div className="text-sm">
-                    {searchForm.fecha === null ? (
+                    {searchForm.fecha.length === 0 ? (
                       `Elige una fecha`
                     ) : (
                       <h1 className="font-[900] text-xl">{searchForm.fecha}</h1>
@@ -270,7 +166,7 @@ export const SearchBar = ({
                   <PopUpFecha
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
-                    setFechaPopUp={setFechaPopUp}
+                    // setFechaPopUp={setFechaPopUp}
                   />
                 </div>
               ) : null}
@@ -284,7 +180,7 @@ export const SearchBar = ({
               >
                 <div
                   className="flex justify-center items-center w-full h-full cursor-pointer button"
-                  onClick={() => setFloresPopUp()}
+                  onClick={() => togglePopUp({ flor: true })}
                   id="button-open"
                 >
                   <div className="flex flex-col justify-start w-full">
@@ -324,7 +220,7 @@ export const SearchBar = ({
                     <PopUpPlanta
                       setSearchForm={setSearchForm}
                       searchForm={searchForm}
-                      setFloresPopUp={setFloresPopUp}
+                      // setFloresPopUp={setFloresPopUp}
                     />
                   </div>
                 ) : null}
@@ -336,7 +232,7 @@ export const SearchBar = ({
                 className="w-full h-full border border-[#c5c5c5] cursor-pointer
                  border-none rounded-full button"
                 id="button-open"
-                onClick={() => setPopQueHacer()}
+                onClick={() => togglePopUp({ queHacer: true })}
               >
                 <div className="flex h-full justify-between items-center">
                   <div
@@ -351,7 +247,7 @@ export const SearchBar = ({
                       <h1 className="md:block font-bold text-sm">
                         Que quieres hacer?
                       </h1>
-                      {searchForm.queHacer !== "" ? (
+                      {searchForm.queHacer !== null ? (
                         <h1>
                           {searchForm.queHacer === "Punto_de_Interes" ? (
                             <div className="flex gap-2 items-center">
@@ -383,12 +279,10 @@ export const SearchBar = ({
                   <PopUpQueHacer
                     setSearchForm={setSearchForm}
                     searchForm={searchForm}
-                    setPopQueHacer={setPopQueHacer}
+                    // setPopQueHacer={setPopQueHacer}
                   />
                 </div>
-              ) : (
-                <div className=""></div>
-              )}
+              ) : null}
             </div>
           </form>
         </div>
