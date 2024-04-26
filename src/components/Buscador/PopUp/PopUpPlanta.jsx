@@ -5,10 +5,12 @@ export const PopUpPlanta = ({
   searchForm,
   onChangeForm,
   setFloresPopUp,
+  setExpanded
 }) => {
   const handleFunction = (value) => {
     if (onChangeForm) {
       onChangeForm({ ...value });
+      setExpanded(false);
     } else {
       setSearchForm({ ...searchForm, ...value });
       setFloresPopUp(false);

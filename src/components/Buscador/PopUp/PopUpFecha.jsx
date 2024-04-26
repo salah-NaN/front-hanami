@@ -10,6 +10,7 @@ export const PopUpFecha = ({
   setSearchForm,
   searchForm,
   setFechaPopUp,
+  setExpanded
 }) => {
   const dateFormat = {
     day: "2-digit",
@@ -19,6 +20,7 @@ export const PopUpFecha = ({
   const handleFunction = (value) => {
     if (onChangeForm) {
       onChangeForm(value);
+      setExpanded(false);
     } else {
       setSearchForm({ ...searchForm, ...value });
       setFechaPopUp(false);
