@@ -5,6 +5,15 @@ import { PopUpBuscador } from "./Buscador/PopUp";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Banner = () => {
+  const [puntosDeInteres, setPuntosDeInteres] = useState([]);
+  useEffect(() => {
+    const url = "http://localhost:3000/api";
+    fetch(url + "/puntos_interes")
+      .then((res) => res.json())
+      .then((puntos_interes) => setPuntosDeInteres(puntos_interes))
+      .catch((error) => console.log(error));
+  }, []);
+
   const ref = useRef(null);
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
@@ -38,7 +47,11 @@ export const Banner = () => {
         <div className="relative md:hidden">
           <AnimatePresence>
             <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
-              <PopUpBuscador toggleMobileNav={toggleMobileNav} />
+              <PopUpBuscador
+                toggleMobileNav={toggleMobileNav}
+                puntosDeInteres={puntosDeInteres}
+                setPuntosDeInteres={setPuntosDeInteres}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -62,7 +75,11 @@ export const Banner = () => {
           </div>
         </div>
         <div className="flex w-full justify-center items-center md:pt-16">
-          <SearchBar openPopUpBuscador={openPopUpBuscador} />
+          <SearchBar
+            openPopUpBuscador={openPopUpBuscador}
+            puntosDeInteres={puntosDeInteres}
+            setPuntosDeInteres={setPuntosDeInteres}
+          />
         </div>
       </div>
       <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">

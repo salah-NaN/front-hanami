@@ -4,13 +4,17 @@ import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
 
-export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
+export const SearchBar = ({
+  moveToSearchBar,
+  openPopUpBuscador,
+  puntosDeInteres,
+  setPuntosDeInteres,
+}) => {
   const navigate = useNavigate();
   const ref = useRef();
-  const url = "http://localhost:3000/api";
 
   const queHacer = ["Punto_de_Interes", "Actividades"];
-  const [puntosDeInteres, setPuntosDeInteres] = useState([]);
+  // const [puntosDeInteres, setPuntosDeInteres] = useState([]);
   const [foundWord, setFoundWord] = useState([]);
   // const [value, setValue] = useState(parseDate("2024-03-07"));
 
@@ -30,13 +34,6 @@ export const SearchBar = ({ moveToSearchBar, openPopUpBuscador }) => {
   });
 
   const [isCheck, setIsCheck] = useState("");
-
-  useEffect(() => {
-    fetch(url + "/puntos_interes")
-      .then((res) => res.json())
-      .then((puntos_interes) => setPuntosDeInteres(puntos_interes))
-      .catch((error) => console.log(error));
-  }, []);
 
   //Seleccionamos el input donde el div de buscar
   let divBuscar = document.querySelector(".buscar_div");

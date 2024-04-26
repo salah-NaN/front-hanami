@@ -11,9 +11,14 @@ import { IconPLanta, PopUpFecha, PopSearchPlace, PopUpPlanta } from "./";
 import IconDondeIr from "./IconDondeIr";
 import IconFecha from "./IconFecha";
 
-export const PopUpBuscador = ({ toggleMobileNav }) => {
+export const PopUpBuscador = ({
+  toggleMobileNav,
+  puntosDeInteres,
+  setPuntosDeInteres,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [openInput, setOpenInput] = useState(false);
+  const [foundWord, setFoundWord] = useState([]);
   const navigate = useNavigate();
 
   const [clickChoice, setClickChoice] = useState({
@@ -86,6 +91,49 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
       );
     }
   };
+
+  //Buscador input
+  useEffect(() => {
+    const { localizacion } = searchForm;
+    if (localizacion === "") {
+      setFoundWord([]);
+    }
+
+    setSearchForm({
+      ...searchForm,
+      provincia: null,
+    });
+
+    let arr = [];
+    puntosDeInteres.map((item) => {
+      if (localizacion) {
+        if (
+          item?.poblacion?.toLowerCase().includes(localizacion.toLowerCase()) ||
+          item?.poblacion?.toUpperCase().includes(localizacion.toUpperCase())
+        ) {
+          arr.push({ poblacion: item?.poblacion, provincia: item?.provincia });
+        }
+      }
+    });
+
+    /* Hacemos el new set para que no hayan duplicados.
+          Luego pues convertimos los datos del array arr para pasarlos a stringify y apartir de ahí
+          quitar los datos duplicados
+      */
+    arr = new Set(
+      arr.map((poblacion) =>
+        JSON.stringify({
+          poblacion: poblacion.poblacion,
+          provincia: poblacion.provincia,
+        })
+      )
+    );
+    /* Creamos un nuevo array y parseamos el json a un objeto */
+    const poblacionProvinciaUnicos = Array.from(arr).map((str) =>
+      JSON.parse(str)
+    );
+    setFoundWord([...poblacionProvinciaUnicos]);
+  }, [searchForm.localizacion]);
 
   return (
     <MotionConfig
@@ -232,6 +280,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                     </AccordionSummary>
                     <AccordionDetails className="border-none">
                       <PopSearchPlace
+                        foundWord={foundWord}
                         openInputSearch={openInputSearch}
                         openInput={openInput}
                         onChangeForm={onChangeForm}
@@ -308,7 +357,11 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                           <div className="">
                             <h1 className="text-xl font-bold">
                               {searchForm.flor}
-                              <img src={`http://localhost:3000/img/cerezos.png`} alt="" className="w-7" />
+                              <img
+                                src={`http://localhost:3000/img/cerezos.png`}
+                                alt=""
+                                className="w-7"
+                              />
                             </h1>
                             <h1 className="text-[15px] py-2">
                               ¿Que plantas quieres ver?

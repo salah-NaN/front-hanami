@@ -1,6 +1,5 @@
 import { ButtonSearch } from "../";
 import { motion } from "framer-motion";
-import { ProvinciasComponent } from "./";
 
 export const PopSearchPlace = ({
   searchPc,
