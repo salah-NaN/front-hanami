@@ -308,6 +308,7 @@ export const PopUpBuscador = ({ toggleMobileNav }) => {
                           <div className="">
                             <h1 className="text-xl font-bold">
                               {searchForm.flor}
+                              <img src={`http://localhost:3000/img/cerezos.png`} alt="" className="w-7" />
                             </h1>
                             <h1 className="text-[15px] py-2">
                               ¿Que plantas quieres ver?
