@@ -4,7 +4,7 @@ import { CardItemMap, NavBar } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import { Filter } from "../components/filtros";
+import Filter from "../components/filtros/Filter";
 import { format, parse } from "date-fns";
 import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
@@ -51,9 +51,6 @@ export const Busqueda = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  /*     if(filterData.map(fd => fd.temporadas.map(t => t.nombre)) == filters?.filter(f=>f.seteado == true).map(f => f.temporada)){
-        console.log("hola");
-      } */
   useEffect(() => {
     setCambio(!cambio);
   }, [filters]);
@@ -64,11 +61,8 @@ export const Busqueda = () => {
     );
   }, [cambio]);
 
-  /* 
-  pi => pi.temporadas.map(t=>t.nombre)
-  
-  */
   return (
+
     <>
       <NavBar />
       {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
