@@ -1,29 +1,22 @@
-import { useEffect, useState } from "react";
-
 export const IconPLanta = ({ planta }) => {
-
-  const [flor, setFlor] = useState('');
-  useEffect(() => {
-    if(flor === 'Cerezo'){
-      setFlor('cerezos');
-    }
-
-    if(flor === 'Lavanda'){
-      setFlor('LavandaMaxFloracion');
-    }
-    
-    if(flor === 'Olivos'){
-      setFlor('olivos');
-    }
-
-    if(flor === 'Viña'){
-      setFlor('ViñaUvaGrande');
-    }
-  }, [planta])
   return (
     <>
       {planta !== null ? (
-        <img src={`http://localhost:3000/img/${flor}.png`} alt="" />
+        <img
+          src={`http://localhost:3000/img/${
+            planta === "Cerezo"
+              ? "cerezas"
+              : planta === "Lavanda"
+              ? "LavandaMaxFloracion"
+              : planta === "Olivo"
+              ? "olivos"
+              : planta === "Viña"
+              ? "ViñaUvaGrande"
+              : ""
+          }.png`}
+          alt=""
+          className="w-10"
+        />
       ) : (
         <svg
           viewBox="0 0 24 24"

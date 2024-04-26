@@ -7,7 +7,7 @@ import {
   SearchBar,
   Mapa,
   Footer,
-  NavBar
+  NavBar,
 } from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
 import ClienteContext from "../context/ClienteContext";
@@ -37,9 +37,7 @@ export const Inicio = () => {
 
     fetch(url + `/actividades_or_puntointeres`)
       .then((res) => res.json())
-      .then((puntosInteres) =>
-        setActividadOrPuntoInteres(puntosInteres)
-      )
+      .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
       .catch((error) => console.log(error));
 
   }, []);
@@ -47,22 +45,27 @@ export const Inicio = () => {
 
 
   return (
-    <div className="">
+    <div className="bg-white">
       <div className="" id="banner">
         <NavBar />
         <Banner />
       </div>
-      <div className="bg-[#FFFFFF]" ref={scrollBuscadorRef}>
-        <div className="py-12 w-10/12 mx-auto">
-          <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
-          <Mapa />
-        </div>
-        <div className="w-10/12 mx-auto">
-          <CardBox hotTrends={hotTrends} />
-        </div>
-        <div className="py-32">
-          <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
-            <SliderItems actividadOrPuntoInteres={actividadOrPuntoInteres} setActividadOrPuntoInteres={setActividadOrPuntoInteres} />
+      <div className="bg-[#FFFFFF] w-10/12 mx-auto" ref={scrollBuscadorRef}>
+        <div className="w-[90%] mx-auto">
+          <div className="py-12 w-10/12 mx-auto">
+            <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
+            <Mapa />
+          </div>
+          <div className="w-10/12 mx-auto">
+            <CardBox hotTrends={hotTrends} />
+          </div>
+          <div className="py-32">
+            <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
+              <SliderItems
+                actividadOrPuntoInteres={actividadOrPuntoInteres}
+                setActividadOrPuntoInteres={setActividadOrPuntoInteres}
+              />
+            </div>
           </div>
         </div>
       </div>

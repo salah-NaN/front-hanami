@@ -5,6 +5,15 @@ import { PopUpBuscador } from "./Buscador/PopUp";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Banner = () => {
+  const [puntosDeInteres, setPuntosDeInteres] = useState([]);
+  useEffect(() => {
+    const url = "http://localhost:3000/api";
+    fetch(url + "/puntos_interes")
+      .then((res) => res.json())
+      .then((puntos_interes) => setPuntosDeInteres(puntos_interes))
+      .catch((error) => console.log(error));
+  }, []);
+
   const ref = useRef(null);
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
@@ -38,12 +47,16 @@ export const Banner = () => {
         <div className="relative md:hidden">
           <AnimatePresence>
             <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
-              <PopUpBuscador toggleMobileNav={toggleMobileNav} />
+              <PopUpBuscador
+                toggleMobileNav={toggleMobileNav}
+                puntosDeInteres={puntosDeInteres}
+                setPuntosDeInteres={setPuntosDeInteres}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
       ) : null}
-      <div className="absolute bottom-80 flex flex-col justify-start items-start">
+      <div className="md:absolute md:bottom-80 flex flex-col justify-start items-center">
         <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
           <div className="py-2 bg-transparent md:px-6 lg:w-fit">
             <h1
@@ -61,15 +74,19 @@ export const Banner = () => {
             </h1>
           </div>
         </div>
-        <div className="flex w-full justify-center items-center">
-          <SearchBar openPopUpBuscador={openPopUpBuscador} />
+        <div className="flex w-full justify-center items-center md:pt-16">
+          <SearchBar
+            openPopUpBuscador={openPopUpBuscador}
+            puntosDeInteres={puntosDeInteres}
+            setPuntosDeInteres={setPuntosDeInteres}
+          />
         </div>
       </div>
       <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">
         <div
-          className="hover:backdrop-blur-0"
+          className="md:block hidden hover:backdrop-blur-0"
           style={{
-            backgroundImage: `url(/lavanda.jpg)`,
+            backgroundImage: `url(/lavandaFoto.png)`,
             backgroundSize: `cover`,
             position: "relative",
             width: "100%",
@@ -90,7 +107,7 @@ export const Banner = () => {
           ></div>
         </div>
         <div
-          className=""
+          className="md:block hidden"
           style={{
             backgroundImage: `url(/olivo.jpg)`,
             backgroundSize: `cover`,
@@ -113,7 +130,7 @@ export const Banner = () => {
           ></div>
         </div>
         <div
-          className=""
+          className="md:block hidden"
           style={{
             backgroundImage: `url(/cerezoflor2.jpg)`,
             backgroundSize: `cover`,
@@ -136,9 +153,32 @@ export const Banner = () => {
           ></div>
         </div>
         <div
-          className=""
+          className="md:block hidden"
           style={{
             backgroundImage: `url(/viñaaaa.jpg)`,
+            backgroundSize: `cover`,
+            position: "relative",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              transition: "backdrop-filter 0.3s ease",
+              zIndex: 0,
+            }}
+            className="hover:backdrop-blur-0 backdrop-blur-sm w-full h-full absolute top-0 left-0 right-0 cursor-pointer"
+          ></div>
+        </div>
+        <div
+          className="md:hidden block"
+          style={{
+            backgroundImage: `url(/lavanda.jpg)`,
             backgroundSize: `cover`,
             position: "relative",
             width: "100%",
