@@ -42,7 +42,7 @@ export const ProvinciasComponent = ({
           onClick={() => handleFunction({ provincia: `Tarragona` })}
         >
           <img src="/tarragona.svg" />
-          <h1 className="text-sm text-right">Tarragon</h1>
+          <h1 className="text-sm text-right">Tarragona</h1>
         </div>
         <div
           className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
