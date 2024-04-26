@@ -1,13 +1,22 @@
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence, useCycle } from "framer-motion";
 import { motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
+import BuscadorOtrasPaginas from "../Buscador/BuscadorOtrasPaginas";
 
-export const NavBar = () => {
+export const NavBar = ({otrasPaginas}) => {
+  
+  const location = useLocation();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
+  const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
 
   const toggleMenu = () => {
     toggleMobileNav();
   };
+
+  const openPopUpBuscador = () => {
+    toggleBuscadorNav();
+  }
 
   return (
     <div className="w-full z-30 absolute top-0
@@ -16,6 +25,11 @@ export const NavBar = () => {
         <div className="sticky border-r-0 border-l-0 border-t-0">
           <nav className="w-10/12 max-auto flex justify-between py-3 mx-auto">
             <Logo />
+            {
+              location.pathname !== '/' ? (
+                <BuscadorOtrasPaginas />
+              ) : null
+            }
             <div className="hidden md:inline">
               <AccountButton />
             </div>
