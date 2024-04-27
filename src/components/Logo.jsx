@@ -10,7 +10,7 @@ export const Logo = () => {
       <div className="flex items-center cursor-pointer"onClick={()=>navigate("/")}>
 
         <img src="http://localhost:3000/img/menta.png" alt="logo" className="w-10" />
-        <h1 className="px-2">Hanami</h1>
+        <h1 className="px-2 text-white text-[20px] font-bold">Hanami</h1>
       </div>
     </div>
   );

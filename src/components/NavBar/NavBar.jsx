@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { AnimatePresence, useCycle } from "framer-motion";
 import { motion } from "framer-motion";
 import { AccountButton, Logo, HanburgerButton, NavLinks } from "../";
@@ -8,6 +8,7 @@ export const NavBar = () => {
   const location = useLocation();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
+  console.log(location);
 
   const toggleMenu = () => {
     toggleMobileNav();
@@ -15,20 +16,31 @@ export const NavBar = () => {
 
   const openPopUpBuscador = () => {
     toggleBuscadorNav();
-  }
+  };
 
   return (
-    <div className="w-full z-10 absolute top-0
-    xl:w-3/4 mx-auto left-0 right-0 bg-red-600">
-      <header className="">
-        <div className="overflow-visible border-r-0 border-l-0 border-t-0 bg-red-500">
-          <nav className="w-10/12 max-auto flex justify-between py-3 mx-auto">
+    <div>
+      <header
+        className={`w-full ${
+          location.pathname.includes("/puntoInteres") ||
+          location.pathname.includes("/actividades")
+            ? "w-10/12 mx-auto md:w-[68%] xl:mx-auto"
+            : location.pathname.includes("/busqueda")
+            ? "w-full h-24"
+            : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
+        }`}
+      >
+        <div
+          className={`overflow-visible border-r-0 border-l-0 border-t-0 ${
+            location.pathname == "/" ? "w-11/12 mx-auto" : ""
+          }`}
+        >
+          {/* Antes el w-full estaba en w-10/12 */}
+          <nav className="w-11/12 max-auto flex justify-between py-3 mx-auto">
             <Logo />
-            {
-              location.pathname !== '/' ? (
-                <BuscadorOtrasPaginas openPopUpBuscador={openPopUpBuscador} />
-              ) : null
-            }
+            {location.pathname !== "/" ? (
+              <BuscadorOtrasPaginas openPopUpBuscador={openPopUpBuscador} />
+            ) : null}
             <div className="hidden md:inline">
               <AccountButton />
             </div>

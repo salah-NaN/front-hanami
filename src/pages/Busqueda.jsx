@@ -62,13 +62,10 @@ export const Busqueda = () => {
   }, [cambio]);
 
   return (
-
     <>
-      {/* <NavBar /> */}
-      {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
       <div
-        className="mt-[0px] flex flex-col rounded-md
-        lg:flex-row-reverse"
+        className=" mt-[66px] flex flex-col rounded-md
+        lg:flex-row-reverse bg-red-400"
       >
         {/* mapa */}
         <div
@@ -116,6 +113,8 @@ export const Busqueda = () => {
           <p>Mostrar mapa</p>
           <img className="size-5" src={arrowRight}></img>
         </a>
+
+
 
         {/* cards */}
         <div

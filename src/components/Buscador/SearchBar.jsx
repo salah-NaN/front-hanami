@@ -208,7 +208,7 @@ export const SearchBar = ({
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
 
-    console.log(searchForm?.localizacion, searchForm?.provincia)
+    console.log(searchForm?.localizacion, searchForm?.provincia);
     if (searchForm?.provincia !== undefined) {
       localizacion = "provincia:" + searchForm?.provincia;
     }
@@ -217,7 +217,7 @@ export const SearchBar = ({
       localizacion = "poblacion:" + searchForm?.localizacion;
     }
 
-    console.log(localizacion)
+    console.log(localizacion);
 
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {

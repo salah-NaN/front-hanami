@@ -13,6 +13,7 @@ import {
 import { NavBar } from "./components";
 import { useState } from "react";
 import ClienteContext from "./context/ClienteContext";
+import BusquedaPrueba from "./pages/BusquedaPrueba";
 
 export const App = () => {
   const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: "" });
@@ -52,8 +53,8 @@ export const App = () => {
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
             element={
               <LayoutHanami>
-                <NavBar />
-                <Busqueda />
+                <BusquedaPrueba />
+                {/* <Busqueda /> */}
               </LayoutHanami>
             }
           ></Route>

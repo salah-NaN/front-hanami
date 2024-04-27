@@ -3,11 +3,31 @@ import { ButtonSearch } from "./ButtonSearch";
 export const BuscadorOtrasPaginas = ({ openPopUpBuscador }) => {
   return (
     <div
-      className="grid grid-cols-5 justify-between items-center w-7/12 h-fit p-2 border rounded-xl
+      className="flex flex-row gap-5 justify-between items-center w-96 h-fit px-4 py-2 border rounded-xl
     shadow-md cursor-pointer"
       onClick={openPopUpBuscador}
     >
-      <div className="items-center flex justify-center">
+      <div className="flex justify-between w-full">
+        <div className="w-full">
+          <h1>Nueva busqueda</h1>
+        </div>
+      </div>
+      <div className="flex w-full col-span-2 items-center justify-end">
+        {/* <div className="w-full flex px-5"> */}
+        {/* <h1 className="text-sm font-bold">Que quieres</h1> */}
+        {/* </div> */}
+        <div className="w-full flex justify-end">
+          <ButtonSearch
+            stylesButton={{
+              backGround: `bg-white`,
+              svgColor: `stroke-black`,
+              size: `w-[40px] h-10`,
+              svgSize: `w-[27px]`,
+            }}
+          />
+        </div>
+      </div>
+      {/* <div className="items-center flex justify-center">
         <h1 className="font-bold text-sm">Elige un Lugar</h1>
       </div>
       <div className="flex items-center justify-center border-l">
@@ -15,22 +35,7 @@ export const BuscadorOtrasPaginas = ({ openPopUpBuscador }) => {
       </div>
       <div className="border-l flex items-center justify-center w-full">
         <h1 className="text-sm font-bold">Que ver?</h1>
-      </div>
-      <div className="border-l flex w-full col-span-2 items-center">
-        <div className="w-full flex px-5">
-          <h1 className="text-sm font-bold">Que quieres</h1>
-        </div>
-        <div className="">
-          <ButtonSearch
-            stylesButton={{
-              backGround: `bg-white`,
-              svgColor: `stroke-black`,
-              size: `w-[38px] h-9`,
-              svgSize: `w-[20px]`,
-            }}
-          />
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 };
