@@ -39,7 +39,6 @@ export const Inicio = () => {
       .then((res) => res.json())
       .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
       .catch((error) => console.log(error));
-
   }, []);
 
 

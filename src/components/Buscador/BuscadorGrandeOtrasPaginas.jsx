@@ -4,11 +4,8 @@ import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
 
-export const SearchBar = ({
-  moveToSearchBar,
-  openPopUpBuscador,
-  puntosDeInteres,
-  setPuntosDeInteres,
+export const BuscadorGrandeOtrasPaginas = ({
+    puntosDeInteres
 }) => {
   const navigate = useNavigate();
   const ref = useRef();
@@ -241,10 +238,11 @@ export const SearchBar = ({
   return (
     <>
       <div
-        className={`z-20 h-20 flex items-center w-10/12 mx-auto border rounded-full shadow-sm shadow-white ${
+        className={`z-20 h-20 flex items-center w-full 
+        mx-auto border rounded-full shadow-sm shadow-white ${
           isCheck === true ? `bg-[#EBEBEB]` : `bg-white`
         }`}
-        ref={moveToSearchBar}
+        // ref={moveToSearchBar}
       >
         <div className="w-full flex items-center md:relative">
           <form
@@ -256,7 +254,7 @@ export const SearchBar = ({
                 : `md:grid md:grid-cols-10 md:h-20`
             }`}
           >
-            <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
+            {/* <BuscadorMobil openPopUpBuscador={openPopUpBuscador} /> */}
             <div
               className={`buscar_div w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
               hover:border-none hover:rounded-full button hover:shadow-xl ${
@@ -460,4 +458,4 @@ export const SearchBar = ({
     </>
   );
 };
-export default SearchBar;
+export default BuscadorGrandeOtrasPaginas;

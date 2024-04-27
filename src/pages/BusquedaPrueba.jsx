@@ -61,6 +61,7 @@ export const BusquedaPrueba = () => {
 
   return (
     <div className="grid grid-cols-2 relative">
+
       {/* cards */}
       <div
         className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
@@ -87,7 +88,8 @@ export const BusquedaPrueba = () => {
                 />
               ))}
       </div>
-      <div className={`w-full ${mapSizeFull ? "w-10" : "w-10"}`}>
+
+      <div className={`w-full z-10 ${mapSizeFull ? "w-10" : "w-10"}`}>
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden

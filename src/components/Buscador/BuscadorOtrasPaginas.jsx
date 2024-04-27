@@ -1,15 +1,15 @@
 import { ButtonSearch } from "./ButtonSearch";
 
-export const BuscadorOtrasPaginas = ({ openPopUpBuscador }) => {
+export const BuscadorOtrasPaginas = ({ openOnPopUpBuscador }) => {
   return (
     <div
       className="flex flex-row gap-5 justify-between items-center w-96 h-fit px-4 py-2 border rounded-xl
-    shadow-md cursor-pointer"
-      onClick={openPopUpBuscador}
+    shadow-sm cursor-pointer hover:shadow-lg hover:transition-all hover:duration-300"
+      onClick={openOnPopUpBuscador}
     >
       <div className="flex justify-between w-full">
         <div className="w-full">
-          <h1>Nueva busqueda</h1>
+          <h1 className="text-md font-bold">Nueva busqueda</h1>
         </div>
       </div>
       <div className="flex w-full col-span-2 items-center justify-end">
