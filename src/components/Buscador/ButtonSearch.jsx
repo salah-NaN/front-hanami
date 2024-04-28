@@ -2,12 +2,13 @@ export const ButtonSearch = ({ stylesButton }) => {
   return (
     <div className="">
       <button
-        className={`w-full md:bg-[#53cd68] md:stroke-white ${
-          stylesButton?.size !== undefined ? stylesButton?.size : `md:h-20 md:w-20 px-4`
-        } h-14  flex justify-center 
-        items-center 
-        ${stylesButton?.svgColor} 
-        ${stylesButton?.hover}
+        className={`w-10 h-fit rounded-full md:bg-[#53cd68] md:stroke-white ${
+          stylesButton?.size !== undefined
+            ? stylesButton?.size
+            : `md:h-20 md:w-20 px-4`
+        } h-14 flex justify-center items-center ${stylesButton?.svgColor} ${
+          stylesButton?.hover
+        }
           hover:bg-green-700 border-none rounded-full`}
         type="submit"
       >
@@ -16,7 +17,11 @@ export const ButtonSearch = ({ stylesButton }) => {
           strokeWidth="1.5"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`${stylesButton?.svgSize !== undefined ? stylesButton?.svgSize : `md:w-8 w-6`}`}
+          className={`${
+            stylesButton?.svgSize !== undefined
+              ? stylesButton?.svgSize
+              : `md:w-8 w-6`
+          }`}
         >
           <path
             d="M17 17L21 21"

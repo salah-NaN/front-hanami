@@ -3,8 +3,8 @@ import { ButtonSearch } from "./ButtonSearch";
 export const BuscadorOtrasPaginas = ({ openOnPopUpBuscador }) => {
   return (
     <div
-      className="flex flex-row gap-5 justify-between items-center w-96 h-fit px-4 py-2 border rounded-xl
-    shadow-sm cursor-pointer hover:shadow-lg hover:transition-all hover:duration-300"
+      className="flex flex-row justify-between items-center w-96 h-fit border rounded-full
+    shadow-sm cursor-pointer hover:shadow-lg hover:transition-all hover:duration-300 p-1 px-2"
       onClick={openOnPopUpBuscador}
     >
       <div className="flex justify-between w-full">
@@ -21,8 +21,8 @@ export const BuscadorOtrasPaginas = ({ openOnPopUpBuscador }) => {
             stylesButton={{
               backGround: `bg-white`,
               svgColor: `stroke-black`,
-              size: `w-[40px] h-10`,
-              svgSize: `w-[27px]`,
+              size: '',
+              svgSize: "w-6 h-10"
             }}
           />
         </div>
