@@ -41,7 +41,7 @@ export const NavBar = () => {
         `}
         >
           <div
-            className={`overflow-visible border-r-0 border-l-0 border-t-0  h-full ${
+            className={`flex items-center overflow-visible border-r-0 border-l-0 border-t-0  h-full ${
               location.pathname == "/" ? "w-11/12 mx-auto" : ""
             }`}
           >
@@ -52,8 +52,15 @@ export const NavBar = () => {
             buscadorNav === true ? `h-full items-center` : ``
           } justify-between py-3 mx-auto`}
             >
-              <Logo />
-
+              <div
+                className={`${
+                  location.pathname.includes("/busqueda")
+                    ? `hidden md:block`
+                    : ``
+                }`}
+              >
+                <Logo />
+              </div>
               {/* Buscador pequeño sin el popUp  */}
               {location.pathname !== "/" && buscadorNav === false ? (
                 <BuscadorOtrasPaginas
@@ -78,9 +85,15 @@ export const NavBar = () => {
               <div className="hidden md:inline">
                 <AccountButton />
               </div>
-              <div className="flex items-center md:hidden lg:hidden xl:hidden">
-                <HanburgerButton toggleMenu={toggleMenu} />
-              </div>
+              {location.pathname.includes("busqueda") ? (
+                <div className="">
+                  <h1>hola</h1>
+                </div>
+              ) : (
+                <div className="flex items-center md:hidden lg:hidden xl:hidden">
+                  <HanburgerButton toggleMenu={toggleMenu} />
+                </div>
+              )}
             </nav>
           </div>
         </motion.header>

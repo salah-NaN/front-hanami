@@ -8,8 +8,8 @@ export const ButtonSearch = ({ stylesButton }) => {
             : `md:h-20 md:w-20 px-4`
         } h-14 flex justify-center items-center ${stylesButton?.svgColor} ${
           stylesButton?.hover
-        }
-          hover:bg-green-700 border-none rounded-full`}
+        }hover:bg-green-700 border-none rounded-full`}
+        
         type="submit"
       >
         <svg

@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
 
-export const BuscadorGrandeOtrasPaginas = ({
-    puntosDeInteres
-}) => {
+export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
   const navigate = useNavigate();
   const ref = useRef();
 
@@ -24,7 +22,7 @@ export const BuscadorGrandeOtrasPaginas = ({
   });
 
   const [popUp, setPopUp] = useState({
-    buscador: false,
+    buscador: true,
     flor: false,
     queHacer: false,
     fecha: false,
@@ -200,12 +198,12 @@ export const BuscadorGrandeOtrasPaginas = ({
   }, [popUp]);
 
   const onSubmitSearch = () => {
-    event.preventDefault();
+    // event.preventDefault();
+
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
 
-    console.log(searchForm?.localizacion, searchForm?.provincia);
     if (searchForm?.provincia !== undefined) {
       localizacion = "provincia:" + searchForm?.provincia;
     }
@@ -214,14 +212,12 @@ export const BuscadorGrandeOtrasPaginas = ({
       localizacion = "poblacion:" + searchForm?.localizacion;
     }
 
-    console.log(localizacion);
-
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
       navigate(
         `/busqueda/${queHacer}/${localizacion || ";"}/${
-          fecha?.toLocaleString().replaceAll("/", "-") || ";"
+          fecha?.toLocaleString()?.replaceAll("/", "-") || ";"
         }/${flor || ";"}`
       );
     }
@@ -256,7 +252,7 @@ export const BuscadorGrandeOtrasPaginas = ({
           >
             {/* <BuscadorMobil openPopUpBuscador={openPopUpBuscador} /> */}
             <div
-              className={`buscar_div w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
+              className={`buscar_div w-full col-span-3 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
               hover:border-none hover:rounded-full button hover:shadow-xl ${
                 popUp.buscador ? `bg-white rounded-full` : ``
               }`}
@@ -393,23 +389,29 @@ export const BuscadorGrandeOtrasPaginas = ({
               </div>
             )}
 
-            <div className="hidden md:block w-full col-span-4 relative">
+            <div className="hidden md:block w-full col-span-5 relative">
               <div
                 className="w-full h-full border border-[#c5c5c5] cursor-pointer
-                 border-none rounded-full button"
-                id="button-open"
-                onClick={() => setPopQueHacer()}
+                 border-none rounded-full "
               >
                 <div className="flex h-full justify-between items-center">
                   <div
-                    className={`w-full h-full flex justify-between items-center hover:md:shadow-xl hover:xl:shadow-none 
-                  hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white ${
-                    popUp.queHacer
-                      ? `bg-white border-none rounded-full shadow-lg`
-                      : ``
-                  }`}
+                    className={`w-full h-full flex justify-between items-center hover:md:shadow-xl 
+                    hover:xl:shadow-none 
+                    hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] 
+                    hover:xl:bg-white
+                    ${
+                      popUp.queHacer
+                        ? `border-none rounded-full shadow-lg`
+                        : ``
+                    }`}
                   >
-                    <div className="flex flex-col px-2">
+                    <div
+                      className="flex flex-col px-2 w-full h-full justify-center
+                      button"
+                      id="button-open"
+                      onClick={() => setPopQueHacer()}
+                    >
                       <h1 className="md:block font-bold text-sm">
                         Que quieres hacer?
                       </h1>
@@ -431,9 +433,9 @@ export const BuscadorGrandeOtrasPaginas = ({
                         <h1 className="text-sm">Elige una opcion</h1>
                       )}
                     </div>
-                    <div>
+                    <button type="submit" onClick={onSubmitSearch}>
                       <ButtonSearch />
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -448,9 +450,7 @@ export const BuscadorGrandeOtrasPaginas = ({
                     setPopQueHacer={setPopQueHacer}
                   />
                 </div>
-              ) : (
-                <div className=""></div>
-              )}
+              ) : null}
             </div>
           </form>
         </div>
