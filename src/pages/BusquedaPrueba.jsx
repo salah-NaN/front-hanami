@@ -33,7 +33,6 @@ export const BusquedaPrueba = () => {
   }, []);
 
   // constantes
-
   useEffect(() => {
     const url = "http://localhost:3000/api/";
     if (fecha !== ";") {
@@ -60,13 +59,13 @@ export const BusquedaPrueba = () => {
   }, [cambio]);
 
   return (
-    <div className="grid grid-cols-2 relative">
+    <div className="grid grid-cols-2 relative mt-28">
 
       {/* cards */}
       <div
         className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
         ${mapSizeFull ? "" : ""}
-      xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-auto`}
+      xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-y-auto`}
       >
         {checkedFilters.length === 0
           ? filterData &&
@@ -89,7 +88,7 @@ export const BusquedaPrueba = () => {
               ))}
       </div>
 
-      <div className={`w-full z-10 ${mapSizeFull ? "w-10" : "w-10"}`}>
+      <div className={`w-1/2 fixed right-0 h-screen z-10 ${mapSizeFull ? "w-10" : "w-10"}`}>
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden
@@ -105,6 +104,9 @@ export const BusquedaPrueba = () => {
         {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
         <a
           href="#"
+          onClick={(e) => {
+            e.preventDefault()
+          }}
           className={` flex justify-between items-center px-2.5 py-1.5 fixed z-30 bottom-12 left-1/2 -translate-x-1/2 bg-red-700 
           lg:hidden`}
         >

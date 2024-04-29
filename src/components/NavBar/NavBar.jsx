@@ -1,8 +1,8 @@
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, useCycle, motion } from "framer-motion";
-import { AccountButton, Logo, HanburgerButton, NavLinks, SearchBar } from "../";
+import { AccountButton, Logo, HanburgerButton, NavLinks, SearchBar, FiltersButton } from "../";
 import { BuscadorGrandeOtrasPaginas, BuscadorOtrasPaginas } from "../Buscador";
-import { useState, useEffect } from "react";
 
 export const NavBar = () => {
   const location = useLocation();
@@ -31,13 +31,13 @@ export const NavBar = () => {
       <AnimatePresence>
         <motion.header
           className={`w-full ${
-            location.pathname.includes("/puntoInteres") ||
+            location.pathname.includes("/puntosInteres") ||
             location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-[68%] xl:mx-auto"
               : location.pathname.includes("/busqueda")
-              ? "w-full h-24 transition-all duration-300"
+              ? "w-full h-24 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
-          } ${buscadorNav === true ? `h-48 absolute bg-white z-50` : ``}
+          } ${buscadorNav === true ? `h-48 absolute top-0 left-0 right-0 bg-white z-50` : ``}
         `}
         >
           <div
@@ -50,7 +50,7 @@ export const NavBar = () => {
               className={`w-11/12 max-auto flex 
           ${
             buscadorNav === true ? `h-full items-center` : ``
-          } justify-between py-3 mx-auto`}
+          } justify-between py-3 gap-3 mx-auto`}
             >
               <div
                 className={`${
@@ -86,8 +86,8 @@ export const NavBar = () => {
                 <AccountButton />
               </div>
               {location.pathname.includes("busqueda") ? (
-                <div className="">
-                  <h1>hola</h1>
+                <div className="md:hidden flex items-center">
+                  <FiltersButton />
                 </div>
               ) : (
                 <div className="flex items-center md:hidden lg:hidden xl:hidden">
