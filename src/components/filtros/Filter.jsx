@@ -216,7 +216,7 @@ export const Filter = ({ setFilters, filterData }) => {
           data-ripple-light="true"
           data-popover-target="menu"
           onClick={() => setToggleDropDown(!toggleDropDown)}
-          class="select-none rounded-lg py-3 px-6 border
+          class="select-none rounded-lg p-2 px-4 border
         text-center align-middle font-sans text-xs font-bold uppercase 
         text-white transition-all hover:shadow-lg
          hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] 
@@ -229,7 +229,8 @@ export const Filter = ({ setFilters, filterData }) => {
         {toggleDropDown === true ? (
           <div
             className="fixed inset-0 backdrop-blur-sm bg-opacity-75 z-50 flex justify-center
-           items-center fondo">
+           items-center fondo"
+          >
             <div className="bg-white w-1/2 p-5 border rounded-2xl">
               <div className="w-full flex justify-end cursor-pointer">
                 <div
