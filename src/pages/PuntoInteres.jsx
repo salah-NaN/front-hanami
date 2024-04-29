@@ -14,7 +14,7 @@ import plusCircle from '../assets/plus-circle.svg'
 import minusCircle from '../assets/minus-circle.svg'
 import ModalVerResenias from "../components/resenias/ModalVerResenias";
 import { fechas, nombreConvertido, parseNumTelefono, parseFecha, parseTemporada } from "../pages/utils/Hooks"
-
+import CardActividades from '../components/cards/CardActividades'
 
 
 // constantes
@@ -32,6 +32,8 @@ export const PuntoInteres = () => {
   const [modalVerReseniasVisible, setModalVerReseniasVisible] = useState(false)
   // controlar temporadas visibles
   const [seasonVisible, setSeasonVisible] = useState(false)
+  // state para almacenar todas las actividades
+  const [actividades, setActividades] = useState([])
 
   useEffect(() => {
 
@@ -39,8 +41,8 @@ export const PuntoInteres = () => {
       .then(res => res.json())
       .then(res => {
         console.log(res)
-
         setPuntoInteres(res)
+        setActividades(todasLasActividades(res.temporadas))
       })
       .catch(err => console.log(err))
   }, [])
@@ -102,10 +104,26 @@ export const PuntoInteres = () => {
     componentToRender = <GridFive images={puntoInteres.imagenes} />;
   }
 
+  useEffect(() => {
+    console.log('asdf')
+    console.log(actividades)
+  }, [actividades])
+
+  function todasLasActividades(temporadas) {
+    const actividades = []
+
+    temporadas?.forEach(t => {
+      t.actividades?.forEach(a => {
+        actividades?.push(a)
+      })
+    })
+
+    return actividades
+
+  }
+
   return (
     <>
-
-
       <>
         <div className="mt-28" >
           <h2 className=" text-4xl w-fit font-black mb-1 text-[#222222]
@@ -137,16 +155,13 @@ export const PuntoInteres = () => {
                     }
                   </div>
                   <div onClick={() => setSeasonVisible(!seasonVisible)}
-                  className={`ml-0.5 flex items-center `}>
-                    <img src={seasonVisible ? minusCircle :  plusCircle} ></img>
-                  <button className=" ml-1.5 mt-0.5 text-[15px] w-fit  rounded-lg underline underline-offset-1 transition-all duration-300  text-[#404040]   "
-                  >{seasonVisible ? 'Ver menos' : 'Ver más'}</button>
+                    className={`ml-0.5 flex items-center `}>
+                    <img src={seasonVisible ? minusCircle : plusCircle} ></img>
+                    <button className=" ml-1.5 mt-0.5 text-[15px] w-fit  rounded-lg underline underline-offset-1 transition-all duration-300  text-[#404040]   "
+                    >{seasonVisible ? 'Ver menos' : 'Ver más'}</button>
                   </div>
                 </div>
-
-
                 :
-
                 puntoInteres?.temporadas?.map(t => (
                   <div className="flex items-center gap-1">
                     <img className="hidden size-6
@@ -228,9 +243,29 @@ export const PuntoInteres = () => {
                 <p className="ml-2 pt-0.5 "
                 >{parseNumTelefono(puntoInteres.propietario?.telefono)}</p>
               </div>
-
             </div>
+          </div>
 
+          {/* <h3 className="text-3xl mx-auto font-semibold mt-10">Actividades</h3> */}
+          {
+            actividades.length !== 0
+              ?
+              <h3 className="mt-10 text-4xl w-fit mx-auto font-black mb-1  bg-gradient-to-r from-[#131313] to-[#bb7d4a] bg-clip-text text-transparent
+        md:text-5xl">Actividades</h3>
+              :
+              null
+          }
+
+          {/* actividades */}
+          <div className="mt-10 grid grid-cols-1 mx-auto gap-y-9 
+            sm:grid-cols-2 sm:gap-x-9
+            lg:grid-cols-3" >
+            {
+              actividades && actividades.map(a => (
+
+                <CardActividades key={a.id} actividad={a} />
+              ))
+            }
           </div>
         </div>
 
@@ -238,17 +273,6 @@ export const PuntoInteres = () => {
         {/* <Resenia resenia={resenia}/> */}
       </>
     </>
-
-
-
-
-
-
-
-
-
-
-
 
   )
 }

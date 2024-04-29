@@ -194,7 +194,7 @@ export const Actividades = () => {
             {/* email */}
             <div className="flex justify-start items-center">
               <img className="size-6" src={mail} ></img>
-              <p className="ml-2 pt-0.5 "
+              <p className="ml-2 pt-0.5 " onClick={() => window.open(`mailto:${actividad?.temporada?.puntos_intere?.propietario?.email}`)}
               >{actividad?.temporada?.puntos_intere?.propietario?.email}</p>
             </div>
 

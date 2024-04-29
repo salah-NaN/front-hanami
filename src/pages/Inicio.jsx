@@ -49,7 +49,8 @@ export const Inicio = () => {
         <div className="md:w-[90%] mx-auto">
           <div className="py-32 w-10/12 mx-auto">
             <h1 className="text-6xl w-fit mx-auto text-center mb-2 bg-gradient-to-r from-[#32b74b] to-[#929292] bg-clip-text text-transparent
-            md:mb-12">Busca por el mapa</h1>
+            lg:mb-2
+            xl:mb-16">Busca por el mapa</h1>
             <div className="flex flex-col gap-10
             xl:flex-row xl:gap-20" >
               <div className=" mb-10 mt-[4rem]
