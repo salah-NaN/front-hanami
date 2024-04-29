@@ -10,7 +10,8 @@ const GridFive = ({ images }) => {
     return (
         <>
             <div className="grid grid-cols-4 grid-rows-2 gap-1.5 h-[320px] 
-            xl:h-[370px]">
+            xl:h-[380px]
+            2xl:h-[390px]">
                 {
                     images && images.map((image, index) => {
                         if (index === 0) {
@@ -18,7 +19,6 @@ const GridFive = ({ images }) => {
                         } else if (index > 0 && index < 4) {
                             return <img key={image.id} className="hover:scale-95 transition-all duration-300 w-full h-full  rounded-lg" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
                         } else if (index === 4) {
-                            {/* return <img key={image.id} className="w-full h-full" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img> */ }
                             return <div key={image.id} className="b relative  w-full h-full">
                                 <img className="   w-full h-full rounded-lg " src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} >
                                 </img>

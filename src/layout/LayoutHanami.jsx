@@ -7,6 +7,9 @@ export const LayoutHanami = ({ children }) => {
   return (
     <>
       <header className="">
+      //<div className="w-10/11 mx-auto
+    //xl:w-[75%] xl:mx-auto
+    //2xl:w-[63%]">
         <NavBar />
       </header>
       <body>
