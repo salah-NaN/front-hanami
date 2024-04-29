@@ -39,7 +39,6 @@ export const Inicio = () => {
       .then((res) => res.json())
       .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
       .catch((error) => console.log(error));
-
   }, []);
 
 
@@ -50,9 +49,9 @@ export const Inicio = () => {
         <NavBar />
         <Banner />
       </div>
-      <div className="bg-[#FFFFFF] w-10/12 mx-auto" ref={scrollBuscadorRef}>
-        <div className="w-[90%] mx-auto">
-          <div className="py-12 w-10/12 mx-auto">
+      <div className="bg-[#FFFFFF] w-full mx-auto" ref={scrollBuscadorRef}>
+        <div className="w-full mx-auto lg:w-9/12">
+          <div className="py-12 w-10/12 md: mx-auto">
             <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
             <Mapa />
           </div>

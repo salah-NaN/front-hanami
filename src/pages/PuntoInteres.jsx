@@ -103,7 +103,30 @@ export const PuntoInteres = () => {
   }
 
   return (
-    <>
+
+    //<div className="mt-4">
+
+      {/* titulo */}
+      //<div>
+        //<h2 className="text-3xl font-medium mb-6"
+        //>{puntoInteres.nombre}</h2></div>
+      {/* imagenes */}
+      //{componentToRender}
+      {/* contenedor contenido y contacto */}
+      //<div className="flex flex-col mt-3
+      //sm:flex-row sm:justify-between ">
+        //<div className="w-full
+        //sm:w-7/12" >
+          {/* direccion y ubicacion */}
+          //<p className="text-[17px] font-semibold mt-3 "
+          //>{puntoInteres.ubicacion + ' · ' + puntoInteres.poblacion}</p>
+          {/* valoraciones */}
+          //<div className="flex items-center mt-1.5 mb-3" >
+           // <img className="size-6"
+            //  src={estrella} ></img>
+           // <p className="pt-0.5 text-[17px] font-semibold" >{datosResenia && (datosResenia.media + ' · ' + datosResenia.numResenias + ' ')}</p>
+           // <a className="pt-0.5 text-[17px] font-semibold underline underline-offset-1 ml-1.5 cursor-pointer">evaluaciones</a>
+          //</div>
 
 
       <>
