@@ -59,7 +59,7 @@ export const BusquedaPrueba = () => {
   }, [cambio]);
 
   return (
-    <div className="grid grid-cols-2 relative mt-28">
+    <div className="grid grid-cols-2 relative mt-24">
 
       {/* cards */}
       <div
@@ -88,7 +88,7 @@ export const BusquedaPrueba = () => {
               ))}
       </div>
 
-      <div className={`w-1/2 fixed right-0 h-screen z-10 ${mapSizeFull ? "w-10" : "w-10"}`}>
+      <div className={`${mapSizeFull ? "w-1/2" : "w-full"} fixed right-0 h-screen z-10`}>
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden
@@ -96,7 +96,7 @@ export const BusquedaPrueba = () => {
               lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] 
               lg:absolute lg:top-[9px] lg:cursor-pointer
               `}
-          src={mapSizeFull ? arrowRight : arrow}
+          src={mapSizeFull ? arrow : arrowRight}
           onClick={() => setMapSizeFull(!mapSizeFull)}
         ></img>
 
