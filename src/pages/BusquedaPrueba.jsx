@@ -65,7 +65,7 @@ export const BusquedaPrueba = () => {
 
   return (
     <div
-      className={`md:grid md:grid-cols-2 md:relative md:mt-24 flex-col mt-96`}
+      className={`md:grid md:grid-cols-2 md:relative md:mt-24 flex flex-col ${showMap ? `mt-20` : `mt-96`}`}
     >
       {/* cards */}
 
@@ -96,18 +96,14 @@ export const BusquedaPrueba = () => {
                 ))}
         </div>
       ) : (
+        // null
         <div className="border absolute rounded-md bg-white bottom-0 flex items-end justify-center w-full h-full"></div>
       )}
 
       <div
-        className={`${mapSizeFull ? "md:w-full z-50 absolute" : ""}
-      ${showMap ? `h-5/6 w-full` : `md:h-full h-1/2`} z-10`}
-        //   className={`${
-        //     mapSizeFull ? "md:w-1/2" : "md:w-full"
-        //   } fixed md:right-0 md:h-screen md:z-10 fixed top-0 ${
-        //     showMap ? `h-5/6` : `h-1/2`
-        //   } z-10
-        // w-full`}
+        className={`${mapSizeFull ? "md:w-full z-50 absolute" 
+        : "md:h-screen md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 z-10"}
+      ${showMap ? `h-5/6 w-full` : `md:h-full fixed z-10 w-full h-2/5`} z-10`}
       >
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
@@ -117,8 +113,7 @@ export const BusquedaPrueba = () => {
               md:absolute md:top-[9px] md:cursor-pointer
               lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:rigth-0 lg:block 
               lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] 
-              lg:absolute lg:top-[9px] lg:cursor-pointer
-              `}
+              lg:absolute lg:top-[9px] lg:cursor-pointer`}
           src={mapSizeFull ? arrow : arrowRight}
           onClick={() => setMapSizeFull(!mapSizeFull)}
         ></img>
