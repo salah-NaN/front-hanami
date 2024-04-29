@@ -40,7 +40,7 @@ export const PopSearchPlace = ({
     >
       {searchPc === "" ? (
         <div
-          className="flex items-center border rounded-xl text-[17px]"
+          className="flex items-center border-none rounded-xl text-[17px]"
           onClick={openInputSearch}
         >
           <ButtonSearch

@@ -1,15 +1,17 @@
+import { useLocation } from "react-router-dom";
+
 export const ButtonSearch = ({ stylesButton }) => {
+  const location = useLocation();
   return (
     <div className="">
       <button
-        className={`w-10 h-fit rounded-full md:bg-[#53cd68] md:stroke-white ${
+        className={`${location.pathname !== `/` ? `w-10` : `w-14`} h-fit rounded-full md:bg-[#53cd68] md:stroke-white ${
           stylesButton?.size !== undefined
             ? stylesButton?.size
             : `md:h-20 md:w-20 px-4`
         } h-14 flex justify-center items-center ${stylesButton?.svgColor} ${
           stylesButton?.hover
         }hover:bg-green-700 border-none rounded-full`}
-        
         type="submit"
       >
         <svg

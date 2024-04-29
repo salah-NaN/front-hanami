@@ -17,6 +17,7 @@ export const BusquedaPrueba = () => {
   const [checkedFilters, setCheckedFilters] = useState([]);
   const [cambio, setCambio] = useState(false);
   const [mapSizeFull, setMapSizeFull] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [posicionScroll, setPosicionScroll] = useState(window.scrollY);
   const redirect = useNavigate();
 
@@ -31,6 +32,10 @@ export const BusquedaPrueba = () => {
       });
     };
   }, []);
+
+  const handleShowMap = () => {
+    setShowMap(!showMap);
+  };
 
   // constantes
   useEffect(() => {
@@ -59,44 +64,57 @@ export const BusquedaPrueba = () => {
   }, [cambio]);
 
   return (
-    <div className="grid grid-cols-2 relative mt-28">
-
+    <div
+      className={`md:grid md:grid-cols-2 md:relative md:mt-24 flex flex-col ${showMap ? `mt-20` : `mt-96`}`}
+    >
       {/* cards */}
-      <div
-        className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
+
+      {!showMap ? (
+        <div
+          className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
         ${mapSizeFull ? "" : ""}
-      xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-y-auto`}
-      >
-        {checkedFilters.length === 0
-          ? filterData &&
-            filterData?.map((puntos_interes) => (
-              <CardItemMap
-                puntos_interes={puntos_interes}
-                quehacer={quehacer}
-              />
-            ))
-          : filterData &&
-            filterData
-              ?.filter((pi) =>
-                pi.temporadas.find((t) => checkedFilters.includes(t.nombre))
-              )
-              .map((puntoInteres) => (
+        xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-y-auto`}
+        >
+          {checkedFilters.length === 0
+            ? filterData &&
+              filterData?.map((puntos_interes) => (
                 <CardItemMap
-                  puntos_interes={puntoInteres}
+                  puntos_interes={puntos_interes}
                   quehacer={quehacer}
                 />
-              ))}
-      </div>
+              ))
+            : filterData &&
+              filterData
+                ?.filter((pi) =>
+                  pi.temporadas.find((t) => checkedFilters.includes(t.nombre))
+                )
+                .map((puntoInteres) => (
+                  <CardItemMap
+                    puntos_interes={puntoInteres}
+                    quehacer={quehacer}
+                  />
+                ))}
+        </div>
+      ) : (
+        // null
+        <div className="border absolute rounded-md bg-white bottom-0 flex items-end justify-center w-full h-full"></div>
+      )}
 
-      <div className={`w-1/2 fixed right-0 h-screen z-10 ${mapSizeFull ? "w-10" : "w-10"}`}>
+      <div
+        className={`${mapSizeFull ? "md:w-full z-50 absolute" 
+        : "md:h-screen md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 z-10"}
+      ${showMap ? `h-5/6 w-full` : `md:h-full fixed z-10 w-full h-2/5`} z-10`}
+      >
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden
-              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:left-3 lg:block 
+          md:bg-[#fafafa] md:z-[1000] md:py-1 md:px-1 md:rigth-0 md:block 
+              md:rounded-[5px] md:shadow-md md:hover:bg-[#ededed] 
+              md:absolute md:top-[9px] md:cursor-pointer
+              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:rigth-0 lg:block 
               lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] 
-              lg:absolute lg:top-[9px] lg:cursor-pointer
-              `}
-          src={mapSizeFull ? arrowRight : arrow}
+              lg:absolute lg:top-[9px] lg:cursor-pointer`}
+          src={mapSizeFull ? arrow : arrowRight}
           onClick={() => setMapSizeFull(!mapSizeFull)}
         ></img>
 
@@ -104,14 +122,12 @@ export const BusquedaPrueba = () => {
         {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
         <a
           href="#"
-          onClick={(e) => {
-            e.preventDefault()
-          }}
-          className={` flex justify-between items-center px-2.5 py-1.5 fixed z-30 bottom-12 left-1/2 -translate-x-1/2 bg-red-700 
-          lg:hidden`}
+          onClick={handleShowMap}
+          className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+          lg:hidden bg-white font-bold`}
         >
-          <p>Mostrar mapa</p>
-          <img className="size-5" src={arrowRight}></img>
+          {showMap ? <p>Cards</p> : <p>Mapa</p>}
+          {/* <img className="size-5" src={arrowRight}></img> */}
         </a>
         {filterData && (
           <MapaSinSlider

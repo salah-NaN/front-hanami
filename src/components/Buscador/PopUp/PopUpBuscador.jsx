@@ -57,9 +57,9 @@ export const PopUpBuscador = ({
 
   useEffect(() => {
     if (clickChoice.actividades) {
-      onChangeForm({ eleccion: `Actividades` });
+      onChangeForm({ queHacer: `Actividades` });
     } else {
-      onChangeForm({ eleccion: `Punto_de_Interes` });
+      onChangeForm({ queHacer: `Punto_de_Interes` });
     }
   }, [clickChoice]);
 
@@ -81,8 +81,6 @@ export const PopUpBuscador = ({
       localizacion = "poblacion:" + searchForm?.localizacion;
     }
 
-    console.log(localizacion, fecha, flor, queHacer)
-
     //miramos si hay datos en el objeto de searchForm, si hay datos pues los metemos en la url
     if (queHacer === "Punto_de_Interes") {
       // si no hay datos pues metemos esto ;
@@ -92,6 +90,8 @@ export const PopUpBuscador = ({
         }/${flor || ";"}`
       );
     }
+
+    console.log(queHacer)
     if (queHacer === "Actividades") {
       // si no hay datos pues metemos esto ;
       navigate(
@@ -223,7 +223,7 @@ export const PopUpBuscador = ({
           <motion.div className="bg-slate-50 absolute bottom-0 w-full px-5 h-20 flex justify-end items-center">
             <div className="">
               <button
-                className="border-none rounded-lg pr-4 text-md bg-green-400 text-white flex items-center"
+                className="border-none rounded-lg p-3 pl-0 text-md bg-green-400 text-white flex items-center"
                 type="submit"
               >
                 <ButtonSearch
@@ -271,22 +271,22 @@ export const PopUpBuscador = ({
                       id="panel1bh-header"
                       className="border border-black"
                     >
-                      {searchForm.localizacion === undefined ? (
-                        <div className="">
-                          <h1 className="text-bold text-xl py-2">
-                            ¿Donde quieres ir?
+                      {searchForm.localizacion === null && searchForm?.provincia === null ? (
+                        <h1 className="text-[1rem] text-bold py-2">
+                          ¿Cuando quieres ir?
+                        </h1>
+                      ) : searchForm?.localizacion !== null ? (
+                        <div className="py-">
+                          <h1 className="text-[15px] font-bold">
+                            {searchForm.localizacion}
                           </h1>
                         </div>
-                      ) : (
+                      ) : searchForm?.provincia !== null ? (
                         <div className="">
-                          <h1 className="text-bold text-xl">
-                            {searchForm.localizacion || searchForm?.provincia}
-                          </h1>
-                          <h1 className="text-[15px] py-2">
-                            ¿Donde quieres ir?
-                          </h1>
+                          <h1 className="text-[15px] font-bold">{searchForm?.provincia}</h1>
                         </div>
-                      )}
+                      ) : null
+                    }
                     </AccordionSummary>
                     <AccordionDetails className="border-none">
                       <PopSearchPlace
@@ -319,15 +319,18 @@ export const PopUpBuscador = ({
                       expandIcon={<IconFecha />}
                     >
                       {searchForm.fecha === null ? (
-                        <h1 className="text-[15px] text-bold py-2">
+                        <h1 className="text-[1rem] text-bold py-2">
                           ¿Cuando quieres ir?
                         </h1>
                       ) : (
-                        <div className="">
-                          <h1 className="text-xl font-bold">
-                            {searchForm.fecha}
+                        <div className="py-">
+                          <h1 className="text-[15px] font-bold">
+                            {searchForm.fecha.length === 0 ? (
+                              <h1>¿Cuando quieres ir?</h1>
+                            ) : (
+                              <h1 className="py-2">{searchForm.fecha}</h1>
+                            )}
                           </h1>
-                          <h1 className="text-sm py-2">¿Cuando quieres ir?</h1>
                         </div>
                       )}
                     </AccordionSummary>
@@ -360,23 +363,22 @@ export const PopUpBuscador = ({
                         expandIcon={<IconPLanta planta={searchForm.flor} />}
                         aria-controls="panel3bh-content"
                         id="panel3bh-header"
-                        className="border border-black "
+                        sx={{
+                          paddingTop: "0",
+                        }}
+                        className="border border-black"
                       >
                         {searchForm.eleccion === undefined ? (
-                          <h1 className="text-xl text-bold py-2">
-                            ¿Que plantas quieres ver?
+                          <h1 className="text-[1rem] text-bold py-">
+                            {searchForm.flor !== null ? (
+                              <h1>{searchForm.flor}</h1>
+                            ) : (
+                              <h1>Que plantas quieres ver</h1>
+                            )}
                           </h1>
                         ) : (
                           <div className="">
-                            <h1 className="text-xl font-bold">
-                              {searchForm.flor}
-                              <img
-                                src={`http://localhost:3000/img/cerezos.png`}
-                                alt=""
-                                className="w-7"
-                              />
-                            </h1>
-                            <h1 className="text-[15px] py-2">
+                            <h1 className="text-[1rem] text-bold py-0">
                               ¿Que plantas quieres ver?
                             </h1>
                           </div>
