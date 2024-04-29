@@ -56,7 +56,8 @@ export default function SliderCustom({ fechaSlider, setFechaSlider }) {
 
 
     <ThemeProvider theme={theme}>
-      <div className='mt-9 z-50'>
+      <div className='mt-7 z-50
+      sm:mt-9'>
         <Slider
           aria-label="Custom marks"
           defaultValue={(new Date().getDate())}

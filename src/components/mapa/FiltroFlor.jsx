@@ -9,8 +9,9 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
     }
     return (
         <>
-            <form className='rounded-full w-fit flex  mx-auto mb-3.5 border-2 border-[#53cd68]' >
-                <label className={`rounded-full px-3 ${selectedRadio === 'todasFlores' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
+            <form className='rounded-full w-fit flex  mx-auto mb-4 border border-[#e8e8e8] shadow
+            xl:mb-5' >
+                <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'todasFlores' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='todasFlores'>Todo</label>
                 <input
                     id='todasFlores'
@@ -21,7 +22,7 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
                     onChange={handleChange}
                     className='appearance-none'
                 />
-                <label className={`rounded-full px-3 ${selectedRadio === 'cerezo' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
+                <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'cerezo' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='cerezo'>Cerezo</label>
                 <input
                     id='cerezo'
@@ -32,7 +33,7 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
                     onChange={handleChange}
                     className='appearance-none'
                 />
-                <label className={`rounded-full px-3 ${selectedRadio === 'olivo' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
+                <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'olivo' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='olivo'>Olivo</label>
                 <input
                     id='olivo'
@@ -43,7 +44,7 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
                     onChange={handleChange}
                     className='appearance-none'
                 />
-                <label className={`rounded-full px-3 ${selectedRadio === 'viña' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
+                <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'viña' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='viña'>Viña</label>
                 <input
                     id='viña'
@@ -54,7 +55,7 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
                     onChange={handleChange}
                     className='appearance-none'
                 />
-                <label className={`rounded-full px-3 ${selectedRadio === 'lavanda' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
+                <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'lavanda' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='lavanda'>Lavanda</label>
                 <input
                     id='lavanda'
