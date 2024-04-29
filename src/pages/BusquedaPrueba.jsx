@@ -100,19 +100,22 @@ export const BusquedaPrueba = () => {
       )}
 
       <div
-      className={`${mapSizeFull ? "md:w-1/2" : ""}
-      ${showMap ? `h-5/6` : `md:h-full h-1/2`} z-10`}
-      //   className={`${
-      //     mapSizeFull ? "md:w-1/2" : "md:w-full"
-      //   } fixed md:right-0 md:h-screen md:z-10 fixed top-0 ${
-      //     showMap ? `h-5/6` : `h-1/2`
-      //   } z-10 
-      // w-full`}
+        className={`${mapSizeFull ? "md:w-full z-50 absolute" : ""}
+      ${showMap ? `h-5/6 w-full` : `md:h-full h-1/2`} z-10`}
+        //   className={`${
+        //     mapSizeFull ? "md:w-1/2" : "md:w-full"
+        //   } fixed md:right-0 md:h-screen md:z-10 fixed top-0 ${
+        //     showMap ? `h-5/6` : `h-1/2`
+        //   } z-10
+        // w-full`}
       >
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden
-              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:left-3 lg:block 
+          md:bg-[#fafafa] md:z-[1000] md:py-1 md:px-1 md:rigth-0 md:block 
+              md:rounded-[5px] md:shadow-md md:hover:bg-[#ededed] 
+              md:absolute md:top-[9px] md:cursor-pointer
+              lg:bg-[#fafafa] lg:z-[1000] lg:py-1 lg:px-1 lg:rigth-0 lg:block 
               lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] 
               lg:absolute lg:top-[9px] lg:cursor-pointer
               `}
