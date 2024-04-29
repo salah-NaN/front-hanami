@@ -65,60 +65,63 @@ export const BusquedaPrueba = () => {
   }, [cambio]);
 
   return (
-    <div className="">
-      <div className="bg-red-600 w-full z-50 absolute md:block hidden">
-        <Filter setFilters={setFilters} filterData={filterData} />
-      </div>
+    <div className="md:mt-24">
+      <div className="">
+        <div className="w-full">
+          <Filter setFilters={setFilters} filterData={filterData} />
+        </div>
 
-      <div
-        className={`md:grid md:grid-cols-2 md:relative md:mt-16 flex flex-col ${
-          showMap ? `mt-20` : `mt-[25rem]`
-        }`}
-      >
-        {/* cards */}
+        <div
+          className={`md:grid md:grid-cols-2 md:relative md:mt-2 flex flex-col ${
+            showMap ? `mt-20` : `mt-[23rem]`
+          }`}
+        >
+          {/* cards */}
 
-        {!showMap ? (
-          <div
-            className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3 md:mt-16
+          {!showMap ? (
+            <div
+              className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3  
         xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3`}
-          >
-            {checkedFilters.length === 0
-              ? filterData &&
-                filterData?.map((puntos_interes) => (
-                  <CardItemMap
-                    puntos_interes={puntos_interes}
-                    quehacer={quehacer}
-                  />
-                ))
-              : filterData &&
-                filterData
-                  ?.filter((pi) =>
-                    pi.temporadas.find((t) => checkedFilters.includes(t.nombre))
-                  )
-                  .map((puntoInteres) => (
+            >
+              {checkedFilters.length === 0
+                ? filterData &&
+                  filterData?.map((puntos_interes) => (
                     <CardItemMap
-                      puntos_interes={puntoInteres}
+                      puntos_interes={puntos_interes}
                       quehacer={quehacer}
                     />
-                  ))}
-          </div>
-        ) : (
-          // null
-          <div className="border absolute rounded-md bg-white bottom-0 flex items-end justify-center w-full h-full"></div>
-        )}
+                  ))
+                : filterData &&
+                  filterData
+                    ?.filter((pi) =>
+                      pi.temporadas.find((t) =>
+                        checkedFilters.includes(t.nombre)
+                      )
+                    )
+                    .map((puntoInteres) => (
+                      <CardItemMap
+                        puntos_interes={puntoInteres}
+                        quehacer={quehacer}
+                      />
+                    ))}
+            </div>
+          ) : (
+            // null
+            <div className="border fixed rounded-md bg-white bottom-0 flex items-end justify-center w-full h-full"></div>
+          )}
 
-        {/* revisar esto */}
-        <div
-          className={`${
-            mapSizeFull
-              ? "md:w-full z-20 absolute"
-              : "md:h-full md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 z-10"
-          }
+          {/* revisar esto */}
+          <div
+            className={`${
+              mapSizeFull
+                ? "md:w-full z-20 fixed"
+                : "md:h-full md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 z-10"
+            }
         ${showMap ? `h-5/6 w-full` : `md:h-full fixed z-10 w-full h-2/5`} z-10`}
-        >
-          {/* boton expandir mapa en tamaño lg en adelante*/}
-          <img
-            className={`
+          >
+            {/* boton expandir mapa en tamaño lg en adelante*/}
+            <img
+              className={`
           md:bg-[#fafafa] md:z-[9999] md:py-1 md:px-1 md:left-0 md:block 
               md:rounded-[5px] md:shadow-md md:hover:bg-[#ededed]
               
@@ -126,35 +129,36 @@ export const BusquedaPrueba = () => {
               lg:bg-[#fafafa] lg:z-[9999] lg:py-1 lg:px-1 lg:left-0 lg:block 
               lg:rounded-[5px] lg:shadow-lg lg:hover:bg-[#ededed] 
               lg:absolute lg:top-0 lg:cursor-pointer xl:z-[9999]`}
-            src={mapSizeFull ? arrow : arrowRight}
-            onClick={() => setMapSizeFull(!mapSizeFull)}
-          ></img>
+              src={mapSizeFull ? arrow : arrowRight}
+              onClick={() => setMapSizeFull(!mapSizeFull)}
+            ></img>
 
-          {/* boton ir al mapa en tamaño sm hasta md*/}
-          {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
-          <a
-            href="#"
-            onClick={handleShowMap}
-            className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+            {/* boton ir al mapa en tamaño sm hasta md*/}
+            {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
+            <a
+              href="#"
+              onClick={handleShowMap}
+              className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
           lg:hidden bg-white font-bold`}
-          >
-            {showMap ? <p>Cards</p> : <p>Mapa</p>}
-            {/* <img className="size-5" src={arrowRight}></img> */}
-          </a>
-          {filterData && (
-            <MapaSinSlider
-              puntosInteres={
-                checkedFilters.length === 0
-                  ? filterData
-                  : filterData.filter((pi) =>
-                      pi.temporadas.find((t) =>
-                        checkedFilters.includes(t.nombre)
+            >
+              {showMap ? <p>Cards</p> : <p>Mapa</p>}
+              {/* <img className="size-5" src={arrowRight}></img> */}
+            </a>
+            {filterData && (
+              <MapaSinSlider
+                puntosInteres={
+                  checkedFilters.length === 0
+                    ? filterData
+                    : filterData.filter((pi) =>
+                        pi.temporadas.find((t) =>
+                          checkedFilters.includes(t.nombre)
+                        )
                       )
-                    )
-              }
-              setPuntosInteres={setFilterData}
-            />
-          )}
+                }
+                setPuntosInteres={setFilterData}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

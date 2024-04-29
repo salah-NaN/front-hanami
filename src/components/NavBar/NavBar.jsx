@@ -116,7 +116,7 @@ export const NavBar = () => {
                 />
               ) : buscadorNav === true ? (
                 <motion.div
-                  className="flex justify-center items-center h-full"
+                  className="flex justify-center items-center h-full "
                   initial={{ scale: 0 }}
                   animate={{ rotate: 0, scale: 1 }}
                   transition={{

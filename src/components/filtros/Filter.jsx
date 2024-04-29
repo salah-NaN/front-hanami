@@ -10,6 +10,7 @@ export const Filter = ({ setFilters, filterData }) => {
   const [visible, setVisible] = useState(false);
   // referencia para que se cierre cuando se clique fuera del div
   const dropdownRef = useRef(null);
+  const [toggleDropDown, setToggleDropDown] = useState(false);
 
   // constants
   const nombreConvertido = [
@@ -178,6 +179,14 @@ export const Filter = ({ setFilters, filterData }) => {
     setInputs(inputsNuevos);
   };
 
+  useEffect(() => {
+    const backgroundClose = document?.getElementById("#fondo");
+    backgroundClose?.addEventListener("click", () => {
+      console.log("hola");
+      setToggleDropDown(false);
+    });
+  }, []);
+
   // testeo
   // useEffect(() => {
   //   console.log('test')
@@ -198,12 +207,82 @@ export const Filter = ({ setFilters, filterData }) => {
   // }, [inputs])
 
   return (
-    <div ref={dropdownRef} className="w-full h-full px-5">
-      <h1 className="text-black text-2xl">Filtros</h1>
-      <ul className="flex">
-        {/* <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}> */}
+    <div ref={dropdownRef} className="z-20 w-full">
+      {/* <div className="bg-red-500 w-full absolute z-50">
+      <h1>Filtros</h1>
+    </div> */}
+      <div className="px-5">
+        <button
+          data-ripple-light="true"
+          data-popover-target="menu"
+          onClick={() => setToggleDropDown(!toggleDropDown)}
+          class="select-none rounded-lg py-3 px-6 border
+        text-center align-middle font-sans text-xs font-bold uppercase 
+        text-white transition-all hover:shadow-lg
+         hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] 
+         active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        >
+          <img src="/ajustamiento.png" className="w-6" alt="filter" />
+        </button>
+      </div>
+      <div className="">
+        {toggleDropDown === true ? (
+          <div
+            className="fixed inset-0 backdrop-blur-sm bg-opacity-75 z-50 flex justify-center
+           items-center fondo">
+            <div className="bg-white w-1/2 p-5 border rounded-2xl">
+              <div className="w-full flex justify-end cursor-pointer">
+                <div
+                  className="hover:bg-slate-100 border-none rounded-2xl p-1"
+                  id="fondo"
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  <svg
+                    width="25px"
+                    height="25px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#000000"
+                  >
+                    <path
+                      d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426"
+                      stroke="#000000"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <h1 className="text-4xl pb-4">Filtra temporadas</h1>
+              <div className="flex flex-col gap-3">
+                {inputs.map((i) => {
+                  return (
+                    <div className="">
+                      <label className="p-2">{i.nombre}</label>
+                      <input
+                        type="checkbox"
+                        name={i.temporada}
+                        id={i.temporada}
+                        value={i.temporada}
+                        checked={i.seteado}
+                        onChange={handleCheckbox}
+                      ></input>
+                    </div>
+                  );
+                })}
+                <button></button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+      {/* <ul className="flex"> */}
+      {/* <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}> */}
 
-        {inputs.map((i) => {
+      {/* {inputs.map((i) => {
           return (
             <li className="">
               <label>{i.nombre}</label>
@@ -217,8 +296,8 @@ export const Filter = ({ setFilters, filterData }) => {
               ></input>
             </li>
           );
-        })}
-      </ul>
+        })} */}
+      {/* </ul> */}
     </div>
   );
 };
