@@ -72,10 +72,16 @@ export const NavBar = () => {
         <motion.header
           className={`w-full ${
             location.pathname.includes("/puntosInteres") ||
-            location.pathname.includes("/actividades") ? "w-10/12 mx-auto md:w-8/12 md:mx-auto xl:mx-auto" : location.pathname.includes("/busqueda")
-              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300" : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
-
-          } ${ buscadorNav === true ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50` : ``} `}
+            location.pathname.includes("/actividades")
+              ? "w-10/12 mx-auto md:w-8/12 md:mx-auto xl:mx-auto"
+              : location.pathname.includes("/busqueda")
+              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
+              : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
+          } ${
+            buscadorNav === true
+              ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50`
+              : ``
+          } `}
         >
           <div
             className={`flex items-center overflow-visible border-r-0 border-l-0 border-t-0  h-full ${
