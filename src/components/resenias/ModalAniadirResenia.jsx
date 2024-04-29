@@ -1,6 +1,6 @@
 import { Rating } from "@mui/material"
 import { useEffect, useState } from "react"
-import arrow from '../../assets/nav-arrow-left2.svg'
+import arrow from '../../assets/nav-arrow-left.svg'
 
 // constantes
 const URL = 'http://localhost:3000/api'
@@ -64,7 +64,7 @@ const AniadirResenia = ({ modalVisible, setModalVisible, id }) => {
                     </div>
 
                     <textarea
-                        className=" px-2 py-1 mt-3 h-40 bg-[#fafafa] border-2 border-[#53cd68]/50 hover:border-[#53cd68] rounded-lg transition-all duration-300"
+                        className=" px-2 py-1 mt-3 h-40 bg-[#fafafa] border-2 border-[#121212]/50 hover:border-[#121212] rounded-lg transition-all duration-300"
                         name="resenia"
                         value={inputsResenia.resenia}
                         onChange={(event) => {
