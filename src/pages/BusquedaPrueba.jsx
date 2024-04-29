@@ -17,6 +17,7 @@ export const BusquedaPrueba = () => {
   const [checkedFilters, setCheckedFilters] = useState([]);
   const [cambio, setCambio] = useState(false);
   const [mapSizeFull, setMapSizeFull] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [posicionScroll, setPosicionScroll] = useState(window.scrollY);
   const redirect = useNavigate();
 
@@ -31,6 +32,10 @@ export const BusquedaPrueba = () => {
       });
     };
   }, []);
+
+  const handleShowMap = () => {
+    setShowMap(!showMap);
+  };
 
   // constantes
   useEffect(() => {
@@ -59,36 +64,51 @@ export const BusquedaPrueba = () => {
   }, [cambio]);
 
   return (
-    <div className="grid grid-cols-2 relative mt-24">
-
+    <div
+      className={`md:grid md:grid-cols-2 md:relative md:mt-24 flex-col mt-96`}
+    >
       {/* cards */}
-      <div
-        className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
+
+      {!showMap ? (
+        <div
+          className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
         ${mapSizeFull ? "" : ""}
-      xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-y-auto`}
-      >
-        {checkedFilters.length === 0
-          ? filterData &&
-            filterData?.map((puntos_interes) => (
-              <CardItemMap
-                puntos_interes={puntos_interes}
-                quehacer={quehacer}
-              />
-            ))
-          : filterData &&
-            filterData
-              ?.filter((pi) =>
-                pi.temporadas.find((t) => checkedFilters.includes(t.nombre))
-              )
-              .map((puntoInteres) => (
+        xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3 overflow-y-auto`}
+        >
+          {checkedFilters.length === 0
+            ? filterData &&
+              filterData?.map((puntos_interes) => (
                 <CardItemMap
-                  puntos_interes={puntoInteres}
+                  puntos_interes={puntos_interes}
                   quehacer={quehacer}
                 />
-              ))}
-      </div>
+              ))
+            : filterData &&
+              filterData
+                ?.filter((pi) =>
+                  pi.temporadas.find((t) => checkedFilters.includes(t.nombre))
+                )
+                .map((puntoInteres) => (
+                  <CardItemMap
+                    puntos_interes={puntoInteres}
+                    quehacer={quehacer}
+                  />
+                ))}
+        </div>
+      ) : (
+        <div className="border absolute rounded-md bg-white bottom-0 flex items-end justify-center w-full h-full"></div>
+      )}
 
-      <div className={`${mapSizeFull ? "w-1/2" : "w-full"} fixed right-0 h-screen z-10`}>
+      <div
+      className={`${mapSizeFull ? "md:w-1/2" : ""}
+      ${showMap ? `h-5/6` : `md:h-full h-1/2`} z-10`}
+      //   className={`${
+      //     mapSizeFull ? "md:w-1/2" : "md:w-full"
+      //   } fixed md:right-0 md:h-screen md:z-10 fixed top-0 ${
+      //     showMap ? `h-5/6` : `h-1/2`
+      //   } z-10 
+      // w-full`}
+      >
         {/* boton expandir mapa en tamaño lg en adelante*/}
         <img
           className={`hidden
@@ -104,14 +124,12 @@ export const BusquedaPrueba = () => {
         {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
         <a
           href="#"
-          onClick={(e) => {
-            e.preventDefault()
-          }}
-          className={` flex justify-between items-center px-2.5 py-1.5 fixed z-30 bottom-12 left-1/2 -translate-x-1/2 bg-red-700 
-          lg:hidden`}
+          onClick={handleShowMap}
+          className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+          lg:hidden bg-white font-bold`}
         >
-          <p>Mostrar mapa</p>
-          <img className="size-5" src={arrowRight}></img>
+          {showMap ? <p>Cards</p> : <p>Mapa</p>}
+          {/* <img className="size-5" src={arrowRight}></img> */}
         </a>
         {filterData && (
           <MapaSinSlider

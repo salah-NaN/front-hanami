@@ -35,9 +35,9 @@ export const NavBar = () => {
             location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-[68%] xl:mx-auto"
               : location.pathname.includes("/busqueda")
-              ? "w-full h-24 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
+              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
-          } ${buscadorNav === true ? `h-48 absolute top-0 left-0 right-0 bg-white z-50` : ``}
+          } ${buscadorNav === true ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50` : ``}
         `}
         >
           <div

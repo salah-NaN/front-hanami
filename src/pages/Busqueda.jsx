@@ -114,8 +114,6 @@ export const Busqueda = () => {
           <img className="size-5" src={arrowRight}></img>
         </a>
 
-
-
         {/* cards */}
         <div
           className={`pt-10 absolute z-10 top-1/2 w-full grid grid-cols-1 gap-y-9 bg-[#fafafa] rounded-lg
