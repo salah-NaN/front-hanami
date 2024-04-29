@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CardHotTrendItem,
   Banner,
@@ -10,7 +10,7 @@ import {
   NavBar,
 } from "../components";
 import { motion, useInView, useAnimation } from "framer-motion";
-import ClienteContext from "../context/ClienteContext";
+import { nombreConvertido } from './utils/Hooks'
 
 
 export const Inicio = () => {
@@ -21,13 +21,8 @@ export const Inicio = () => {
   const [actividadOrPuntoInteres, setActividadOrPuntoInteres] = useState([]);
 
   const scrollBuscadorRef = useRef(false);
-  
+
   // contexto para ver si está logueado un cliente o no
-  const {log, setLog} = useContext(ClienteContext)
-
-
-    console.log(log)
-
 
   useEffect(() => {
     fetch(url + `puntos_interes/;/;/;`)
@@ -50,11 +45,36 @@ export const Inicio = () => {
         <NavBar />
         <Banner />
       </div>
-      <div className="bg-[#FFFFFF] w-10/12 mx-auto" ref={scrollBuscadorRef}>
+      <div className="bg-[#FFFFFF]  mx-auto" ref={scrollBuscadorRef}>
         <div className="w-[90%] mx-auto">
-          <div className="py-12 w-10/12 mx-auto">
-            <h1 className="text-5xl text-center pb-2">Busca por el mapa</h1>
-            <Mapa />
+          <div className="py-32 w-10/12 mx-auto">
+            <h1 className="text-6xl text-center mb-12">Busca por el mapa</h1>
+            <div className="flex gap-20" >
+              {/* <div></div> */}
+              {/* <h4>Leyenda</h4> */}
+              <div className="w-1/2 border-2 grid grid-cols-2 gap-7 bg-[#f7fff8] border-[#7fe48f] rounded-lg mt-10 mb-10 p-7">
+                <div className="border-2 border-[#ed5fb2] rounded-lg">
+                  {
+                    nombreConvertido.map((etapa) => {
+                      console.log(etapa)
+                      if (etapa.nombre.startsWith('Cerezo')) {
+                        <div className="flex gap-2">
+                          <p>{etapa.convertido}</p>
+                          <img className="size-7" src={`http://localhost:3000/img/${etapa.nombre}.png`} alt={etapa} key={etapa} />
+                        </div>
+                      }
+                    })
+                  }
+                </div>
+                <div className="border-2 border-[#ed5fb2] rounded-lg"> </div>
+                <div className="border-2 border-[#ed5fb2] rounded-lg"> </div>
+                <div className="border-2 border-[#ed5fb2] rounded-lg"> </div>
+              </div>
+              <div className="w-1/2">
+
+                <Mapa />
+              </div>
+            </div>
           </div>
           <div className="w-10/12 mx-auto">
             <CardBox hotTrends={hotTrends} />

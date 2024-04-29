@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import L, { Marker, icon, map } from 'leaflet'
 import 'leaflet/dist/leaflet.css';
 import SliderCustom from '../SliderCustom';
@@ -8,10 +8,12 @@ import FiltroFlor from './FiltroFlor';
 import { compressNormals } from 'three/examples/jsm/utils/GeometryCompressionUtils.js';
 
 
-
 //constantes
 const URL = 'http://localhost:3000/api'
-
+const etapas = ['ViñaFlor', 'ViñaUvaPequenia', 'ViñaUvaMediana', 'ViñaUvaGrande',
+    'CerezoCapullo', 'CerezoInicioFlor', 'CerezoMaxFloracion', 'CerezoMuerto', 'CerezoPequenio', 'CerezoMediano', 'CerezoGrande',
+    'LavandaCapullo', 'LavandaInicioFlor', 'LavandaMaxFloracion', 'LavandaMuerta',
+    'OlivoFlor', 'OlivoPequenio', 'OlivoMediano', 'OlivoGrande']
 
 // las imágenes de los cerezos
 // import cerezas from '../../../public/images/cerezas'
@@ -31,7 +33,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     const [fechaSlider, setFechaSlider] = useState(new Date().getDate())
     const [mapa, setMapa] = useState(false)
     // state para saber que flor en el filtro se ha elegido
-    const [selectedRadio, setSelectedRadio] = useState('')
+    const [selectedRadio, setSelectedRadio] = useState('todasFlores')
 
 
     // los iconos de todas las etapas de los arboles florales
@@ -62,7 +64,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     useEffect(() => {
         if (!primerRender) {
 
-            const ourMap = L.map(mapRef.current, {zoomControl: false}).setView([41.6092, 2.1477], 9);
+            const ourMap = L.map(mapRef.current, { zoomControl: false }).setView([41.6092, 2.1477], 9);
 
             setMapa(ourMap)
 
@@ -90,9 +92,9 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             // }).addTo(ourMap);
 
             L.control.zoom({
-                position:'topright'
-           }).addTo(ourMap);
-           
+                position: 'topright'
+            }).addTo(ourMap);
+
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
                 // extraer las temporadas que coincida con la fecha de hoy
@@ -167,7 +169,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             fecha.setDate(fechaSlider)
 
             // antes de mapear los markers se han de eliminar previamente
-            mapa.eachLayer((layer) => {
+            mapa?.eachLayer((layer) => {
                 if (layer instanceof L.Marker) {
                     layer.remove();
                 }
@@ -177,19 +179,19 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             puntosInteres.map(punto => {
                 // extraer las temporadas que coincida con la fecha de hoy
                 const temporadasCoincidentes = punto.temporadas
-                .filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
-                // filtrando por tipo de flor 
-                .filter(t => {
-                    let response
-                    
-                    if(selectedRadio !== 'todasFlores' && !!selectedRadio){
-                        response = t.flore.especie.toLowerCase() === selectedRadio.toLowerCase()
-                    } else {
-                        response = true
-                    }
+                    .filter(temporada => fechaInluidaEnRangoFechas(fecha, new Date(temporada.fecha_inicio), new Date(temporada.fecha_fin)) && temporada.flor_id !== null)
+                    // filtrando por tipo de flor 
+                    .filter(t => {
+                        let response
 
-                    return response
-                })
+                        if (selectedRadio !== 'todasFlores' && !!selectedRadio) {
+                            response = t.flore.especie.toLowerCase() === selectedRadio.toLowerCase()
+                        } else {
+                            response = true
+                        }
+
+                        return response
+                    })
 
 
                 // distinción de si 0 temporadas, 1 o más
@@ -255,12 +257,12 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
     return (
         <>
-            <FiltroFlor selectedRadio={selectedRadio} setSelectedRadio={setSelectedRadio}/>
-            <div id="map" ref={mapRef} className={`w-full ${location.pathname === '/' ? 'h-[500px]' : 'h-full'}`} ></div>
+            <FiltroFlor selectedRadio={selectedRadio} setSelectedRadio={setSelectedRadio} />
+            <div id="map" ref={mapRef} className={`w-full rounded-xl  ${location.pathname === '/' ? 'h-[500px]' : 'h-full'}`} ></div>
             {
                 location.pathname === '/' && <SliderCustom fechaSlider={fechaSlider} setFechaSlider={setFechaSlider} />
             }
-            
+
         </>
     );
 }

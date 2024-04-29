@@ -10,8 +10,9 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="w-full z-30 absolute top-0
-    xl:w-3/4 mx-auto left-0 right-0">
+    <div className="w-full z-30 absolute top-0 mx-auto left-0 right-0
+    xl:w-[86%] 
+    2xl:w-[63%]">
       <header className="">
         <div className="sticky border-r-0 border-l-0 border-t-0">
           <nav className="w-10/12 max-auto flex justify-between py-3 mx-auto">
