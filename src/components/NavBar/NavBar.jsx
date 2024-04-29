@@ -73,7 +73,7 @@ export const NavBar = () => {
           className={`w-full ${
             location.pathname.includes("/puntosInteres") ||
             location.pathname.includes("/actividades")
-              ? "w-10/12 mx-auto md:w-8/12 md:mx-auto xl:mx-auto"
+              ? "w-10/12 mx-auto md:w-11/12 lg:w-[89%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-8/12"
               : location.pathname.includes("/busqueda")
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
@@ -94,15 +94,16 @@ export const NavBar = () => {
           >
             {/* Antes el w-full estaba en w-10/12 */}
             <nav
-              className={`w-[97%] max-auto flex 
+              className={`md:w-[90%] lg:lg:w-[93%] w-11/12 max-auto flex 
           ${
             buscadorNav === true ? `h-full items-center` : ``
           } justify-between py-3 gap-3 mx-auto`}
             >
               <div
                 className={`${
-                  location.pathname.includes("/busqueda")
-                    ? `hidden md:block`
+                  location.pathname.includes("/busqueda") || location.pathname.includes('/puntosInteres') || 
+                  location.pathname.includes('/actividades')
+                    ? `hidden md:block lg:block`
                     : ``
                 }`}
               >
@@ -133,7 +134,7 @@ export const NavBar = () => {
                 <AccountButton />
               </div>
               {location.pathname.includes("busqueda") ? (
-                <div className="md:hidden flex items-center">
+                <div className="hidden md:flex lg:flex md:items-center lg:items-center">
                   <FiltersButton />
                 </div>
               ) : (
