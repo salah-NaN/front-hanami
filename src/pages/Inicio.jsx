@@ -55,8 +55,8 @@ export const Inicio = () => {
             xl:flex-row xl:gap-20" >
               <div className=" mb-10 mt-[4rem]
               xl:w-5/12 xl:mt-0">
-                <h4 className="text-[37px] mb-5 w-fit mx-auto text-[#636363]
-                xl:mb-2.5" >Temporadas</h4>
+                <h4 className="text-[32px] mb-5 w-fit mx-auto text-[#909391]
+                xl:mb-4" >Temporadas</h4>
                 <div className=" w-full  grid grid-cols-2 gap-3 bg-[#fafafa] shadow-lg border border-[##53cd68] rounded-xl  p-4
                 xl:h-[500px]">
                   <div className="border-2 border-[#f8b2c2] bg-[#ffe3ea] rounded-lg">
@@ -101,7 +101,6 @@ export const Inicio = () => {
                   <div className="border-2 border-[#b07ad6] bg-[#f3e1ff] rounded-lg">
                     {
                       nombreConvertido.map((etapa) => {
-                        console.log(etapa)
                         if (etapa.nombre.startsWith('Lavanda')) {
                           return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
                             <p>{etapa.convertido}</p>
