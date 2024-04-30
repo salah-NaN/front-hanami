@@ -33,7 +33,7 @@ export const PopUpQueHacer = ({
           onClick={() => handleFunction({ queHacer: "Punto_de_Interes" })}
         >
           <h1>Punto de interes</h1>
-          <img src="./campos.png" alt="" className="w-7" />
+          <img src="/campos.png" alt="" className="w-7" />
         </div>
         <div
           className="cursor-pointer hover:bg-[#EBEBEB] hover:border-none
@@ -41,7 +41,7 @@ export const PopUpQueHacer = ({
           onClick={() => handleFunction({ queHacer: "Actividades" })}
         >
           <h1>Activiades</h1>
-          <img src="./cometa.png" alt="" className="w-7" />
+          <img src="/cometa.png" alt="" className="w-7" />
         </div>
       </div>
     </motion.div>

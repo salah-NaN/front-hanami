@@ -3,7 +3,7 @@ import { ButtonSearch } from "./ButtonSearch";
 export const BuscadorOtrasPaginas = ({ openOnPopUpBuscadorMobile }) => {
   return (
     <div
-      className="flex flex-row justify-between items-center w-11/12 md:w-96 h-fit border rounded-full
+      className="flex flex-row justify-between items-center w-11/12 md:w-80 lg:w-96 xl:w-96 2xl:w-96 h-fit border rounded-full
     shadow-sm cursor-pointer hover:shadow-lg hover:transition-all hover:duration-300 p-1 px-2"
       onClick={openOnPopUpBuscadorMobile}
     >
