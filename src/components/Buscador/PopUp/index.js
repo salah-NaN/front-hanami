@@ -6,3 +6,5 @@ export * from './IconPLanta';
 export * from './PopSearchPlace';
 export * from './PopUpPlanta';
 export * from './PopUpQueHacer';
+export * from './ProvinciasComponent';
+export * from './NavBarFiltros';

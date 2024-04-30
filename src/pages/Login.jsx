@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {AnimatePresence, motion} from "framer-motion";
 
+
 // constantes
 const URL = "http://localhost:3000/api";
 
@@ -102,6 +103,7 @@ export const Login = () => {
         className=" hidden md:inline
         md:w-1/2 md:bg-[url('/public/cerezoflor2.jpg')] bg-no-repeat bg-cover "
           ></div>
+
         </div>
 
   );

@@ -78,8 +78,9 @@ export const SliderItems = ({
      2xl:w-[98%] 2xl:mx-auto w-full mx-auto"
     >
       <div className="w-full mx-auto">
-        <h1 className="text-4xl pb-4">Donde quieres ir hoy?</h1>
-        <div className="flex gap-5">
+        <h1 className="text-5xl pb-4 bg-gradient-to-r from-purple-300 
+        from-800% via-emerald-500 via-30% to-emerald-500 to-20% bg-clip-text text-transparent">Donde quieres ir hoy?</h1>
+        <div className="flex gap-5 py-7">
           <button
             className={`bg-white px-3 py-2 rounded-md  ${
               selectedButton.puntos_interes === true
