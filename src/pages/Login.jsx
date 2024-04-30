@@ -55,9 +55,9 @@ export const Login = () => {
           damping: 20,
         }}
       >
-        <div className="lg:flex lg:flex-row w-11/12 mx-auto border rounded-lg shadow-md shadow-neutral mt-32 p-4 ">
+        <div className=" p-4 md:p-0 md:flex md:flex-row lg:justify-between w-full md:h-screen mx-auto rounded-lg mt-32 md:mt-0 md:pt-16">
 
-          <div className="flex flex-col  p-2 mt-4  lg:w-1/2 ">
+          <div className="flex flex-col  p-2 mt-20  lg:w-1/2 ">
               <h1 className="text-xl font-semibold text-center">Inicia sesion</h1>
             <form
               onSubmit={handleSubmit}
@@ -66,7 +66,7 @@ export const Login = () => {
               <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
                 <label className="flex items-center">Email</label>
                 <input
-                  className="flex items-center shadow-md md:w-3/4  shadow-neutral-400 p-2 border border-neutral-400 rounded-lg focus:shadow-inner focus:shadow-neutral-500 focus:outline-none"
+                  className="flex items-center shadow-md md:w-3/4  shadow-neutral-400 p-2 border border-neutral-400 rounded-full focus:shadow-inner focus:shadow-neutral-500 focus:outline-none"
                   type="email"
                   name="email"
                   value={inputs.email}
@@ -76,7 +76,7 @@ export const Login = () => {
               <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
                 <label className="flex items-center">Password</label>
                 <input
-                  className="flex items-center shadow-md md:w-3/4  shadow-neutral-400 p-2 border border-neutral-400 rounded-lg focus:shadow-inner focus:shadow-neutral-500 focus:outline-none"
+                  className="flex items-center shadow-md md:w-3/4  shadow-neutral-400 p-2 border border-neutral-400 rounded-full focus:shadow-inner focus:shadow-neutral-500 focus:outline-none"
                   type="password"
                   name="password"
                   value={inputs.password}
@@ -84,13 +84,13 @@ export const Login = () => {
                 ></input>
               </div>
 
-              <button className="mt-8 mb-4 mx-auto w-full md:w-1/3 rounded-lg shadow-md border border-neutral-400 shadow-neutral-400 p-2 focus:shadow-inner focus:shadow-neutral-500 focus:outline-none">Enviar</button>
+              <button className="mt-8 mb-4 mx-auto w-full md:w-1/3 rounded-full shadow-md border border-neutral-400 shadow-neutral-400 p-2 focus:shadow-inner focus:shadow-neutral-500 focus:outline-none">Enviar</button>
             </form>
           </div>
 
           <div
-        className=" 
-        lg:w-1/2  bg-sky-800"
+        className=" hidden md:inline
+        md:w-1/2 md:bg-[url('/public/cerezoflor2.jpg')] bg-no-repeat bg-cover "
           ></div>
         </div>
       </motion.div>

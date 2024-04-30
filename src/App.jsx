@@ -21,19 +21,20 @@ export const App = () => {
         <Route
             path="/register"
             element={
-              <LayoutHanami>
+              <div>
+                <NavBar/>
                 <Register />
+              </div>
 
-              </LayoutHanami>
             }
           ></Route>
           <Route
             path="/login"
             element={
-              <LayoutHanami>
-
+              <div>
+                <NavBar/>
                 <Login />
-              </LayoutHanami>
+              </div>
             }
           ></Route>
           <Route
