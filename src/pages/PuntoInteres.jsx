@@ -285,7 +285,7 @@ export const PuntoInteres = () => {
         </div>
 
         {/* <h3 className="text-3xl mx-auto font-semibold mt-10">Actividades</h3> */}
-        {actividades.length !== 0 ? (
+        {actividades?.length !== 0 ? (
           <h3
             className="mt-10 text-4xl w-fit mx-auto font-black mb-1  bg-gradient-to-r from-[#131313] to-[#bb7d4a] bg-clip-text text-transparent
        md:text-5xl"
