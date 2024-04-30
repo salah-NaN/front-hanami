@@ -5,4 +5,6 @@ export * from "./PuntoInteres";
 export * from "./BusquedaActividad";
 export * from "./Register";
 export * from "./Login";
+export * from "./MiPerfil";
 export * from "./MisResenias";
+

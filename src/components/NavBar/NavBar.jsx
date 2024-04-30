@@ -1,5 +1,6 @@
+
 import { useState, useEffect, useContext } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { AnimatePresence, useCycle, motion } from "framer-motion";
 import {
   AccountButton,
@@ -20,6 +21,17 @@ export const NavBar = () => {
   const location = useLocation();
   const params = useParams();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
+
+  const [logueado, setLogueado] =useState(false)
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+
+    if(document.cookie.includes('token')){
+      setLogueado(true)
+    }
+
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
   const [buscadorNavMobile, toggleBuscadorNavMobile] = useCycle(false, true);
   const [popUpFiltersMobile, togglePopUpFiltersMobile] = useCycle(false, true);
@@ -30,10 +42,20 @@ export const NavBar = () => {
   const [filters, setFilters] = useState([]);
   const { togglePopUpFilter, popUpFilter } = useContext(ClienteContext);
 
+
+  },[])
   const toggleMenu = () => {
     toggleMobileNav();
   };
 
+    const logout = () => {
+    // Clear the authentication token cookie
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set the expiration date to a past date
+    setLogueado(false)
+    navigate("/")
+  };
+
+            
   const openOnPopUpBuscadorMobile = () => {
     toggleBuscadorNavMobile();
   };
@@ -159,8 +181,17 @@ export const NavBar = () => {
                 </motion.div>
               ) : null}
               <div className="hidden md:inline">
-                <AccountButton />
-              </div>
+ {
+                !logueado ?
+                <div className="hidden md:flex md:flex-row gap-4">
+                  <div onClick={()=>navigate("/login")} className="cursor-pointer "><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-40 hover:bg-opacity-70 focus:bg-opacity-100">Login</p></div>
+                  <div onClick={()=>navigate("/register")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-40 hover:bg-opacity-70 focus:bg-opacity-100">Register</p></div>
+                </div>:
+                <div className="hidden md:flex md:flex-row gap-4">
+                  <div onClick={()=>navigate("/miperfil")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-40 hover:bg-opacity-70 focus:bg-opacity-100">Mi Perfil</p></div>
+                  <div onClick={()=> logout()} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-40 hover:bg-opacity-70 focus:bg-opacity-100">Logout</p></div>
+                </div>
+              }              </div>
               {location.pathname.includes("busqueda") && !buscadorNavMobile ? (
                 <div className="md:hidden flex justify-center items-center">
                   <FiltersButton openPopUpFilters={openPopUpFilters} />

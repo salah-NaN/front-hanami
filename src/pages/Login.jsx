@@ -1,90 +1,135 @@
-import { useState, useContext, useEffect } from "react"
-import ClienteContext from "../context/ClienteContext";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {AnimatePresence, motion} from "framer-motion";
 
-// constantes 
-const URL = 'http://localhost:3000/api'
+
+// constantes
+const URL = "http://localhost:3000/api";
 
 export const Login = () => {
-    const [inputs, setInputs] = useState({ email: '', password: '' })
+  const [inputs, setInputs] = useState({email: "", password: ""});
+  const [ isCorrect, setCorrect] = useState(false)
+  const navigate = useNavigate();
 
-    // contexto para ver si está logueado un cliente o no
-    const { log, setLog } = useContext(ClienteContext)
+  // funciones
+  const handleInputs = (event) => {
+    const {name, value} = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
 
-    // funciones 
-    const handleInputs = (event) => {
-        const { name, value } = event.target
-        setInputs({
-            ...inputs,
-            [name]: value
-        })
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        // fetch para enviar datos
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(inputs),
-            credentials: 'include'
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // fetch para enviar datos
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+      credentials: "include",
+    };
+    fetch(URL + "/clientes/login", options)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if(res){
+          navigate("/")
         }
-        fetch(URL + '/clientes/login', options)
-            .then(res => res.json())
-            .then(res => {
-                console.log(res)
-                console.log('log')
-                console.log(log)
-                
-                setLog(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        // limpiar inputs
-        setInputs({ email: '', password: '' })
-    }
+        console.log("coso",res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // limpiar inputs
+    setInputs({email: "", password: ""});
+  };
 
+  return (
 
-    useEffect(() => {
-        console.log(log)
-    }, [log])
+        <div className=" p-4 md:p-0 md:flex md:flex-row md:justify-between w-full md:h-screen mx-auto rounded-lg mt-28 md:mt-0 md:pt-16">
+<div className="flex flex-col  p-2 md:mt-16 md:w-1/2">
+<AnimatePresence>
+      <motion.div
+        className="block"
+        key="mobile-search"
+        initial={{scale: 0}}
+        animate={{rotate: 0, scale: 1}}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 70,
+        }}
+      >
+          <div >
+              <h1 className="text-3xl md:text-5xl font-semibold text-center md:mb-8">Inicia sesion</h1>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full mx-auto md:gap-8 md:px-8"
+            >
+              <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
+                <label className="flex items-center">Email</label>
+                <input
+              className="flex items-center shadow-sm md:w-3/4  shadow-neutral-300 p-2 border border-neutral-400 rounded-full focus:border-pink-500 focus:outline-none"
+              type="email"
+                  name="email"
+                  value={inputs.email}
+                  onChange={handleInputs}
+                ></input>
+              </div>
+              <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
+                <label className="flex items-center">Password</label>
+                <input
+              className="flex items-center shadow-sm md:w-3/4  shadow-neutral-300 p-2 border border-neutral-400 rounded-full focus:border-pink-500 focus:outline-none"
+              type="password"
+                  name="password"
+                  value={inputs.password}
+                  onChange={handleInputs}
+                ></input>
 
-    return (
-        <div className=" w-11/12 mx-auto border border-gray-900 mt-40
-        lg:flex lg:h-dvh lg:w-full lg:m-0 lg:border-none">
-            <div className="flex flex-col px-7 py-4
-            lg:w-1/2 lg:mt-60" >
-                <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
-                    <label
-                        className="">Email</label>
-                    <input
-                        className="border border-gray-900"
-                        type="email"
-                        name="email"
-                        value={inputs.email}
-                        onChange={handleInputs}
-                    ></input>
-                    <label
-                        className="">Password</label>
-                    <input
-                        className="border border-gray-900"
-                        type="password"
-                        name="password"
-                        value={inputs.password}
-                        onChange={handleInputs}
-                    ></input>
+              </div>
 
-                    <button
-                        className="">Enviar</button>
-                </form>
-            </div>
+              <button className="mt-8 mb-4 mx-auto w-full md:w-1/3 rounded-full shadow-sm border border-neutral-400 shadow-neutral-300 p-2 focus:shadow-inner focus:shadow-pink-500 focus:border-pink-500 focus:outline-none">Enviar</button>
+            </form>
+          </div>
+          </motion.div>
+    </AnimatePresence>
+</div>
+    
 
-            <div className="hidden 
-            lg:block lg:w-1/2  lg:bg-sky-800" ></div>
+          <div
+        className=" hidden md:inline
+        md:w-1/2 md:bg-[url('/public/cerezoflor2.jpg')] bg-no-repeat bg-cover "
+          ></div>
+
         </div>
-    )
-}
+
+  );
+};
 
 export default Login;
+
+
+{/* 
+
+
+
+    <AnimatePresence>
+      <motion.div
+        className="block"
+        key="mobile-search"
+        initial={{scale: 0}}
+        animate={{rotate: 0, scale: 1}}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 70,
+        }}
+      >
+      </motion.div>
+    </AnimatePresence>
+
+
+*/}

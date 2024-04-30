@@ -8,6 +8,7 @@ import {
   BusquedaActividad,
   Busqueda,
   Register,
+  MiPerfil
   MisResenias,
 } from "./pages";
 import { NavBar } from "./components";
@@ -31,8 +32,34 @@ export const App = () => {
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+        <Route
+            path="/register"
+            element={
+              <div>
+                <NavBar/>
+                <Register />
+              </div>
+
+            }
+          ></Route>
+          <Route
+            path="/login"
+            element={
+              <div>
+                <NavBar/>
+                <Login />
+              </div>
+            }
+          ></Route>
+          <Route
+            path="/miperfil"
+            element={
+              <LayoutHanami>
+                <MiPerfil />
+              </LayoutHanami>
+            }
+          ></Route>
+
           <Route
             path="/puntosInteres/:id"
             element={

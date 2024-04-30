@@ -1,7 +1,28 @@
 import { motion, MotionConfig } from "framer-motion";
+
 import Logo from "../Logo";
+import { useNavigate } from "react-router-dom";
+import { useEffect,useState } from "react";
 
 export const NavLinks = ({ toggleMenu, mobileNav }) => {
+  const navigate = useNavigate();
+  const [logueado, setLogueado] =useState(false)
+
+  useEffect(() => {
+
+    if(document.cookie.includes('token')){
+      setLogueado(true)
+    }
+
+  },[])
+
+  const logout = () => {
+    // Clear the authentication token cookie
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set the expiration date to a past date
+    toggleMenu()// Redirect to the login page
+    setLoguejat(false)
+  };
+
   return (
     <MotionConfig
       transition={{
@@ -10,7 +31,7 @@ export const NavLinks = ({ toggleMenu, mobileNav }) => {
       }}
     >
       <motion.div
-        className="bg-green-500"
+        className="bg-emerald-300"
         key="mobile-nav"
         variants={{
           closed: {
@@ -55,26 +76,37 @@ export const NavLinks = ({ toggleMenu, mobileNav }) => {
           }}
         >
           <ul className="text-white w-screen text-center">
-            <div className="">
-              <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
-                Hola
+            {
+              logueado == true ?            
+              <div>
+              <div className="" onClick={()=> navigate("/MiPerfil")}>
+                <li className="py-3 px-6 hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
+                  Mi perfil
+                </li>
+              </div>
+              <div className="" onClick={()=> logout()}>
+                <li className="py-3 px-6hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
+                  Logout
+                </li>
+              </div>
+
+            </div> : 
+            <div>
+            <div className="" onClick={()=> navigate("/login")}>
+              <li className="py-3 px-6 hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
+                Inicia Sesion
               </li>
             </div>
-            <div className="">
+            <div className="" onClick={()=> navigate("/register")}>
               <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
-                Hola
+                Registrate
               </li>
             </div>
-            <div className="">
-              <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
-                Hola
-              </li>
-            </div>
-            <div className="">
-              <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
-                Hola
-              </li>
-            </div>
+
+          </div>
+            }
+
+
           </ul>
         </motion.div>
       </motion.div>

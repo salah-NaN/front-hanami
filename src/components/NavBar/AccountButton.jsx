@@ -1,6 +1,6 @@
-export const AccountButton = () => {
+export const AccountButton = ({toggleMenu}) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between" onClick={() => toggleMenu()}>
       <div className="flex items-center gap-5">
         <div
           className="px-3 py-3 cursor-pointer hover:bg-slate-100 hover:px-3
