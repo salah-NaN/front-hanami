@@ -1,15 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
 
-export const SearchBar = ({
-  moveToSearchBar,
-  openPopUpBuscador,
-  puntosDeInteres,
-  setPuntosDeInteres,
-}) => {
+export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
   const navigate = useNavigate();
   const ref = useRef();
 
@@ -27,7 +22,7 @@ export const SearchBar = ({
   });
 
   const [popUp, setPopUp] = useState({
-    buscador: false,
+    buscador: true,
     flor: false,
     queHacer: false,
     fecha: false,
@@ -203,7 +198,8 @@ export const SearchBar = ({
   }, [popUp]);
 
   const onSubmitSearch = () => {
-    event.preventDefault();
+    // event.preventDefault();
+
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === "" ? "Punto_de_Interes" : queHacer;
@@ -221,7 +217,7 @@ export const SearchBar = ({
       // si no hay datos pues metemos esto ;
       navigate(
         `/busqueda/${queHacer}/${localizacion || ";"}/${
-          fecha?.toLocaleString().replaceAll("/", "-") || ";"
+          fecha?.toLocaleString()?.replaceAll("/", "-") || ";"
         }/${flor || ";"}`
       );
     }
@@ -238,10 +234,11 @@ export const SearchBar = ({
   return (
     <>
       <div
-        className={`z-20 h-20 flex items-center w-10/12 mx-auto border rounded-full shadow-sm shadow-white ${
+        className={`z-20 h-20 flex items-center w-full 
+        mx-auto border rounded-full shadow-sm shadow-white ${
           isCheck === true ? `bg-[#EBEBEB]` : `bg-white`
         }`}
-        ref={moveToSearchBar}
+        // ref={moveToSearchBar}
       >
         <div className="w-full flex items-center md:relative">
           <form
@@ -253,9 +250,9 @@ export const SearchBar = ({
                 : `md:grid md:grid-cols-10 md:h-20`
             }`}
           >
-            <BuscadorMobil openPopUpBuscador={openPopUpBuscador} />
+            {/* <BuscadorMobil openPopUpBuscador={openPopUpBuscador} /> */}
             <div
-              className={`buscar_div w-full col-span-4 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
+              className={`buscar_div w-full col-span-3 hidden md:flex md:w-full md:items-center hover:bg-[#EBEBEB]
               hover:border-none hover:rounded-full button hover:shadow-xl ${
                 popUp.buscador ? `bg-white rounded-full` : ``
               }`}
@@ -392,23 +389,29 @@ export const SearchBar = ({
               </div>
             )}
 
-            <div className="hidden md:block w-full col-span-4 relative">
+            <div className="hidden md:block w-full col-span-5 relative">
               <div
                 className="w-full h-full border border-[#c5c5c5] cursor-pointer
-                 border-none rounded-full button"
-                id="button-open"
-                onClick={() => setPopQueHacer()}
+                 border-none rounded-full "
               >
                 <div className="flex h-full justify-between items-center">
                   <div
-                    className={`w-full h-full flex justify-between items-center hover:md:shadow-xl hover:xl:shadow-none 
-                  hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] hover:xl:bg-white ${
-                    popUp.queHacer
-                      ? `bg-white border-none rounded-full shadow-lg`
-                      : ``
-                  }`}
+                    className={`w-full h-full flex justify-between items-center hover:md:shadow-xl 
+                    hover:xl:shadow-none 
+                    hover:border-none hover:rounded-full hover:md:bg-[#EBEBEB] 
+                    hover:xl:bg-white
+                    ${
+                      popUp.queHacer
+                        ? `border-none rounded-full shadow-lg`
+                        : ``
+                    }`}
                   >
-                    <div className="flex flex-col px-2">
+                    <div
+                      className="flex flex-col px-2 w-full h-full justify-center
+                      button"
+                      id="button-open"
+                      onClick={() => setPopQueHacer()}
+                    >
                       <h1 className="md:block font-bold text-sm">
                         Que quieres hacer?
                       </h1>
@@ -430,9 +433,9 @@ export const SearchBar = ({
                         <h1 className="text-sm">Elige una opcion</h1>
                       )}
                     </div>
-                    <div>
+                    <button type="submit" onClick={onSubmitSearch}>
                       <ButtonSearch />
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -455,4 +458,4 @@ export const SearchBar = ({
     </>
   );
 };
-export default SearchBar;
+export default BuscadorGrandeOtrasPaginas;

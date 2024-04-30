@@ -63,13 +63,10 @@ export const Busqueda = () => {
   }, [cambio]);
 
   return (
-
     <>
-      <NavBar />
-      {/* <Filter setFilters={setFilters} filterData={filterData} /> */}
       <div
         className=" mt-[66px] flex flex-col rounded-md
-        lg:flex-row-reverse"
+        lg:flex-row-reverse bg-red-400"
       >
         {/* mapa */}
         <div

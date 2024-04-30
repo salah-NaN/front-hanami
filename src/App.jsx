@@ -8,36 +8,23 @@ import {
   BusquedaActividad,
   Busqueda,
   Register,
-  MisResenias
+  MisResenias,
 } from "./pages";
 import { NavBar } from "./components";
 import { useState } from "react";
 import ClienteContext from "./context/ClienteContext";
-
+import BusquedaPrueba from "./pages/BusquedaPrueba";
 
 export const App = () => {
-
-  const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: '' })
-
+  const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: "" });
 
   return (
     <ClienteContext.Provider value={{ log, setLog }}>
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/register"
-            element={
-              <Register />
-            }
-          ></Route>
-          <Route
-            path="/login"
-            element={
-
-              <Login />
-            }
-          ></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route
             path="/puntosInteres/:id"
             element={
@@ -65,25 +52,29 @@ export const App = () => {
           <Route
             path="/busqueda/:quehacer/:localizacion/:fecha/:flor"
             element={
-              <Busqueda />}
+              <LayoutHanami>
+                <BusquedaPrueba />
+                {/* <Busqueda /> */}
+              </LayoutHanami>
+            }
           ></Route>
           <Route path="/" element={<Inicio />}></Route>
 
-          <Route path='/actividades/:quehacer/:localizacion/:fecha/:flor' element={
-            <LayoutHanami>
-              <BusquedaActividad />
-            </LayoutHanami>}
+          <Route
+            path="/actividades/:quehacer/:localizacion/:fecha/:flor"
+            element={
+              <LayoutHanami>
+                <BusquedaActividad />
+              </LayoutHanami>
+            }
           ></Route>
-
         </Routes>
       </BrowserRouter>
     </ClienteContext.Provider>
-
   );
 };
 
 export default App;
-
 
 /* 
   <BrowserRouter>
