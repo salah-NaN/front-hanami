@@ -83,7 +83,7 @@ export const Actividades = () => {
 
   return (
     <>
-      <div className="mt-28" >
+      <div className="mt-12" >
         <h2 className=" text-4xl w-fit font-black mb-1  bg-gradient-to-r from-[#131313] to-[#bb7d4a] bg-clip-text text-transparent
         md:text-5xl "
         >{actividad.nombre}</h2>
