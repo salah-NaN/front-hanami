@@ -43,12 +43,12 @@ export const Banner = () => {
           </AnimatePresence>
         </div>
       ) : null}
-      <div className="absolute bottom-80 flex flex-col justify-start items-start">
-        <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-30">
+      <div className="absolute top-40 bottom-80 flex flex-col justify-start items-start">
+        <div className="mx:w-80 md:w-full lg:w-11/12 lg:mx-auto px-1 z-10">
           <div className="py-2 bg-transparent md:px-6 lg:w-fit">
             <h1
               style={{ y: textY }}
-              className="text-semibold text-8xl relative z-20 w-full text-center
+              className="text-semibold text-8xl relative z-10 w-full text-center
               text-bold bg-gradient-to-br from-white to-green-100
                     bg-clip-text xs:text-[2.30rem] xs:tracking-wide xs:text-pretty p-2
                     xm:text-5xl
@@ -59,10 +59,10 @@ export const Banner = () => {
             >
               Toda la belleza de Cataluña en un solo clic
             </h1>
-          </div>
-        </div>
-        <div className="flex w-full justify-center items-center">
+        <div className="flex w-full justify-center items-center mt-8">
           <SearchBar openPopUpBuscador={openPopUpBuscador} />
+        </div>
+          </div>
         </div>
       </div>
       <div className="absolute inset-0 z-0 grid grid-row md:grid md:grid-cols-4">
