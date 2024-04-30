@@ -21,7 +21,7 @@ export const Footer = () => {
     return (
 
         <div>
-            <motion.div className="mt-40 flex flex-col justify-between w-full bg-[#94e89e] "
+            <motion.div className="mt-40 flex flex-col justify-between w-full bg-[#43bc59] "
                 initial={{ scale: 0.1 }}
                 animate={{ scale: 1 }}
                 transition={{
