@@ -78,11 +78,13 @@ export const BusquedaPrueba = () => {
 
   return (
     <div className="md:mt-24">
+      {/* <div
+        className="lg:w-full lg:fixed lg:z-[9999] lg:left-[59rem] lg:top-[26px] 
+        md:w-full md:fixed md:z-[9999] md:left-[59rem] md:top-[26px]"
+      > */}
+      <Filter setFilters={setFilters} filterData={filterData} />
+      {/* </div> */}
       <div className="">
-        <div className="w-full">
-          <Filter setFilters={setFilters} filterData={filterData} />
-        </div>
-
         <div
           // className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
           //   showMap ? `mt-20` : `mt-[22rem]`
@@ -95,7 +97,7 @@ export const BusquedaPrueba = () => {
             <div
               className={`md:w-7/12 grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
             xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 
-            2xl:grid-cols-3 2xl:gap-3 z-10 bg-white pt-5 md:pt-0`}
+            2xl:grid-cols-3 2xl:gap-3 z-10 bg-[#FAFAFA] pt-5 md:pt-0`}
             >
               {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0
@@ -124,11 +126,32 @@ export const BusquedaPrueba = () => {
               <a
                 href="#"
                 onClick={handleShowMap}
-                className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
-                md:hidden lg:hidden bg-white font-bold`}
+                className={`border rounded-full flex justify-between items-center px-5 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+                md:hidden lg:hidden bg-green-400 font-bold `}
               >
-                {showMap ? <p>Cards</p> : <p>Mapa</p>}
-                {/* <img className="size-5" src={arrowRight}></img> */}
+                {showMap ? (
+                  <p className="text-xl text-white pr-2">Cards</p>
+                ) : (
+                  <p className="text-xl text-white pr-2">Mapa</p>
+                )}
+                <svg
+                  width="25px"
+                  height="25px"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="#FFFFFF"
+                >
+                  <path
+                    d="M9 19L3.78974 20.7368C3.40122 20.8663 3 20.5771 3 20.1675L3 5.43246C3 5.1742 3.16526 4.94491 3.41026 4.86325L9 3M9 19L15 21M9 19L9 3M15 21L20.5897 19.1368C20.8347 19.0551 21 18.8258 21 18.5675L21 3.83246C21 3.42292 20.5988 3.13374 20.2103 3.26325L15 5M15 21L15 5M15 5L9 3"
+                    stroke="#FFFFFF"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+                {/* <img className="size-9 pl-3" src={arrowRight}></img> */}
               </a>
 
             </div>
@@ -161,10 +184,14 @@ export const BusquedaPrueba = () => {
             <a
               href="#"
               onClick={handleShowMap}
-              className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
-                md:hidden lg:hidden bg-white font-bold`}
+              className={`border rounded-full flex justify-between items-center px-5 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+                md:hidden lg:hidden bg-green-400 font-bold`}
             >
-              {showMap ? <p>Cards</p> : <p>Mapa</p>}
+              {showMap ? (
+                <p className="text-xl text-white">Cards</p>
+              ) : (
+                <p className="text-xl text-white pr-2">Mapa</p>
+              )}
               {/* <img className="size-5" src={arrowRight}></img> */}
             </a>
             {/* boton ir al mapa en tamaño sm hasta md*/}

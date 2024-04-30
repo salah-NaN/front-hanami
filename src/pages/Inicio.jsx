@@ -45,7 +45,7 @@ export const Inicio = () => {
         <Banner />
       </div>
 
-      <div className="bg-[#FFFFFF]  mx-auto" ref={scrollBuscadorRef}>
+      <div className="bg-[#FAFAFA]  mx-auto" ref={scrollBuscadorRef}>
         <div className="md:w-[90%] mx-auto">
           <div className="py-32 w-10/12 mx-auto">
             <h1 className="text-6xl w-fit mx-auto text-center mb-2 bg-gradient-to-r from-[#32b74b] to-[#929292] bg-clip-text text-transparent
@@ -122,7 +122,7 @@ export const Inicio = () => {
           <div className="w-10/12 mx-auto">
             <CardBox hotTrends={hotTrends} />
           </div>
-          <div className="py-32">
+          <div className="pt-32">
             <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
               <SliderItems
                 actividadOrPuntoInteres={actividadOrPuntoInteres}
