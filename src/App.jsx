@@ -9,7 +9,7 @@ import {
   Busqueda,
   Register,
   MiPerfil,
-  MisResenias
+  MisResenias,
 } from "./pages";
 import { NavBar } from "./components";
 import { useState } from "react";
