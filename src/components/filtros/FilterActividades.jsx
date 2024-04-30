@@ -6,7 +6,7 @@ import { useRef, useState, useEffect, } from "react";
 
 
 
-const FilterActividades = ({ setFilters, filterData }) => {
+export const FilterActividades = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
   const [inputs, setInputs] = useState([]);
   // controlador para definir si el filtro es visible o no
@@ -16,7 +16,7 @@ const FilterActividades = ({ setFilters, filterData }) => {
 
 
 
-    
+
 
   // constants
   const nombreConvertido = [
@@ -137,14 +137,14 @@ const FilterActividades = ({ setFilters, filterData }) => {
   // seleccionar infomacion de las temporadas que se van a mapear en el filtro
   function generateDistinctTemporadas() {
     const tempoRepetidas = filterData.map((e) =>
-        e.temporada.nombre
+      e.temporada.nombre
     );
 
     const distinctTemporadas = [];
     tempoRepetidas.forEach((nombreTemporada) => {
-        if (!distinctTemporadas.includes(nombreTemporada)) {
-          distinctTemporadas.push(nombreTemporada);
-        }
+      if (!distinctTemporadas.includes(nombreTemporada)) {
+        distinctTemporadas.push(nombreTemporada);
+      }
 
     });
 
@@ -165,12 +165,12 @@ const FilterActividades = ({ setFilters, filterData }) => {
     })
     const definitive = []
     const toSend = arrObj.filter(o => {
-        if(!definitive.includes(o.temporada)){
-          definitive.push(o.temporada)
-          return true
-        } else {
-            return false
-        }
+      if (!definitive.includes(o.temporada)) {
+        definitive.push(o.temporada)
+        return true
+      } else {
+        return false
+      }
     })
     return toSend
   }
@@ -220,7 +220,7 @@ const FilterActividades = ({ setFilters, filterData }) => {
 
 
       <div >
-        <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}>
+        <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden'}`}>
 
           {inputs.map(i => {
 

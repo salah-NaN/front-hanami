@@ -10,7 +10,7 @@ import {
   FiltersButton,
 } from "../";
 import { BuscadorGrandeOtrasPaginas, BuscadorOtrasPaginas } from "../Buscador";
-import { NavBarFiltros } from "../Buscador/PopUp";
+
 import { format, parse } from "date-fns";
 import { FilterActividades, Filter } from "../filtros";
 import { PopUpBuscador } from "../Buscador/PopUp";
@@ -79,43 +79,38 @@ export const NavBar = () => {
     <div className="">
       <AnimatePresence>
         <motion.header
-          className={`w-full ${
-            location.pathname.includes("/puntosInteres") ||
-            location.pathname.includes("/actividades")
+          className={`w-full ${location.pathname.includes("/puntosInteres") ||
+              location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-11/12 lg:w-[89%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-8/12"
               : location.pathname.includes("/busqueda")
-              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
-              : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
-          } ${
-            buscadorNavMobile === true
+                ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
+                : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
+            } ${buscadorNavMobile === true
               ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50`
               : ``
-          } `}
+            } `}
         >
           <div
-            className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${
-              location.pathname === "/"
+            className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${location.pathname === "/"
                 ? "w-11/12 mx-auto"
                 : location.pathname.includes("/busqueda")
-                ? "md:flex md:flex-col"
-                : "w-full mx-auto"
-            }`}
+                  ? "md:flex md:flex-col"
+                  : "w-full mx-auto"
+              }`}
           >
             {/* Antes el w-full estaba en w-10/12 */}
             <nav
               className={`md:w-[90%] lg:lg:w-[93%] w-11/12 max-auto flex 
-          ${
-            buscadorNavMobile === true ? `h-full items-center` : ``
-          } justify-between py-3 gap-3 mx-auto`}
+          ${buscadorNavMobile === true ? `h-full items-center` : ``
+                } justify-between py-3 gap-3 mx-auto`}
             >
               <div
-                className={`${
-                  location.pathname.includes("/busqueda") ||
-                  location.pathname.includes("/puntosInteres") ||
-                  location.pathname.includes("/actividades")
+                className={`${location.pathname.includes("/busqueda") ||
+                    location.pathname.includes("/puntosInteres") ||
+                    location.pathname.includes("/actividades")
                     ? `hidden md:block lg:block`
                     : ``
-                }`}
+                  }`}
               >
                 <Logo />
               </div>
