@@ -11,7 +11,6 @@ import {
   FiltersButton,
 } from "../";
 import { BuscadorGrandeOtrasPaginas, BuscadorOtrasPaginas } from "../Buscador";
-import { NavBarFiltros } from "../Buscador/PopUp";
 import { format, parse } from "date-fns";
 import { FilterActividades, Filter } from "../filtros";
 import { PopUpBuscador } from "../Buscador/PopUp";
@@ -22,7 +21,7 @@ export const NavBar = () => {
   const params = useParams();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
 
-  const [logueado, setLogueado] =useState(false)
+  const [logueado, setLogueado] = useState(false)
   const navigate = useNavigate();
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
   const [buscadorNavMobile, toggleBuscadorNavMobile] = useCycle(false, true);
@@ -37,18 +36,18 @@ export const NavBar = () => {
 
   useEffect(() => {
 
-    if(document.cookie.includes('token')){
+    if (document.cookie.includes('token')) {
       setLogueado(true)
     }
 
 
 
-  },[])
+  }, [])
   const toggleMenu = () => {
     toggleMobileNav();
   };
 
-    const logout = () => {
+  const logout = () => {
     // Clear the authentication token cookie
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set the expiration date to a past date
     setLogueado(false)
@@ -100,45 +99,41 @@ export const NavBar = () => {
     <div className="">
       <AnimatePresence>
         <motion.header
-          className={`w-full ${
-            location.pathname.includes("/puntosInteres") ||
-            location.pathname.includes("/actividades")
+          className={`w-full ${location.pathname.includes("/puntosInteres") ||
+              location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-full lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto transition-all duration-300"
 
               : location.pathname.includes("/busqueda")
+
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-[#FAFAFAFA] transition-all duration-300"
 
-              : "z-10 absolute top-0 xl:w-11/12 mx-auto left-0 right-0"
-          } ${
-            buscadorNavMobile === true
+                : "z-10 absolute top-0 xl:w-11/12 mx-auto left-0 right-0"
+            } ${buscadorNavMobile === true
               ? `md:h-48 xl:w-full md:w-full md:absolute bg-white top-0 left-0 right-0 z-50`
               : ``
-          } `}
+            } `}
         >
           <div
-            className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${
-              location.pathname === "/" ? "w-11/12 mx-auto"
+            className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${location.pathname === "/" ? "w-11/12 mx-auto"
 
                 : location.pathname.includes("/busqueda") ? "md:flex md:flex-col"
 
-                : "w-full mx-auto"
-            }`}
+                  : "w-full mx-auto"
+              }`}
           >
             {/* Antes el w-full estaba en w-10/12 */}
             <nav
               className={`md:w-[90%] lg:lg:w-[93%] w-11/12 max-auto flex 
-          ${
-            buscadorNavMobile === true ? `h-full items-center` : ``
-          } justify-between py-3 gap-3 mx-auto`}
+          ${buscadorNavMobile === true ? `h-full items-center` : ``
+                } justify-between py-3 gap-3 mx-auto`}
             >
               <div
-                className={`${
-                  location.pathname.includes("/busqueda") ||
-                  location.pathname.includes("/puntosInteres") ||
-                  location.pathname.includes("/actividades")
+                className={`${location.pathname.includes("/busqueda") ||
+                    location.pathname.includes("/puntosInteres") ||
+                    location.pathname.includes("/actividades")
                     ? `hidden md:block lg:block`
                     : ``
-                }`}
+                  }`}
               >
                 <Logo />
               </div>
@@ -182,18 +177,18 @@ export const NavBar = () => {
                 </motion.div>
               ) : null}
               <div className="hidden md:inline">
- {
-                !logueado ?
-                <div className="hidden md:flex md:flex-row gap-4">
-                  <div onClick={()=>navigate("/login")} className="cursor-pointer "><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Login</p></div>
-                  <div onClick={()=>navigate("/register")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Register</p></div>
-                </div>:
-                <div className="hidden md:flex md:flex-row gap-4">
-                  <div onClick={()=>navigate("/miperfil")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Mi Perfil</p></div>
-                  <div onClick={()=> logout()} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Logout</p></div>
-                </div>
-              }              </div>
-              {location.pathname.includes("/busqueda")  || location.pathname.includes("/actividades/Actividades") && !buscadorNavMobile ? (
+                {
+                  !logueado ?
+                    <div className="hidden md:flex md:flex-row gap-4">
+                      <div onClick={() => navigate("/login")} className="cursor-pointer "><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Login</p></div>
+                      <div onClick={() => navigate("/register")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Register</p></div>
+                    </div> :
+                    <div className="hidden md:flex md:flex-row gap-4">
+                      <div onClick={() => navigate("/miperfil")} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Mi Perfil</p></div>
+                      <div onClick={() => logout()} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Logout</p></div>
+                    </div>
+                }              </div>
+              {location.pathname.includes("/busqueda") || location.pathname.includes("/actividades/Actividades") && !buscadorNavMobile ? (
                 <div className="md:hidden flex justify-center items-center">
                   <FiltersButton openPopUpFilters={openPopUpFilters} />
                 </div>

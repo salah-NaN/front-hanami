@@ -1,7 +1,6 @@
 import { FormControl, ListItemText, MenuItem, Select } from "@mui/material";
 import { setOptions } from "leaflet";
 import { useRef, useState, useEffect, useContext } from "react";
-import { NavBarFiltros } from "../Buscador/PopUp";
 import ClienteContext from "../../context/ClienteContext";
 
 export const Filter = ({ setFilters, filterData }) => {
@@ -285,11 +284,10 @@ export const Filter = ({ setFilters, filterData }) => {
                         />
                       </div>
                       <label
-                        className={`p-2 ${
-                          i.seteado
+                        className={`p-2 ${i.seteado
                             ? `bg-[#54CC68] border rounded-md transition-all duration-300 h-fit`
                             : `border rounded-lg`
-                        }  cursor-pointer`}
+                          }  cursor-pointer`}
                         htmlFor={i.temporada}
                       >
                         {i.nombre}
