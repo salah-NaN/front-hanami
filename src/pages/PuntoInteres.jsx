@@ -133,7 +133,7 @@ export const PuntoInteres = () => {
                   <div>
                     {
                       puntoInteres?.temporadas?.map((t, index) => (
-                        <div className={`flex items-center gap-1 ${seasonVisible ? '' : (index > 1 ? 'hidden' : '')}`}>
+                        <div className={flex items-center gap-1 ${seasonVisible ? '' : (index > 1 ? 'hidden' : '')}}>
                           <img className="hidden size-6
                   md:block"
                             src={leaf} ></img>
@@ -273,4 +273,3 @@ export const PuntoInteres = () => {
 }
 
 export default PuntoInteres;
-

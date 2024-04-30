@@ -40,7 +40,7 @@ export const PopSearchPlace = ({
     >
       {searchPc === "" ? (
         <div
-          className="flex items-center border-none rounded-xl text-[17px]"
+          className="flex items-center md:border-none border p-2 rounded-xl text-[17px]"x
           onClick={openInputSearch}
         >
           <ButtonSearch
@@ -109,28 +109,28 @@ export const PopSearchPlace = ({
           </h1>
           <div className="grid grid-cols-2 md:grid md:grid-cols-4 gap-3 md:gap-1 pt-5">
             <div
-              className="md:w-full w-full border rounded-xl px-3 py-2 bg-slate-50 cursor-pointer hover:bg-[#EBEBEB]"
+              className="md:w-full w-11/12 border rounded-xl px-3 py-2 bg-slate-50 cursor-pointer hover:bg-[#EBEBEB]"
               onClick={() => handleFunction({ provincia: "Barcelona" }, true)}
             >
               <img src="/barcelona_comarca.svg" />
               <h1 className="text-sm text-right">Barcelona</h1>
             </div>
             <div
-              className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+              className="md:w-full w-11/12 bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
               onClick={() => handleFunction({ provincia: `Girona` } , true)}
             >
               <img src="/girona.svg" />
               <h1 className="text-sm text-right">Girona</h1>
             </div>
             <div
-              className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+              className="md:w-full w-11/12 bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
               onClick={() => handleFunction({ provincia: `Tarragona` }, true)}
             >
               <img src="/tarragona.svg" />
               <h1 className="text-sm text-right">Tarragona</h1>
             </div>
             <div
-              className="md:w-full w-full bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
+              className="md:w-full w-11/12 bg-slate-50 border rounded-xl px-3 py-2 cursor-pointer hover:bg-[#EBEBEB]"
               onClick={() => handleFunction({ provincia: `Lleida` }, true)}
             >
               <img src="/lleida.svg" />

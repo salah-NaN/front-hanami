@@ -416,7 +416,7 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
                         Que quieres hacer?
                       </h1>
                       {searchForm.queHacer !== "" ? (
-                        <h1>
+                        <div>
                           {searchForm.queHacer === "Punto_de_Interes" ? (
                             <div className="flex gap-2 items-center">
                               <h1 className="text-xl">Punto de interes</h1>
@@ -428,7 +428,7 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
                               <img src="./cometa.png" alt="" className="w-7" />
                             </div>
                           )}
-                        </h1>
+                        </div>
                       ) : (
                         <h1 className="text-sm">Elige una opcion</h1>
                       )}

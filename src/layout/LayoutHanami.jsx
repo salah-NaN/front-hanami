@@ -27,7 +27,7 @@ export const LayoutHanami = ({ children }) => {
             className={`bg-[#fafafa] ${
               location.pathname.includes("/busqueda")
                 ? `w-full mx-auto`
-                : `w-9/12 mx-auto md:w-[90%] md:mx-auto`
+                : `w-11/12 mx-auto md:w-[90%] md:mx-auto`
             }`}
           >
             {children}

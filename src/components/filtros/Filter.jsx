@@ -1,10 +1,8 @@
-import { FormControl, ListItemText, MenuItem, Select } from "@mui/material"
-import { setOptions } from "leaflet"
-import { useRef, useState, useEffect, } from "react";
-
-
-
-
+import { FormControl, ListItemText, MenuItem, Select } from "@mui/material";
+import { setOptions } from "leaflet";
+import { useRef, useState, useEffect, useContext } from "react";
+import { NavBarFiltros } from "../Buscador/PopUp";
+import ClienteContext from "../../context/ClienteContext";
 
 export const Filter = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
@@ -13,86 +11,88 @@ export const Filter = ({ setFilters, filterData }) => {
   const [visible, setVisible] = useState(false);
   // referencia para que se cierre cuando se clique fuera del div
   const dropdownRef = useRef(null);
+  const [toggleDropDown, setToggleDropDown] = useState(false);
+  const { togglePopUpFilter, popUpFilter } = useContext(ClienteContext);
 
   // constants
   const nombreConvertido = [
     {
-      nombre: 'CerezoCapullo',
-      convertido: 'Boton Blanco'
+      nombre: "CerezoCapullo",
+      convertido: "Boton Blanco",
     },
     {
-      nombre: 'CerezoGrande',
-      convertido: 'Cerezo Grande'
+      nombre: "CerezoGrande",
+      convertido: "Cerezo Grande",
     },
     {
-      nombre: 'CerezoInicioFlor',
-      convertido: ' Inicio Floración'
+      nombre: "CerezoInicioFlor",
+      convertido: " Inicio Floración",
     },
     {
-      nombre: 'CerezoMaxFloracion',
-      convertido: 'Flor Abierta'
+      nombre: "CerezoMaxFloracion",
+      convertido: "Flor Abierta",
     },
     {
-      nombre: 'CerezoMediano',
-      convertido: 'Cerezo Mediano '
+      nombre: "CerezoMediano",
+      convertido: "Cerezo Mediano ",
     },
     {
-      nombre: 'CerezoMuerto',
-      convertido: 'Caida de la flor'
+      nombre: "CerezoMuerto",
+      convertido: "Caida de la flor",
     },
     {
-      nombre: 'CerezoPequenio',
-      convertido: 'Cerezo Pequeño'
+      nombre: "CerezoPequenio",
+      convertido: "Cerezo Pequeño",
     },
     {
-      nombre: 'LavandaCapullo',
-      convertido: 'Lavanda sin brotes'
+      nombre: "LavandaCapullo",
+      convertido: "Lavanda sin brotes",
     },
     {
-      nombre: 'LavandaInicioFlor',
-      convertido: 'Brotes de Lavanda'
+      nombre: "LavandaInicioFlor",
+      convertido: "Brotes de Lavanda",
     },
     {
-      nombre: 'LavandaMaxFloracion',
-      convertido: 'Lavanda en Flor'
+      nombre: "LavandaMaxFloracion",
+      convertido: "Lavanda en Flor",
     },
     {
-      nombre: 'LavandaMuerta',
-      convertido: 'Lavanda para Cosechar'
+      nombre: "LavandaMuerta",
+      convertido: "Lavanda para Cosechar",
     },
     {
-      nombre: 'OlivoFlor',
-      convertido: 'Olivo Floracion'
+      nombre: "OlivoFlor",
+      convertido: "Olivo Floracion",
     },
     {
-      nombre: 'OlivoGrande',
-      convertido: 'Olivo Cuajado'
+      nombre: "OlivoGrande",
+      convertido: "Olivo Cuajado",
     },
     {
-      nombre: 'OlivoMediano',
-      convertido: 'Olivo Carolas visibles'
+      nombre: "OlivoMediano",
+      convertido: "Olivo Carolas visibles",
     },
     {
-      nombre: 'OlivoPequenio',
-      convertido: 'Olivo Inicio'
+      nombre: "OlivoPequenio",
+      convertido: "Olivo Inicio",
     },
     {
-      nombre: 'ViñaFlor',
-      convertido: 'Vid en Flor'
+      nombre: "ViñaFlor",
+      convertido: "Vid en Flor",
     },
     {
-      nombre: 'ViñaUvaGrande',
-      convertido: 'Vid Madura'
+      nombre: "ViñaUvaGrande",
+      convertido: "Vid Madura",
     },
     {
-      nombre: 'ViñaUvaMediana',
-      convertido: 'Vid Inicio(Veraison)'
+      nombre: "ViñaUvaMediana",
+      convertido: "Vid Inicio(Veraison)",
     },
     {
-      nombre: 'ViñaUvaPequeña',
-      convertido: 'Vid Cuajado'
-    }
-  ]
+      nombre: "ViñaUvaPequeña",
+      convertido: "Vid Cuajado",
+    },
+  ];
 
   // useEffects
   // para que se cierre cuando se clique fuera del div
@@ -110,15 +110,15 @@ export const Filter = ({ setFilters, filterData }) => {
 
   useEffect(() => {
     if (inputs.length === 0) {
-      let distinct = generateDistinctTemporadas()
-      distinct = asignarControladorCheckboxes(distinct)
-      setInputs(distinct)
+      let distinct = generateDistinctTemporadas();
+      distinct = asignarControladorCheckboxes(distinct);
+      setInputs(distinct);
     }
-  }, [filterData])
+  }, [filterData]);
 
   useEffect(() => {
-    setFilters(inputs)
-  }, [inputs])
+    setFilters(inputs);
+  }, [inputs]);
 
   // useEffect(() => {
   //   console.log(temporadas)
@@ -143,44 +143,57 @@ export const Filter = ({ setFilters, filterData }) => {
       });
     });
 
-    return distinctTemporadas
+    return distinctTemporadas;
   }
 
   // funcion para preparar los inputs de los checkbox del filtro
   function asignarControladorCheckboxes(tempos) {
-    let x = [{}]
-    const arrObj = tempos.map(temporada => {
-      nombreConvertido.map(nc => {
+    let x = [{}];
+    const arrObj = tempos.map((temporada) => {
+      nombreConvertido.map((nc) => {
         if (nc.nombre === temporada) {
-          x = { nombre: nc.convertido, temporada, seteado: false }
+          x = { nombre: nc.convertido, temporada, seteado: false };
         }
-      })
-      return x
-    })
-    const definitive = []
-    const toSend = arrObj.filter(o => {
-        if(!definitive.includes(o.temporada)){
-          definitive.push(o.temporada)
-          return true
-        } else {
-            return false
-        }
-    })
-    return toSend
+      });
+      return x;
+    });
+    const definitive = [];
+    const toSend = arrObj.filter((o) => {
+      if (!definitive.includes(o.temporada)) {
+        definitive.push(o.temporada);
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return toSend;
   }
 
   // funcion para modificar el state del checkbox de cada input
   const handleCheckbox = (event) => {
-    const { name } = event.target
-    const inputsNuevos = inputs.map(i => {
+    const { name } = event.target;
+    const inputsNuevos = inputs.map((i) => {
       if (i.temporada === name) {
-        i.seteado = !i.seteado
+        i.seteado = !i.seteado;
       }
-      return i
-    })
-    setInputs(inputsNuevos)
-  }
+      return i;
+    });
+    setInputs(inputsNuevos);
+  };
 
+  // useEffect(() => {
+  //   const backgroundClose = document?.getElementById("#fondo");
+  //   backgroundClose?.addEventListener("click", () => {
+  //     setToggleDropDown(false);
+  //   });
+  // }, []);
+
+  const togglePopUpFilterFilter = () => {
+    setToggleDropDown(false);
+    if (popUpFilter) {
+      togglePopUpFilter();
+    }
+  };
 
   // testeo
   // useEffect(() => {
@@ -194,9 +207,6 @@ export const Filter = ({ setFilters, filterData }) => {
   //   console.log(filtros)
   // }, [filtros])
 
-
-
-
   // este useEffect filtra los inputs que están checkeados
   // useEffect(() => {
   //   const filtrados = inputs.filter(i => i.seteado)
@@ -205,35 +215,121 @@ export const Filter = ({ setFilters, filterData }) => {
   // }, [inputs])
 
   return (
-    <div ref={dropdownRef}>
-      <button
-        onClick={() => setVisible(!visible)}
-      >Temporadas</button>
+    <div ref={dropdownRef} className="z-20 w-full">
+      {/* <div className="bg-red-500 w-full absolute z-50">
+      <h1>Filtros</h1>
+    </div> */}
+      <div className="px-5">
+        <button
+          data-ripple-light="true"
+          data-popover-target="menu"
+          onClick={() => setToggleDropDown(true)}
+          class="select-none rounded-lg p-2 px-4 border
+        text-center align-middle font-sans text-xs font-bold uppercase 
+        text-white transition-all hover:shadow-lg
+         hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] 
+         active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        >
+          <img src="/ajustamiento.png" className="w-6" alt="filter" />
+        </button>
+      </div>
+      <div className="">
+        {toggleDropDown === true || popUpFilter === true ? (
+          <div
+            className="md:fixed md:inset-0 md:backdrop-blur-sm md:bg-opacity-75 md:z-50 md:flex md:justify-center
+           md:items-center fondo fixed inset-0 z-50 backdrop-blur-sm bg-opacity-75 flex justify-center items-center"
+          >
+            <div className="md:bg-white md:w-1/2 md:p-5 md:border md:rounded-2xl bg-white border rounded-2xl p-4">
+              <div className="w-full flex justify-end cursor-pointer">
+                <div
+                  className="hover:bg-slate-100 border-none rounded-2xl p-1"
+                  id="fondo"
+                  onClick={togglePopUpFilterFilter}
+                >
+                  <svg
+                    width="25px"
+                    height="25px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#000000"
+                  >
+                    <path
+                      d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426"
+                      stroke="#000000"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <h1 className="text-4xl pb-4">Filtra temporadas</h1>
+              <div className="flex flex-col gap-3">
+                {inputs.map((i) => {
+                  return (
+                    <div className="">
+                      <label className="p-2">{i.nombre}</label>
+                      <input
+                        type="checkbox"
+                        name={i.temporada}
+                        id={i.temporada}
+                        value={i.temporada}
+                        checked={i.seteado}
+                        onChange={handleCheckbox}
+                      ></input>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-full flex justify-end">
+                <button className="border-none rounded-md px-4 py-1 bg-[#4ADE80] hover:bg-green-500"
+                onClick={togglePopUpFilterFilter}>
+                  <svg
+                    width="25px"
+                    height="25px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#FFFFFF"
+                  >
+                    <path
+                      d="M5 13L9 17L19 7"
+                      stroke="#FFFFFF"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+      {/* <ul className="flex"> */}
+      {/* <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}> */}
 
-
-      <div >
-        <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}>
-
-          {inputs.map(i => {
-            return <li className="">
-              <label>
-                {i.nombre}
-              </label>
-              <input type="checkbox" 
+      {/* {inputs.map((i) => {
+          return (
+            <li className="">
+              <label>{i.nombre}</label>
+              <input
+                type="checkbox"
                 name={i.temporada}
                 id={i.temporada}
                 value={i.temporada}
                 checked={i.seteado}
-                onChange={handleCheckbox}>
-
-              </input>
+                onChange={handleCheckbox}
+              ></input>
             </li>
-          })
-          }
-        </ul>
-      </div>
+          );
+        })} */}
+      {/* </ul> */}
     </div>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;
