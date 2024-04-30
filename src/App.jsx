@@ -15,6 +15,9 @@ import { useState } from "react";
 import ClienteContext from "./context/ClienteContext";
 import BusquedaPrueba from "./pages/BusquedaPrueba";
 
+
+///Cmabios
+
 export const App = () => {
   const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: "" });
   const [popUpFilter, setPopUpFilter] = useState(false);
