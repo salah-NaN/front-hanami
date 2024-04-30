@@ -81,8 +81,6 @@ export const PuntoInteres = () => {
       sumaPuntuacion += r.puntuacion;
     });
     const mediaPuntuacion = sumaPuntuacion / numResenias;
-    console.log(sumaPuntuacion);
-    console.log({ media: mediaPuntuacion, numResenias: numResenias });
     setDatosResenia({ media: mediaPuntuacion, numResenias: numResenias });
     setTodasResenias(arrayResenias);
   }, [todasActividades]);
@@ -125,7 +123,7 @@ export const PuntoInteres = () => {
 
   return (
     <>
-      <div className="mt-28">
+      <div className="mt-12">
         <h2
           className=" text-4xl w-fit font-black mb-1 text-[#222222]
        md:text-5xl bg-gradient-to-r from-[#bbc35d] via-[#6bc35d] to-[#131313] bg-clip-text text-transparent"
