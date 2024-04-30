@@ -63,8 +63,10 @@ export const Login = () => {
           damping: 70,
         }}
       >
+
+        
           <div >
-              <h1 className="text-3xl md:text-5xl font-semibold text-center md:mb-8">Inicia sesion</h1>
+              <h1 className="md:text-5xl font-semibold text-3xl w-fit mx-auto bg-gradient-to-r from-emerald-400 from-800% via-[#929292] via-30% to-pink-500 to-20% bg-clip-text text-transparent">Inicia sesion</h1>
             <form
               onSubmit={handleSubmit}
               className="flex flex-col w-full mx-auto md:gap-8 md:px-8"

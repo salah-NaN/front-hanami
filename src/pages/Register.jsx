@@ -61,9 +61,9 @@ export const Register = () => {
          }}
        >
           <div>
-          <h1 className="text-3xl md:text-5xl font-semibold text-center md:mb-8">Registro</h1>
+          <h1 className="text-3xl md:text-5xl font-semibold mx-auto w-fit md:mb-8 bg-gradient-to-r from-emerald-400 from-800% via-[#929292] via-30% to-purple-500 bg-clip-text text-transparent">Registro</h1>
         <form onSubmit={handleSubmit} className="flex flex-col   w-full mx-auto md:gap-4 md:px-8">
-          <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
+          <div className="flex flex-col justify-between  md:flex-row gap-4 mt-6">
             <label className="flex items-center">Nombre</label>
             <input
               className="flex items-center shadow-sm md:w-3/4  shadow-neutral-300 p-2 border border-neutral-400 rounded-full focus:border-purple-800 focus:outline-none"
