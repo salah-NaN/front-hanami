@@ -67,7 +67,7 @@ export const MiPerfil = () => {
             className="block"
             key="mobile-search"
             initial={{ scale: 0 }}
-            animate={{ rotate: 0, scale: 1 }}
+            animate={{ rotate: 0, scale: 0.9 }}
             transition={{
               type: "spring",
               stiffness: 260,
@@ -84,7 +84,7 @@ export const MiPerfil = () => {
             <div className="flex flex-col justify-between  md:flex-row gap-4 mt-4">
               <label className="flex items-center">Nombre</label>
               <input
-                className="flex items-center shadow-md md:w-3/4  shadow-emerald-200 p-2 border border-emerald-300 rounded-lg focus:shadow-inner focus:shadow-emerald-300 focus:outline-none"
+                className="flex items-center md:w-3/4  p-2 border border-emerald-300 rounded-full focus:shadow-inner focus:shadow-emerald-300 focus:outline-none"
                 type="text"
                 name="nombre"
                 value={cliente.nombre}
@@ -94,7 +94,7 @@ export const MiPerfil = () => {
             <div className="flex flex-col justify-between md:flex-row gap-4 mt-4">
               <label className="flex items-center">Email</label>
               <input
-                className="shadow-md md:w-3/4 shadow-emerald-200 p-2 border border-emerald-300 rounded-lg focus:shadow-inner focus:shadow-emerald-300 focus:outline-none"
+                className="md:w-3/4 p-2 border border-emerald-300 rounded-full focus:shadow-inner focus:border-emerald-300 focus:outline-none"
                 type="email"
                 name="email"
                 value={cliente.email}
@@ -105,7 +105,7 @@ export const MiPerfil = () => {
             <div className="flex flex-col justify-between md:flex-row gap-4 mt-4">
               <label className="flex items-center">Password</label>
               <input
-                className="shadow-md md:w-3/4 shadow-emerald-200 p-2 border border-emerald-300 rounded-lg focus:shadow-inner focus:shadow-emerald-300 focus:outline-none"
+                className="md:w-3/4  p-2 border border-neutral-400 rounded-full focus:shadow-inner focus:border-emerald-300 focus:outline-none"
                 type="password"
                 name="password"
                 value={cliente.password}
@@ -113,7 +113,7 @@ export const MiPerfil = () => {
               ></input>
             </div>
 
-            <button className="mt-8 mb-4 mx-auto w-full md:w-1/3 rounded-lg shadow-lg border border-emerald-300 shadow-emerald-200 p-2 focus:shadow-inner focus:shadow-emerald-300 focus:outline-none">Enviar</button>
+            <button  className="mt-8 mb-4 mx-auto w-full md:w-1/3 rounded-full shadow-sm border border-neutral-400 shadow-neutral-300 p-2 focus:shadow-inner focus:shadow-emerlad-500 focus:border-emerald-500 focus:outline-none">Enviar</button>
           </form>
       </div>
     </div>

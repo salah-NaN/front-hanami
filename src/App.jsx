@@ -38,7 +38,7 @@ export const App = () => {
             }
           ></Route>
           <Route
-            path="/MiPerfil"
+            path="/miperfil"
             element={
               <LayoutHanami>
                 <MiPerfil />
