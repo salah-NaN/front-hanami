@@ -24,6 +24,7 @@ export const BusquedaActividad = () => {
     if (fecha !== ";") {
       fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
     }
+    
     fetch(url + `actividades/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {

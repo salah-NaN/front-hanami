@@ -161,7 +161,8 @@ export const NavBar = () => {
               <div className="hidden md:inline">
                 <AccountButton />
               </div>
-              {location.pathname.includes("busqueda") && !buscadorNavMobile ? (
+              {location.pathname.includes("/busqueda") || location.pathname.includes("/actividades/Actividades")
+                && !buscadorNavMobile ? (
                 <div className="md:hidden flex justify-center items-center">
                   <FiltersButton openPopUpFilters={openPopUpFilters} />
                 </div>

@@ -271,17 +271,61 @@ export const Filter = ({ setFilters, filterData }) => {
                 </div>
               </div>
               <h1 className="text-4xl pb-4">Filtra temporadas</h1>
-              <div className="flex flex-col gap-1">
+              <div className="grid grid-cols-2 gap-7">
                 {inputs.map((i) => {
                   return (
                     <div className="flex">
-                      <img
-                        src={`http://localhost:3000/img/${i.img}.png`}
-                        alt=""
-                        className="w-9"
-                      />
-                      <label className="p-2">{i.nombre}</label>
+                      <div className="px-2">
+                        <img
+                          src={`http://localhost:3000/img/${i.img}.png`}
+                          alt=""
+                          className="w-11 h-11"
+                        />
+                      </div>
+                      <label
+                        className={`p-2 ${
+                          i.seteado
+                            ? `bg-[#54CC68] border rounded-md transition-all duration-300 h-fit`
+                            : `border rounded-lg`
+                        }  cursor-pointer`}
+                        htmlFor={i.temporada}
+                      >
+                        {i.nombre}
+                      </label>
+
+                      {i.seteado ? (
+                        <div className="px-1">
+                          <svg
+                            width="20px"
+                            height="20px"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            color="#000000"
+                          >
+                            <path
+                              d="M7 12.5L10 15.5L17 8.5"
+                              className="stroke-[#54CC68]"
+                              stroke="#000000"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                            <path
+                              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                              stroke="#000000"
+                              className="stroke-[#54CC68]"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                          </svg>
+                        </div>
+                      ) : null}
+
                       <input
+                        className={`appearance-none`}
                         type="checkbox"
                         name={i.temporada}
                         id={i.temporada}
