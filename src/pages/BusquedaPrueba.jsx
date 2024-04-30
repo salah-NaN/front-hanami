@@ -8,7 +8,6 @@ import Filter from "../components/filtros/Filter";
 import { format, parse } from "date-fns";
 import arrow from "../assets/nav-arrow-left.svg";
 import arrowRight from "../assets/nav-arrow-right.svg";
-import { NavBarFiltros } from "../components/Buscador/PopUp";
 import { poblaciones } from "./utils/Hooks";
 
 
