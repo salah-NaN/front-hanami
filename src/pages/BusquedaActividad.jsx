@@ -4,7 +4,6 @@ import { CardItemMap } from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
 import { motion } from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
-import { format, parse } from "date-fns";
 import Filter from "../components/filtros/Filter";
 import { format, parse } from "date-fns";
 import FilterActividades from "../components/filtros/FilterActividades";
