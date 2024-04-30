@@ -109,6 +109,15 @@ export const BusquedaPrueba = () => {
                         quehacer={quehacer}
                       />
                     ))}
+              <a
+                href="#"
+                onClick={handleShowMap}
+                className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+                md:hidden lg:hidden bg-white font-bold`}
+              >
+                {showMap ? <p>Cards</p> : <p>Mapa</p>}
+                {/* <img className="size-5" src={arrowRight}></img> */}
+              </a>
             </div>
           ) : (
             // null
@@ -137,18 +146,18 @@ export const BusquedaPrueba = () => {
               src={mapSizeFull ? arrow : arrowRight}
               onClick={() => setMapSizeFull(!mapSizeFull)}
             ></img>
-
-            {/* boton ir al mapa en tamaño sm hasta md*/}
-            {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
             <a
               href="#"
               onClick={handleShowMap}
               className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
-          lg:hidden bg-white font-bold`}
+                md:hidden lg:hidden bg-white font-bold`}
             >
               {showMap ? <p>Cards</p> : <p>Mapa</p>}
               {/* <img className="size-5" src={arrowRight}></img> */}
             </a>
+            {/* boton ir al mapa en tamaño sm hasta md*/}
+            {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
+
             {filterData && (
               <MapaSinSlider
                 puntosInteres={
