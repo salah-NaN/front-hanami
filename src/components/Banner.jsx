@@ -63,7 +63,7 @@ export const Banner = () => {
          </AnimatePresence>
        </div>
      ) : null}
-     <div className="md:absolute md:top-40 flex flex-col justify-start items-center">
+     <div className="md:absolute md:top-40 lg:top-20 xl:top-20 2xl:top-20 flex flex-col justify-start items-center">
        <div className="mx:w-80 md:w-full md:mx-auto lg:w-11/12 lg:mx-auto z-10">
          <div className="py-2 bg-transparent md:px-6 lg:w-fit">
          </div>
