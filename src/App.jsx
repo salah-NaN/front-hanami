@@ -8,8 +8,8 @@ import {
   BusquedaActividad,
   Busqueda,
   Register,
-  MiPerfil
-  MisResenias,
+  MiPerfil,
+  MisResenias
 } from "./pages";
 import { NavBar } from "./components";
 import { useState } from "react";

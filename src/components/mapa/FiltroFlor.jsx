@@ -9,7 +9,7 @@ export const FiltroFlor = ({ selectedRadio, setSelectedRadio }) => {
     }
     return (
         <>
-            <form className='rounded-full w-fit flex  mx-auto mb-4 md:mb-7 border border-[#e8e8e8] shadow
+            <form className='xm:rounded-full w-fit flex flex-wrap flex-row mx-auto mb-4 xm:mb-7 xm:border xm:border-[#e8e8e8] xp:shadow
             xl:mb-5' >
                 <label className={`rounded-full md:px-6 md:py-2.5 px-2 py-1.5 font-medium ${selectedRadio === 'todasFlores' ? 'bg-[#53cd68] text-[#fafafa] ' : ''}`}
                     htmlFor='todasFlores'>Todo</label>
