@@ -1,40 +1,42 @@
 import { Rating } from "@mui/material"
 import { useEffect, useState } from "react"
-import arrow from '../../assets/nav-arrow-left2.svg'
+import arrow from '../../assets/nav-arrow-left.svg'
 
 // constantes
 const URL = 'http://localhost:3000/api'
 
-const AniadirResenia = ({ modalVisible, setModalVisible, id }) => {
+const AniadirResenia = ({ actividad, setActividad, modalVisible, setModalVisible, id }) => {
     const [inputsResenia, setInputsResenia] = useState({ puntuacion: -1, resenia: '', })
 
     // funciones
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log('inputsResenia')
         console.log(inputsResenia)
 
         // fetch para subir reseña
         const options = {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             credentials: 'include',
             body: JSON.stringify(inputsResenia)
-          }
-          fetch(URL + '/crearResenia/' + id, options)
+        }
+        fetch(URL + '/crearResenia/' + id, options)
             .then(res => res.json())
             .then(res => {
-              console.log(res)
+                console.log(res)
             })
             .catch(err => console.log(err))
 
-        
+        setActividad({ ...actividad, resenias: [...actividad.resenias, inputsResenia] })
     }
 
     const handleAddResenia = () => {
         setModalVisible(false)
-        setInputsResenia({ puntuacion: -1, resenia: '', })
+        setInputsResenia(inputsResenia)
+
     }
 
 
@@ -47,8 +49,8 @@ const AniadirResenia = ({ modalVisible, setModalVisible, id }) => {
                 lg:w-1/3 lg:mx-auto
                 xl:w-1/4 xl:mx-auto`}>
                 <img src={arrow}
-                        className="size-7 absolute top-[17px] left-3 cursor-pointer hover:bg-[#d9d9d9] hover:rounded-full transition-all duration-300"
-                        onClick={() => setModalVisible(false)}></img>
+                    className="size-7 absolute top-[17px] left-3 cursor-pointer hover:bg-[#d9d9d9] hover:rounded-full transition-all duration-300"
+                    onClick={() => setModalVisible(false)}></img>
 
 
                 <form onSubmit={handleSubmit}
@@ -64,7 +66,7 @@ const AniadirResenia = ({ modalVisible, setModalVisible, id }) => {
                     </div>
 
                     <textarea
-                        className=" px-2 py-1 mt-3 h-40 bg-[#fafafa] border-2 border-[#53cd68]/50 hover:border-[#53cd68] rounded-lg transition-all duration-300"
+                        className=" px-2 py-1 mt-3 h-40 bg-[#fafafa] border-2 border-[#121212]/50 hover:border-[#121212] rounded-lg transition-all duration-300"
                         name="resenia"
                         value={inputsResenia.resenia}
                         onChange={(event) => {
@@ -73,7 +75,7 @@ const AniadirResenia = ({ modalVisible, setModalVisible, id }) => {
                     ></textarea>
 
                     <button onClick={handleAddResenia}
-                    className=" mt-5 self-end w-1/3 px-2 py-1.5 rounded-lg bg-[#53cd68] border-[#53cd68] border-2 shadow-md transition-all duration-300 hover:bg-[#4bb75d] hover:border-[#4bb75d] hover:text-[#d9d9d9]  text-[#fafafa]   ">
+                        className=" mt-5 self-end w-1/3 px-2 py-1.5 rounded-lg bg-[#53cd68] border-[#53cd68] border-2 shadow-md transition-all duration-300 hover:bg-[#4bb75d] hover:border-[#4bb75d] hover:text-[#d9d9d9]  text-[#fafafa]   ">
                         Añadir
                     </button>
                 </form>

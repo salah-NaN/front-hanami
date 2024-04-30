@@ -8,7 +8,7 @@ const theme = createTheme({
   palette: {
     primary: {
       light: '#757ce8',
-      main: '#4ade80',
+      main: '#53cd68',
       dark: '#002884',
       contrastText: '#fff',
     },
@@ -28,10 +28,10 @@ const marks = Array(diasDelMesActual()).fill(null).map((_, i) => i + 1);
 const setMarks = () => {
   const mapped = marks.map((mark) => {
     const actualDate = new Date(new Date().setDate(mark));
-    const o = { value: mark, label: mark %4 === 0 ? actualDate.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('') : ''}
+    const o = { value: mark, label: mark % 4 === 0 ? actualDate.toLocaleDateString().split('').reverse().join('').slice(5).split('').reverse().join('') : '' }
     return o
   })
-  
+
   return mapped
 }
 
@@ -52,24 +52,25 @@ export default function SliderCustom({ fechaSlider, setFechaSlider }) {
   }
 
   return (
-    
+
 
 
     <ThemeProvider theme={theme}>
-      <div className='mt-9 z-50'>
-      <Slider
-        aria-label="Custom marks"
-        defaultValue={(new Date().getDate())}
-        // getAriaValueText={valuetext}
-        step={null}
-        valueLabelDisplay="auto"
-        marks={fechas}
-        min={1}
-        max={diasDelMesActual()}
-        onChange={handleSlider}
-        color="primary"
-      />
-    </div>
+      <div className='mt-7 z-50
+      sm:mt-9'>
+        <Slider
+          aria-label="Custom marks"
+          defaultValue={(new Date().getDate())}
+          // getAriaValueText={valuetext}
+          step={null}
+          valueLabelDisplay="auto"
+          marks={fechas}
+          min={1}
+          max={diasDelMesActual()}
+          onChange={handleSlider}
+          color="primary"
+        />
+      </div>
     </ThemeProvider>
   );
 }

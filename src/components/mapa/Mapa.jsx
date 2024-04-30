@@ -33,7 +33,7 @@ export const Mapa = () => {
   }, []);
 
   return (
-    <MapComponent puntosInteres={puntosInteres} setPuntosInteres={setPuntosInteres}/> 
+    <MapComponent puntosInteres={puntosInteres} setPuntosInteres={setPuntosInteres} />
   );
 }
 
