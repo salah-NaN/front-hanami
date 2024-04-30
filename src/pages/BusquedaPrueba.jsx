@@ -97,7 +97,7 @@ export const BusquedaPrueba = () => {
             <div
               className={`md:w-7/12 grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
             xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 
-            2xl:grid-cols-3 2xl:gap-3 z-10 bg-[#FFFFFF] pt-5 md:pt-0`}
+            2xl:grid-cols-3 2xl:gap-3 z-10 bg-[#FAFAFA] pt-5 md:pt-0`}
             >
               {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0

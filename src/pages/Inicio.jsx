@@ -45,7 +45,7 @@ export const Inicio = () => {
         <Banner />
       </div>
 
-      <div className="bg-[#FFFFFF]  mx-auto" ref={scrollBuscadorRef}>
+      <div className="bg-[#FAFAFA]  mx-auto" ref={scrollBuscadorRef}>
         <div className="md:w-[90%] mx-auto">
           <div className="py-32 w-10/12 mx-auto">
             <h1 className="text-6xl w-fit mx-auto text-center mb-2 bg-gradient-to-r from-[#32b74b] to-[#929292] bg-clip-text text-transparent
