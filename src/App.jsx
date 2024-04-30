@@ -17,9 +17,17 @@ import BusquedaPrueba from "./pages/BusquedaPrueba";
 
 export const App = () => {
   const [log, setLog] = useState({ cliente_id: -1, cliente_nombre: "" });
+  const [popUpFilter, setPopUpFilter] = useState(false);
+
+  const togglePopUpFilter = (value) => {
+    
+    setPopUpFilter(!popUpFilter);
+  };
 
   return (
-    <ClienteContext.Provider value={{ log, setLog }}>
+    <ClienteContext.Provider
+      value={{ log, setLog, togglePopUpFilter, popUpFilter }}
+    >
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>

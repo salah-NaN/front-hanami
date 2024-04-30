@@ -35,9 +35,9 @@ export const BusquedaPrueba = () => {
   //   };
   // }, []);
 
-  // const handleShowMap = () => {
-  //   setShowMap(!showMap);
-  // };
+  const handleShowMap = () => {
+    setShowMap(!showMap);
+  };
 
   // constantes
   useEffect(() => {
@@ -74,16 +74,17 @@ export const BusquedaPrueba = () => {
 
         <div
           className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
-            showMap ? `mt-20` : `mt-[23rem]`
+            showMap ? `mt-20` : `mt-[22rem]`
           }`}
         >
           {/* cards */}
-
           {!showMap ? (
             <div
               className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3  
-        xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 2xlgrid-cols-3 2xl:gap-3`}
+            xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 
+            2xlgrid-cols-3 2xl:gap-3 z-20 bg-white pt-5 md:pt-0`}
             >
+              {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0
                 ? filterData &&
                   filterData?.map((puntos_interes) => (
@@ -115,8 +116,8 @@ export const BusquedaPrueba = () => {
           <div
             className={`${
               mapSizeFull
-                ? "md:w-full z-20 fixed"
-                : "md:h-full md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 z-10"
+                ? "md:w-full md:z-10 z-10 fixed"
+                : "md:h-full md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
             }
         ${showMap ? `h-5/6 w-full` : `md:h-full fixed z-10 w-full h-2/5`} z-10`}
           >
@@ -138,7 +139,7 @@ export const BusquedaPrueba = () => {
             {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
             <a
               href="#"
-              // onClick={handleShowMap}
+              onClick={handleShowMap}
               className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
           lg:hidden bg-white font-bold`}
             >

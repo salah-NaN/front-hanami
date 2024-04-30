@@ -1,7 +1,8 @@
 import { FormControl, ListItemText, MenuItem, Select } from "@mui/material";
 import { setOptions } from "leaflet";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { NavBarFiltros } from "../Buscador/PopUp";
+import ClienteContext from "../../context/ClienteContext";
 
 export const Filter = ({ setFilters, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
@@ -11,6 +12,7 @@ export const Filter = ({ setFilters, filterData }) => {
   // referencia para que se cierre cuando se clique fuera del div
   const dropdownRef = useRef(null);
   const [toggleDropDown, setToggleDropDown] = useState(false);
+  const { togglePopUpFilter, popUpFilter } = useContext(ClienteContext);
 
   // constants
   const nombreConvertido = [
@@ -179,13 +181,19 @@ export const Filter = ({ setFilters, filterData }) => {
     setInputs(inputsNuevos);
   };
 
-  useEffect(() => {
-    const backgroundClose = document?.getElementById("#fondo");
-    backgroundClose?.addEventListener("click", () => {
-      console.log("hola");
-      setToggleDropDown(false);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const backgroundClose = document?.getElementById("#fondo");
+  //   backgroundClose?.addEventListener("click", () => {
+  //     setToggleDropDown(false);
+  //   });
+  // }, []);
+
+  const togglePopUpFilterFilter = () => {
+    setToggleDropDown(false);
+    if (popUpFilter) {
+      togglePopUpFilter();
+    }
+  };
 
   // testeo
   // useEffect(() => {
@@ -215,7 +223,7 @@ export const Filter = ({ setFilters, filterData }) => {
         <button
           data-ripple-light="true"
           data-popover-target="menu"
-          onClick={() => setToggleDropDown(!toggleDropDown)}
+          onClick={() => setToggleDropDown(true)}
           class="select-none rounded-lg p-2 px-4 border
         text-center align-middle font-sans text-xs font-bold uppercase 
         text-white transition-all hover:shadow-lg
@@ -226,17 +234,17 @@ export const Filter = ({ setFilters, filterData }) => {
         </button>
       </div>
       <div className="">
-        {toggleDropDown === true ? (
+        {toggleDropDown === true || popUpFilter === true ? (
           <div
-            className="fixed inset-0 backdrop-blur-sm bg-opacity-75 z-50 flex justify-center
-           items-center fondo"
+            className="md:fixed md:inset-0 md:backdrop-blur-sm md:bg-opacity-75 md:z-50 md:flex md:justify-center
+           md:items-center fondo fixed inset-0 z-50 backdrop-blur-sm bg-opacity-75 flex justify-center items-center"
           >
-            <div className="bg-white w-1/2 p-5 border rounded-2xl">
+            <div className="md:bg-white md:w-1/2 md:p-5 md:border md:rounded-2xl bg-white border rounded-2xl p-4">
               <div className="w-full flex justify-end cursor-pointer">
                 <div
                   className="hover:bg-slate-100 border-none rounded-2xl p-1"
                   id="fondo"
-                  onClick={() => setToggleDropDown(false)}
+                  onClick={togglePopUpFilterFilter}
                 >
                   <svg
                     width="25px"
@@ -274,7 +282,28 @@ export const Filter = ({ setFilters, filterData }) => {
                     </div>
                   );
                 })}
-                <button></button>
+              </div>
+              <div className="w-full flex justify-end">
+                <button className="border-none rounded-md px-4 py-1 bg-[#4ADE80] hover:bg-green-500"
+                onClick={togglePopUpFilterFilter}>
+                  <svg
+                    width="25px"
+                    height="25px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#FFFFFF"
+                  >
+                    <path
+                      d="M5 13L9 17L19 7"
+                      stroke="#FFFFFF"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>

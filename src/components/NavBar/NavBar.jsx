@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, useCycle, motion } from "framer-motion";
 import {
@@ -14,6 +14,7 @@ import { NavBarFiltros } from "../Buscador/PopUp";
 import { format, parse } from "date-fns";
 import { FilterActividades, Filter } from "../filtros";
 import { PopUpBuscador } from "../Buscador/PopUp";
+import ClienteContext from "../../context/ClienteContext";
 
 export const NavBar = () => {
   const location = useLocation();
@@ -21,22 +22,24 @@ export const NavBar = () => {
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
   const [buscadorNavMobile, toggleBuscadorNavMobile] = useCycle(false, true);
+  const [popUpFiltersMobile, togglePopUpFiltersMobile] = useCycle(false, true);
   const [cambio, setCambio] = useState(false);
   const [checkedFilters, setCheckedFilters] = useState([]);
   const [puntosDeInteres, setPuntosDeInteres] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
+  const { togglePopUpFilter, popUpFilter } = useContext(ClienteContext);
 
   const toggleMenu = () => {
     toggleMobileNav();
   };
 
-  // const openOnPopUpBuscador = () => {
-  //   toggleBuscadorNav();
-  // };
-
   const openOnPopUpBuscadorMobile = () => {
     toggleBuscadorNavMobile();
+  };
+
+  const openPopUpFilters = () => {
+    togglePopUpFilter();
   };
 
   useEffect(() => {
@@ -81,7 +84,7 @@ export const NavBar = () => {
             location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-11/12 lg:w-[89%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-8/12"
               : location.pathname.includes("/busqueda")
-              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
+              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
           } ${
             buscadorNavMobile === true
@@ -158,7 +161,7 @@ export const NavBar = () => {
               </div>
               {location.pathname.includes("busqueda") && !buscadorNavMobile ? (
                 <div className="md:hidden flex justify-center items-center">
-                  <FiltersButton />
+                  <FiltersButton openPopUpFilters={openPopUpFilters} />
                 </div>
               ) : (
                 <div className="flex items-center md:hidden lg:hidden xl:hidden">
