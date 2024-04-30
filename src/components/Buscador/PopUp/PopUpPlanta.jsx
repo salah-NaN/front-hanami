@@ -33,7 +33,7 @@ export const PopUpPlanta = ({
           onClick={() => handleFunction({ flor: `Lavanda` })}
         >
           <img
-            src={`http://localhost:3000/img/LavandaMaxFloracion.png`}
+            src={`/api/img/LavandaMaxFloracion.png`}
             className="md:h-20"
           />
           <h1 className="text-sm text-right flex justify-end hover:">
@@ -45,7 +45,7 @@ export const PopUpPlanta = ({
           onClick={() => handleFunction({ flor: `Cerezo` })}
         >
           <img
-            src={`http://localhost:3000/img/cerezas.png`}
+            src={`/api/img/cerezas.png`}
             className="h-fit md:h-20"
           />
           <h1 className="text-sm text-right">Cerezo</h1>
@@ -55,7 +55,7 @@ export const PopUpPlanta = ({
           onClick={() => handleFunction({ flor: `Viña` })}
         >
           <img
-            src={`http://localhost:3000/img/viñaUvaGrande.png`}
+            src={`/api/img/viñaUvaGrande.png`}
             className="md:h-20"
           />
           <h1 className="text-sm text-right">Viña</h1>
@@ -65,7 +65,7 @@ export const PopUpPlanta = ({
           onClick={() => handleFunction({ flor: `Olivo` })}
         >
           <img
-            src={`http://localhost:3000/img/olivos.png`}
+            src={`/api/img/olivos.png`}
             className="md:h-20"
           />
           <h1 className="text-sm text-right">Olivo</h1>

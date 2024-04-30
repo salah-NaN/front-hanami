@@ -11,7 +11,7 @@ export const Logo = () => {
         onClick={() => navigate("/")}
       >
         <img
-          src="http://localhost:3000/img/menta.png"
+          src="/api/img/menta.png"
           alt="logo"
           className="w-10"
         />

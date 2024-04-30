@@ -22,7 +22,7 @@ const SwiperComponent = ({ images }) => {
                     className="border-none rounded-lg "
                     key={image.id}
                   >
-                    <img className="w-full" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`} ></img>
+                    <img className="w-full" src={`/api/img/${image.nombre}${image.tipo}`} ></img>
                   </SwiperSlide>
                 </div>
               </div>

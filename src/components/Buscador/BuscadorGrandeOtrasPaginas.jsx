@@ -355,7 +355,7 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
                           {searchForm.flor}
                         </h1>
                         <img
-                          src={`http://localhost:3000/img/${
+                          src={`/api/img/${
                             searchForm.flor === "Cerezo"
                               ? "cerezas"
                               : searchForm.flor === "Lavanda"

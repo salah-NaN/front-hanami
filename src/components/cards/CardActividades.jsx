@@ -95,7 +95,7 @@ export const CardActividades = ({ actividad }) => {
       {/* había un px-5 en el div de justo abajo */}
       <div className="flex flex-col sm:">
         <div className={`w-full h-full`}>
-          <img src={`http://localhost:3000/img/${actividad?.imagenes[0]?.nombre}${actividad?.imagenes[0]?.tipo}`}
+          <img src={`/api/img/${actividad?.imagenes[0]?.nombre}${actividad?.imagenes[0]?.tipo}`}
             className="rounded-lg h-72 w-full
             sm:h-56
             md:h-[370px]

@@ -64,7 +64,7 @@ export const CardItemMap = ({ puntos_interes, quehacer }) => {
 
       <div className="flex flex-col px-5">
         <div className={`w-full h-full`}>
-          <img src={`http://localhost:3000/img/${puntos_interes?.imagenes[0]?.nombre}${puntos_interes?.imagenes[0]?.tipo}`}
+          <img src={`/api/img/${puntos_interes?.imagenes[0]?.nombre}${puntos_interes?.imagenes[0]?.tipo}`}
             className="rounded-lg size-full"/>
         </div>
         <h4 className="text-[17px] mb-1 mt-3 font-semibold">

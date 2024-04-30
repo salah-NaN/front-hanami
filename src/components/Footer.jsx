@@ -54,7 +54,7 @@ export const Footer = () => {
                             className="inline-flex items-center"
                         >
                             <img
-                                src="http://localhost:3000/img/menta.png"
+                                src="/api/img/menta.png"
                                 className="h-8"
                                 alt="Logo"
                             />

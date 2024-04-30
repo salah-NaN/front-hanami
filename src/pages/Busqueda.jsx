@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { CardItemMap, NavBar } from "../components";
+import {useEffect, useState} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {CardItemMap, NavBar} from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/filtros/Filter";
-import { format, parse } from "date-fns";
-import { convertFieldResponseIntoMuiTextFieldProps } from "@mui/x-date-pickers/internals";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
-import arrow from '../assets/nav-arrow-left.svg'
-import arrowRight from '../assets/nav-arrow-right.svg'
-
+import {format, parse} from "date-fns";
+import {convertFieldResponseIntoMuiTextFieldProps} from "@mui/x-date-pickers/internals";
+import {div} from "three/examples/jsm/nodes/Nodes.js";
+import arrow from "../assets/nav-arrow-left.svg";
+import arrowRight from "../assets/nav-arrow-right.svg";
 
 export const Busqueda = () => {
-  let { quehacer, localizacion, fecha, flor } = useParams();
+  let {quehacer, localizacion, fecha, flor} = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -38,7 +37,7 @@ export const Busqueda = () => {
   // constantes
 
   useEffect(() => {
-    const url = "http://localhost:3000/api/";
+    const url = "/api/";
     if (fecha !== ";") {
       fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
     }

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { NavBar } from "../components";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {NavBar} from "../components";
 import Swiper from "../components/Imagenes/Swiper";
 import GridTwo from "../components/Imagenes/GridTwo";
 import GridFive from "../components/Imagenes/GridFive";
@@ -23,14 +23,14 @@ import {
 import CardActividades from "../components/cards/CardActividades";
 
 // constantes
-const URL = "http://localhost:3000/api";
+const URL = "/api";
 const diccionarioFechas = {
   1: "ene",
 };
 
 export const PuntoInteres = () => {
   const [puntoInteres, setPuntoInteres] = useState({});
-  const { id } = useParams();
+  const {id} = useParams();
   const [datosResenia, setDatosResenia] = useState({
     media: -1,
     numResenias: -1,
@@ -81,7 +81,7 @@ export const PuntoInteres = () => {
       sumaPuntuacion += r.puntuacion;
     });
     const mediaPuntuacion = sumaPuntuacion / numResenias;
-    setDatosResenia({ media: mediaPuntuacion, numResenias: numResenias });
+    setDatosResenia({media: mediaPuntuacion, numResenias: numResenias});
     setTodasResenias(arrayResenias);
   }, [todasActividades]);
 

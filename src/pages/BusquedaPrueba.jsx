@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { CardItemMap, NavBar } from "../components";
+import {useEffect, useState} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {CardItemMap, NavBar} from "../components";
 import MapaSinSlider from "../components/mapa/MapaSinSlider";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import GrowShrinkMap from "../components/GrowShrinkMap";
 import Filter from "../components/filtros/Filter";
-import { format, parse } from "date-fns";
+import {format, parse} from "date-fns";
 import arrow from "../assets/nav-arrow-left.svg";
 import arrowRight from "../assets/nav-arrow-right.svg";
-import { NavBarFiltros } from "../components/Buscador/PopUp";
-import { poblaciones } from "./utils/Hooks";
-
+import {NavBarFiltros} from "../components/Buscador/PopUp";
+import {poblaciones} from "./utils/Hooks";
 
 export const BusquedaPrueba = () => {
-  let { quehacer, localizacion, fecha, flor } = useParams();
+  let {quehacer, localizacion, fecha, flor} = useParams();
   // los puntos de interes filtrados
   const [filterData, setFilterData] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -25,12 +24,16 @@ export const BusquedaPrueba = () => {
   const redirect = useNavigate();
 
   // recojo la poblacion y sus coordenadas
-  const poblacion = poblaciones.find(p => p.nombre === localizacion.split(':')[1])
+  const poblacion = poblaciones.find(
+    (p) => p.nombre === localizacion.split(":")[1]
+  );
 
   // setteo las coordenadas en base a la ciudad que llegue por parametro
-  const [coordenadas, setCoordenadas] = useState(poblacion ? [poblacion.latitud, poblacion.longitud, 12] : [41.6092, 2.1477, 9])
-
-
+  const [coordenadas, setCoordenadas] = useState(
+    poblacion
+      ? [poblacion.latitud, poblacion.longitud, 12]
+      : [41.6092, 2.1477, 9]
+  );
 
   // useEffect(() => {
   //   window.addEventListener("onscroll", () => {
@@ -51,7 +54,7 @@ export const BusquedaPrueba = () => {
 
   // constantes
   useEffect(() => {
-    const url = "http://localhost:3000/api/";
+    const url = "/api/";
     if (fecha !== ";") {
       fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
     }
@@ -62,8 +65,6 @@ export const BusquedaPrueba = () => {
         setFilterData(filterData);
       })
       .catch((error) => console.log(error));
-
-
   }, []);
 
   useEffect(() => {
@@ -89,8 +90,9 @@ export const BusquedaPrueba = () => {
           // className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
           //   showMap ? `mt-20` : `mt-[22rem]`
           // }`}
-          className={`md:flex md:mt-2 flex flex-col ${showMap ? `mt-20` : `mt-[22rem]`
-            }`}
+          className={`md:flex md:mt-2 flex flex-col ${
+            showMap ? `mt-20` : `mt-[22rem]`
+          }`}
         >
           {/* cards */}
           {!showMap ? (
@@ -102,26 +104,25 @@ export const BusquedaPrueba = () => {
               {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0
                 ? filterData &&
-                filterData?.map((puntos_interes) => (
-                  <CardItemMap
-                    puntos_interes={puntos_interes}
-                    quehacer={quehacer}
-                  />
-                ))
-                : filterData &&
-                filterData
-                  ?.filter((pi) =>
-                    pi.temporadas.find((t) =>
-                      checkedFilters.includes(t.nombre)
-                    )
-                  )
-                  .map((puntoInteres) => (
+                  filterData?.map((puntos_interes) => (
                     <CardItemMap
-                      puntos_interes={puntoInteres}
+                      puntos_interes={puntos_interes}
                       quehacer={quehacer}
                     />
-
-                  ))}
+                  ))
+                : filterData &&
+                  filterData
+                    ?.filter((pi) =>
+                      pi.temporadas.find((t) =>
+                        checkedFilters.includes(t.nombre)
+                      )
+                    )
+                    .map((puntoInteres) => (
+                      <CardItemMap
+                        puntos_interes={puntoInteres}
+                        quehacer={quehacer}
+                      />
+                    ))}
 
               <a
                 href="#"
@@ -153,7 +154,6 @@ export const BusquedaPrueba = () => {
                 </svg>
                 {/* <img className="size-9 pl-3" src={arrowRight}></img> */}
               </a>
-
             </div>
           ) : (
             // null
@@ -162,10 +162,11 @@ export const BusquedaPrueba = () => {
 
           {/* revisar esto */}
           <div
-            className={`${mapSizeFull
-              ? "md:w-full md:z-10 fixed"
-              : "md:h-full md:w-5/12 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
-              }
+            className={`${
+              mapSizeFull
+                ? "md:w-full md:z-10 fixed"
+                : "md:h-full md:w-5/12 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
+            }
         ${showMap ? `h-5/6 w-full` : `md:h-full fixed w-full h-2/5`}`}
           >
             {/* boton expandir mapa en tamaño lg en adelante*/}
@@ -203,10 +204,10 @@ export const BusquedaPrueba = () => {
                   checkedFilters.length === 0
                     ? filterData
                     : filterData.filter((pi) =>
-                      pi.temporadas.find((t) =>
-                        checkedFilters.includes(t.nombre)
+                        pi.temporadas.find((t) =>
+                          checkedFilters.includes(t.nombre)
+                        )
                       )
-                    )
                 }
                 setPuntosInteres={setFilterData}
                 latlonzoom={coordenadas}

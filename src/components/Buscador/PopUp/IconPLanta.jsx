@@ -3,7 +3,7 @@ export const IconPLanta = ({ planta }) => {
     <>
       {planta !== null ? (
         <img
-          src={`http://localhost:3000/img/${
+          src={`/api/img/${
             planta === "Cerezo"
               ? "cerezas"
               : planta === "Lavanda"

@@ -277,7 +277,7 @@ export const Filter = ({ setFilters, filterData }) => {
                     <div className="flex">
                       <div className="px-2">
                         <img
-                          src={`http://localhost:3000/img/${i.img}.png`}
+                          src={`/api/img/${i.img}.png`}
                           alt=""
                           className="w-11 h-11"
                         />

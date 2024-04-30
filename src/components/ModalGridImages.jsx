@@ -20,9 +20,9 @@ const ModalGridImages = ({ modalVisible, setModalVisible, listImages }) => {
                             listImages && listImages.map((image, index) => (
                                 index % 3 === 0
                                     ?
-                                    <img className="rounded-lg w-full h-full col-span-2 " src={`http://localhost:3000/img/${image.nombre}${image.tipo}`}></img>
+                                    <img className="rounded-lg w-full h-full col-span-2 " src={`/api/img/${image.nombre}${image.tipo}`}></img>
                                     :
-                                    <img className="rounded-lg w-full h-full" src={`http://localhost:3000/img/${image.nombre}${image.tipo}`}></img>
+                                    <img className="rounded-lg w-full h-full" src={`/api/img/${image.nombre}${image.tipo}`}></img>
                             ))
                         }
                     </div>
