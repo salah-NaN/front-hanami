@@ -12,7 +12,7 @@ import IconDondeIr from "./IconDondeIr";
 import IconFecha from "./IconFecha";
 
 export const PopUpBuscador = ({
-  toggleMobileNav,
+  toggleBuscadorNavMobile,
   puntosDeInteres,
   setPuntosDeInteres,
 }) => {
@@ -69,6 +69,7 @@ export const PopUpBuscador = ({
 
   const onFormSubmit = () => {
     event.preventDefault();
+    console.log('hola')
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === null ? "Punto_de_Interes" : queHacer;
@@ -91,7 +92,6 @@ export const PopUpBuscador = ({
       );
     }
 
-    console.log(queHacer)
     if (queHacer === "Actividades") {
       // si no hay datos pues metemos esto ;
       navigate(
@@ -100,6 +100,8 @@ export const PopUpBuscador = ({
         }/${flor || ";"}`
       );
     }
+
+    toggleBuscadorNavMobile();
   };
 
   //Buscador input
@@ -166,7 +168,7 @@ export const PopUpBuscador = ({
         <form onSubmit={onFormSubmit}>
           <motion.div className="py-5 px-5">
             <div className="w-full flex justify-start">
-              <button onClick={() => toggleMobileNav()}>
+              <button onClick={() => toggleBuscadorNavMobile()}>
                 <svg
                   width="30px"
                   height="30px"
@@ -271,9 +273,10 @@ export const PopUpBuscador = ({
                       id="panel1bh-header"
                       className="border border-black"
                     >
-                      {searchForm.localizacion === null && searchForm?.provincia === null ? (
+                      {searchForm.localizacion === null &&
+                      searchForm?.provincia === null ? (
                         <h1 className="text-[1rem] text-bold py-2">
-                          ¿Cuando quieres ir?
+                          ¿Donde quieres ir?
                         </h1>
                       ) : searchForm?.localizacion !== null ? (
                         <div className="py-">
@@ -283,10 +286,11 @@ export const PopUpBuscador = ({
                         </div>
                       ) : searchForm?.provincia !== null ? (
                         <div className="">
-                          <h1 className="text-[15px] font-bold">{searchForm?.provincia}</h1>
+                          <h1 className="text-[15px] font-bold">
+                            {searchForm?.provincia}
+                          </h1>
                         </div>
-                      ) : null
-                    }
+                      ) : null}
                     </AccordionSummary>
                     <AccordionDetails className="border-none">
                       <PopSearchPlace
@@ -318,21 +322,15 @@ export const PopUpBuscador = ({
                       className=""
                       expandIcon={<IconFecha />}
                     >
-                      {searchForm.fecha === null ? (
-                        <h1 className="text-[1rem] text-bold py-2">
-                          ¿Cuando quieres ir?
+                      <div className="py-">
+                        <h1 className="text-[15px] font-bold">
+                          {searchForm.fecha.length === 0 ? (
+                            <h1 className="py-2">¿Cuando quieres ir?</h1>
+                          ) : (
+                            <h1 className="py-2">{searchForm.fecha}</h1>
+                          )}
                         </h1>
-                      ) : (
-                        <div className="py-">
-                          <h1 className="text-[15px] font-bold">
-                            {searchForm.fecha.length === 0 ? (
-                              <h1>¿Cuando quieres ir?</h1>
-                            ) : (
-                              <h1 className="py-2">{searchForm.fecha}</h1>
-                            )}
-                          </h1>
-                        </div>
-                      )}
+                      </div>
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="flex justify-center">
@@ -369,7 +367,7 @@ export const PopUpBuscador = ({
                         className="border border-black"
                       >
                         {searchForm.eleccion === undefined ? (
-                          <h1 className="text-[1rem] text-bold py-">
+                          <h1 className="text-[1rem] text-bold py-2">
                             {searchForm.flor !== null ? (
                               <h1>{searchForm.flor}</h1>
                             ) : (

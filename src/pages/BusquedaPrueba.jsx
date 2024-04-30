@@ -22,21 +22,22 @@ export const BusquedaPrueba = () => {
   const [posicionScroll, setPosicionScroll] = useState(window.scrollY);
   const redirect = useNavigate();
 
-  useEffect(() => {
-    window.addEventListener("onscroll", () => {
-      setPosicionScroll(window.scrollY);
-    });
+  // useEffect(() => {
+  //   window.addEventListener("onscroll", () => {
+  //     setPosicionScroll(window.scrollY);
+  //   });
 
-    return () => {
-      window.addEventListener("onscroll", () => {
-        setPosicionScroll(window.scrollY);
-      });
-    };
-  }, []);
+  //   return () => {
+  //     window.addEventListener("onscroll", () => {
+  //       console.log(event)
+  //       setPosicionScroll(window.scrollY);
+  //     });
+  //   };
+  // }, []);
 
-  const handleShowMap = () => {
-    setShowMap(!showMap);
-  };
+  // const handleShowMap = () => {
+  //   setShowMap(!showMap);
+  // };
 
   // constantes
   useEffect(() => {
@@ -72,7 +73,7 @@ export const BusquedaPrueba = () => {
         </div>
 
         <div
-          className={`md:grid md:grid-cols-2 md:relative md:mt-2 flex flex-col ${
+          className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
             showMap ? `mt-20` : `mt-[23rem]`
           }`}
         >
@@ -137,7 +138,7 @@ export const BusquedaPrueba = () => {
             {/* ${posicionScroll > 200 ? 'block' : 'hidden'} */}
             <a
               href="#"
-              onClick={handleShowMap}
+              // onClick={handleShowMap}
               className={`border rounded-xl flex justify-between items-center px-2.5 py-1.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
           lg:hidden bg-white font-bold`}
             >

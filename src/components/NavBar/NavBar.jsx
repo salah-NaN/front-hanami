@@ -13,12 +13,14 @@ import { BuscadorGrandeOtrasPaginas, BuscadorOtrasPaginas } from "../Buscador";
 import { NavBarFiltros } from "../Buscador/PopUp";
 import { format, parse } from "date-fns";
 import { FilterActividades, Filter } from "../filtros";
+import { PopUpBuscador } from "../Buscador/PopUp";
 
 export const NavBar = () => {
   const location = useLocation();
   const params = useParams();
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
   const [buscadorNav, toggleBuscadorNav] = useCycle(false, true);
+  const [buscadorNavMobile, toggleBuscadorNavMobile] = useCycle(false, true);
   const [cambio, setCambio] = useState(false);
   const [checkedFilters, setCheckedFilters] = useState([]);
   const [puntosDeInteres, setPuntosDeInteres] = useState([]);
@@ -29,8 +31,12 @@ export const NavBar = () => {
     toggleMobileNav();
   };
 
-  const openOnPopUpBuscador = () => {
-    toggleBuscadorNav();
+  // const openOnPopUpBuscador = () => {
+  //   toggleBuscadorNav();
+  // };
+
+  const openOnPopUpBuscadorMobile = () => {
+    toggleBuscadorNavMobile();
   };
 
   useEffect(() => {
@@ -42,7 +48,7 @@ export const NavBar = () => {
 
     if (location.pathname.includes("/busqueda")) {
       const url = "http://localhost:3000/api/";
-      const { localizacion, fecha, flor } = params;
+      let { localizacion, fecha, flor } = params;
       if (fecha !== ";") {
         fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
       }
@@ -78,13 +84,13 @@ export const NavBar = () => {
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-20 bg-white transition-all duration-300"
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
           } ${
-            buscadorNav === true
+            buscadorNavMobile === true
               ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50`
               : ``
           } `}
         >
           <div
-            className={`flex items-center overflow-visible border-r-0 border-l-0 border-t-0  h-full ${
+            className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${
               location.pathname === "/"
                 ? "w-11/12 mx-auto"
                 : location.pathname.includes("/busqueda")
@@ -96,27 +102,44 @@ export const NavBar = () => {
             <nav
               className={`md:w-[90%] lg:lg:w-[93%] w-11/12 max-auto flex 
           ${
-            buscadorNav === true ? `h-full items-center` : ``
+            buscadorNavMobile === true ? `h-full items-center` : ``
           } justify-between py-3 gap-3 mx-auto`}
             >
               <div
                 className={`${
-                  location.pathname.includes("/busqueda") || location.pathname.includes('/puntosInteres') || 
-                  location.pathname.includes('/actividades')
+                  location.pathname.includes("/busqueda") ||
+                  location.pathname.includes("/puntosInteres") ||
+                  location.pathname.includes("/actividades")
                     ? `hidden md:block lg:block`
                     : ``
                 }`}
               >
                 <Logo />
               </div>
+              {buscadorNavMobile ? (
+                <div className="relative md:hidden">
+                  <AnimatePresence>
+                    <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
+                      <PopUpBuscador
+                        toggleBuscadorNavMobile={toggleBuscadorNavMobile}
+                        puntosDeInteres={puntosDeInteres}
+                        setPuntosDeInteres={setPuntosDeInteres}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              ) : null}
+
               {/* Buscador pequeño sin el popUp  */}
-              {location.pathname !== "/" && buscadorNav === false ? (
+              {location.pathname !== "/" && buscadorNavMobile === false ? (
                 <BuscadorOtrasPaginas
-                  openOnPopUpBuscador={openOnPopUpBuscador}
+                  openOnPopUpBuscadorMobile={openOnPopUpBuscadorMobile}
                 />
-              ) : buscadorNav === true ? (
+              ) : null}
+
+              {buscadorNavMobile ? (
                 <motion.div
-                  className="flex justify-center items-center h-full "
+                  className="hidden md:flex md:justify-center md:items-center md:h-full lg:flex lg:justify-center lg:items-center lg:h-full"
                   initial={{ scale: 0 }}
                   animate={{ rotate: 0, scale: 1 }}
                   transition={{
@@ -133,8 +156,8 @@ export const NavBar = () => {
               <div className="hidden md:inline">
                 <AccountButton />
               </div>
-              {location.pathname.includes("busqueda") ? (
-                <div className="hidden md:flex lg:flex md:items-center lg:items-center">
+              {location.pathname.includes("busqueda") && !buscadorNavMobile ? (
+                <div className="md:hidden flex justify-center items-center">
                   <FiltersButton />
                 </div>
               ) : (
@@ -143,14 +166,11 @@ export const NavBar = () => {
                 </div>
               )}
             </nav>
-            {/* {location.pathname.includes("/busqueda") ? (
-              <Filter setFilters={setFilters} filterData={filterData} />
-            ) : null} */}
           </div>
         </motion.header>
       </AnimatePresence>
 
-      {buscadorNav === true ? (
+      {buscadorNavMobile === true ? (
         <div
           className="fixed top-0 left-0 w-full h-full bg-black opacity-10 z-30 fondoOpacity"
           onClick={() => toggleBuscadorNav()}
