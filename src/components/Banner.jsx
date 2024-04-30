@@ -63,7 +63,7 @@ export const Banner = () => {
          </AnimatePresence>
        </div>
      ) : null}
-     <div className="md:absolute md:top-28 flex flex-col justify-start items-center">
+     <div className="md:absolute md:top-40 flex flex-col justify-start items-center">
        <div className="mx:w-80 md:w-full md:mx-auto lg:w-11/12 lg:mx-auto z-10">
          <div className="py-2 bg-transparent md:px-6 lg:w-fit">
          </div>
@@ -78,8 +78,8 @@ export const Banner = () => {
                    leading-tight
                    text-transparent
                    2xl:max-w-screen-2xl 2xl:mx-auto
-                   md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem]
-                   md:mb-20 mb-8"
+
+                   md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem] py-12"
            >
              Toda la belleza de Cataluña en un solo clic
            </h1>
