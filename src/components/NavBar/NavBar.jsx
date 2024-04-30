@@ -23,7 +23,7 @@ export const NavBar = () => {
           <nav className="w-10/12 max-auto flex justify-between sticky py-3 mx-auto">
             <Logo />
             <div className="hidden md:inline">
-              <AccountButton />
+              <AccountButton toggleMenu={toggleMenu} />
             </div>
             <div className="flex items-center md:hidden lg:hidden xl:hidden">
               <HanburgerButton toggleMenu={toggleMenu} />

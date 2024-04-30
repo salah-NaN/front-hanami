@@ -31,7 +31,7 @@ export const NavLinks = ({ toggleMenu, mobileNav }) => {
       }}
     >
       <motion.div
-        className="bg-green-500"
+        className="bg-emerald-300"
         key="mobile-nav"
         variants={{
           closed: {
@@ -80,12 +80,12 @@ export const NavLinks = ({ toggleMenu, mobileNav }) => {
               logueado == true ?            
               <div>
               <div className="" onClick={()=> navigate("/MiPerfil")}>
-                <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
+                <li className="py-3 px-6 hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
                   Mi perfil
                 </li>
               </div>
               <div className="" onClick={()=> logout()}>
-                <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
+                <li className="py-3 px-6hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
                   Logout
                 </li>
               </div>
@@ -93,7 +93,7 @@ export const NavLinks = ({ toggleMenu, mobileNav }) => {
             </div> : 
             <div>
             <div className="" onClick={()=> navigate("/login")}>
-              <li className="py-3 px-6 hover:bg-red-500 hover:cursor-pointer">
+              <li className="py-3 px-6 hover:bg-green-500 hover:shadow-md hover:shadow-green-800 hover:cursor-pointer">
                 Inicia Sesion
               </li>
             </div>

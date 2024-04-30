@@ -21,19 +21,27 @@ export const App = () => {
         <Route
             path="/register"
             element={
+              <LayoutHanami>
                 <Register />
+
+              </LayoutHanami>
             }
           ></Route>
           <Route
             path="/login"
             element={
+              <LayoutHanami>
+
                 <Login />
+              </LayoutHanami>
             }
           ></Route>
           <Route
             path="/MiPerfil"
             element={
+              <LayoutHanami>
                 <MiPerfil />
+              </LayoutHanami>
             }
           ></Route>
           <Route
