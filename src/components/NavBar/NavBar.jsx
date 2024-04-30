@@ -82,15 +82,15 @@ export const NavBar = () => {
           className={`w-full ${
             location.pathname.includes("/puntosInteres") ||
             location.pathname.includes("/actividades")
-              ? "w-10/12 mx-auto md:w-11/12 lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto"
+              ? "w-10/12 mx-auto md:w-full lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto transition-all duration-300"
 
               : location.pathname.includes("/busqueda")
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
 
-              : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
+              : "z-10 absolute top-0 xl:w-11/12 mx-auto left-0 right-0"
           } ${
             buscadorNavMobile === true
-              ? `md:h-48 md:absolute top-0 left-0 right-0 bg-white z-50`
+              ? `md:h-48 xl:w-full md:w-full md:absolute bg-white top-0 left-0 right-0 z-50`
               : ``
           } `}
         >

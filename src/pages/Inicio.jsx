@@ -122,7 +122,7 @@ export const Inicio = () => {
           <div className="w-10/12 mx-auto">
             <CardBox hotTrends={hotTrends} />
           </div>
-          <div className="py-32">
+          <div className="pt-32">
             <div className="w-10/12 mx-auto md:w-[90%] md:mx-auto lg:w-[87%] lg:mx-auto xl:w-[87%] 2xl:w-[85%] relative">
               <SliderItems
                 actividadOrPuntoInteres={actividadOrPuntoInteres}

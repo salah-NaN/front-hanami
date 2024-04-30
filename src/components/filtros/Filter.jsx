@@ -152,7 +152,12 @@ export const Filter = ({ setFilters, filterData }) => {
     const arrObj = tempos.map((temporada) => {
       nombreConvertido.map((nc) => {
         if (nc.nombre === temporada) {
-          x = { nombre: nc.convertido, temporada, seteado: false };
+          x = {
+            nombre: nc.convertido,
+            img: nc.nombre,
+            temporada,
+            seteado: false,
+          };
         }
       });
       return x;
@@ -224,7 +229,7 @@ export const Filter = ({ setFilters, filterData }) => {
           data-ripple-light="true"
           data-popover-target="menu"
           onClick={() => setToggleDropDown(true)}
-          class="select-none rounded-lg p-2 px-4 border
+          class="select-none rounded-full p-2 px-3 border
         text-center align-middle font-sans text-xs font-bold uppercase 
         text-white transition-all hover:shadow-lg
          hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] 
@@ -266,10 +271,15 @@ export const Filter = ({ setFilters, filterData }) => {
                 </div>
               </div>
               <h1 className="text-4xl pb-4">Filtra temporadas</h1>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1">
                 {inputs.map((i) => {
                   return (
-                    <div className="">
+                    <div className="flex">
+                      <img
+                        src={`http://localhost:3000/img/${i.img}.png`}
+                        alt=""
+                        className="w-9"
+                      />
                       <label className="p-2">{i.nombre}</label>
                       <input
                         type="checkbox"
@@ -284,8 +294,10 @@ export const Filter = ({ setFilters, filterData }) => {
                 })}
               </div>
               <div className="w-full flex justify-end">
-                <button className="border-none rounded-md px-4 py-1 bg-[#4ADE80] hover:bg-green-500"
-                onClick={togglePopUpFilterFilter}>
+                <button
+                  className="border-none rounded-md px-4 py-1 bg-[#4ADE80] hover:bg-green-500"
+                  onClick={togglePopUpFilterFilter}
+                >
                   <svg
                     width="25px"
                     height="25px"
