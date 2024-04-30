@@ -12,7 +12,7 @@ const URL = 'http://localhost:3000/api'
 // las imágenes de los cerezos
 // import cerezas from '../../../public/images/cerezas'
 
-export default function Mapa({ puntosInteres, setPuntosInteres }) {
+export default function Mapa({ puntosInteres, setPuntosInteres, latlonzoom }) {
     // referencia del mapa
     const mapRef = useRef(null)
     // state para controlar que se ejecute solo una vez
@@ -50,7 +50,8 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
     useEffect(() => {
 
-        const ourMap = L.map(mapRef.current, { zoomControl: false }).setView([41.6092, 2.1477], 9);
+        console.log(latlonzoom)
+        const ourMap = L.map(mapRef.current, { zoomControl: false }).setView([latlonzoom[0], latlonzoom[1]], latlonzoom[2]);
 
         setMapa(ourMap)
 
@@ -171,7 +172,6 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
     return (
         <>
             <div id="map" ref={mapRef} className={`w-full ${location.pathname === '/' ? 'h-[500px]' : 'h-full'}`} ></div>
-
         </>
     );
 }

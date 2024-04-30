@@ -101,7 +101,6 @@ export const Inicio = () => {
                   <div className="border-2 border-[#b07ad6] bg-[#f3e1ff] rounded-lg">
                     {
                       nombreConvertido.map((etapa) => {
-                        console.log(etapa)
                         if (etapa.nombre.startsWith('Lavanda')) {
                           return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
                             <p>{etapa.convertido}</p>
