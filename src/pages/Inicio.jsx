@@ -34,7 +34,6 @@ export const Inicio = () => {
       .then((res) => res.json())
       .then((puntosInteres) => setActividadOrPuntoInteres(puntosInteres))
       .catch((error) => console.log(error));
-
   }, []);
 
 
@@ -45,6 +44,7 @@ export const Inicio = () => {
         <NavBar />
         <Banner />
       </div>
+
       <div className="bg-[#FFFFFF]  mx-auto" ref={scrollBuscadorRef}>
         <div className="md:w-[90%] mx-auto">
           <div className="py-32 w-10/12 mx-auto">

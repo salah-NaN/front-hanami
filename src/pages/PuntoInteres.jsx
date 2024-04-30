@@ -104,11 +104,6 @@ export const PuntoInteres = () => {
     componentToRender = <GridFive images={puntoInteres.imagenes} />;
   }
 
-  useEffect(() => {
-    console.log('asdf')
-    console.log(actividades)
-  }, [actividades])
-
   function todasLasActividades(temporadas) {
     const actividades = []
 
@@ -124,7 +119,7 @@ export const PuntoInteres = () => {
 
   return (
     <>
-      <>
+
         <div className="mt-28" >
           <h2 className=" text-4xl w-fit font-black mb-1 text-[#222222]
         md:text-5xl bg-gradient-to-r from-[#bbc35d] via-[#6bc35d] to-[#131313] bg-clip-text text-transparent"
@@ -272,7 +267,7 @@ export const PuntoInteres = () => {
         <ModalVerResenias resenias={todasResenias} modalVerReseniasVisible={modalVerReseniasVisible} setModalVerReseniasVisible={setModalVerReseniasVisible} />
         {/* <Resenia resenia={resenia}/> */}
       </>
-    </>
+
 
   )
 }

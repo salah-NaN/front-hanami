@@ -12,3 +12,4 @@ export * from './SliderItems/SliderItems';
 export * from './cardItem/CardBox';
 export * from './mapa/Mapa';
 export * from './Footer';
+export * from './NavBar/FiltersButton';
