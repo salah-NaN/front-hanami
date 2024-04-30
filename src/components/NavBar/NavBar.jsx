@@ -192,7 +192,7 @@ export const NavBar = () => {
                   <div onClick={()=> logout()} className="cursor-pointer"><p className="text-neutral-900 p-2 px-6 bg-slate-100 rounded-full backdrop-filter backdrop-blur-lg bg-opacity-20 hover:bg-opacity-50 focus:bg-opacity-100 font-semibold">Logout</p></div>
                 </div>
               }              </div>
-              {location.pathname.includes("busqueda") && !buscadorNavMobile ? (
+              {location.pathname.includes("/busqueda")  || location.pathname.includes("/actividades/Actividades") && !buscadorNavMobile ? (
                 <div className="md:hidden flex justify-center items-center">
                   <FiltersButton openPopUpFilters={openPopUpFilters} />
                 </div>
