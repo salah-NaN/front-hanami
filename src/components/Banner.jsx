@@ -16,6 +16,7 @@ export const Banner = () => {
 
   const ref = useRef(null);
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
+  const [buscadorNavMobile, toggleBuscadorNavMobile] = useCycle(false, true);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -26,29 +27,29 @@ export const Banner = () => {
   const descY = useTransform(scrollYProgress, [0, 1], ["0%", "800%"]);
 
   const openPopUpBuscador = () => {
-    toggleMobileNav();
+    toggleBuscadorNavMobile();
   };
 
   //Impedir que se pueda hacer scroll cuando salte el popUp de buscar
   useEffect(() => {
-    if (mobileNav) {
+    if (buscadorNavMobile) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [mobileNav]);
+  }, [buscadorNavMobile]);
 
   return (
     <div
       className="w-full h-screen overflow-hidden relative grid place-items-center"
       ref={ref}
     >
-      {mobileNav === true ? (
+      {buscadorNavMobile === true ? (
         <div className="relative md:hidden">
           <AnimatePresence>
             <motion.div className="fixed z-50 top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden">
               <PopUpBuscador
-                toggleMobileNav={toggleMobileNav}
+                toggleBuscadorNavMobile={toggleBuscadorNavMobile}
                 puntosDeInteres={puntosDeInteres}
                 setPuntosDeInteres={setPuntosDeInteres}
               />

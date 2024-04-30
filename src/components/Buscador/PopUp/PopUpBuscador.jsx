@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MotionConfig, motion } from "framer-motion";
+import { MotionConfig, motion, useCycle } from "framer-motion";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { styled } from "@mui/material";
 import ButtonSearch from "../ButtonSearch";
 import { IconPLanta, PopUpFecha, PopSearchPlace, PopUpPlanta } from "./";
 
@@ -67,9 +66,7 @@ export const PopUpBuscador = ({
     setSearchForm({ ...searchForm, ...data });
   };
 
-  const onFormSubmit = () => {
-    event.preventDefault();
-    console.log('hola')
+  const onFormSubmit = (event) => {
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
     queHacer = queHacer === null ? "Punto_de_Interes" : queHacer;
@@ -102,6 +99,7 @@ export const PopUpBuscador = ({
     }
 
     toggleBuscadorNavMobile();
+    window.location.reload();
   };
 
   //Buscador input
@@ -147,6 +145,10 @@ export const PopUpBuscador = ({
     setFoundWord([...poblacionProvinciaUnicos]);
   }, [searchForm.localizacion]);
 
+  const closePopUp = () => {
+    toggleBuscadorNavMobile();
+  }
+
   return (
     <MotionConfig
       transition={{
@@ -166,9 +168,9 @@ export const PopUpBuscador = ({
         }}
       >
         <form onSubmit={onFormSubmit}>
-          <motion.div className="py-5 px-5">
+          <div className="py-5 px-5">
             <div className="w-full flex justify-start">
-              <button onClick={() => toggleBuscadorNavMobile()}>
+              <div onClick={closePopUp}>
                 <svg
                   width="30px"
                   height="30px"
@@ -193,7 +195,7 @@ export const PopUpBuscador = ({
                     stroke-linejoin="round"
                   ></path>
                 </svg>
-              </button>
+              </div>
               <div
                 className={`flex w-full justify-center items-center gap-5 font-light text-sm 
             `}
@@ -220,9 +222,9 @@ export const PopUpBuscador = ({
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div className="bg-slate-50 absolute bottom-0 w-full px-5 h-20 flex justify-end items-center">
+          <div className="bg-slate-50 absolute bottom-0 w-full px-5 h-20 flex justify-end items-center">
             <div className="">
               <button
                 className="border-none rounded-lg p-3 pl-0 text-md bg-green-400 text-white flex items-center"
@@ -238,7 +240,7 @@ export const PopUpBuscador = ({
                 <h1 className="font-bold">Buscar</h1>
               </button>
             </div>
-          </motion.div>
+          </div>
 
           <motion.div
             className="h-screen text-2xl w-11/12 mx-auto"
