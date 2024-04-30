@@ -420,12 +420,12 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
                           {searchForm.queHacer === "Punto_de_Interes" ? (
                             <div className="flex gap-2 items-center">
                               <h1 className="text-xl">Punto de interes</h1>
-                              <img src="./campos.png" alt="" className="w-7" />
+                              <img src="/campos.png" alt="" className="w-7" />
                             </div>
                           ) : (
                             <div className="flex gap-2 items-center">
                               <h1 className="text-xl">Actividades</h1>
-                              <img src="./cometa.png" alt="" className="w-7" />
+                              <img src="/cometa.png" alt="" className="w-7" />
                             </div>
                           )}
                         </div>

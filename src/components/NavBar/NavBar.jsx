@@ -82,9 +82,11 @@ export const NavBar = () => {
           className={`w-full ${
             location.pathname.includes("/puntosInteres") ||
             location.pathname.includes("/actividades")
-              ? "w-10/12 mx-auto md:w-11/12 lg:w-[89%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-8/12"
+              ? "w-10/12 mx-auto md:w-11/12 lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto"
+
               : location.pathname.includes("/busqueda")
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
+
               : "z-10 absolute top-0 xl:w-9/12 mx-auto left-0 right-0"
           } ${
             buscadorNavMobile === true
@@ -94,10 +96,10 @@ export const NavBar = () => {
         >
           <div
             className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${
-              location.pathname === "/"
-                ? "w-11/12 mx-auto"
-                : location.pathname.includes("/busqueda")
-                ? "md:flex md:flex-col"
+              location.pathname === "/" ? "w-11/12 mx-auto"
+
+                : location.pathname.includes("/busqueda") ? "md:flex md:flex-col"
+
                 : "w-full mx-auto"
             }`}
           >
@@ -176,7 +178,7 @@ export const NavBar = () => {
       {buscadorNavMobile === true ? (
         <div
           className="fixed top-0 left-0 w-full h-full bg-black opacity-10 z-30 fondoOpacity"
-          onClick={() => toggleBuscadorNav()}
+          onClick={() => openOnPopUpBuscadorMobile()}
         ></div>
       ) : null}
 

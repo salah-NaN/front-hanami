@@ -73,16 +73,19 @@ export const BusquedaPrueba = () => {
         </div>
 
         <div
-          className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
+          // className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
+          //   showMap ? `mt-20` : `mt-[22rem]`
+          // }`}
+          className={`md:flex md:mt-2 flex flex-col ${
             showMap ? `mt-20` : `mt-[22rem]`
           }`}
         >
           {/* cards */}
           {!showMap ? (
             <div
-              className={`grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3  
+              className={`md:w-7/12 grid grid-cols-1 md:grid md:grid-cols-2 md:gap-3
             xl:grid xl:grid-cols-3 xl:gap-3 2xl:grid 
-            2xlgrid-cols-3 2xl:gap-3 z-20 bg-white pt-5 md:pt-0`}
+            2xl:grid-cols-3 2xl:gap-3 z-10 bg-white pt-5 md:pt-0`}
             >
               {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0
@@ -116,10 +119,10 @@ export const BusquedaPrueba = () => {
           <div
             className={`${
               mapSizeFull
-                ? "md:w-full md:z-10 z-10 fixed"
-                : "md:h-full md:w-1/2 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
+                ? "md:w-full md:z-10 fixed"
+                : "md:h-full md:w-5/12 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
             }
-        ${showMap ? `h-5/6 w-full` : `md:h-full fixed z-10 w-full h-2/5`} z-10`}
+        ${showMap ? `h-5/6 w-full` : `md:h-full fixed w-full h-2/5`}`}
           >
             {/* boton expandir mapa en tamaño lg en adelante*/}
             <img
