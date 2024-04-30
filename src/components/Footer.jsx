@@ -5,23 +5,23 @@ import { motion, MotionConfig } from "framer-motion";
 
 
 export const Footer = () => {
-//     const ref = useRef(null);
-//   const isInView = useInView(ref, { once: true });
+    //     const ref = useRef(null);
+    //   const isInView = useInView(ref, { once: true });
 
-//   const mainControladores = useAnimation();
+    //   const mainControladores = useAnimation();
 
-//   useEffect(() => {
-//     if (isInView) {
-//       mainControladores.start("visible");
-//     }
-//   }, [isInView]);
+    //   useEffect(() => {
+    //     if (isInView) {
+    //       mainControladores.start("visible");
+    //     }
+    //   }, [isInView]);
 
 
 
     return (
 
         <div>
-            <motion.div className="mt-40 flex flex-col justify-between w-full bg-[#c0c0c0] "
+            <motion.div className="mt-40 flex flex-col justify-between w-full bg-[#94e89e] "
                 initial={{ scale: 0.1 }}
                 animate={{ scale: 1 }}
                 transition={{

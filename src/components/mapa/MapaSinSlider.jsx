@@ -50,26 +50,26 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
 
     useEffect(() => {
 
-        const ourMap = L.map(mapRef.current, {zoomControl: false}).setView([41.6092, 2.1477], 9);
+        const ourMap = L.map(mapRef.current, { zoomControl: false }).setView([41.6092, 2.1477], 9);
 
         setMapa(ourMap)
 
         let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleStreets.addTo(ourMap)
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleStreets.addTo(ourMap)
 
-            L.control.zoom({
-                position:'topright'
-           }).addTo(ourMap);
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(ourMap);
     }, [])
 
 
     // creación del mapa y todos los markers según el fetch de la api
     useEffect(() => {
         if (!primerRender && mapa) {
-            mapa.eachLayer((layer) => {
+            mapa?.eachLayer((layer) => {
                 if (layer instanceof L.Marker) {
                     layer.remove();
                 }
@@ -106,7 +106,7 @@ export default function Mapa({ puntosInteres, setPuntosInteres }) {
             // mapeo de todos los markers y asignacion de diseño de marker en el array de etapas
             puntosInteres.map(punto => {
 
-                
+
 
                 // extraer las temporadas
                 const temporadasCoincidentes = punto.temporadas

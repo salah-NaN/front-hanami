@@ -6,10 +6,13 @@ export const LayoutHanami = ({ children }) => {
   
   return (
     <>
+
+    {/* <div className="w-10/11 mx-auto
+    xl:w-[86%] xl:mx-auto
+    2xl:w-[63%]"> */}
+    
+      
       <header className="">
-      //<div className="w-10/11 mx-auto
-    //xl:w-[75%] xl:mx-auto
-    //2xl:w-[63%]">
         <NavBar />
       </header>
       <body>
@@ -32,6 +35,9 @@ export const LayoutHanami = ({ children }) => {
         </div>
       </body>
       {/* <Footer /> */}
+      {/* </div> */}
+      
+      
     </>
   );
 };

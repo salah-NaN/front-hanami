@@ -84,7 +84,7 @@ export const Actividades = () => {
   return (
     <>
       <div className="mt-28" >
-        <h2 className=" text-4xl w-fit font-black mb-1  bg-gradient-to-r from-[#131313] to-[#573a23] bg-clip-text text-transparent
+        <h2 className=" text-4xl w-fit font-black mb-1  bg-gradient-to-r from-[#131313] to-[#bb7d4a] bg-clip-text text-transparent
         md:text-5xl "
         >{actividad.nombre}</h2>
         {/* temporada */}
@@ -112,14 +112,14 @@ export const Actividades = () => {
         </div>
         {/* punto de interés */}
         <div
-          className=" flex  justify-start items-center cursor-pointer w-fit mb-1 underline
+          className=" flex  justify-start items-center cursor-pointer w-fit mb-1 
         sm:mb-0
         md:mb-4">
           <img className=" size-8
         sm:size-10"
             src={flower} ></img>
           <h5 onClick={() => redirect(`/puntosInteres/${actividad.temporada?.puntos_intere?.id}`)}
-            className="text-[25px] font-black text-[#2a2a2a] mb-2.5 mt-4 ml-3 
+            className="text-[25px] font-black text-[#121212] hover:underline mb-2.5 mt-4 ml-3 
         md:text-[32px]"
           >{actividad.temporada?.puntos_intere?.nombre}</h5>
         </div>
@@ -156,7 +156,7 @@ export const Actividades = () => {
             {
               document.cookie.includes('token')
                 ?
-                <div className="flex justify-center items-center mb-4 cursor-pointer"
+                <div className="w-fit mx-auto flex justify-center items-center mb-4 cursor-pointer"
                   onClick={() => setModalVisible(true)}>
                   <img className="size-8 self-center ml-15 mr-3 cursor-pointer "
                     src={plusCircle}
@@ -194,7 +194,7 @@ export const Actividades = () => {
             {/* email */}
             <div className="flex justify-start items-center">
               <img className="size-6" src={mail} ></img>
-              <p className="ml-2 pt-0.5 "
+              <p className="ml-2 pt-0.5 " onClick={() => window.open(`mailto:${actividad?.temporada?.puntos_intere?.propietario?.email}`)}
               >{actividad?.temporada?.puntos_intere?.propietario?.email}</p>
             </div>
 
@@ -204,19 +204,10 @@ export const Actividades = () => {
               <p className="ml-2 pt-0.5 "
               >{parseNumTelefono(actividad?.temporada?.puntos_intere?.propietario?.telefono)}</p>
             </div>
-
           </div>
-
         </div>
       </div>
-      {
-        document.cookie.includes('token')
-          ?
-          <button onClick={() => setModalVisible(true)}>añadir reseña</button>
-          :
-          null
-      }
-      <ModalAniadirResenia modalVisible={modalVisible} setModalVisible={setModalVisible} id={id} />
+      <ModalAniadirResenia actividad={actividad} setActividad={setActividad} modalVisible={modalVisible} setModalVisible={setModalVisible} id={id} />
       <ModalVerResenias resenias={actividad.resenias} modalVerReseniasVisible={modalVerReseniasVisible} setModalVerReseniasVisible={setModalVerReseniasVisible} />
       {/* <Resenia resenia={resenia}/> */}
     </>
