@@ -54,7 +54,6 @@ export const NavBar = () => {
     navigate("/")
   };
 
-
   const openOnPopUpBuscadorMobile = () => {
     toggleBuscadorNavMobile();
   };
@@ -105,7 +104,8 @@ export const NavBar = () => {
               ? "w-10/12 mx-auto md:w-full lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto transition-all duration-300"
 
               : location.pathname.includes("/busqueda")
-                ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
+
+              ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-[#FAFAFAFA] transition-all duration-300"
 
                 : "z-10 absolute top-0 xl:w-11/12 mx-auto left-0 right-0"
             } ${buscadorNavMobile === true
@@ -152,11 +152,12 @@ export const NavBar = () => {
               ) : null}
 
               {/* Buscador pequeño sin el popUp  */}
-              {location.pathname !== "/" && buscadorNavMobile === false ? (
+              {(location.pathname.includes("/busqueda") || location.pathname.includes("/actividades/Actividades")  || 
+              location.pathname.includes("/puntosInteres") || location.pathname.includes("/actividades")) && buscadorNavMobile === false ? (
                 <BuscadorOtrasPaginas
                   openOnPopUpBuscadorMobile={openOnPopUpBuscadorMobile}
                 />
-              ) : null}
+              ) : location.pathname.includes('/login') || location.pathname.includes('/register') && null}
 
               {buscadorNavMobile ? (
                 <motion.div
@@ -171,6 +172,7 @@ export const NavBar = () => {
                 >
                   <BuscadorGrandeOtrasPaginas
                     puntosDeInteres={puntosDeInteres}
+                    toggleBuscadorNavMobile={toggleBuscadorNavMobile}
                   />
                 </motion.div>
               ) : null}

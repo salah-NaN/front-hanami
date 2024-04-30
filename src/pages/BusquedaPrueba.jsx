@@ -10,7 +10,6 @@ import arrow from "../assets/nav-arrow-left.svg";
 import arrowRight from "../assets/nav-arrow-right.svg";
 import { poblaciones } from "./utils/Hooks";
 
-
 export const BusquedaPrueba = () => {
   let { quehacer, localizacion, fecha, flor } = useParams();
   // los puntos de interes filtrados
@@ -24,12 +23,16 @@ export const BusquedaPrueba = () => {
   const redirect = useNavigate();
 
   // recojo la poblacion y sus coordenadas
-  const poblacion = poblaciones.find(p => p.nombre === localizacion.split(':')[1])
+  const poblacion = poblaciones.find(
+    (p) => p.nombre === localizacion.split(":")[1]
+  );
 
   // setteo las coordenadas en base a la ciudad que llegue por parametro
-  const [coordenadas, setCoordenadas] = useState(poblacion ? [poblacion.latitud, poblacion.longitud, 12] : [41.6092, 2.1477, 9])
-
-
+  const [coordenadas, setCoordenadas] = useState(
+    poblacion
+      ? [poblacion.latitud, poblacion.longitud, 12]
+      : [41.6092, 2.1477, 9]
+  );
 
   // useEffect(() => {
   //   window.addEventListener("onscroll", () => {
@@ -61,9 +64,24 @@ export const BusquedaPrueba = () => {
         setFilterData(filterData);
       })
       .catch((error) => console.log(error));
-
-
   }, []);
+
+  useEffect(() => {
+    const url = "http://localhost:3000/api/";
+    console.log(localizacion, fecha, flor);
+
+    if (fecha !== ";") {
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
+    
+    fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
+      .then((res) => res.json())
+      .then((filterData) => {
+        console.log(filterData);
+        setFilterData(filterData);
+      })
+      .catch((error) => console.log(error));
+  }, [quehacer, localizacion, fecha, flor]);
 
   useEffect(() => {
     setCambio(!cambio);
@@ -88,8 +106,9 @@ export const BusquedaPrueba = () => {
           // className={`md:grid md:grid-cols-2 md: md:mt-2 flex flex-col ${
           //   showMap ? `mt-20` : `mt-[22rem]`
           // }`}
-          className={`md:flex md:mt-2 flex flex-col ${showMap ? `mt-20` : `mt-[22rem]`
-            }`}
+          className={`md:flex md:mt-2 flex flex-col ${
+            showMap ? `mt-20` : `mt-[22rem] xm:mt-[16rem]`
+          }`}
         >
           {/* cards */}
           {!showMap ? (
@@ -101,37 +120,36 @@ export const BusquedaPrueba = () => {
               {/* <h1 className="text-3xl text-center py-7">Puntos de interes</h1> */}
               {checkedFilters.length === 0
                 ? filterData &&
-                filterData?.map((puntos_interes) => (
-                  <CardItemMap
-                    puntos_interes={puntos_interes}
-                    quehacer={quehacer}
-                  />
-                ))
-                : filterData &&
-                filterData
-                  ?.filter((pi) =>
-                    pi.temporadas.find((t) =>
-                      checkedFilters.includes(t.nombre)
-                    )
-                  )
-                  .map((puntoInteres) => (
+                  filterData?.map((puntos_interes) => (
                     <CardItemMap
-                      puntos_interes={puntoInteres}
+                      puntos_interes={puntos_interes}
                       quehacer={quehacer}
                     />
-
-                  ))}
+                  ))
+                : filterData &&
+                  filterData
+                    ?.filter((pi) =>
+                      pi.temporadas.find((t) =>
+                        checkedFilters.includes(t.nombre)
+                      )
+                    )
+                    .map((puntoInteres) => (
+                      <CardItemMap
+                        puntos_interes={puntoInteres}
+                        quehacer={quehacer}
+                      />
+                    ))}
 
               <a
                 href="#"
                 onClick={handleShowMap}
-                className={`border rounded-full flex justify-between items-center px-5 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+                className={`border rounded-full flex justify-between items-center px-3 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
                 md:hidden lg:hidden bg-green-400 font-bold `}
               >
                 {showMap ? (
-                  <p className="text-xl text-white pr-2">Cards</p>
+                  <p className="text-md text-white pr-2">Cards</p>
                 ) : (
-                  <p className="text-xl text-white pr-2">Mapa</p>
+                  <p className="text-md text-white pr-2">Mapa</p>
                 )}
                 <svg
                   width="25px"
@@ -152,7 +170,6 @@ export const BusquedaPrueba = () => {
                 </svg>
                 {/* <img className="size-9 pl-3" src={arrowRight}></img> */}
               </a>
-
             </div>
           ) : (
             // null
@@ -161,10 +178,11 @@ export const BusquedaPrueba = () => {
 
           {/* revisar esto */}
           <div
-            className={`${mapSizeFull
-              ? "md:w-full md:z-10 fixed"
-              : "md:h-full md:w-5/12 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
-              }
+            className={`${
+              mapSizeFull
+                ? "md:w-full md:z-10 fixed"
+                : "md:h-full md:w-5/12 w-full h-1/2 fixed top-0 md:right-0 md:z-10"
+            }
         ${showMap ? `h-5/6 w-full` : `md:h-full fixed w-full h-2/5`}`}
           >
             {/* boton expandir mapa en tamaño lg en adelante*/}
@@ -202,10 +220,10 @@ export const BusquedaPrueba = () => {
                   checkedFilters.length === 0
                     ? filterData
                     : filterData.filter((pi) =>
-                      pi.temporadas.find((t) =>
-                        checkedFilters.includes(t.nombre)
+                        pi.temporadas.find((t) =>
+                          checkedFilters.includes(t.nombre)
+                        )
                       )
-                    )
                 }
                 setPuntosInteres={setFilterData}
                 latlonzoom={coordenadas}

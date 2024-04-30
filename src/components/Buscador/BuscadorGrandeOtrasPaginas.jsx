@@ -4,7 +4,7 @@ import { PopUpFecha, PopSearchPlace, PopUpQueHacer } from "./PopUp";
 import { ButtonSearch, BuscadorMobil } from "./";
 import PopUpPlanta from "./PopUp/PopUpPlanta";
 
-export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
+export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres, toggleBuscadorNavMobile }) => {
   const navigate = useNavigate();
   const ref = useRef();
 
@@ -198,7 +198,7 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
   }, [popUp]);
 
   const onSubmitSearch = () => {
-    // event.preventDefault();
+    event.preventDefault();
 
     //desestructuramos el objeto de searchForm
     let { localizacion, fecha, flor, queHacer } = searchForm;
@@ -229,6 +229,8 @@ export const BuscadorGrandeOtrasPaginas = ({ puntosDeInteres }) => {
         }/${flor || ";"}`
       );
     }
+
+    toggleBuscadorNavMobile();
   };
 
   return (
