@@ -9,7 +9,7 @@ export const LayoutHanami = ({ children }) => {
       <div
         className="w-10/11 mx-auto
         lg:w-full
-        xl:w-9/12 xl:mx-auto
+        xl:w-[86%] xl:mx-auto
         2xl:w-[54%]"
       >
         <header className="">
@@ -23,7 +23,7 @@ export const LayoutHanami = ({ children }) => {
           className={`${
             location.pathname.includes("/busqueda")
               ? `w-10/11 mx-auto xl:w-full xl:mx-auto`
-              : `w-11/12 mx-auto md:w-10/12 md:mx-auto lg:w-11/12 xl:w-7/12 xl:mx-auto
+              : `w-11/12 mx-auto md:w-11/12 md:mx-auto lg:w-11/12 xl:w-8/12 xl:mx-auto
               2xl:w-6/12`
           }`}
         >
