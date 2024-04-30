@@ -68,7 +68,7 @@ export const Banner = () => {
          <div className="py-2 bg-transparent md:px-6 lg:w-fit">
          </div>
        </div>
-       <div className="flex flex-col w-full justify-center items-center"> 
+       <div className="flex flex-col w-full justify-center items-center md:mt-20"> 
            <h1
              style={{ y: textY }}
              className="text-semibold text-8xl relative z-20 w-full text-center
@@ -78,7 +78,8 @@ export const Banner = () => {
                    leading-tight
                    text-transparent
                    2xl:max-w-screen-2xl 2xl:mx-auto
-                   md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem]"
+                   md:text-7xl md:tracking-wide lg:text-7xl xl:text-8xl 2xl:text-[7rem]
+                   md:mb-20 mb-8"
            >
              Toda la belleza de Cataluña en un solo clic
            </h1>
