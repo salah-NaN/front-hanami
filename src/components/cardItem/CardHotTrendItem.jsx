@@ -26,7 +26,7 @@ export const CardHotTrendItem = ({ hotTrend }) => {
       transition={{ duration: 0.5, delay: 0.25 }}
       className="border-none rounded-md w-full h-full cursor-pointer"
       style={{
-        backgroundImage: `url(localhost:3000/api/${hotTrend.imagen}.png)`,
+        backgroundImage: `url(/api/img/${hotTrend.imagen}.png)`,
         backgroundSize: `cover`,
       }}
     >
