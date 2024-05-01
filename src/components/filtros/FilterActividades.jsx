@@ -201,11 +201,15 @@ export const FilterActividades = ({ setFilters, filterData }) => {
 
   return (
     <div ref={dropdownRef}>
-      <button onClick={() => setVisible(!visible)}>Temporadas</button>
+      <button className="border-2 border-[#e2e2e2] px-4 py-1.5 rounded-lg shadow-md transition-all duration-300 hover:bg-[#e2e2e2] hover:border-[#e2e2e2]   text-[#262626]"
+        onClick={() => setVisible(!visible)}>Temporadas</button>
 
       <div>
         <ul
-          className={`${""}`}
+          className={`${visible
+            ? "absolute z-50 bg-white top-[125px] right-24 shadow-md p-2  rounded-md"
+            : "hidden"
+            }`}
         >
           {/* <ul className={`${visible ? 'absolute z-50 bg-white shadow-md p-2 border rounded-md' : 'hidden' }`}> */}
 
@@ -226,7 +230,7 @@ export const FilterActividades = ({ setFilters, filterData }) => {
           })}
         </ul>
       </div>
-    </div>
+    </div >
   );
 };
 

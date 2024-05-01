@@ -1,7 +1,6 @@
 import { FormControl, ListItemText, MenuItem, Select } from "@mui/material";
 import { setOptions } from "leaflet";
 import { useRef, useState, useEffect } from "react";
-import { NavBarFiltros } from "../Buscador/PopUp";
 
 const FilterCategoria = ({ setFiltersType, filterData }) => {
   // inputs donde se guardarán los inputs de los checkboxes para filtrar
@@ -76,16 +75,15 @@ const FilterCategoria = ({ setFiltersType, filterData }) => {
 
   return (
     <>
-      <NavBarFiltros inputs={inputs} />
       <div ref={dropdownRef}>
-        <button onClick={() => setVisible(!visible)}>Categrorías</button>
+        <button className="border-2 border-[#e2e2e2] px-2 py-1.5 rounded-lg shadow-md transition-all duration-300 hover:bg-[#e2e2e2] hover:border-[#e2e2e2] text-[#262626]"
+          onClick={() => setVisible(!visible)}>Categorías</button>
         <div>
           <ul
-            className={`${
-              visible
-                ? "absolute z-50 bg-white shadow-md p-2 border rounded-md"
-                : "hidden"
-            }`}
+            className={`${visible
+              ? "absolute z-50 bg-white shadow-md p-2 top-[125px] right-[0.9rem] rounded-md"
+              : "hidden"
+              }`}
           >
             {inputs.map((i) => {
               return (

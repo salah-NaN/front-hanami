@@ -8,8 +8,7 @@ import Filter from "../components/filtros/Filter";
 import {format, parse} from "date-fns";
 import arrow from "../assets/nav-arrow-left.svg";
 import arrowRight from "../assets/nav-arrow-right.svg";
-import {NavBarFiltros} from "../components/Buscador/PopUp";
-import {poblaciones} from "./utils/Hooks";
+import { poblaciones } from "./utils/Hooks";
 
 export const BusquedaPrueba = () => {
   let {quehacer, localizacion, fecha, flor} = useParams();
@@ -68,6 +67,23 @@ export const BusquedaPrueba = () => {
   }, []);
 
   useEffect(() => {
+    const url = "/api/";
+    console.log(localizacion, fecha, flor);
+
+    if (fecha !== ";") {
+      fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
+    }
+    
+    fetch(url + `puntos_interes/${localizacion}/${fecha}/${flor}`)
+      .then((res) => res.json())
+      .then((filterData) => {
+        console.log(filterData);
+        setFilterData(filterData);
+      })
+      .catch((error) => console.log(error));
+  }, [quehacer, localizacion, fecha, flor]);
+
+  useEffect(() => {
     setCambio(!cambio);
   }, [filters]);
 
@@ -91,7 +107,7 @@ export const BusquedaPrueba = () => {
           //   showMap ? `mt-20` : `mt-[22rem]`
           // }`}
           className={`md:flex md:mt-2 flex flex-col ${
-            showMap ? `mt-20` : `mt-[22rem]`
+            showMap ? `mt-20` : `mt-[22rem] xm:mt-[16rem]`
           }`}
         >
           {/* cards */}
@@ -127,13 +143,13 @@ export const BusquedaPrueba = () => {
               <a
                 href="#"
                 onClick={handleShowMap}
-                className={`border rounded-full flex justify-between items-center px-5 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
+                className={`border rounded-full flex justify-between items-center px-3 py-2.5 fixed z-50 bottom-12 left-1/2 -translate-x-1/2 
                 md:hidden lg:hidden bg-green-400 font-bold `}
               >
                 {showMap ? (
-                  <p className="text-xl text-white pr-2">Cards</p>
+                  <p className="text-md text-white pr-2">Cards</p>
                 ) : (
-                  <p className="text-xl text-white pr-2">Mapa</p>
+                  <p className="text-md text-white pr-2">Mapa</p>
                 )}
                 <svg
                   width="25px"

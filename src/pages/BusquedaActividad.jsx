@@ -23,6 +23,7 @@ export const BusquedaActividad = () => {
       fecha = format(parse(fecha, "dd-MM-yyyy", new Date()), "yyyy-MM-dd");
     }
 
+
     fetch(url + `actividades/${localizacion}/${fecha}/${flor}`)
       .then((res) => res.json())
       .then((filterData) => {
@@ -45,13 +46,15 @@ export const BusquedaActividad = () => {
   }, [filtersType]);
 
   return (
-    <div className="mt-20">
+
+    <div className="">
       <div className="mx-auto border-none">
-        <FilterActividades setFilters={setFilters} filterData={filterData} />
-        <FilterCategoria
-          setFiltersType={setFiltersType}
-          filterData={filterData}
-        />
+        <div className=" h-16 flex justify-end">
+          <div className="flex gap-4">
+            <FilterActividades setFilters={setFilters} filterData={filterData} />
+            <FilterCategoria setFiltersType={setFiltersType} filterData={filterData} />
+          </div>
+        </div>
         <div className="flex flex-col border-none rounded-md">
           <div className="">
             <div

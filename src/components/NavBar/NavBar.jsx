@@ -43,6 +43,7 @@ export const NavBar = () => {
   };
 
   const logout = () => {
+  const logout = () => {
     // Clear the authentication token cookie
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Set the expiration date to a past date
     setLogueado(false);
@@ -94,9 +95,8 @@ export const NavBar = () => {
     <div className="">
       <AnimatePresence>
         <motion.header
-          className={`w-full ${
-            location.pathname.includes("/puntosInteres") ||
-            location.pathname.includes("/actividades")
+          className={`w-full ${location.pathname.includes("/puntosInteres") ||
+              location.pathname.includes("/actividades")
               ? "w-10/12 mx-auto md:w-full lg:w-[96%] lg:mx-auto md:mx-auto xl:mx-auto xl:w-10/12 2xl:w-full 2xl:mx-auto transition-all duration-300"
               : location.pathname.includes("/busqueda")
               ? "md:w-full md:h-24 h-20 fixed top-0 right-0 z-30 bg-white transition-all duration-300"
@@ -105,7 +105,7 @@ export const NavBar = () => {
             buscadorNavMobile === true
               ? `md:h-48 xl:w-full md:w-full md:absolute bg-white top-0 left-0 right-0 z-50`
               : ``
-          } `}
+            } `}
         >
           <div
             className={`flex items-center justify-center overflow-visible border-r-0 border-l-0 border-t-0 h-full ${
@@ -119,18 +119,16 @@ export const NavBar = () => {
             {/* Antes el w-full estaba en w-10/12 */}
             <nav
               className={`md:w-[90%] lg:lg:w-[93%] w-11/12 max-auto flex 
-          ${
-            buscadorNavMobile === true ? `h-full items-center` : ``
-          } justify-between py-3 gap-3 mx-auto`}
+          ${buscadorNavMobile === true ? `h-full items-center` : ``
+                } justify-between py-3 gap-3 mx-auto`}
             >
               <div
-                className={`${
-                  location.pathname.includes("/busqueda") ||
-                  location.pathname.includes("/puntosInteres") ||
-                  location.pathname.includes("/actividades")
+                className={`${location.pathname.includes("/busqueda") ||
+                    location.pathname.includes("/puntosInteres") ||
+                    location.pathname.includes("/actividades")
                     ? `hidden md:block lg:block`
                     : ``
-                }`}
+                  }`}
               >
                 <Logo />
               </div>
@@ -149,11 +147,12 @@ export const NavBar = () => {
               ) : null}
 
               {/* Buscador pequeño sin el popUp  */}
-              {location.pathname !== "/" && buscadorNavMobile === false ? (
+              {(location.pathname.includes("/busqueda") || location.pathname.includes("/actividades/Actividades")  || 
+              location.pathname.includes("/puntosInteres") || location.pathname.includes("/actividades")) && buscadorNavMobile === false ? (
                 <BuscadorOtrasPaginas
                   openOnPopUpBuscadorMobile={openOnPopUpBuscadorMobile}
                 />
-              ) : null}
+              ) : location.pathname.includes('/login') || location.pathname.includes('/register') && null}
 
               {buscadorNavMobile ? (
                 <motion.div
@@ -168,6 +167,7 @@ export const NavBar = () => {
                 >
                   <BuscadorGrandeOtrasPaginas
                     puntosDeInteres={puntosDeInteres}
+                    toggleBuscadorNavMobile={toggleBuscadorNavMobile}
                   />
                 </motion.div>
               ) : null}
@@ -242,5 +242,6 @@ export const NavBar = () => {
     </div>
   );
 };
+}
 
-export default NavBar;
+export default NavBar

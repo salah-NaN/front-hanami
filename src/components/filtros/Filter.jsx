@@ -1,7 +1,6 @@
 import { FormControl, ListItemText, MenuItem, Select } from "@mui/material";
 import { setOptions } from "leaflet";
 import { useRef, useState, useEffect, useContext } from "react";
-import { NavBarFiltros } from "../Buscador/PopUp";
 import ClienteContext from "../../context/ClienteContext";
 
 export const Filter = ({ setFilters, filterData }) => {
@@ -242,10 +241,12 @@ export const Filter = ({ setFilters, filterData }) => {
         {toggleDropDown === true || popUpFilter === true ? (
           <div
             className="md:fixed md:inset-0 md:backdrop-blur-sm md:bg-opacity-75 md:z-50 md:flex md:justify-center
-           md:items-center fondo fixed inset-0 z-50 backdrop-blur-sm bg-opacity-75 flex justify-center items-center"
+           md:items-center fondo fixed inset-0 z-50 backdrop-blur-sm bg-opacity-75 flex justify-center items-center
+           "
           >
-            <div className="md:bg-white md:w-1/2 md:p-5 md:border md:rounded-2xl bg-white border rounded-2xl p-4">
-              <div className="w-full flex justify-end cursor-pointer">
+            <div className="md:bg-white md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 md:h-fit w-full h-full 
+            md:p-5 md:border md:rounded-2xl bg-white border rounded-2xl p-3 overflow-auto">
+              <div className="w-full  flex justify-end cursor-pointer">
                 <div
                   className="hover:bg-slate-100 border-none rounded-2xl p-1"
                   id="fondo"
@@ -283,11 +284,10 @@ export const Filter = ({ setFilters, filterData }) => {
                         />
                       </div>
                       <label
-                        className={`p-2 ${
-                          i.seteado
+                        className={`p-2 ${i.seteado
                             ? `bg-[#54CC68] border rounded-md transition-all duration-300 h-fit`
                             : `border rounded-lg`
-                        }  cursor-pointer`}
+                          }  cursor-pointer`}
                         htmlFor={i.temporada}
                       >
                         {i.nombre}
