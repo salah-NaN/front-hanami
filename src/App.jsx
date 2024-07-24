@@ -21,7 +21,7 @@ export const App = () => {
   const [popUpFilter, setPopUpFilter] = useState(false);
 
   const togglePopUpFilter = (value) => {
-    
+
     setPopUpFilter(!popUpFilter);
   };
 
@@ -32,11 +32,11 @@ export const App = () => {
       {/* <LayoutHanami /> */}
       <BrowserRouter>
         <Routes>
-        <Route
+          <Route
             path="/register"
             element={
               <div>
-                <NavBar/>
+                <NavBar />
                 <Register />
               </div>
 
@@ -46,7 +46,7 @@ export const App = () => {
             path="/login"
             element={
               <div>
-                <NavBar/>
+                <NavBar />
                 <Login />
               </div>
             }
