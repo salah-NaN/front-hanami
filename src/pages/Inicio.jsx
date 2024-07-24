@@ -45,26 +45,25 @@ export const Inicio = () => {
         <Banner />
       </div>
 
-      <div className="bg-[#FAFAFA]  mx-auto" ref={scrollBuscadorRef}>
+      <div className="bg-[#fafcfa]   mx-auto" ref={scrollBuscadorRef}>
         <div className="md:w-[90%] mx-auto">
-          <div className="py-32 w-10/12 mx-auto">
+          <div className="py-32 w-10/12 mx-auto ">
             <h1 className="text-6xl w-fit mx-auto text-center mb-2 bg-gradient-to-r from-[#32b74b] to-[#929292] bg-clip-text text-transparent
             lg:mb-2
             xl:mb-16">Busca por el mapa</h1>
-            <div className="flex flex-col gap-10
+            <div className="flex flex-col gap-10 
             xl:flex-row xl:gap-20" >
               <div className=" mb-10 mt-[4rem]
               xl:w-5/12 xl:mt-0">
-                <h4 className="text-[32px] mb-5 w-fit mx-auto text-[#909391]
-                xl:mb-4" >Temporadas</h4>
+                <h4 className="text-[32px] mb-5 w-fit font-thin mx-auto text-[#636363]
+                xl:mb-4 italic" >Temporadas</h4>
                 <div className=" w-full  grid grid-cols-2 gap-3 bg-[#fafafa] shadow-lg border border-[##53cd68] rounded-xl  p-4
                 xl:h-[500px]">
                   <div className="border-2 border-[#f8b2c2] bg-[#ffe3ea] rounded-lg">
                     {
-                      nombreConvertido.map((etapa) => {
-                        console.log(etapa)
+                      nombreConvertido.map((etapa, index) => {
                         if (etapa.nombre.startsWith('Cerezo')) {
-                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
+                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1" key={index} >
                             <p>{etapa.convertido}</p>
                             <img className="size-7" src={`http://localhost:3000/img/${etapa.nombre}.png`} alt={etapa} key={etapa} />
                           </div>
@@ -74,10 +73,10 @@ export const Inicio = () => {
                   </div>
                   <div className="border-2 border-[#b4b46a] bg-[#e6e6cc] rounded-lg">
                     {
-                      nombreConvertido.map((etapa) => {
-                        console.log(etapa)
+                      nombreConvertido.map((etapa, index) => {
+
                         if (etapa.nombre.startsWith('Olivo')) {
-                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
+                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1" key={index}>
                             <p>{etapa.convertido}</p>
                             <img className="size-7" src={`http://localhost:3000/img/${etapa.nombre}.png`} alt={etapa} key={etapa} />
                           </div>
@@ -87,10 +86,10 @@ export const Inicio = () => {
                   </div>
                   <div className="border-2 border-[#4e1318] bg-[#f1cfee] rounded-lg">
                     {
-                      nombreConvertido.map((etapa) => {
-                        console.log(etapa)
+                      nombreConvertido.map((etapa, index) => {
+
                         if (etapa.nombre.startsWith('Viña')) {
-                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
+                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1" key={index}>
                             <p>{etapa.convertido}</p>
                             <img className="size-7" src={`http://localhost:3000/img/${etapa.nombre}.png`} alt={etapa} key={etapa} />
                           </div>
@@ -100,9 +99,9 @@ export const Inicio = () => {
                   </div>
                   <div className="border-2 border-[#b07ad6] bg-[#f3e1ff] rounded-lg">
                     {
-                      nombreConvertido.map((etapa) => {
+                      nombreConvertido.map((etapa, index) => {
                         if (etapa.nombre.startsWith('Lavanda')) {
-                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1">
+                          return <div className=" rounded-lg px-3 py-1 flex  justify-between items-center gap-1" key={index}>
                             <p>{etapa.convertido}</p>
                             <img className="size-7" src={`http://localhost:3000/img/${etapa.nombre}.png`} alt={etapa} key={etapa} />
                           </div>
